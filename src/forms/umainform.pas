@@ -84,6 +84,9 @@ begin
 
   loadFormConfig();
   loadSynEditConfig();
+
+  if ParamCount > 0 then
+    editor.openFile(ParamStr(1));
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
