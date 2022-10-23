@@ -124,7 +124,9 @@ begin
       begin
         Left := formLeft;
         Top := formTop;
-      end;
+      end
+      else
+        Position := poScreenCenter;
 
       Height := formHeight;
       Width := formWidth;
