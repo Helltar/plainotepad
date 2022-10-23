@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 553
-  Height = 509
-  Top = 238
-  Width = 864
+  Left = 524
+  Height = 500
+  Top = 268
+  Width = 900
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 509
-  ClientWidth = 864
+  ClientHeight = 500
+  ClientWidth = 900
   Color = clCream
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
@@ -23,9 +23,9 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 509
+    Height = 500
     Top = 0
-    Width = 864
+    Width = 900
     Anchors = [akTop, akLeft, akRight, akBottom]
     Color = clCream
     Font.Height = -16

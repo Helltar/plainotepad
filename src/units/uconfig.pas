@@ -48,23 +48,25 @@ type
     procedure SetRightEdge(AValue: integer);
     procedure SetScrollBars(AValue: boolean);
   public
+    procedure createDefaultConfigFile();
+
+    property formHeight: integer read GetFormHeight write SetFormHeight;
     property formLeft: integer read GetFormLeft write SetFormLeft;
     property formTop: integer read GetFormTop write SetFormTop;
-    property formHeight: integer read GetFormHeight write SetFormHeight;
     property formWidth: integer read GetFormWidth write SetFormWidth;
 
+    property colorTheme: string read GetColorTheme write SetColorTheme;
     property fontName: string read GetFontName write SetFontName;
     property fontSize: integer read GetFontSize write SetFontSize;
-    property colorTheme: string read GetColorTheme write SetColorTheme;
+    property highlighter: boolean read GetHighlighter write SetHighlighter;
     property lineNumbers: boolean read GetLineNumbers write SetLineNumbers;
     property rightEdge: integer read GetRightEdge write SetRightEdge;
     property scrollBars: boolean read GetScrollBars write SetScrollBars;
-    property highlighter: boolean read GetHighlighter write SetHighlighter;
 
+    property borderSpaceBottom: integer read GetBorderSpaceBottom write SetBorderSpaceBottom;
     property borderSpaceLeft: integer read GetBorderSpaceLeft write SetBorderSpaceLeft;
     property borderSpaceRight: integer read GetBorderSpaceRight write SetBorderSpaceRight;
     property borderSpaceTop: integer read GetBorderSpaceTop write SetBorderSpaceTop;
-    property borderSpaceBottom: integer read GetBorderSpaceBottom write SetBorderSpaceBottom;
   end;
 
 implementation
@@ -223,6 +225,21 @@ end;
 procedure TConfig.SetScrollBars(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'scrollBars', AValue);
+end;
+
+procedure TConfig.createDefaultConfigFile;
+begin
+  SetColorTheme(GetColorTheme);
+  SetFontName(GetFontName);
+  SetFontSize(GetFontSize);
+  SetHighlighter(GetHighlighter);
+  SetLineNumbers(GetLineNumbers);
+  SetRightEdge(GetRightEdge);
+  SetScrollBars(GetScrollBars);
+  SetBorderSpaceBottom(GetBorderSpaceBottom);
+  SetBorderSpaceLeft(GetBorderSpaceLeft);
+  SetBorderSpaceRight(GetBorderSpaceRight);
+  SetBorderSpaceTop(GetBorderSpaceTop);
 end;
 
 end.

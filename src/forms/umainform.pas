@@ -45,6 +45,7 @@ type
     appConfigFile: string;
     function saveFile(): boolean;
     function showFileChangeDialog(): TModalResult;
+    procedure createDefaultConfigFile();
     procedure loadFormConfig();
     procedure loadSynEditConfig();
     procedure saveConfig();
@@ -80,7 +81,8 @@ begin
   appConfigFile := appConfigDir + APP_CONFIG_FILE_NAME;
 
   if not DirectoryExists(appConfigDir) then
-    CreateDir(appConfigDir);
+    if CreateDir(appConfigDir) then
+      createDefaultConfigFile();
 
   loadFormConfig();
   loadSynEditConfig();
@@ -201,6 +203,19 @@ begin
       formHeight := Height;
       formWidth := Width;
     end;
+  finally
+    FreeAndNil(config);
+  end;
+end;
+
+procedure TfrmMain.createDefaultConfigFile;
+var
+  config: TConfig;
+
+begin
+  try
+    config := TConfig.Create(appConfigFile);
+    config.createDefaultConfigFile();
   finally
     FreeAndNil(config);
   end;
