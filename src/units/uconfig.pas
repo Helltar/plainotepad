@@ -114,7 +114,7 @@ end;
 
 function TConfig.GetFormHeight: integer;
 begin
-  Result := ReadInteger(SECTION_FORM, 'formHeight', 600);
+  Result := ReadInteger(SECTION_FORM, 'formHeight', 400);
 end;
 
 function TConfig.GetFormLeft: integer;
@@ -129,7 +129,7 @@ end;
 
 function TConfig.GetFormWidth: integer;
 begin
-  Result := ReadInteger(SECTION_FORM, 'formWidth', 800);
+  Result := ReadInteger(SECTION_FORM, 'formWidth', 600);
 end;
 
 function TConfig.GetHighlighter: boolean;
