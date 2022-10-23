@@ -34,12 +34,12 @@ borderSpaceTop=24
 - dark
 - white
 
-**lineNumbers**
+**highlighter**
 
 - 0: disable (default)
 - 1: enable
 
-**highlighter**
+**lineNumbers**
 
 - 0: disable (default)
 - 1: enable
