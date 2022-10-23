@@ -104,7 +104,7 @@ end;
 
 function TConfig.GetFontName: string;
 begin
-  Result := ReadString(SECTION_MAIN, 'fontName', 'DejaVu Sans Mono');
+  Result := ReadString(SECTION_MAIN, 'fontName', 'Monospace');
 end;
 
 function TConfig.GetFontSize: integer;
