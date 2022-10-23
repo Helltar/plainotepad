@@ -59,3 +59,10 @@ borderSpaceTop=24
 - border spacing in px:
 
 <p align="center"><img src="https://helltar.com/projects/plainotepad/screenshots/border-spacing.png" alt="border-spacing"/></p>
+
+
+Keyboard Shortcuts
+------------------
+
+- **F11** *Full-screen*
+- **CTRL+Q** *Exit*
