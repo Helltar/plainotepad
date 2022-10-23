@@ -584,6 +584,11 @@ object frmMain: TfrmMain
       Hint = 'Delete'
       ShortCut = 46
     end
+    object actHelp: TAction
+      Caption = 'actHelp'
+      OnExecute = actHelpExecute
+      ShortCut = 112
+    end
   end
   object saveDialog: TSaveDialog
     Left = 288

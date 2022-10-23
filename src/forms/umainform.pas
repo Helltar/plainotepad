@@ -5,7 +5,7 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, StdCtrls, Menus, StdActns, SynEdit;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, StdCtrls, Menus, StdActns, SynEdit, LCLIntf;
 
 type
 
@@ -14,6 +14,7 @@ type
   TfrmMain = class(TForm)
     actFullscreen: TAction;
     actClose: TAction;
+    actHelp: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
     edtCopy: TEditCopy;
@@ -36,6 +37,7 @@ type
     synEdit: TSynEdit;
     procedure actFullscreenExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
+    procedure actHelpExecute(Sender: TObject);
     procedure actSaveFileExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
@@ -62,6 +64,9 @@ uses
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
   MSG_SAVE_CHANGES = 'Save the changes?';
+
+const
+  URl_GITHUB = 'https://github.com/Helltar/plainotepad';
 
 var
   editor: TEditor;
@@ -264,6 +269,11 @@ end;
 procedure TfrmMain.actCloseExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmMain.actHelpExecute(Sender: TObject);
+begin
+  OpenURL(URl_GITHUB);
 end;
 
 end.
