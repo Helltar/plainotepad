@@ -13,6 +13,7 @@ object frmMain: TfrmMain
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnDropFiles = FormDropFiles
   LCLVersion = '2.2.4.0'
   inline synEdit: TSynEdit
     AnchorSideLeft.Control = Owner
@@ -592,6 +593,11 @@ object frmMain: TfrmMain
       OnExecute = actHelpExecute
       ShortCut = 112
     end
+    object actHtmlExport: TAction
+      Caption = 'Export as HTML ...'
+      Hint = 'Export as HTML'
+      OnUpdate = actHtmlExportUpdate
+    end
   end
   object saveDialog: TSaveDialog
     Left = 288
@@ -605,6 +611,13 @@ object frmMain: TfrmMain
       Hint = 'File'
       object miSaveFile: TMenuItem
         Action = actSaveFile
+      end
+      object Separator8: TMenuItem
+        Caption = '-'
+      end
+      object miHtmlExport: TMenuItem
+        Action = actHtmlExport
+        OnClick = miHtmlExportClick
       end
       object Separator1: TMenuItem
         Caption = '-'

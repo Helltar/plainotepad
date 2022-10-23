@@ -16,6 +16,7 @@ type
     actFullscreen: TAction;
     actClose: TAction;
     actHelp: TAction;
+    actHtmlExport: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
     edtCopy: TEditCopy;
@@ -24,6 +25,7 @@ type
     edtPaste: TEditPaste;
     edtSelectAll: TEditSelectAll;
     editUndo: TEditUndo;
+    miHtmlExport: TMenuItem;
     miSettings: TMenuItem;
     miFullscreen: TMenuItem;
     miView: TMenuItem;
@@ -49,15 +51,18 @@ type
     Separator5: TMenuItem;
     Separator6: TMenuItem;
     Separator7: TMenuItem;
+    Separator8: TMenuItem;
     synEdit: TSynEdit;
     procedure actFullscreenExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
     procedure actHelpExecute(Sender: TObject);
+    procedure actHtmlExportUpdate(Sender: TObject);
     procedure actSaveFileExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure miHtmlExportClick(Sender: TObject);
     procedure miSettingsClick(Sender: TObject);
   private
     appConfigFile: string;
@@ -122,6 +127,11 @@ end;
 procedure TfrmMain.FormDropFiles(Sender: TObject; const FileNames: array of string);
 begin
   openFile(FileNames[0]);
+end;
+
+procedure TfrmMain.miHtmlExportClick(Sender: TObject);
+begin
+  editor.exportToHtml();
 end;
 
 procedure TfrmMain.miSettingsClick(Sender: TObject);
@@ -303,6 +313,11 @@ end;
 procedure TfrmMain.actHelpExecute(Sender: TObject);
 begin
   OpenURL(URL_GITHUB);
+end;
+
+procedure TfrmMain.actHtmlExportUpdate(Sender: TObject);
+begin
+  actHtmlExport.Enabled := editor.isHighlighterEnabled();
 end;
 
 end.
