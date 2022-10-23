@@ -11,6 +11,23 @@
 Options
 -------
 
+Configuration file: **~/.config/plainotepad/config**:
+
+```
+[MAIN]
+colorTheme=cream
+fontName=Monospace
+fontSize=12
+highlighter=0
+lineNumbers=0
+rightEdge=-1
+scrollBars=1
+borderSpaceBottom=0
+borderSpaceLeft=24
+borderSpaceRight=0
+borderSpaceTop=24
+```
+
 **colorTheme**
 
 - cream (default)
@@ -42,12 +59,3 @@ Options
 - border spacing in px:
 
 <p align="center"><img src="https://helltar.com/projects/plainotepad/screenshots/border-spacing.png" alt="border-spacing"/></p>
-
-default values:
-
-```
-borderSpaceBottom=0
-borderSpaceLeft=24
-borderSpaceRight=0
-borderSpaceTop=24
-```
