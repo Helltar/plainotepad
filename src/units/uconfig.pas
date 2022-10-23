@@ -149,7 +149,7 @@ end;
 
 function TConfig.GetScrollBars: boolean;
 begin
-  Result := ReadBool(SECTION_MAIN, 'scrollBars', False);
+  Result := ReadBool(SECTION_MAIN, 'scrollBars', True);
 end;
 
 procedure TConfig.SetBorderSpaceBottom(AValue: integer);
