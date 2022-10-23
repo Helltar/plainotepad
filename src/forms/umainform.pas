@@ -5,7 +5,8 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, StdCtrls, Menus, StdActns, SynEdit, LCLIntf;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs,
+  ActnList, StdCtrls, Menus, StdActns, SynEdit, LCLIntf;
 
 type
 
@@ -23,17 +24,31 @@ type
     edtPaste: TEditPaste;
     edtSelectAll: TEditSelectAll;
     editUndo: TEditUndo;
-    miUndo: TMenuItem;
+    miSettings: TMenuItem;
+    miFullscreen: TMenuItem;
+    miView: TMenuItem;
+    miDelete: TMenuItem;
+    miAbout: TMenuItem;
+    miQuit: TMenuItem;
+    miHelp: TMenuItem;
+    miOnlineHelp: TMenuItem;
+    miEdit: TMenuItem;
     miCut: TMenuItem;
     miCopy: TMenuItem;
     miPaste: TMenuItem;
     miSelectAll: TMenuItem;
-    miDelete: TMenuItem;
+    miUndo: TMenuItem;
+    miFile: TMenuItem;
+    miSaveFile: TMenuItem;
     pmMain: TPopupMenu;
     saveDialog: TSaveDialog;
-    miSeparator: TMenuItem;
-    miSeparator1: TMenuItem;
-    miSeparator2: TMenuItem;
+    Separator1: TMenuItem;
+    Separator2: TMenuItem;
+    Separator3: TMenuItem;
+    Separator4: TMenuItem;
+    Separator5: TMenuItem;
+    Separator6: TMenuItem;
+    Separator7: TMenuItem;
     synEdit: TSynEdit;
     procedure actFullscreenExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
@@ -43,8 +58,10 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure miSettingsClick(Sender: TObject);
   private
     appConfigFile: string;
+    function openFile(fileName: string): boolean;
     function saveFile(): boolean;
     function showFileChangeDialog(): TModalResult;
     procedure createDefaultConfigFile();
@@ -66,7 +83,7 @@ resourcestring
   MSG_SAVE_CHANGES = 'Save the changes?';
 
 const
-  URl_GITHUB = 'https://github.com/Helltar/plainotepad';
+  URL_GITHUB = 'https://github.com/Helltar/plainotepad';
 
 var
   editor: TEditor;
@@ -93,7 +110,7 @@ begin
   loadSynEditConfig();
 
   if ParamCount > 0 then
-    editor.openFile(ParamStr(1));
+    openFile(ParamStr(1));
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -104,6 +121,18 @@ end;
 
 procedure TfrmMain.FormDropFiles(Sender: TObject; const FileNames: array of string);
 begin
+  openFile(FileNames[0]);
+end;
+
+procedure TfrmMain.miSettingsClick(Sender: TObject);
+begin
+  openFile(appConfigFile);
+end;
+
+function TfrmMain.openFile(fileName: string): boolean;
+begin
+  Result := False;
+
   if editor.fileModified then
     case showFileChangeDialog() of
       mrYes:
@@ -112,7 +141,7 @@ begin
       mrCancel: Exit;
     end;
 
-  editor.openFile(FileNames[0]);
+  Result := editor.openFile(fileName);
 end;
 
 procedure TfrmMain.loadFormConfig;
@@ -273,7 +302,7 @@ end;
 
 procedure TfrmMain.actHelpExecute(Sender: TObject);
 begin
-  OpenURL(URl_GITHUB);
+  OpenURL(URL_GITHUB);
 end;
 
 end.

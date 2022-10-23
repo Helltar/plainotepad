@@ -13,7 +13,6 @@ object frmMain: TfrmMain
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  OnDropFiles = FormDropFiles
   LCLVersion = '2.2.4.0'
   inline synEdit: TSynEdit
     AnchorSideLeft.Control = Owner
@@ -534,17 +533,20 @@ object frmMain: TfrmMain
     Left = 112
     Top = 32
     object actSaveFile: TAction
-      Caption = 'Save'
+      Caption = '&Save'
+      Hint = 'Save'
       OnExecute = actSaveFileExecute
       ShortCut = 16467
     end
     object actFullscreen: TAction
-      Caption = 'actFullscreen'
+      Caption = '&Fullscreen'
+      Hint = 'Fullscreen'
       OnExecute = actFullscreenExecute
       ShortCut = 122
     end
     object actClose: TAction
-      Caption = 'actClose'
+      Caption = '&Quit'
+      Hint = 'Quit'
       OnExecute = actCloseExecute
       ShortCut = 16465
     end
@@ -585,7 +587,8 @@ object frmMain: TfrmMain
       ShortCut = 46
     end
     object actHelp: TAction
-      Caption = 'actHelp'
+      Caption = '&Help ...'
+      Hint = 'Online Help'
       OnExecute = actHelpExecute
       ShortCut = 112
     end
@@ -597,32 +600,81 @@ object frmMain: TfrmMain
   object pmMain: TPopupMenu
     Left = 456
     Top = 32
-    object miCut: TMenuItem
-      Action = edtCut
+    object miFile: TMenuItem
+      Caption = '&File'
+      Hint = 'File'
+      object miSaveFile: TMenuItem
+        Action = actSaveFile
+      end
+      object Separator1: TMenuItem
+        Caption = '-'
+      end
+      object miSettings: TMenuItem
+        Caption = 'Se&ttings ...'
+        Hint = 'Settings'
+        OnClick = miSettingsClick
+      end
+      object Separator5: TMenuItem
+        Caption = '-'
+      end
+      object miQuit: TMenuItem
+        Action = actClose
+      end
     end
-    object miCopy: TMenuItem
-      Action = edtCopy
+    object miEdit: TMenuItem
+      Caption = '&Edit'
+      Hint = 'Edit'
+      object miCut: TMenuItem
+        Action = edtCut
+      end
+      object miCopy: TMenuItem
+        Action = edtCopy
+      end
+      object miPaste: TMenuItem
+        Action = edtPaste
+      end
+      object Separator2: TMenuItem
+        Caption = '-'
+      end
+      object miSelectAll: TMenuItem
+        Action = edtSelectAll
+      end
+      object Separator3: TMenuItem
+        Caption = '-'
+      end
+      object miUndo: TMenuItem
+        Action = editUndo
+      end
+      object Separator4: TMenuItem
+        Caption = '-'
+      end
+      object miDelete: TMenuItem
+        Action = edtDelete
+      end
     end
-    object miPaste: TMenuItem
-      Action = edtPaste
+    object miView: TMenuItem
+      Caption = '&View'
+      Hint = 'View'
+      object miFullscreen: TMenuItem
+        Action = actFullscreen
+      end
     end
-    object miSeparator: TMenuItem
+    object Separator6: TMenuItem
       Caption = '-'
     end
-    object miSelectAll: TMenuItem
-      Action = edtSelectAll
-    end
-    object miSeparator1: TMenuItem
-      Caption = '-'
-    end
-    object miUndo: TMenuItem
-      Action = editUndo
-    end
-    object miSeparator2: TMenuItem
-      Caption = '-'
-    end
-    object miDelete: TMenuItem
-      Action = edtDelete
+    object miHelp: TMenuItem
+      Caption = '&Help'
+      Hint = 'Help'
+      object miOnlineHelp: TMenuItem
+        Action = actHelp
+      end
+      object Separator7: TMenuItem
+        Caption = '-'
+      end
+      object miAbout: TMenuItem
+        Caption = '&About'
+        Hint = 'About'
+      end
     end
   end
 end
