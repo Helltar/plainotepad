@@ -16,11 +16,15 @@ type
     lblHomepage: TLabel;
     lblGithub: TLabel;
     lblLicense: TLabel;
+    procedure FormCreate(Sender: TObject);
     procedure lblClick(Sender: TObject);
     procedure lblLicenseClick(Sender: TObject);
   end;
 
 implementation
+
+const
+  URL_LICENSE = 'https://github.com/Helltar/plainotepad/blob/master/LICENSE';
 
 {$R *.lfm}
 
@@ -31,9 +35,14 @@ begin
   OpenURL(TLabel(Sender).Caption);
 end;
 
+procedure TfrmAbout.FormCreate(Sender: TObject);
+begin
+  lblLicense.Hint := URL_LICENSE;
+end;
+
 procedure TfrmAbout.lblLicenseClick(Sender: TObject);
 begin
-  OpenURL('https://github.com/Helltar/plainotepad/blob/master/LICENSE');
+  OpenURL(URL_LICENSE);
 end;
 
 end.

@@ -7,6 +7,7 @@ object frmAbout: TfrmAbout
   Caption = 'About'
   ClientHeight = 290
   ClientWidth = 425
+  OnCreate = FormCreate
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'
   object imgAbout: TImage
@@ -169,6 +170,8 @@ object frmAbout: TfrmAbout
     Font.Style = [fsUnderline]
     ParentColor = False
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     OnClick = lblLicenseClick
   end
 end
