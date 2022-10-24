@@ -5,94 +5,68 @@ unit uEditorHighlighter;
 interface
 
 uses
-  SysUtils, Graphics,
-  SynHighlighterJScript, SynHighlighterHTML, SynHighlighterCss,
-  SynHighlighterPHP, SynHighlighterPython, SynHighlighterBat,
-  synhighlighterunixshellscript, SynHighlighterJava, SynHighlighterSQL,
-  uEditor;
+  Classes, SysUtils, Graphics,
+  SynHighlighterJava, SynHighlighterJScript, SynHighlighterHTML,
+  synhighlighterunixshellscript, SynHighlighterCss, SynHighlighterPHP,
+  SynHighlighterSQL, SynHighlighterPython, SynHighlighterBat;
 
 type
 
-  { TEditorHighlighter }
+  { TdmHighlighter }
 
-  TEditorHighlighter = class
+  TdmHighlighter = class(TDataModule)
+    synBatSyn: TSynBatSyn;
+    synCssSyn: TSynCssSyn;
+    synHTMLSyn: TSynHTMLSyn;
+    synJavaSyn: TSynJavaSyn;
+    synJScriptSyn: TSynJScriptSyn;
+    synPHPSyn: TSynPHPSyn;
+    synPythonSyn: TSynPythonSyn;
+    synSQLSyn: TSynSQLSyn;
+    synUNIXShellScriptSyn: TSynUNIXShellScriptSyn;
+    procedure DataModuleCreate(Sender: TObject);
   private
-    commentColor: TColor;
-    cssMeasurementUnitColor: TColor;
-    htmlValueColor: TColor;
-    keyColor: TColor;
-    numberColor: TColor;
-    pythonFloatColor: TColor;
-    pythonNonKeyColor: TColor;
-    shellVarColor: TColor;
-    stringColor: TColor;
-    symbolColor: TColor;
-  private
-    FSynBat: TSynBatSyn;
-    FSynCss: TSynCssSyn;
-    FSynHtml: TSynHTMLSyn;
-    FSynJava: TSynJavaSyn;
-    FSynJs: TSynJScriptSyn;
-    FSynPhp: TSynPHPSyn;
-    FSynPython: TSynPythonSyn;
-    FSynShell: TSynUNIXShellScriptSyn;
-    FSynSql: TSynSQLSyn;
-  public
-    constructor Create(colorTheme: TColorTheme);
-    destructor Destroy; override;
+    commentColor, cssMeasurementUnitColor, htmlValueColor, keyColor, numberColor,
+    pythonFloatColor, pythonNonKeyColor, shellVarColor, stringColor, symbolColor: TColor;
+    procedure updateColors();
   public
     procedure enableDarkTheme();
     procedure enableLightTheme();
-  public
-    property batHighlighter: TSynBatSyn read FSynBat;
-    property cssHighlighter: TSynCssSyn read FSynCss;
-    property htmlHighlighter: TSynHTMLSyn read FSynHtml;
-    property javaHighlighter: TSynJavaSyn read FSynJava;
-    property jsHighlighter: TSynJScriptSyn read FSynJs;
-    property phpHighlighter: TSynPHPSyn read FSynPhp;
-    property pythonHighlighter: TSynPythonSyn read FSynPython;
-    property shellScriptHighlighter: TSynUNIXShellScriptSyn read FSynShell;
-    property sqlHighlighter: TSynSQLSyn read FSynSql;
   end;
 
 implementation
 
-{ TEditorHighlighter }
+{$R *.lfm}
 
-constructor TEditorHighlighter.Create(colorTheme: TColorTheme);
+{ TdmHighlighter }
+
+procedure TdmHighlighter.DataModuleCreate(Sender: TObject);
 begin
-  case colorTheme of
-    default: enableLightTheme();
-    dark: enableDarkTheme();
-    white: enableLightTheme();
-  end;
+  enableLightTheme();
+end;
 
-  FSynBat := TSynBatSyn.Create(nil);
-
-  with FSynBat do
+procedure TdmHighlighter.updateColors;
+begin
+  with synBatSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
     NumberAttri.Foreground := numberColor;
   end;
 
-  FSynCss := TSynCssSyn.Create(nil);
-
-  with FSynCss do
+  with synCssSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
+    MeasurementUnitAttri.Foreground := cssMeasurementUnitColor;
     NumberAttri.Foreground := numberColor;
     SelectorAttri.Style := [fsBold];
     StringAttri.Foreground := stringColor;
     StringAttri.Style := [fsBold];
     SymbolAttri.Foreground := symbolColor;
-    MeasurementUnitAttri.Foreground := cssMeasurementUnitColor;
   end;
 
-  FSynHtml := TSynHTMLSyn.Create(nil);
-
-  with FSynHtml do
+  with synHTMLSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
@@ -100,9 +74,7 @@ begin
     ValueAttri.Foreground := htmlValueColor;
   end;
 
-  FSynJava := TSynJavaSyn.Create(nil);
-
-  with FSynJava do
+  with synJavaSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
@@ -112,9 +84,7 @@ begin
     SymbolAttri.Foreground := symbolColor;
   end;
 
-  FSynJs := TSynJScriptSyn.Create(nil);
-
-  with FSynJs do
+  with synJScriptSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
@@ -124,9 +94,7 @@ begin
     SymbolAttri.Foreground := symbolColor;
   end;
 
-  FSynPhp := TSynPHPSyn.Create(nil);
-
-  with FSynPhp do
+  with synPHPSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
@@ -136,9 +104,7 @@ begin
     SymbolAttri.Foreground := symbolColor;
   end;
 
-  FSynPython := TSynPythonSyn.Create(nil);
-
-  with FSynPython do
+  with synPythonSyn do
   begin
     CommentAttri.Foreground := commentColor;
     FloatAttri.Foreground := pythonFloatColor;
@@ -150,9 +116,7 @@ begin
     SymbolAttri.Foreground := symbolColor;
   end;
 
-  FSynShell := TSynUNIXShellScriptSyn.Create(nil);
-
-  with FSynShell do
+  with synUNIXShellScriptSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
@@ -163,9 +127,7 @@ begin
     VarAttri.Foreground := shellVarColor;
   end;
 
-  FSynSql := TSynSQLSyn.Create(nil);
-
-  with FSynSql do
+  with synSQLSyn do
   begin
     CommentAttri.Foreground := commentColor;
     KeyAttri.Foreground := keyColor;
@@ -176,34 +138,7 @@ begin
   end;
 end;
 
-destructor TEditorHighlighter.Destroy;
-begin
-  FreeAndNil(FSynBat);
-  FreeAndNil(FSynCss);
-  FreeAndNil(FSynHtml);
-  FreeAndNil(FSynJava);
-  FreeAndNil(FSynJs);
-  FreeAndNil(FSynPhp);
-  FreeAndNil(FSynPython);
-  FreeAndNil(FSynShell);
-  FreeAndNil(FSynSql);
-  inherited Destroy;
-end;
-
-procedure TEditorHighlighter.enableLightTheme;
-begin
-  commentColor := clGray;
-  cssMeasurementUnitColor := clMaroon;
-  htmlValueColor := clGreen;
-  keyColor := clTeal;
-  numberColor := clRed;
-  stringColor := clGreen;
-  shellVarColor := clMaroon;
-  symbolColor := clBlack;
-  pythonFloatColor := clMaroon;
-end;
-
-procedure TEditorHighlighter.enableDarkTheme;
+procedure TdmHighlighter.enableDarkTheme;
 begin
   commentColor := clSilver;
   cssMeasurementUnitColor := clRed;
@@ -215,6 +150,23 @@ begin
   shellVarColor := clSkyBlue;
   pythonNonKeyColor := clSkyBlue;
   pythonFloatColor := clSkyBlue;
+
+  updateColors();
+end;
+
+procedure TdmHighlighter.enableLightTheme;
+begin
+  commentColor := clGray;
+  cssMeasurementUnitColor := clMaroon;
+  htmlValueColor := clGreen;
+  keyColor := clTeal;
+  numberColor := clRed;
+  stringColor := clGreen;
+  shellVarColor := clMaroon;
+  symbolColor := clBlack;
+  pythonFloatColor := clMaroon;
+
+  updateColors();
 end;
 
 end.

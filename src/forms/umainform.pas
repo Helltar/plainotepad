@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs,
-  ActnList, StdCtrls, Menus, StdActns, SynEdit, LCLIntf;
+  ActnList, StdCtrls, Menus, StdActns, SynEdit, LCLIntf,
+  uEditor;
 
 type
 
@@ -62,9 +63,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure miAboutClick(Sender: TObject);
     procedure miHtmlExportClick(Sender: TObject);
     procedure miSettingsClick(Sender: TObject);
   private
+    editor: TEditor;
     appConfigFile: string;
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
@@ -81,17 +84,11 @@ var
 implementation
 
 uses
-  uConfig, uEditor;
+  uConsts, uConfig, uAboutForm;
 
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
   MSG_SAVE_CHANGES = 'Save the changes?';
-
-const
-  URL_GITHUB = 'https://github.com/Helltar/plainotepad';
-
-var
-  editor: TEditor;
 
 {$R *.lfm}
 
@@ -127,6 +124,16 @@ end;
 procedure TfrmMain.FormDropFiles(Sender: TObject; const FileNames: array of string);
 begin
   openFile(FileNames[0]);
+end;
+
+procedure TfrmMain.miAboutClick(Sender: TObject);
+begin
+  with TfrmAbout.Create(Self) do
+    try
+      ShowModal;
+    finally
+      Free;
+    end;
 end;
 
 procedure TfrmMain.miHtmlExportClick(Sender: TObject);
@@ -190,12 +197,10 @@ begin
       end;
 
       if highlighter then
-        case colorTheme of
-          COLOR_THEME_DARK: editor.setHighlighterColorTheme(dark);
-          COLOR_THEME_WHITE: editor.setHighlighterColorTheme(white);
-          else
-            editor.setHighlighterColorTheme(default);
-        end;
+        if colorTheme = COLOR_THEME_DARK then
+          editor.enableHighlighter(True)
+        else
+          editor.enableHighlighter(False);
     end;
   finally
     FreeAndNil(config);
@@ -317,7 +322,7 @@ end;
 
 procedure TfrmMain.actHtmlExportUpdate(Sender: TObject);
 begin
-  actHtmlExport.Enabled := editor.isHighlighterEnabled();
+  actHtmlExport.Enabled := editor.isHighlighterUsed();
 end;
 
 end.

@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 480
   Height = 500
-  Top = 264
+  Top = 294
   Width = 900
   AllowDropFiles = True
   Caption = 'Plainotepad'
@@ -687,6 +687,7 @@ object frmMain: TfrmMain
       object miAbout: TMenuItem
         Caption = '&About'
         Hint = 'About'
+        OnClick = miAboutClick
       end
     end
   end

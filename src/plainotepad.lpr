@@ -11,17 +11,15 @@ uses
   {$ENDIF}
   Interfaces,
   Forms,
-  uMainForm,
-  uConfig,
-  uEditor,
-  uEditorHighlighter,
-  uLogger;
+  uMainForm, uAboutForm,
+  uConsts, uUtils, uConfig, uLogger,
+  uEditor, uEditorHighlighter;
 
 {$R *.res}
 
 begin
   RequireDerivedFormResource := True;
-  Application.Scaled:=True;
+  Application.Scaled := True;
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
   Application.Run;

@@ -5,7 +5,9 @@ unit uEditor;
 interface
 
 uses
-  Classes, SysUtils, Graphics, Dialogs, SynEdit, SynExportHTML;
+  Classes, SysUtils, Graphics, Dialogs,
+  SynEdit, SynExportHTML,
+  uEditorHighlighter;
 
 type
 
@@ -15,39 +17,36 @@ type
 
   TEditor = class
   private
+    editorHighlighter: TdmHighlighter;
     synEdit: TSynEdit;
     currentFileName: string;
     fFileModified: boolean;
+    procedure setHighlighterByFileExt(fileExt: string);
     procedure synEditChange(Sender: TObject);
     procedure updateParentCaption();
     procedure updateParentCaption(addedText: string);
-    procedure setHighlighterByFileExt(fileExt: string);
   public
     constructor Create(AOwner: TSynEdit);
-    destructor Destroy; override;
   public
     function isNotNewFile(): boolean;
-    function isHighlighterEnabled(): boolean;
+    function isHighlighterUsed(): boolean;
     function openFile(fileName: string): boolean;
     function saveCurrentFile(): boolean;
     function saveFile(fileName: string): boolean;
+    procedure enableHighlighter(darkTheme: boolean);
     procedure exportToHtml();
     procedure setColorTheme(colorTheme: TColorTheme);
-    procedure setHighlighterColorTheme(colorTheme: TColorTheme);
     property fileModified: boolean read fFileModified;
   end;
 
 implementation
 
 uses
-  uEditorHighlighter, uLogger;
+  uLogger, uUtils;
 
 resourcestring
   ERROR_OPEN_FILE = 'Error when opening a file: %s';
   ERROR_SAVE_FILE = 'Error when saving the file: %s';
-
-var
-  editorHighlighter: TEditorHighlighter;
 
 { TEditor }
 
@@ -55,16 +54,6 @@ constructor TEditor.Create(AOwner: TSynEdit);
 begin
   synEdit := AOwner;
   synEdit.OnChange := @synEditChange;
-end;
-
-destructor TEditor.Destroy;
-begin
-  FreeAndNil(synEdit);
-
-  if Assigned(editorHighlighter) then
-    FreeAndNil(editorHighlighter);
-
-  inherited Destroy;
 end;
 
 procedure TEditor.synEditChange(Sender: TObject);
@@ -90,7 +79,7 @@ begin
   Result := not currentFileName.IsEmpty;
 end;
 
-function TEditor.isHighlighterEnabled: boolean;
+function TEditor.isHighlighterUsed: boolean;
 begin
   Result := Assigned(synEdit.Highlighter);
 end;
@@ -138,37 +127,40 @@ end;
 procedure TEditor.exportToHtml;
 var
   saveDialog: TSaveDialog;
+  filename: string;
 
 begin
-  if not isHighlighterEnabled() then
+  if not isHighlighterUsed() then
     Exit;
 
   saveDialog := TSaveDialog.Create(nil);
   saveDialog.InitialDir := GetUserDir;
 
   if saveDialog.Execute then
+  begin
+    filename := saveDialog.FileName + '.html';
+
     with TSynExporterHTML.Create(nil) do
       try
         try
+          Title := getAppOriginalFilename() + ' ' + getAppFileVersion() + ': ' + ExtractFileName(saveDialog.FileName);
           Highlighter := synEdit.Highlighter;
           ExportAll(synEdit.Lines);
-          SaveToFile(saveDialog.FileName + '.html');
+          SaveToFile(filename);
         except
-          addLog(Format(ERROR_SAVE_FILE, [saveDialog.FileName + '.html']));
+          addLog(Format(ERROR_SAVE_FILE, [filename]));
         end;
       finally
         Free;
       end;
+  end;
 
   FreeAndNil(saveDialog);
 end;
 
 function TEditor.saveCurrentFile: boolean;
 begin
-  Result := False;
-
-  if isNotNewFile() then
-    Result := saveFile(currentFileName);
+  Result := saveFile(currentFileName);
 end;
 
 procedure TEditor.setHighlighterByFileExt(fileExt: string);
@@ -176,15 +168,15 @@ begin
   with synEdit do
     with editorHighlighter do
       case fileExt of
-        '.bat', '.cmd': Highlighter := batHighlighter;
-        '.css': Highlighter := cssHighlighter;
-        '.html', '.htm', '.xml': Highlighter := htmlHighlighter;
-        '.java', '.kt': Highlighter := javaHighlighter;
-        '.js', '.ts', '.json': Highlighter := jsHighlighter;
-        '.php', '.php3', '.phtml', '.inc': Highlighter := phpHighlighter;
-        '.py': Highlighter := pythonHighlighter;
-        '.sh', '.bash', '.bashrc': Highlighter := shellScriptHighlighter;
-        '.sql': Highlighter := sqlHighlighter;
+        '.bat', '.cmd': Highlighter := synBatSyn;
+        '.css': Highlighter := synCssSyn;
+        '.html', '.htm', '.xml': Highlighter := synHTMLSyn;
+        '.java', '.kt': Highlighter := synJavaSyn;
+        '.js', '.ts', '.json': Highlighter := synJScriptSyn;
+        '.php', '.php3', '.phtml', '.inc': Highlighter := synPHPSyn;
+        '.py': Highlighter := synPythonSyn;
+        '.sh', '.bash', '.bashrc': Highlighter := synUNIXShellScriptSyn;
+        '.sql': Highlighter := synSQLSyn;
         else
           Highlighter := nil;
       end;
@@ -211,9 +203,12 @@ begin
   end;
 end;
 
-procedure TEditor.setHighlighterColorTheme(colorTheme: TColorTheme);
+procedure TEditor.enableHighlighter(darkTheme: boolean);
 begin
-  editorHighlighter := TEditorHighlighter.Create(colorTheme);
+  editorHighlighter := TdmHighlighter.Create(synEdit);
+
+  if darkTheme then
+    editorHighlighter.enableDarkTheme();
 end;
 
 end.

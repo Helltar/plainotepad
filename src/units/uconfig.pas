@@ -7,11 +7,6 @@ interface
 uses
   SysUtils, IniFiles;
 
-const
-  APP_CONFIG_FILE_NAME = 'config';
-  COLOR_THEME_DARK = 'dark';
-  COLOR_THEME_WHITE = 'white';
-
 type
   { TConfig }
 
