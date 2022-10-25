@@ -10,10 +10,10 @@ uses
   athreads,
   {$ENDIF}
   Interfaces,
-  Forms,
+  Forms, lazcontrols,
   uMainForm, uAboutForm,
   uConsts, uUtils, uConfig, uLogger,
-  uEditor, uEditorHighlighter;
+  uEditor, uEditorHighlighter, uSettingsForm;
 
 {$R *.res}
 

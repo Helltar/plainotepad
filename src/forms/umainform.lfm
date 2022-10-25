@@ -1,13 +1,12 @@
 object frmMain: TfrmMain
-  Left = 480
-  Height = 500
-  Top = 294
-  Width = 900
+  Left = 288
+  Height = 350
+  Top = 250
+  Width = 859
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 500
-  ClientWidth = 900
-  Color = clCream
+  ClientHeight = 350
+  ClientWidth = 859
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   OnCloseQuery = FormCloseQuery
@@ -23,22 +22,20 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 500
+    Height = 350
     Top = 0
-    Width = 900
+    Width = 859
     Anchors = [akTop, akLeft, akRight, akBottom]
-    Color = clCream
-    Font.Height = -16
+    Font.Height = 13
     Font.Name = 'DejaVu Sans Mono'
     Font.Pitch = fpFixed
-    Font.Quality = fqAntialiased
+    Font.Quality = fqCleartype
     ParentColor = False
     ParentFont = False
     PopupMenu = pmMain
     TabOrder = 0
     BorderStyle = bsNone
-    Gutter.Color = clCream
-    Gutter.Width = 35
+    Gutter.Width = 32
     Gutter.MouseActions = <>
     RightGutter.Width = 0
     RightGutter.MouseActions = <>
@@ -469,9 +466,7 @@ object frmMain: TfrmMain
     Options = [eoAutoIndent, eoBracketHighlight, eoGroupUndo, eoSmartTabs, eoTabsToSpaces, eoTrimTrailingSpaces]
     MouseOptions = [emDragDropEditing, emCtrlWheelZoom]
     VisibleSpecialChars = [vscSpace, vscTabAtLast]
-    RightEdgeColor = clHighlight
-    ScrollBars = ssNone
-    SelectedColor.Background = clBtnFace
+    SelectedColor.Background = 15395562
     SelectedColor.Foreground = clBlack
     SelectedColor.BackPriority = 50
     SelectedColor.ForePriority = 50
@@ -481,8 +476,8 @@ object frmMain: TfrmMain
     SelectedColor.UnderlinePriority = 50
     SelectedColor.StrikeOutPriority = 50
     BracketHighlightStyle = sbhsBoth
-    BracketMatchColor.Background = 13680686
-    BracketMatchColor.Foreground = clWhite
+    BracketMatchColor.Background = 14277011
+    BracketMatchColor.Foreground = clBlack
     BracketMatchColor.Style = [fsBold]
     FoldedCodeColor.Background = clNone
     FoldedCodeColor.Foreground = clGray
@@ -498,10 +493,10 @@ object frmMain: TfrmMain
         MouseActions = <>
       end
       object SynGutterLineNumber1: TSynGutterLineNumber
-        Width = 21
+        Width = 17
         MouseActions = <>
         MarkupInfo.Background = clNone
-        MarkupInfo.Foreground = clSilver
+        MarkupInfo.Foreground = clNone
         DigitCount = 2
         ShowOnlyLineNumbersMultiplesOf = 1
         ZeroStart = False
@@ -510,16 +505,15 @@ object frmMain: TfrmMain
       object SynGutterChanges1: TSynGutterChanges
         Width = 4
         MouseActions = <>
-        ModifiedColor = clSkyBlue
-        SavedColor = 50944
+        ModifiedColor = 16563803
+        SavedColor = 48640
       end
       object SynGutterSeparator1: TSynGutterSeparator
         AutoSize = False
         Width = 1
-        Visible = False
         MouseActions = <>
-        MarkupInfo.Background = clNone
-        MarkupInfo.Foreground = clHighlight
+        MarkupInfo.Background = clWhite
+        MarkupInfo.Foreground = clGray
       end
       object SynGutterCodeFolding1: TSynGutterCodeFolding
         MouseActions = <>
@@ -537,6 +531,7 @@ object frmMain: TfrmMain
       Caption = '&Save'
       Hint = 'Save'
       OnExecute = actSaveFileExecute
+      OnUpdate = actSaveFileUpdate
       ShortCut = 16467
     end
     object actFullscreen: TAction
@@ -587,19 +582,17 @@ object frmMain: TfrmMain
       Hint = 'Delete'
       ShortCut = 46
     end
-    object actHelp: TAction
-      Caption = '&Help ...'
-      Hint = 'Online Help'
-      OnExecute = actHelpExecute
-      ShortCut = 112
-    end
     object actHtmlExport: TAction
-      Caption = 'Export as HTML ...'
+      Caption = 'Export as &HTML ...'
       Hint = 'Export as HTML'
+      OnExecute = actHtmlExportExecute
       OnUpdate = actHtmlExportUpdate
     end
   end
   object saveDialog: TSaveDialog
+    FileName = '/home/helltar'
+    InitialDir = '/home/'
+    Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     Left = 288
     Top = 32
   end
@@ -612,12 +605,15 @@ object frmMain: TfrmMain
       object miSaveFile: TMenuItem
         Action = actSaveFile
       end
+      object miSaveAs: TMenuItem
+        Caption = 'Save &As ...'
+        OnClick = miSaveAsClick
+      end
       object Separator8: TMenuItem
         Caption = '-'
       end
       object miHtmlExport: TMenuItem
         Action = actHtmlExport
-        OnClick = miHtmlExportClick
       end
       object Separator1: TMenuItem
         Caption = '-'
@@ -678,12 +674,6 @@ object frmMain: TfrmMain
     object miHelp: TMenuItem
       Caption = '&Help'
       Hint = 'Help'
-      object miOnlineHelp: TMenuItem
-        Action = actHelp
-      end
-      object Separator7: TMenuItem
-        Caption = '-'
-      end
       object miAbout: TMenuItem
         Caption = '&About'
         Hint = 'About'

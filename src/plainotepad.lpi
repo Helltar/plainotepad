@@ -18,7 +18,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="108"/>
+      <BuildNr Value="148"/>
       <StringTable CompanyName="helltar.com" FileDescription="Lightweight plain text editor" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.1.0"/>
     </VersionInfo>
     <BuildModes>
@@ -103,6 +103,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="LazControls"/>
+      </Item>
+      <Item>
         <PackageName Value="SynEdit"/>
       </Item>
       <Item>
@@ -159,8 +162,17 @@
         <Filename Value="forms/uaboutform.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmAbout"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uAboutForm"/>
+      </Unit>
+      <Unit>
+        <Filename Value="forms/usettingsform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmSettings"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uSettingsForm"/>
       </Unit>
     </Units>
   </ProjectOptions>

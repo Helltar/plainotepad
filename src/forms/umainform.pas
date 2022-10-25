@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs,
   ActnList, StdCtrls, Menus, StdActns, SynEdit, LCLIntf,
-  uEditor;
+  uEditor, uConfig;
 
 type
 
@@ -16,7 +16,6 @@ type
   TfrmMain = class(TForm)
     actFullscreen: TAction;
     actClose: TAction;
-    actHelp: TAction;
     actHtmlExport: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
@@ -26,6 +25,7 @@ type
     edtPaste: TEditPaste;
     edtSelectAll: TEditSelectAll;
     editUndo: TEditUndo;
+    miSaveAs: TMenuItem;
     miHtmlExport: TMenuItem;
     miSettings: TMenuItem;
     miFullscreen: TMenuItem;
@@ -34,7 +34,6 @@ type
     miAbout: TMenuItem;
     miQuit: TMenuItem;
     miHelp: TMenuItem;
-    miOnlineHelp: TMenuItem;
     miEdit: TMenuItem;
     miCut: TMenuItem;
     miCopy: TMenuItem;
@@ -51,31 +50,33 @@ type
     Separator4: TMenuItem;
     Separator5: TMenuItem;
     Separator6: TMenuItem;
-    Separator7: TMenuItem;
     Separator8: TMenuItem;
     synEdit: TSynEdit;
     procedure actFullscreenExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
-    procedure actHelpExecute(Sender: TObject);
+    procedure actHtmlExportExecute(Sender: TObject);
     procedure actHtmlExportUpdate(Sender: TObject);
     procedure actSaveFileExecute(Sender: TObject);
+    procedure actSaveFileUpdate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure miAboutClick(Sender: TObject);
-    procedure miHtmlExportClick(Sender: TObject);
+    procedure miSaveAsClick(Sender: TObject);
     procedure miSettingsClick(Sender: TObject);
   private
     editor: TEditor;
-    appConfigFile: string;
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
     function showFileChangeDialog(): TModalResult;
-    procedure createDefaultConfigFile();
-    procedure loadFormConfig();
-    procedure loadSynEditConfig();
     procedure saveConfig();
+    procedure loadFormConfig();
+    procedure loadEditorConfig();
+  public
+    appConfigFile: string;
+    config: TConfig;
+    procedure updateConfig();
   end;
 
 var
@@ -84,7 +85,7 @@ var
 implementation
 
 uses
-  uConsts, uConfig, uAboutForm;
+  uConsts, uAboutForm, uSettingsForm;
 
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
@@ -99,26 +100,29 @@ var
   appConfigDir: string;
 
 begin
-  editor := TEditor.Create(synEdit);
-
   appConfigDir := GetAppConfigDir(False);
   appConfigFile := appConfigDir + APP_CONFIG_FILE_NAME;
 
   if not DirectoryExists(appConfigDir) then
-    if CreateDir(appConfigDir) then
-      createDefaultConfigFile();
+    CreateDir(appConfigDir);
+
+  config := TConfig.Create(appConfigFile);
+  editor := TEditor.Create(synEdit);
 
   loadFormConfig();
-  loadSynEditConfig();
+  loadEditorConfig();
 
   if ParamCount > 0 then
     openFile(ParamStr(1));
+
+  saveDialog.InitialDir := GetUserDir;
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
-  FreeAndNil(editor);
   saveConfig();
+  FreeAndNil(editor);
+  FreeAndNil(config);
 end;
 
 procedure TfrmMain.FormDropFiles(Sender: TObject; const FileNames: array of string);
@@ -136,14 +140,20 @@ begin
     end;
 end;
 
-procedure TfrmMain.miHtmlExportClick(Sender: TObject);
+procedure TfrmMain.miSaveAsClick(Sender: TObject);
 begin
-  editor.exportToHtml();
+  if saveDialog.Execute then
+    editor.saveFile(saveDialog.FileName);
 end;
 
 procedure TfrmMain.miSettingsClick(Sender: TObject);
 begin
-  openFile(appConfigFile);
+  with TfrmSettings.Create(Self) do
+    try
+      ShowModal;
+    finally
+      Free;
+    end;
 end;
 
 function TfrmMain.openFile(fileName: string): boolean;
@@ -162,113 +172,74 @@ begin
 end;
 
 procedure TfrmMain.loadFormConfig;
-var
-  config: TConfig;
-
 begin
-  try
-    config := TConfig.Create(appConfigFile);
-
-    with config do
+  with config do
+  begin
+    if (formLeft + formTop) > 0 then
     begin
-      if (formLeft + formTop) > 0 then
-      begin
-        Left := formLeft;
-        Top := formTop;
-      end
-      else
-        Position := poScreenCenter;
+      Left := formLeft;
+      Top := formTop;
+    end
+    else
+      Position := poScreenCenter;
 
-      Height := formHeight;
-      Width := formWidth;
+    Height := formHeight;
+    Width := formWidth;
 
-      case colorTheme of
-        COLOR_THEME_DARK:
-        begin
-          Color := $001e1e1e;
-          editor.setColorTheme(dark);
-        end;
-
-        COLOR_THEME_WHITE:
-        begin
-          Color := clWhite;
-          editor.setColorTheme(white);
-        end;
-      end;
-
-      if highlighter then
-        if colorTheme = COLOR_THEME_DARK then
-          editor.enableHighlighter(True)
-        else
-          editor.enableHighlighter(False);
+    case colorTheme of
+      COLOR_THEME_CREAM: Color := clCream;
+      COLOR_THEME_DARK: Color := $001e1e1e;
+      COLOR_THEME_WHITE: Color := clWhite;
     end;
-  finally
-    FreeAndNil(config);
   end;
 end;
 
-procedure TfrmMain.loadSynEditConfig;
-var
-  config: TConfig;
-
+procedure TfrmMain.loadEditorConfig;
 begin
-  try
-    config := TConfig.Create(appConfigFile);
-
-    with synEdit do
+  with synEdit do
+    with config do
     begin
-      Font.Name := config.fontName;
-      Font.Size := config.fontSize;
+      Font.Name := fontName;
+      Font.Size := fontSize;
 
-      Gutter.Parts[1].Visible := config.lineNumbers; // SynGutterLineNumber
-      Gutter.Parts[3].Visible := config.lineNumbers; // SynGutterSeparator
-      RightEdge := config.rightEdge;
+      Gutter.Parts[1].Visible := lineNumbers; // SynGutterLineNumber
+      Gutter.Parts[3].Visible := lineNumbers; // SynGutterSeparator
+      synEdit.RightEdge := rightEdge;
 
-      BorderSpacing.Left := config.borderSpaceLeft;
-      BorderSpacing.Right := config.borderSpaceRight;
-      BorderSpacing.Top := config.borderSpaceTop;
-      BorderSpacing.Bottom := config.borderSpaceBottom;
+      BorderSpacing.Left := borderSpaceLeft;
+      BorderSpacing.Right := borderSpaceRight;
+      BorderSpacing.Top := borderSpaceTop;
+      BorderSpacing.Bottom := borderSpaceBottom;
 
-      if config.scrollBars then
-        ScrollBars := ssAutoBoth
+      if scrollBars then
+        synEdit.ScrollBars := ssAutoBoth
       else
-        ScrollBars := ssNone;
+        synEdit.ScrollBars := ssNone;
+
+      case colorTheme of
+        COLOR_THEME_CREAM: editor.setColorTheme(cream);
+        COLOR_THEME_DARK: editor.setColorTheme(dark);
+        COLOR_THEME_WHITE: editor.setColorTheme(white);
+      end;
+
+      editor.enableHighlighter(highlighter);
     end;
-  finally
-    FreeAndNil(config);
-  end;
+end;
+
+procedure TfrmMain.updateConfig;
+begin
+  loadFormConfig();
+  loadEditorConfig();
 end;
 
 procedure TfrmMain.saveConfig;
-var
-  config: TConfig;
-
 begin
-  try
-    config := TConfig.Create(appConfigFile);
-
-    with config do
-    begin
-      formLeft := Left;
-      formTop := Top;
-      formHeight := Height;
-      formWidth := Width;
-    end;
-  finally
-    FreeAndNil(config);
-  end;
-end;
-
-procedure TfrmMain.createDefaultConfigFile;
-var
-  config: TConfig;
-
-begin
-  try
-    config := TConfig.Create(appConfigFile);
-    config.createDefaultConfigFile();
-  finally
-    FreeAndNil(config);
+  with config do
+  begin
+    formLeft := Left;
+    formTop := Top;
+    formHeight := Height;
+    formWidth := Width;
   end;
 end;
 
@@ -293,6 +264,11 @@ begin
   saveFile();
 end;
 
+procedure TfrmMain.actSaveFileUpdate(Sender: TObject);
+begin
+  actSaveFile.Enabled := editor.fileModified;
+end;
+
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   if editor.fileModified then
@@ -315,9 +291,9 @@ begin
   Close;
 end;
 
-procedure TfrmMain.actHelpExecute(Sender: TObject);
+procedure TfrmMain.actHtmlExportExecute(Sender: TObject);
 begin
-  OpenURL(URL_GITHUB);
+  editor.exportToHtml();
 end;
 
 procedure TfrmMain.actHtmlExportUpdate(Sender: TObject);

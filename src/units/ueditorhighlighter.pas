@@ -141,15 +141,15 @@ end;
 procedure TdmHighlighter.enableDarkTheme;
 begin
   commentColor := clSilver;
-  cssMeasurementUnitColor := clRed;
-  htmlValueColor := clGreen;
+  cssMeasurementUnitColor := clSkyBlue;
+  htmlValueColor := $00ad00;
   keyColor := $00D59B55;
   numberColor := clYellow;
-  stringColor := clGreen;
+  stringColor := $00ad00;
   symbolColor := clWhite;
   shellVarColor := clSkyBlue;
   pythonNonKeyColor := clSkyBlue;
-  pythonFloatColor := clSkyBlue;
+  pythonFloatColor := clFuchsia;
 
   updateColors();
 end;
@@ -164,7 +164,8 @@ begin
   stringColor := clGreen;
   shellVarColor := clMaroon;
   symbolColor := clBlack;
-  pythonFloatColor := clMaroon;
+  pythonNonKeyColor := clMaroon;
+  pythonFloatColor := clPurple;
 
   updateColors();
 end;

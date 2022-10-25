@@ -23,8 +23,8 @@ type
 
 implementation
 
-const
-  URL_LICENSE = 'https://github.com/Helltar/plainotepad/blob/master/LICENSE';
+uses
+  uConsts;
 
 {$R *.lfm}
 

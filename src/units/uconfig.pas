@@ -43,8 +43,6 @@ type
     procedure SetRightEdge(AValue: integer);
     procedure SetScrollBars(AValue: boolean);
   public
-    procedure createDefaultConfigFile();
-
     property formHeight: integer read GetFormHeight write SetFormHeight;
     property formLeft: integer read GetFormLeft write SetFormLeft;
     property formTop: integer read GetFormTop write SetFormTop;
@@ -79,7 +77,7 @@ end;
 
 function TConfig.GetBorderSpaceLeft: integer;
 begin
-  Result := ReadInteger(SECTION_MAIN, 'borderSpaceLeft', 24);
+  Result := ReadInteger(SECTION_MAIN, 'borderSpaceLeft', 12);
 end;
 
 function TConfig.GetBorderSpaceRight: integer;
@@ -129,12 +127,12 @@ end;
 
 function TConfig.GetHighlighter: boolean;
 begin
-  Result := ReadBool(SECTION_MAIN, 'highlighter', False);
+  Result := ReadBool(SECTION_MAIN, 'highlighter', True);
 end;
 
 function TConfig.GetLineNumbers: boolean;
 begin
-  Result := ReadBool(SECTION_MAIN, 'lineNumbers', False);
+  Result := ReadBool(SECTION_MAIN, 'lineNumbers', True);
 end;
 
 function TConfig.GetRightEdge: integer;
@@ -220,21 +218,6 @@ end;
 procedure TConfig.SetScrollBars(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'scrollBars', AValue);
-end;
-
-procedure TConfig.createDefaultConfigFile;
-begin
-  SetColorTheme(GetColorTheme);
-  SetFontName(GetFontName);
-  SetFontSize(GetFontSize);
-  SetHighlighter(GetHighlighter);
-  SetLineNumbers(GetLineNumbers);
-  SetRightEdge(GetRightEdge);
-  SetScrollBars(GetScrollBars);
-  SetBorderSpaceBottom(GetBorderSpaceBottom);
-  SetBorderSpaceLeft(GetBorderSpaceLeft);
-  SetBorderSpaceRight(GetBorderSpaceRight);
-  SetBorderSpaceTop(GetBorderSpaceTop);
 end;
 
 end.
