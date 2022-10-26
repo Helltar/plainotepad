@@ -196,11 +196,14 @@ begin
         '.bat', '.cmd': Highlighter := synBatSyn;
         '.css': Highlighter := synCssSyn;
         '.html', '.htm', '.xml': Highlighter := synHTMLSyn;
-        '.java', '.kt', '.gradle': Highlighter := synJavaSyn;
+        '.java', '.kt', '.gradle', '.kts': Highlighter := synJavaSyn;
         '.js', '.ts', '.json': Highlighter := synJScriptSyn;
         '.php', '.php3', '.phtml', '.inc': Highlighter := synPHPSyn;
         '.py': Highlighter := synPythonSyn;
-        '.sh', '.bash', '.bashrc': Highlighter := synUNIXShellScriptSyn;
+
+        '.sh', '.bash', '.conf', '.properties',
+        '.bashrc', 'gradlew': Highlighter := synUNIXShellScriptSyn;
+
         '.sql': Highlighter := synSQLSyn;
         else
           Highlighter := nil;
