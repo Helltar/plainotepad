@@ -86,7 +86,7 @@ var
 implementation
 
 uses
-  uConsts, uAboutForm, uSettingsForm;
+  uConsts, uAboutForm, uSettingsForm, uLogger;
 
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
@@ -107,7 +107,7 @@ begin
 
   if not DirectoryExists(appConfigDir) then
     if not CreateDir(appConfigDir) then
-      ShowMessage(ERROR_MK_CONFIG_DIR);
+      addLog(ERROR_MK_CONFIG_DIR);
 
   config := TConfig.Create(appConfigFile);
   editor := TEditor.Create(synEdit);
