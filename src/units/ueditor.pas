@@ -117,6 +117,7 @@ begin
 
   try
     synEdit.Lines.SaveToFile(fileName);
+    currentFileName := fileName;
     fFileModified := False;
     updateParentCaption();
     Result := True;
