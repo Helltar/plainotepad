@@ -13,12 +13,15 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
+      <Resources Count="1">
+        <Resource_0 FileName="../icons/plainotepad.svg" Type="RCDATA" ResourceName="APP_ICON"/>
+      </Resources>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="1"/>
-      <BuildNr Value="163"/>
+      <BuildNr Value="166"/>
       <StringTable CompanyName="helltar.com" FileDescription="Plain text editor" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.1.0"/>
     </VersionInfo>
     <BuildModes>

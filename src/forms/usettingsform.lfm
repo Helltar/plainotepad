@@ -1,7 +1,7 @@
 object frmSettings: TfrmSettings
-  Left = 507
+  Left = 454
   Height = 749
-  Top = 102
+  Top = 148
   Width = 552
   AutoSize = True
   Caption = 'Settings'
@@ -293,6 +293,21 @@ object frmSettings: TfrmSettings
     Caption = '&Save'
     OnClick = btnSaveClick
     TabOrder = 9
+  end
+  object btnCreateDesktopEntry: TButton
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = gbBorderSpace
+    AnchorSideTop.Side = asrBottom
+    Left = 24
+    Height = 33
+    Top = 656
+    Width = 167
+    AutoSize = True
+    BorderSpacing.Around = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = 'Create Desktop Entry'
+    OnClick = btnCreateDesktopEntryClick
+    TabOrder = 10
   end
   object fontDialog: TFontDialog
     MinFontSize = 0

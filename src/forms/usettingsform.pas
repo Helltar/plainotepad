@@ -14,6 +14,7 @@ type
   TfrmSettings = class(TForm)
     btnSelectFont: TButton;
     btnSave: TButton;
+    btnCreateDesktopEntry: TButton;
     cmbColorTheme: TComboBox;
     cbHighlighter: TCheckBox;
     cbLineNumbers: TCheckBox;
@@ -34,6 +35,7 @@ type
     seLeftSpace: TSpinEdit;
     seRightSpace: TSpinEdit;
     seTopSpace: TSpinEdit;
+    procedure btnCreateDesktopEntryClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnSelectFontClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -43,7 +45,10 @@ type
 implementation
 
 uses
-  uMainForm, uConsts;
+  uMainForm, uConsts, uUtils, uLogger;
+
+resourcestring
+  DESKTOP_ENTRY_CREATED = 'Desktop entry created';
 
 {$R *.lfm}
 
@@ -77,6 +82,12 @@ begin
 
   frmMain.updateConfig();
   Close;
+end;
+
+procedure TfrmSettings.btnCreateDesktopEntryClick(Sender: TObject);
+begin
+  if createDesktopEntry() then
+    addLog(DESKTOP_ENTRY_CREATED);
 end;
 
 procedure TfrmSettings.FormCreate(Sender: TObject);

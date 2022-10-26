@@ -5,7 +5,8 @@ unit uConsts;
 interface
 
 const
-  APP_NAME = 'plainotepad';
+  APP_NAME = 'Plainotepad';
+  APP_FILE_NAME = 'plainotepad';
   APP_CONFIG_FILE_NAME = 'config';
 
   COLOR_THEME_CREAM = 'cream';
