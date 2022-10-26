@@ -91,6 +91,7 @@ uses
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
   MSG_SAVE_CHANGES = 'Save the changes?';
+  ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
 
 {$R *.lfm}
 
@@ -105,7 +106,8 @@ begin
   appConfigFile := appConfigDir + APP_CONFIG_FILE_NAME;
 
   if not DirectoryExists(appConfigDir) then
-    CreateDir(appConfigDir);
+    if not CreateDir(appConfigDir) then
+      ShowMessage(ERROR_MK_CONFIG_DIR);
 
   config := TConfig.Create(appConfigFile);
   editor := TEditor.Create(synEdit);
@@ -290,10 +292,12 @@ begin
   if editor.fileModified then
     case showFileChangeDialog() of
       mrYes:
-        if saveFile() then
-          CanClose := True;
-      mrNo: CanClose := True;
+        if not saveFile() then
+          Exit;
+      mrCancel: Exit;
     end;
+
+  CanClose := True;
 end;
 
 procedure TfrmMain.actFullscreenExecute(Sender: TObject);
