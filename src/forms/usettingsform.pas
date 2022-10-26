@@ -40,7 +40,6 @@ type
     procedure FormShow(Sender: TObject);
   end;
 
-
 implementation
 
 uses
