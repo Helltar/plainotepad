@@ -285,10 +285,14 @@ end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
+  CanClose := False;
+
   if editor.fileModified then
     case showFileChangeDialog() of
-      mrYes: saveFile();
-      mrCancel: CanClose := False;
+      mrYes:
+        if saveFile() then
+          CanClose := True;
+      mrNo: CanClose := True;
     end;
 end;
 
