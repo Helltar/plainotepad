@@ -17,6 +17,7 @@ type
     lblGithub: TLabel;
     lblLicense: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure lblClick(Sender: TObject);
     procedure lblLicenseClick(Sender: TObject);
   end;
@@ -38,6 +39,12 @@ end;
 procedure TfrmAbout.FormCreate(Sender: TObject);
 begin
   lblLicense.Hint := URL_LICENSE;
+end;
+
+procedure TfrmAbout.FormShow(Sender: TObject);
+begin
+  Constraints.MinHeight := Height;
+  Constraints.MinWidth := Width;
 end;
 
 procedure TfrmAbout.lblLicenseClick(Sender: TObject);
