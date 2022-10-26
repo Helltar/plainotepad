@@ -144,7 +144,8 @@ end;
 procedure TfrmMain.miSaveAsClick(Sender: TObject);
 begin
   if saveDialog.Execute then
-    editor.saveFile(saveDialog.FileName);
+    if editor.saveFile(saveDialog.FileName) then
+      editor.openFile(saveDialog.FileName);
 end;
 
 procedure TfrmMain.miSettingsClick(Sender: TObject);
