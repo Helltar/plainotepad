@@ -73,6 +73,7 @@ type
     procedure saveConfig();
     procedure loadFormConfig();
     procedure loadEditorConfig();
+    procedure loadSynEditConfig();
   public
     appConfigFile: string;
     config: TConfig;
@@ -185,12 +186,6 @@ begin
 
     Height := formHeight;
     Width := formWidth;
-
-    case colorTheme of
-      COLOR_THEME_CREAM: Color := clCream;
-      COLOR_THEME_DARK: Color := $001e1e1e;
-      COLOR_THEME_WHITE: Color := clWhite;
-    end;
   end;
 end;
 
@@ -217,18 +212,36 @@ begin
         synEdit.ScrollBars := ssNone;
 
       case colorTheme of
-        COLOR_THEME_CREAM: editor.setColorTheme(cream);
-        COLOR_THEME_DARK: editor.setColorTheme(dark);
-        COLOR_THEME_WHITE: editor.setColorTheme(white);
+        COLOR_THEME_CREAM:
+        begin
+          Self.Color := clCream;
+          editor.setColorTheme(cream);
+        end;
+
+        COLOR_THEME_DARK:
+        begin
+          Self.Color := $001e1e1e;
+          editor.setColorTheme(dark);
+        end;
+
+        COLOR_THEME_WHITE:
+        begin
+          Self.Color := clWhite;
+          editor.setColorTheme(white);
+        end;
       end;
 
       editor.enableHighlighter(highlighter);
     end;
 end;
 
+procedure TfrmMain.loadSynEditConfig;
+begin
+
+end;
+
 procedure TfrmMain.updateConfig;
 begin
-  loadFormConfig();
   loadEditorConfig();
 end;
 
