@@ -73,7 +73,6 @@ type
     procedure saveConfig();
     procedure loadFormConfig();
     procedure loadEditorConfig();
-    procedure loadSynEditConfig();
   public
     appConfigFile: string;
     config: TConfig;
@@ -236,11 +235,6 @@ begin
 
       editor.enableHighlighter(highlighter);
     end;
-end;
-
-procedure TfrmMain.loadSynEditConfig;
-begin
-
 end;
 
 procedure TfrmMain.updateConfig;
