@@ -5,7 +5,7 @@ unit uSettingsForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Graphics, Dialogs, StdCtrls, Spin;
+  Classes, SysUtils, Forms, Graphics, Dialogs, StdCtrls, Spin, ComCtrls;
 
 type
 
@@ -21,7 +21,6 @@ type
     cbScrollBars: TCheckBox;
     edtFontName: TEdit;
     fontDialog: TFontDialog;
-    gbBorderSpace: TGroupBox;
     lblRightMargin: TLabel;
     lblBottomSpace: TLabel;
     lblLeftSpace: TLabel;
@@ -29,12 +28,15 @@ type
     lblTopSpace: TLabel;
     lblColorTheme: TLabel;
     lblFont: TLabel;
+    pcSettings: TPageControl;
     seFontSize: TSpinEdit;
     seRightMargin: TSpinEdit;
     seBottomSpace: TSpinEdit;
     seLeftSpace: TSpinEdit;
     seRightSpace: TSpinEdit;
     seTopSpace: TSpinEdit;
+    tsEditor: TTabSheet;
+    tsBorderSpace: TTabSheet;
     procedure btnCreateDesktopEntryClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnSelectFontClick(Sender: TObject);
