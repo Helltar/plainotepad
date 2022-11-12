@@ -5,7 +5,8 @@ unit uSettingsForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Graphics, Dialogs, StdCtrls, Spin, ComCtrls;
+  Classes, SysUtils, Forms, Graphics, Dialogs, StdCtrls, Spin, ComCtrls,
+  ComboEx, ColorBox;
 
 type
 
@@ -15,10 +16,10 @@ type
     btnSelectFont: TButton;
     btnSave: TButton;
     btnCreateDesktopEntry: TButton;
-    cmbColorTheme: TComboBox;
     cbHighlighter: TCheckBox;
     cbLineNumbers: TCheckBox;
     cbScrollBars: TCheckBox;
+    clbColorTheme: TColorBox;
     edtFontName: TEdit;
     fontDialog: TFontDialog;
     lblRightMargin: TLabel;
@@ -73,7 +74,7 @@ begin
     borderSpaceLeft := seLeftSpace.Value;
     borderSpaceRight := seRightSpace.Value;
     borderSpaceTop := seTopSpace.Value;
-    colorTheme := cmbColorTheme.Items[cmbColorTheme.ItemIndex];
+    colorTheme := clbColorTheme.Items[clbColorTheme.ItemIndex];
     fontName := edtFontName.Text;
     fontSize := seFontSize.Value;
     highlighter := cbHighlighter.Checked;
@@ -94,9 +95,9 @@ end;
 
 procedure TfrmSettings.FormCreate(Sender: TObject);
 begin
-  cmbColorTheme.Items.Add(COLOR_THEME_CREAM);
-  cmbColorTheme.Items.Add(COLOR_THEME_DARK);
-  cmbColorTheme.Items.Add(COLOR_THEME_WHITE);
+  clbColorTheme.AddItem(COLOR_THEME_CREAM, TObject(clCream));
+  clbColorTheme.AddItem(COLOR_THEME_DARK, TObject(clBlack));
+  clbColorTheme.AddItem(COLOR_THEME_WHITE, TObject(clWhite));
 
   with frmMain.config do
   begin
@@ -112,9 +113,9 @@ begin
     seTopSpace.Value := borderSpaceTop;
 
     case colorTheme of
-      COLOR_THEME_CREAM: cmbColorTheme.ItemIndex := 0;
-      COLOR_THEME_DARK: cmbColorTheme.ItemIndex := 1;
-      COLOR_THEME_WHITE: cmbColorTheme.ItemIndex := 2;
+      COLOR_THEME_CREAM: clbColorTheme.Selected := clCream;
+      COLOR_THEME_DARK: clbColorTheme.Selected := clBlack;
+      COLOR_THEME_WHITE: clbColorTheme.Selected := clWhite;
     end;
   end;
 end;

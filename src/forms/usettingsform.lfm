@@ -1,7 +1,7 @@
 object frmSettings: TfrmSettings
-  Left = 633
+  Left = 671
   Height = 568
-  Top = 264
+  Top = 224
   Width = 518
   AutoSize = True
   Caption = 'Settings'
@@ -98,7 +98,6 @@ object frmSettings: TfrmSettings
         Height = 33
         Top = 55
         Width = 60
-        AutoSize = False
         BorderSpacing.Left = 12
         MaxValue = 72
         MinValue = 6
@@ -135,23 +134,8 @@ object frmSettings: TfrmSettings
         Caption = 'Color Theme'
         ParentColor = False
       end
-      object cmbColorTheme: TComboBox
-        AnchorSideLeft.Control = tsEditor
-        AnchorSideTop.Control = lblColorTheme
-        AnchorSideTop.Side = asrBottom
-        Left = 24
-        Height = 33
-        Top = 143
-        Width = 200
-        AutoSize = False
-        BorderSpacing.Left = 24
-        ItemHeight = 25
-        ReadOnly = True
-        TabOrder = 3
-      end
       object lblRightMargin: TLabel
         AnchorSideLeft.Control = tsEditor
-        AnchorSideTop.Control = cmbColorTheme
         AnchorSideTop.Side = asrBottom
         Left = 24
         Height = 19
@@ -172,7 +156,6 @@ object frmSettings: TfrmSettings
         Height = 33
         Top = 231
         Width = 60
-        AutoSize = False
         BorderSpacing.Left = 24
         MaxValue = 240
         MinValue = -1
@@ -220,6 +203,23 @@ object frmSettings: TfrmSettings
         BorderSpacing.Bottom = 24
         Caption = 'Show Scroll Bars'
         TabOrder = 7
+      end
+      object clbColorTheme: TColorBox
+        AnchorSideLeft.Control = tsEditor
+        AnchorSideTop.Control = lblColorTheme
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 33
+        Top = 143
+        Width = 200
+        DefaultColorColor = clNone
+        NoneColorColor = clNone
+        Selected = clNone
+        Style = []
+        BorderSpacing.Left = 24
+        ItemHeight = 24
+        ParentColor = True
+        TabOrder = 3
       end
     end
     object tsBorderSpace: TTabSheet
