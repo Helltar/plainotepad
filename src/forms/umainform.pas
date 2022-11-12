@@ -188,6 +188,9 @@ begin
 
     Height := formHeight;
     Width := formWidth;
+
+    if fullScreen then
+      WindowState := wsFullScreen;
   end;
 end;
 
@@ -250,6 +253,7 @@ begin
     formTop := Top;
     formHeight := Height;
     formWidth := Width;
+    fullScreen := WindowState = wsFullScreen;
   end;
 end;
 

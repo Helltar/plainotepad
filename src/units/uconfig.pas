@@ -23,6 +23,7 @@ type
     function GetFormLeft: integer;
     function GetFormTop: integer;
     function GetFormWidth: integer;
+    function GetFullScreen: boolean;
     function GetHighlighter: boolean;
     function GetLineNumbers: boolean;
     function GetRightEdge: integer;
@@ -38,6 +39,7 @@ type
     procedure SetFormLeft(AValue: integer);
     procedure SetFormTop(AValue: integer);
     procedure SetFormWidth(AValue: integer);
+    procedure SetFullScreen(AValue: boolean);
     procedure SetHighlighter(AValue: boolean);
     procedure SetLineNumbers(AValue: boolean);
     procedure SetRightEdge(AValue: integer);
@@ -47,6 +49,7 @@ type
     property formLeft: integer read GetFormLeft write SetFormLeft;
     property formTop: integer read GetFormTop write SetFormTop;
     property formWidth: integer read GetFormWidth write SetFormWidth;
+    property fullScreen: boolean read GetFullScreen write SetFullScreen;
 
     property colorTheme: string read GetColorTheme write SetColorTheme;
     property fontName: string read GetFontName write SetFontName;
@@ -125,6 +128,11 @@ begin
   Result := ReadInteger(SECTION_FORM, 'formWidth', 600);
 end;
 
+function TConfig.GetFullScreen: boolean;
+begin
+  Result := ReadBool(SECTION_FORM, 'fullScreen', False);
+end;
+
 function TConfig.GetHighlighter: boolean;
 begin
   Result := ReadBool(SECTION_MAIN, 'highlighter', True);
@@ -198,6 +206,11 @@ end;
 procedure TConfig.SetFormWidth(AValue: integer);
 begin
   WriteInteger(SECTION_FORM, 'formWidth', AValue);
+end;
+
+procedure TConfig.SetFullScreen(AValue: boolean);
+begin
+  WriteBool(SECTION_FORM, 'fullScreen', AValue);
 end;
 
 procedure TConfig.SetHighlighter(AValue: boolean);
