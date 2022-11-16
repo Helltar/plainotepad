@@ -29,7 +29,11 @@ function createDesktopEntry: boolean;
     F: TFileStream;
 
   begin
+    {$IFDEF MSWINDOWS}
+    S := nil;
+    {$Else}
     S := TResourceStream.Create(HInstance, 'APP_ICON', RT_RCDATA);
+    {$ENDIF}
 
     try
       CreateDir(dir);

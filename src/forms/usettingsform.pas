@@ -95,6 +95,10 @@ end;
 
 procedure TfrmSettings.FormCreate(Sender: TObject);
 begin
+  {$IFDEF MSWINDOWS}
+  btnCreateDesktopEntry.Visible := False;
+  {$ENDIF}
+
   clbColorTheme.AddItem(COLOR_THEME_CREAM, TObject(clCream));
   clbColorTheme.AddItem(COLOR_THEME_DARK, TObject(clBlack));
   clbColorTheme.AddItem(COLOR_THEME_WHITE, TObject(clWhite));
