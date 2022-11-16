@@ -17,6 +17,7 @@ type
     actFullscreen: TAction;
     actClose: TAction;
     actHtmlExport: TAction;
+    actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
     edtCopy: TEditCopy;
@@ -25,6 +26,7 @@ type
     edtPaste: TEditPaste;
     edtSelectAll: TEditSelectAll;
     editUndo: TEditUndo;
+    miOpenFile: TMenuItem;
     miSaveAs: TMenuItem;
     miHtmlExport: TMenuItem;
     miSettings: TMenuItem;
@@ -42,6 +44,7 @@ type
     miUndo: TMenuItem;
     miFile: TMenuItem;
     miSaveFile: TMenuItem;
+    openDialog: TOpenDialog;
     pmMain: TPopupMenu;
     saveDialog: TSaveDialog;
     Separator1: TMenuItem;
@@ -50,12 +53,14 @@ type
     Separator4: TMenuItem;
     Separator5: TMenuItem;
     Separator6: TMenuItem;
+    Separator7: TMenuItem;
     Separator8: TMenuItem;
     synEdit: TSynEdit;
     procedure actFullscreenExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
     procedure actHtmlExportExecute(Sender: TObject);
     procedure actHtmlExportUpdate(Sender: TObject);
+    procedure actOpenFileExecute(Sender: TObject);
     procedure actSaveFileExecute(Sender: TObject);
     procedure actSaveFileUpdate(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
@@ -118,6 +123,7 @@ begin
     openFile(ParamStr(1));
 
   saveDialog.InitialDir := GetUserDir;
+  openDialog.InitialDir := GetUserDir;
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -319,6 +325,12 @@ end;
 procedure TfrmMain.actHtmlExportUpdate(Sender: TObject);
 begin
   actHtmlExport.Enabled := editor.isHighlighterUsed();
+end;
+
+procedure TfrmMain.actOpenFileExecute(Sender: TObject);
+begin
+  if openDialog.Execute then
+    openFile(openDialog.FileName);
 end;
 
 end.

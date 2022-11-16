@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 467
+  Left = 491
   Height = 350
-  Top = 246
+  Top = 281
   Width = 859
   AllowDropFiles = True
   Caption = 'Plainotepad'
@@ -588,9 +588,13 @@ object frmMain: TfrmMain
       OnExecute = actHtmlExportExecute
       OnUpdate = actHtmlExportUpdate
     end
+    object actOpenFile: TAction
+      Caption = '&Open ...'
+      OnExecute = actOpenFileExecute
+    end
   end
   object saveDialog: TSaveDialog
-    FileName = '/home/helltar'
+    FileName = '/home/'
     InitialDir = '/home/'
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     Left = 288
@@ -602,6 +606,13 @@ object frmMain: TfrmMain
     object miFile: TMenuItem
       Caption = '&File'
       Hint = 'File'
+      object miOpenFile: TMenuItem
+        Action = actOpenFile
+        ShortCut = 16463
+      end
+      object Separator7: TMenuItem
+        Caption = '-'
+      end
       object miSaveFile: TMenuItem
         Action = actSaveFile
       end
@@ -680,5 +691,11 @@ object frmMain: TfrmMain
         OnClick = miAboutClick
       end
     end
+  end
+  object openDialog: TOpenDialog
+    FileName = '/home/'
+    InitialDir = '/home/'
+    Left = 288
+    Top = 120
   end
 end
