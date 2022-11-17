@@ -12,7 +12,7 @@
 Download
 --------
 
-- [plainotepad-0.1.0.tar.gz](https://github.com/Helltar/plainotepad/releases/download/0.1.0/plainotepad-0.1.0.tar.gz) (1.36 MB)
+- [plainotepad-0.2.0.tar.gz](https://github.com/Helltar/plainotepad/releases/download/0.2.0/plainotepad-0.2.0.tar.gz) (1.37 MB)
  
 Installation
 ------------
@@ -48,7 +48,7 @@ Unpack and run:
 cd ~/Downloads/
 ```
 ```
-tar -xvzf plainotepad-0.1.0.tar.gz
+tar -xvzf plainotepad-0.2.0.tar.gz
 ```
 ```
 ./plainotepad
