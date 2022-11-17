@@ -1,12 +1,12 @@
 object frmSettings: TfrmSettings
-  Left = 580
-  Height = 574
-  Top = 234
-  Width = 453
+  Left = 770
+  Height = 588
+  Top = 225
+  Width = 438
   AutoSize = True
   Caption = 'Settings'
-  ClientHeight = 574
-  ClientWidth = 453
+  ClientHeight = 588
+  ClientWidth = 438
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poOwnerFormCenter
@@ -16,7 +16,7 @@ object frmSettings: TfrmSettings
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 367
+    Left = 352
     Height = 33
     Top = 488
     Width = 62
@@ -52,7 +52,7 @@ object frmSettings: TfrmSettings
     Left = 24
     Height = 440
     Top = 24
-    Width = 405
+    Width = 390
     ActivePage = tsEditor
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
@@ -62,7 +62,7 @@ object frmSettings: TfrmSettings
     object tsEditor: TTabSheet
       Caption = 'Editor'
       ClientHeight = 405
-      ClientWidth = 401
+      ClientWidth = 386
       object lblFont: TLabel
         AnchorSideLeft.Control = tsEditor
         AnchorSideTop.Control = tsEditor
@@ -225,7 +225,7 @@ object frmSettings: TfrmSettings
     object tsBorderSpace: TTabSheet
       Caption = 'Border Space'
       ClientHeight = 405
-      ClientWidth = 401
+      ClientWidth = 386
       object lblBottomSpace: TLabel
         AnchorSideLeft.Control = tsBorderSpace
         AnchorSideTop.Control = tsBorderSpace
@@ -244,7 +244,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = tsBorderSpace
         AnchorSideRight.Side = asrBottom
-        Left = 317
+        Left = 302
         Height = 33
         Top = 17
         Width = 60
@@ -270,7 +270,7 @@ object frmSettings: TfrmSettings
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = lblLeftSpace
         AnchorSideTop.Side = asrCenter
-        Left = 317
+        Left = 302
         Height = 33
         Top = 60
         Width = 60
@@ -294,7 +294,7 @@ object frmSettings: TfrmSettings
         AnchorSideLeft.Side = asrCenter
         AnchorSideTop.Control = lblRightSpace
         AnchorSideTop.Side = asrCenter
-        Left = 317
+        Left = 302
         Height = 33
         Top = 103
         Width = 60
@@ -319,7 +319,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Control = lblTopSpace
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Side = asrBottom
-        Left = 317
+        Left = 302
         Height = 33
         Top = 146
         Width = 60
