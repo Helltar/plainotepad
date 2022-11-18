@@ -106,6 +106,15 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="econtrol_package"/>
+      </Item>
+      <Item>
+        <PackageName Value="atsynedit_ex_package"/>
+      </Item>
+      <Item>
+        <PackageName Value="atsynedit_package"/>
+      </Item>
+      <Item>
         <PackageName Value="LazControls"/>
       </Item>
       <Item>

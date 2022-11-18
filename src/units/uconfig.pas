@@ -28,6 +28,7 @@ type
     function GetLineNumbers: boolean;
     function GetRightEdge: integer;
     function GetScrollBars: boolean;
+    function GetWordWrap: boolean;
     procedure SetBorderSpaceBottom(AValue: integer);
     procedure SetBorderSpaceLeft(AValue: integer);
     procedure SetBorderSpaceRight(AValue: integer);
@@ -44,6 +45,7 @@ type
     procedure SetLineNumbers(AValue: boolean);
     procedure SetRightEdge(AValue: integer);
     procedure SetScrollBars(AValue: boolean);
+    procedure SetWordWrap(AValue: boolean);
   public
     property formHeight: integer read GetFormHeight write SetFormHeight;
     property formLeft: integer read GetFormLeft write SetFormLeft;
@@ -58,6 +60,7 @@ type
     property lineNumbers: boolean read GetLineNumbers write SetLineNumbers;
     property rightEdge: integer read GetRightEdge write SetRightEdge;
     property scrollBars: boolean read GetScrollBars write SetScrollBars;
+    property wordWrap: boolean read GetWordWrap write SetWordWrap;
 
     property borderSpaceBottom: integer read GetBorderSpaceBottom write SetBorderSpaceBottom;
     property borderSpaceLeft: integer read GetBorderSpaceLeft write SetBorderSpaceLeft;
@@ -145,12 +148,17 @@ end;
 
 function TConfig.GetRightEdge: integer;
 begin
-  Result := ReadInteger(SECTION_MAIN, 'rightEdge', -1);
+  Result := ReadInteger(SECTION_MAIN, 'rightEdge', 0);
 end;
 
 function TConfig.GetScrollBars: boolean;
 begin
   Result := ReadBool(SECTION_MAIN, 'scrollBars', True);
+end;
+
+function TConfig.GetWordWrap: boolean;
+begin
+  Result := ReadBool(SECTION_MAIN, 'wordWrap', False);
 end;
 
 procedure TConfig.SetBorderSpaceBottom(AValue: integer);
@@ -231,6 +239,11 @@ end;
 procedure TConfig.SetScrollBars(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'scrollBars', AValue);
+end;
+
+procedure TConfig.SetWordWrap(AValue: boolean);
+begin
+  WriteBool(SECTION_MAIN, 'wordWrap', AValue);
 end;
 
 end.

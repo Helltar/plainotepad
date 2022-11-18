@@ -19,6 +19,7 @@ type
     cbHighlighter: TCheckBox;
     cbLineNumbers: TCheckBox;
     cbScrollBars: TCheckBox;
+    cbWordWrap: TCheckBox;
     clbColorTheme: TColorBox;
     edtFontName: TEdit;
     fontDialog: TFontDialog;
@@ -81,6 +82,7 @@ begin
     lineNumbers := cbLineNumbers.Checked;
     rightEdge := seRightMargin.Value;
     scrollBars := cbScrollBars.Checked;
+    wordWrap := cbWordWrap.Checked;
   end;
 
   frmMain.updateConfig();
@@ -108,6 +110,7 @@ begin
     cbHighlighter.Checked := highlighter;
     cbLineNumbers.Checked := lineNumbers;
     cbScrollBars.Checked := scrollBars;
+    cbWordWrap.Checked := wordWrap;
     edtFontName.Text := fontName;
     seBottomSpace.Value := borderSpaceBottom;
     seFontSize.Value := fontSize;

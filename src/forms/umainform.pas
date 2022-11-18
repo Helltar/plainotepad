@@ -5,9 +5,12 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs,
-  ActnList, StdCtrls, Menus, StdActns, SynEdit, LCLIntf,
-  uEditor, uConfig;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, StdActns, LCLIntf,
+
+  ATSynEdit, ATSynEdit_Globals, ATStringProc, ATSynEdit_Adapter_EControl, ATSynEdit_Carets,
+  ATSynEdit_Bookmarks, ATSynEdit_Export_HTML, ec_SyntAnal, ec_proc_lexer,
+
+  uConfig, uEditor;
 
 type
 
@@ -20,6 +23,7 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
+    synEdit: TATSynEdit;
     edtCopy: TEditCopy;
     edtCut: TEditCut;
     edtDelete: TEditDelete;
@@ -55,7 +59,6 @@ type
     Separator6: TMenuItem;
     Separator7: TMenuItem;
     Separator8: TMenuItem;
-    synEdit: TSynEdit;
     procedure actFullscreenExecute(Sender: TObject);
     procedure actCloseExecute(Sender: TObject);
     procedure actHtmlExportExecute(Sender: TObject);
@@ -75,9 +78,11 @@ type
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
     function showFileChangeDialog(): TModalResult;
-    procedure saveConfig();
-    procedure loadFormConfig();
+    procedure initComponents();
+    procedure initEditor();
     procedure loadEditorConfig();
+    procedure loadFormConfig();
+    procedure saveConfig();
   public
     appConfigFile: string;
     config: TConfig;
@@ -90,7 +95,7 @@ var
 implementation
 
 uses
-  uConsts, uAboutForm, uSettingsForm, uLogger;
+  uConsts, uAboutForm, uSettingsForm, uLogger, uUtils;
 
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
@@ -117,13 +122,13 @@ begin
   editor := TEditor.Create(synEdit);
 
   loadFormConfig();
+  initComponents();
+
+  initEditor();
   loadEditorConfig();
 
   if ParamCount > 0 then
     openFile(ParamStr(1));
-
-  saveDialog.InitialDir := GetUserDir;
-  openDialog.InitialDir := GetUserDir;
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -208,9 +213,18 @@ begin
       Font.Name := fontName;
       Font.Size := fontSize;
 
-      Gutter.Parts[1].Visible := lineNumbers; // SynGutterLineNumber
-      Gutter.Parts[3].Visible := lineNumbers; // SynGutterSeparator
-      synEdit.RightEdge := rightEdge;
+      Gutter[Gutter.FindIndexByTag(ATEditorOptions.GutterTagNumbers)].Visible := lineNumbers;
+
+      if wordWrap then
+        OptWrapMode := cWrapOn
+      else
+        OptWrapMode := cWrapOff;
+
+      if rightEdge = 0 then
+        // todo: tmp. OptMarginRight := 10000
+        synEdit.OptMarginRight := 10000
+      else
+        synEdit.OptMarginRight := rightEdge;
 
       BorderSpacing.Left := borderSpaceLeft;
       BorderSpacing.Right := borderSpaceRight;
@@ -218,9 +232,17 @@ begin
       BorderSpacing.Bottom := borderSpaceBottom;
 
       if scrollBars then
-        synEdit.ScrollBars := ssAutoBoth
+      begin
+        synEdit.OptScrollbarsNew := True;
+        synEdit.OptScrollStyleHorz := aessAuto;
+        synEdit.OptScrollStyleVert := aessAuto;
+      end
       else
-        synEdit.ScrollBars := ssNone;
+      begin
+        synEdit.OptScrollbarsNew := False;
+        synEdit.OptScrollStyleHorz := aessHide;
+        synEdit.OptScrollStyleVert := aessHide;
+      end;
 
       case colorTheme of
         COLOR_THEME_CREAM:
@@ -241,9 +263,19 @@ begin
           editor.setColorTheme(white);
         end;
       end;
-
-      editor.enableHighlighter(highlighter);
     end;
+end;
+
+procedure TfrmMain.initEditor;
+begin
+  synEdit.Gutter[synEdit.Gutter.FindIndexByTag(ATEditorOptions.GutterTagBookmarks)].Visible := False;
+  synEdit.PopupText := pmMain;
+end;
+
+procedure TfrmMain.initComponents;
+begin
+  saveDialog.InitialDir := GetUserDir;
+  openDialog.InitialDir := GetUserDir;
 end;
 
 procedure TfrmMain.updateConfig;
@@ -319,12 +351,12 @@ end;
 
 procedure TfrmMain.actHtmlExportExecute(Sender: TObject);
 begin
-  editor.exportToHtml();
+  //editor.exportToHtml();
 end;
 
 procedure TfrmMain.actHtmlExportUpdate(Sender: TObject);
 begin
-  actHtmlExport.Enabled := editor.isHighlighterUsed();
+  //actHtmlExport.Enabled := editor.isHighlighterUsed();
 end;
 
 procedure TfrmMain.actOpenFileExecute(Sender: TObject);

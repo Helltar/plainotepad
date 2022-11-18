@@ -6,8 +6,7 @@ interface
 
 uses
   Classes, StdCtrls, SysUtils, Graphics, Dialogs,
-  SynEdit, SynExportHTML,
-  uEditorHighlighter;
+  ATSynEdit;
 
 type
 
@@ -20,32 +19,26 @@ type
   TEditor = class
   private
     currentColorTheme: TColorTheme;
-    currentFileName: string;
-    editorHighlighter: TdmHighlighter;
-    fFileModified: boolean;
-    isHighlighterEnabled: boolean;
-    synEdit: TSynEdit;
-    procedure setHighlighterByFileExt(fileName: string);
+    synEdit: TATSynEdit;
+    function getCurrentFileName(): string;
+    function GetFileModified: boolean;
     procedure synEditChange(Sender: TObject);
     procedure updateParentCaption();
     procedure updateParentCaption(addedText: string);
   public
-    constructor Create(AOwner: TSynEdit);
-    function isHighlighterUsed(): boolean;
+    constructor Create(AOwner: TATSynEdit);
     function isNotNewFile(): boolean;
     function openFile(fileName: string): boolean;
     function saveCurrentFile(): boolean;
     function saveFile(fileName: string): boolean;
-    procedure enableHighlighter(AEnabled: boolean);
-    procedure exportToHtml();
     procedure setColorTheme(colorTheme: TColorTheme);
-    property fileModified: boolean read fFileModified;
+    property fileModified: boolean read GetFileModified;
   end;
 
 implementation
 
 uses
-  uLogger, uUtils;
+  uLogger;
 
 resourcestring
   ERROR_OPEN_FILE = 'Error when opening a file: %s';
@@ -53,24 +46,22 @@ resourcestring
 
 { TEditor }
 
-constructor TEditor.Create(AOwner: TSynEdit);
+constructor TEditor.Create(AOwner: TATSynEdit);
 begin
   synEdit := AOwner;
   synEdit.OnChange := @synEditChange;
-  editorHighlighter := TdmHighlighter.Create(synEdit);
+  synEdit.Colors.TextSelFont := clBlack;
 end;
 
 procedure TEditor.synEditChange(Sender: TObject);
 begin
-  fFileModified := True;
-
   if isNotNewFile() then
     updateParentCaption(' *');
 end;
 
 procedure TEditor.updateParentCaption(addedText: string);
 begin
-  synEdit.Parent.Caption := ExtractFileName(currentFileName) + addedText;
+  synEdit.Parent.Caption := ExtractFileName(getCurrentFileName()) + addedText;
 end;
 
 procedure TEditor.updateParentCaption;
@@ -80,12 +71,7 @@ end;
 
 function TEditor.isNotNewFile: boolean;
 begin
-  Result := not currentFileName.IsEmpty;
-end;
-
-function TEditor.isHighlighterUsed: boolean;
-begin
-  Result := synEdit.Highlighter <> nil;
+  Result := not getCurrentFileName().IsEmpty;
 end;
 
 function TEditor.openFile(fileName: string): boolean;
@@ -96,14 +82,9 @@ begin
     Exit;
 
   try
-    synEdit.Lines.LoadFromFile(fileName);
+    synEdit.LoadFromFile(fileName);
 
-    currentFileName := fileName;
-    fFileModified := False;
     updateParentCaption();
-
-    if isHighlighterEnabled then
-      setHighlighterByFileExt(fileName);
 
     Result := True;
   except
@@ -116,99 +97,30 @@ begin
   Result := False;
 
   try
-    synEdit.Lines.SaveToFile(fileName);
-    currentFileName := fileName;
-    fFileModified := False;
+    synEdit.SaveToFile(fileName);
+    synEdit.Update();
+
     updateParentCaption();
+
     Result := True;
   except
     addLog(Format(ERROR_SAVE_FILE, [fileName]));
   end;
 end;
 
-procedure TEditor.exportToHtml;
-var
-  saveDialog: TSaveDialog;
-  filename: string;
-
-begin
-  if not isHighlighterUsed() then
-    Exit;
-
-  saveDialog := TSaveDialog.Create(nil);
-  saveDialog.InitialDir := GetUserDir;
-
-  if saveDialog.Execute then
-  begin
-    filename := saveDialog.FileName + '.html';
-
-    with TSynExporterHTML.Create(nil) do
-      try
-        try
-          Title := getAppOriginalFilename() + ' ' + getAppFileVersion() + ': ' + ExtractFileName(saveDialog.FileName);
-          Highlighter := synEdit.Highlighter;
-          ExportAll(synEdit.Lines);
-          SaveToFile(filename);
-        except
-          addLog(Format(ERROR_SAVE_FILE, [filename]));
-        end;
-      finally
-        Free;
-      end;
-  end;
-
-  FreeAndNil(saveDialog);
-end;
-
-procedure TEditor.enableHighlighter(AEnabled: boolean);
-begin
-  isHighlighterEnabled := AEnabled;
-
-  if AEnabled then
-  begin
-    with editorHighlighter do
-      case currentColorTheme of
-        cream: enableLightTheme();
-        dark: enableDarkTheme();
-        white: enableLightTheme();
-      end;
-
-    setHighlighterByFileExt(currentFileName);
-  end
-  else
-    synEdit.Highlighter := nil;
-end;
-
 function TEditor.saveCurrentFile: boolean;
 begin
-  Result := saveFile(currentFileName);
+  Result := saveFile(getCurrentFileName());
 end;
 
-procedure TEditor.setHighlighterByFileExt(fileName: string);
+function TEditor.getCurrentFileName: string;
 begin
-  if ExtractFileExt(fileName) = '' then
-    fileName := ExtractFileName(fileName)
-  else
-    fileName := ExtractFileExt(fileName);
+  Result := synEdit.FileName;
+end;
 
-  with synEdit do
-    with editorHighlighter do
-      case fileName of
-        '.bat', '.cmd': Highlighter := synBatSyn;
-        '.css': Highlighter := synCssSyn;
-        '.html', '.htm', '.xml': Highlighter := synHTMLSyn;
-        '.java', '.kt', '.gradle', '.kts': Highlighter := synJavaSyn;
-        '.js', '.ts', '.json': Highlighter := synJScriptSyn;
-        '.php', '.php3', '.phtml', '.inc': Highlighter := synPHPSyn;
-        '.py': Highlighter := synPythonSyn;
-
-        '.sh', '.bash', '.conf', '.properties',
-        '.bashrc', 'gradlew': Highlighter := synUNIXShellScriptSyn;
-
-        '.sql': Highlighter := synSQLSyn;
-        else
-          Highlighter := nil;
-      end;
+function TEditor.GetFileModified: boolean;
+begin
+  Result := synEdit.Modified;
 end;
 
 procedure TEditor.setColorTheme(colorTheme: TColorTheme);
@@ -217,39 +129,42 @@ begin
 
   case colorTheme of
     cream:
-      with synEdit do
+      with synEdit.Colors do
       begin
-        Color := clCream;
-        Font.Color := $00222222;
-        Gutter.Color := clCream;
-        RightEdgeColor := $00DDDDDD;
-        Gutter.Parts[1].MarkupInfo.Foreground := $00DDDDDD; // SynGutterLineNumber
-        Gutter.Parts[3].MarkupInfo.Foreground := $00EEEEEE; // SynGutterSeparator
-        SelectedColor.Background := $00EEEEEE;
+        GutterBG := clCream;
+        GutterCaretBG := clCream;
+        GutterFoldBG := clCream;
+        GutterFont := $00DDDDDD;
+        MarginRight := $00DDDDDD;
+        TextBG := clCream;
+        TextFont := $00222222;
+        TextSelBG := $EEEEEE;
       end;
 
     white:
-      with synEdit do
+      with synEdit.Colors do
       begin
-        Color := clWhite;
-        Font.Color := $00222222;
-        Gutter.Color := clWhite;
-        RightEdgeColor := clSilver;
-        Gutter.Parts[1].MarkupInfo.Foreground := clSilver;
-        Gutter.Parts[3].MarkupInfo.Foreground := clSilver;
-        SelectedColor.Background := $00EEEEEE;
+        GutterBG := clWhite;
+        GutterCaretBG := $f5f5f5;
+        GutterFoldBG := clWhite;
+        GutterFont := clSilver;
+        MarginRight := clSilver;
+        TextBG := clWhite;
+        TextFont := $00222222;
+        TextSelBG := $EEEEEE;
       end;
 
     dark:
-      with synEdit do
+      with synEdit.Colors do
       begin
-        Color := $001e1e1e;
-        Font.Color := clWhite;
-        Gutter.Color := $001e1e1e;
-        Gutter.Parts[1].MarkupInfo.Foreground := $00606060;
-        Gutter.Parts[3].MarkupInfo.Foreground := $00303030;
-        RightEdgeColor := $00303030;
-        SelectedColor.Background := clSilver;
+        GutterBG := $001e1e1e;
+        GutterCaretBG := $002e2e2e;
+        GutterFoldBG := $001e1e1e;
+        GutterFont := $00606060;
+        MarginRight := $00303030;
+        TextBG := $001e1e1e;
+        TextFont := clWhite;
+        TextSelBG := clSilver;
       end;
   end;
 end;
