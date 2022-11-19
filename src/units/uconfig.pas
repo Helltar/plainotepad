@@ -26,6 +26,10 @@ type
     function GetFullScreen: boolean;
     function GetHighlighter: boolean;
     function GetLineNumbers: boolean;
+    function GetMiniMap: boolean;
+    function GetMiniMapWidth: integer;
+    function GetMouseMiddleClickAction: integer;
+    function GetNonSystemScrollBars: boolean;
     function GetRightEdge: integer;
     function GetScrollBars: boolean;
     function GetWordWrap: boolean;
@@ -43,6 +47,10 @@ type
     procedure SetFullScreen(AValue: boolean);
     procedure SetHighlighter(AValue: boolean);
     procedure SetLineNumbers(AValue: boolean);
+    procedure SetMiniMap(AValue: boolean);
+    procedure SetMiniMapWidth(AValue: integer);
+    procedure SetMouseMiddleClickAction(AValue: integer);
+    procedure SetNonSystemScrollBars(AValue: boolean);
     procedure SetRightEdge(AValue: integer);
     procedure SetScrollBars(AValue: boolean);
     procedure SetWordWrap(AValue: boolean);
@@ -58,9 +66,13 @@ type
     property fontSize: integer read GetFontSize write SetFontSize;
     property highlighter: boolean read GetHighlighter write SetHighlighter;
     property lineNumbers: boolean read GetLineNumbers write SetLineNumbers;
+    property miniMap: boolean read GetMiniMap write SetMiniMap;
+    property miniMapWidth: integer read GetMiniMapWidth write SetMiniMapWidth;
+    property nonSystemScrollBars: boolean read GetNonSystemScrollBars write SetNonSystemScrollBars;
     property rightEdge: integer read GetRightEdge write SetRightEdge;
     property scrollBars: boolean read GetScrollBars write SetScrollBars;
     property wordWrap: boolean read GetWordWrap write SetWordWrap;
+    property mouseMiddleClickAction: integer read GetMouseMiddleClickAction write SetMouseMiddleClickAction;
 
     property borderSpaceBottom: integer read GetBorderSpaceBottom write SetBorderSpaceBottom;
     property borderSpaceLeft: integer read GetBorderSpaceLeft write SetBorderSpaceLeft;
@@ -146,6 +158,26 @@ begin
   Result := ReadBool(SECTION_MAIN, 'lineNumbers', True);
 end;
 
+function TConfig.GetMiniMap: boolean;
+begin
+  Result := ReadBool(SECTION_MAIN, 'miniMap', False);
+end;
+
+function TConfig.GetMiniMapWidth: integer;
+begin
+  Result := ReadInteger(SECTION_MAIN, 'miniMapWidth', 60);
+end;
+
+function TConfig.GetMouseMiddleClickAction: integer;
+begin
+  Result := ReadInteger(SECTION_MAIN, 'mouseMiddleClickAction', 0);
+end;
+
+function TConfig.GetNonSystemScrollBars: boolean;
+begin
+  Result := ReadBool(SECTION_MAIN, 'nonSystemScrollBars', False);
+end;
+
 function TConfig.GetRightEdge: integer;
 begin
   Result := ReadInteger(SECTION_MAIN, 'rightEdge', 0);
@@ -229,6 +261,26 @@ end;
 procedure TConfig.SetLineNumbers(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'lineNumbers', AValue);
+end;
+
+procedure TConfig.SetMiniMap(AValue: boolean);
+begin
+  WriteBool(SECTION_MAIN, 'miniMap', AValue);
+end;
+
+procedure TConfig.SetMiniMapWidth(AValue: integer);
+begin
+  WriteInteger(SECTION_MAIN, 'miniMapWidth', AValue);
+end;
+
+procedure TConfig.SetMouseMiddleClickAction(AValue: integer);
+begin
+  WriteInteger(SECTION_MAIN, 'mouseMiddleClickAction', AValue);
+end;
+
+procedure TConfig.SetNonSystemScrollBars(AValue: boolean);
+begin
+  WriteBool(SECTION_MAIN, 'nonSystemScrollBars', AValue);
 end;
 
 procedure TConfig.SetRightEdge(AValue: integer);

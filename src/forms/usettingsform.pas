@@ -5,8 +5,7 @@ unit uSettingsForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Graphics, Dialogs, StdCtrls, Spin, ComCtrls,
-  ComboEx, ColorBox;
+  Classes, SysUtils, Forms, Graphics, Dialogs, StdCtrls, Spin, ComCtrls, ComboEx, ColorBox;
 
 type
 
@@ -19,10 +18,15 @@ type
     cbHighlighter: TCheckBox;
     cbLineNumbers: TCheckBox;
     cbScrollBars: TCheckBox;
+    cbNonSystemScrollBars: TCheckBox;
+    cbMiniMap: TCheckBox;
     cbWordWrap: TCheckBox;
     clbColorTheme: TColorBox;
+    cmbMouseMiddleClickAction: TComboBox;
     edtFontName: TEdit;
     fontDialog: TFontDialog;
+    gbBorderSpace: TGroupBox;
+    lblMouseMiddleClickAction: TLabel;
     lblRightMargin: TLabel;
     lblBottomSpace: TLabel;
     lblLeftSpace: TLabel;
@@ -37,11 +41,12 @@ type
     seLeftSpace: TSpinEdit;
     seRightSpace: TSpinEdit;
     seTopSpace: TSpinEdit;
-    tsEditor: TTabSheet;
-    tsBorderSpace: TTabSheet;
+    tsGeneral: TTabSheet;
+    tsBorders: TTabSheet;
     procedure btnCreateDesktopEntryClick(Sender: TObject);
     procedure btnSaveClick(Sender: TObject);
     procedure btnSelectFontClick(Sender: TObject);
+    procedure cbScrollBarsChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   end;
@@ -67,6 +72,11 @@ begin
   end;
 end;
 
+procedure TfrmSettings.cbScrollBarsChange(Sender: TObject);
+begin
+  cbNonSystemScrollBars.Enabled := cbScrollBars.Checked;
+end;
+
 procedure TfrmSettings.btnSaveClick(Sender: TObject);
 begin
   with frmMain.config do
@@ -80,9 +90,12 @@ begin
     fontSize := seFontSize.Value;
     highlighter := cbHighlighter.Checked;
     lineNumbers := cbLineNumbers.Checked;
+    miniMap := cbMiniMap.Checked;
+    nonSystemScrollBars := cbNonSystemScrollBars.Checked;
     rightEdge := seRightMargin.Value;
     scrollBars := cbScrollBars.Checked;
     wordWrap := cbWordWrap.Checked;
+    mouseMiddleClickAction := cmbMouseMiddleClickAction.ItemIndex;
   end;
 
   frmMain.updateConfig();
@@ -97,6 +110,8 @@ end;
 
 procedure TfrmSettings.FormCreate(Sender: TObject);
 begin
+  pcSettings.ActivePageIndex := 0;
+
   {$IFDEF MSWINDOWS}
   btnCreateDesktopEntry.Visible := False;
   {$ENDIF}
@@ -109,6 +124,9 @@ begin
   begin
     cbHighlighter.Checked := highlighter;
     cbLineNumbers.Checked := lineNumbers;
+    cbMiniMap.Checked := miniMap;
+    cbNonSystemScrollBars.Checked := nonSystemScrollBars;
+    cbNonSystemScrollBars.Enabled := scrollBars;
     cbScrollBars.Checked := scrollBars;
     cbWordWrap.Checked := wordWrap;
     edtFontName.Text := fontName;
@@ -118,6 +136,11 @@ begin
     seRightMargin.Value := rightEdge;
     seRightSpace.Value := borderSpaceRight;
     seTopSpace.Value := borderSpaceTop;
+
+    if mouseMiddleClickAction <= cmbMouseMiddleClickAction.Items.Count then
+      cmbMouseMiddleClickAction.ItemIndex := mouseMiddleClickAction
+    else
+      cmbMouseMiddleClickAction.ItemIndex := 0;
 
     case colorTheme of
       COLOR_THEME_CREAM: clbColorTheme.Selected := clCream;

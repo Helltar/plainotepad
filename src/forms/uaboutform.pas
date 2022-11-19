@@ -16,7 +16,6 @@ type
     lblHomepage: TLabel;
     lblGithub: TLabel;
     lblLicense: TLabel;
-    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure lblClick(Sender: TObject);
     procedure lblLicenseClick(Sender: TObject);
@@ -25,7 +24,7 @@ type
 implementation
 
 uses
-  uConsts;
+  uConsts, uLicenseForm;
 
 {$R *.lfm}
 
@@ -36,11 +35,6 @@ begin
   OpenURL(TLabel(Sender).Caption);
 end;
 
-procedure TfrmAbout.FormCreate(Sender: TObject);
-begin
-  lblLicense.Hint := URL_LICENSE;
-end;
-
 procedure TfrmAbout.FormShow(Sender: TObject);
 begin
   Constraints.MinHeight := Height;
@@ -49,7 +43,12 @@ end;
 
 procedure TfrmAbout.lblLicenseClick(Sender: TObject);
 begin
-  OpenURL(URL_LICENSE);
+  with TfrmLicense.Create(Self) do
+    try
+      ShowModal;
+    finally
+      Free;
+    end;
 end;
 
 end.

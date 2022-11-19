@@ -7,13 +7,15 @@ interface
 uses
   Classes, SysUtils, Dialogs;
 
-procedure addLog(msg: string);
+procedure addLog(const msg: string; const showForm: boolean = True);
 
 implementation
 
-procedure addLog(msg: string);
+procedure addLog(const msg: string; const showForm: boolean = True);
 begin
-  ShowMessage(msg);
+  if showForm then
+    ShowMessage(msg);
+
   WriteLn(msg);
 end;
 

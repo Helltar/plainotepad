@@ -7,7 +7,6 @@ object frmAbout: TfrmAbout
   Caption = 'About'
   ClientHeight = 290
   ClientWidth = 425
-  OnCreate = FormCreate
   OnShow = FormShow
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'

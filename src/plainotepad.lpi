@@ -21,7 +21,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="167"/>
+      <BuildNr Value="184"/>
       <StringTable CompanyName="helltar.com" FileDescription="Plain text editor" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.2.0"/>
     </VersionInfo>
     <BuildModes>
@@ -118,9 +118,6 @@
         <PackageName Value="LazControls"/>
       </Item>
       <Item>
-        <PackageName Value="SynEdit"/>
-      </Item>
-      <Item>
         <PackageName Value="LCL"/>
       </Item>
     </RequiredPackages>
@@ -153,14 +150,6 @@
         <UnitName Value="uLogger"/>
       </Unit>
       <Unit>
-        <Filename Value="units/ueditorhighlighter.pas"/>
-        <IsPartOfProject Value="True"/>
-        <ComponentName Value="dmHighlighter"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="DataModule"/>
-        <UnitName Value="uEditorHighlighter"/>
-      </Unit>
-      <Unit>
         <Filename Value="units/uconsts.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uConsts"/>
@@ -185,6 +174,13 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uSettingsForm"/>
+      </Unit>
+      <Unit>
+        <Filename Value="forms/ulicenseform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmLicense"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uLicenseForm"/>
       </Unit>
     </Units>
   </ProjectOptions>

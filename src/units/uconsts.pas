@@ -14,7 +14,6 @@ const
   COLOR_THEME_WHITE = 'white';
 
   URL_GITHUB = 'https://github.com/Helltar/plainotepad';
-  URL_LICENSE = URL_GITHUB + '/blob/master/LICENSE';
 
 implementation
 

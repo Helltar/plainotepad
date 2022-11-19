@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 536
-  Height = 328
-  Top = 263
-  Width = 684
+  Left = 461
+  Height = 381
+  Top = 272
+  Width = 717
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 328
-  ClientWidth = 684
+  ClientHeight = 381
+  ClientWidth = 717
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   OnCloseQuery = FormCloseQuery
@@ -22,9 +22,9 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 328
+    Height = 381
     Top = 0
-    Width = 684
+    Width = 717
     Anchors = [akTop, akLeft, akRight, akBottom]
     DoubleBuffered = False
     Font.Height = -12
@@ -32,7 +32,9 @@ object frmMain: TfrmMain
     ParentFont = False
     TabOrder = 0
     TabStop = True
-    OptScrollbarsNew = True
+    OptFoldEnabled = False
+    OptShowURLs = False
+    OptShowMouseSelFrame = False
     OptCaretVirtual = False
     OptBorderVisible = False
     OptRulerVisible = False
@@ -61,51 +63,20 @@ object frmMain: TfrmMain
       OnExecute = actCloseExecute
       ShortCut = 16465
     end
-    object edtCut: TEditCut
-      Category = 'Edit'
-      Caption = 'Cu&t'
-      Hint = 'Cut'
-      ShortCut = 16472
-    end
-    object edtCopy: TEditCopy
-      Category = 'Edit'
-      Caption = '&Copy'
-      Hint = 'Copy'
-      ShortCut = 16451
-    end
-    object edtPaste: TEditPaste
-      Category = 'Edit'
-      Caption = '&Paste'
-      Hint = 'Paste'
-      ShortCut = 16470
-    end
-    object edtSelectAll: TEditSelectAll
-      Category = 'Edit'
-      Caption = 'Select &All'
-      Hint = 'Select All'
-      ShortCut = 16449
-    end
-    object editUndo: TEditUndo
-      Category = 'Edit'
-      Caption = '&Undo'
-      Hint = 'Undo'
-      ShortCut = 16474
-    end
-    object edtDelete: TEditDelete
-      Category = 'Edit'
-      Caption = '&Delete'
-      Hint = 'Delete'
-      ShortCut = 46
-    end
-    object actHtmlExport: TAction
-      Caption = 'Export as &HTML ...'
-      Hint = 'Export as HTML'
-      OnExecute = actHtmlExportExecute
-      OnUpdate = actHtmlExportUpdate
-    end
     object actOpenFile: TAction
       Caption = '&Open ...'
       OnExecute = actOpenFileExecute
+    end
+    object actSaveFileAs: TAction
+      Caption = 'Save &As ...'
+      OnExecute = actSaveFileAsExecute
+      ShortCut = 24659
+    end
+    object actSettings: TAction
+      Caption = 'Se&ttings ...'
+      Hint = 'Settings'
+      OnExecute = actSettingsExecute
+      ShortCut = 24764
     end
   end
   object saveDialog: TSaveDialog
@@ -115,7 +86,7 @@ object frmMain: TfrmMain
     Left = 288
     Top = 56
   end
-  object pmMain: TPopupMenu
+  object pmEditorTextMenu: TPopupMenu
     Left = 456
     Top = 56
     object miFile: TMenuItem
@@ -132,22 +103,13 @@ object frmMain: TfrmMain
         Action = actSaveFile
       end
       object miSaveAs: TMenuItem
-        Caption = 'Save &As ...'
-        OnClick = miSaveAsClick
-      end
-      object Separator8: TMenuItem
-        Caption = '-'
-      end
-      object miHtmlExport: TMenuItem
-        Action = actHtmlExport
+        Action = actSaveFileAs
       end
       object Separator1: TMenuItem
         Caption = '-'
       end
       object miSettings: TMenuItem
-        Caption = 'Se&ttings ...'
-        Hint = 'Settings'
-        OnClick = miSettingsClick
+        Action = actSettings
       end
       object Separator5: TMenuItem
         Caption = '-'
@@ -160,31 +122,49 @@ object frmMain: TfrmMain
       Caption = '&Edit'
       Hint = 'Edit'
       object miCut: TMenuItem
-        Action = edtCut
+        Caption = 'Cu&t'
+        Hint = 'Cut'
+        ShortCut = 16472
+        OnClick = miCutClick
       end
       object miCopy: TMenuItem
-        Action = edtCopy
+        Caption = '&Copy'
+        Hint = 'Copy'
+        ShortCut = 16451
+        OnClick = miCopyClick
       end
       object miPaste: TMenuItem
-        Action = edtPaste
+        Caption = '&Paste'
+        Hint = 'Paste'
+        ShortCut = 16470
+        OnClick = miPasteClick
       end
       object Separator2: TMenuItem
         Caption = '-'
       end
       object miSelectAll: TMenuItem
-        Action = edtSelectAll
+        Caption = 'Select &All'
+        Hint = 'Select All'
+        ShortCut = 16449
+        OnClick = miSelectAllClick
       end
       object Separator3: TMenuItem
         Caption = '-'
       end
       object miUndo: TMenuItem
-        Action = editUndo
+        Caption = '&Undo'
+        Hint = 'Undo'
+        ShortCut = 16474
+        OnClick = miUndoClick
       end
       object Separator4: TMenuItem
         Caption = '-'
       end
       object miDelete: TMenuItem
-        Action = edtDelete
+        Caption = '&Delete'
+        Hint = 'Delete'
+        ShortCut = 46
+        OnClick = miDeleteClick
       end
     end
     object miView: TMenuItem
