@@ -5,9 +5,10 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, LCLIntf,
-  ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands, ec_proc_lexer,
-  uConfig, uEditor;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
+  LCLIntf, ColorBox, ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
+  ATSynEdit_Adapter_EControl, ec_proc_lexer, ec_SyntAnal, ATGroups, uConfig,
+  uEditor;
 
 type
 
@@ -67,8 +68,8 @@ type
     procedure miPasteClick(Sender: TObject);
     procedure miSelectAllClick(Sender: TObject);
     procedure miUndoClick(Sender: TObject);
+    procedure saveDialogShow(Sender: TObject);
   private
-    editor: TEditor;
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
     function showFileChangeDialog(): TModalResult;
@@ -76,22 +77,24 @@ type
     procedure initEditor();
     procedure loadEditorConfig();
     procedure loadFormConfig();
-    procedure resetSaveDialogTitle();
     procedure saveConfig();
-    procedure updateSaveDialogTitle(filename: string);
   public
     appConfigFile: string;
-    config: TConfig;
     procedure updateConfig();
   end;
 
 var
   frmMain: TfrmMain;
+  editor: TEditor;
+  config: TConfig;
 
 implementation
 
 uses
   uConsts, uAboutForm, uSettingsForm, uLogger;
+
+var
+  frmSettings: TfrmSettings;
 
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
@@ -180,6 +183,18 @@ begin
   synEdit.DoCommand(cCommand_Undo, cInvokeMenuContext);
 end;
 
+procedure TfrmMain.saveDialogShow(Sender: TObject);
+var
+  filename: string;
+
+begin
+  saveDialog.Title := TITLE_SAVE_FILE_AS;
+  filename := editor.getCurrentFilename();
+
+  if not filename.IsEmpty then
+    saveDialog.Title := ExtractFileName(filename) + ' - ' + TITLE_SAVE_FILE_AS;
+end;
+
 function TfrmMain.openFile(fileName: string): boolean;
 begin
   Result := False;
@@ -192,28 +207,18 @@ begin
       mrCancel: Exit;
     end;
 
-  if editor.openFile(fileName) then
-  begin
-    updateSaveDialogTitle(fileName);
-    Result := True;
-  end
-  else
-    resetSaveDialogTitle();
+  Result := editor.openFile(fileName);
 end;
 
 function TfrmMain.saveFile: boolean;
 begin
   Result := False;
 
-  if editor.isNotNewFile() and not FileIsReadOnly(editor.getCurrentFileName()) then
+  if editor.isNotNewFile() and not FileIsReadOnly(editor.getCurrentFilename()) then
     Result := editor.saveCurrentFile()
   else
-  begin
-    updateSaveDialogTitle(editor.getCurrentFileName());
-
-    if saveDialog.Execute then
-      Result := editor.saveFile(saveDialog.FileName);
-  end;
+  if saveDialog.Execute then
+    Result := editor.saveFile(saveDialog.FileName);
 end;
 
 procedure TfrmMain.loadFormConfig;
@@ -281,25 +286,7 @@ begin
         OptScrollStyleVert := aessHide;
       end;
 
-      case colorTheme of
-        COLOR_THEME_CREAM:
-        begin
-          Self.Color := clCream;
-          editor.setColorTheme(cream);
-        end;
-
-        COLOR_THEME_DARK:
-        begin
-          Self.Color := $001e1e1e;
-          editor.setColorTheme(dark);
-        end;
-
-        COLOR_THEME_WHITE:
-        begin
-          Self.Color := clWhite;
-          editor.setColorTheme(white);
-        end;
-      end;
+      editor.setColorTheme(colorTheme);
     end;
 end;
 
@@ -332,16 +319,6 @@ begin
   end;
 end;
 
-procedure TfrmMain.updateSaveDialogTitle(filename: string);
-begin
-  saveDialog.Title := ExtractFileName(filename) + ' - ' + TITLE_SAVE_FILE_AS;
-end;
-
-procedure TfrmMain.resetSaveDialogTitle;
-begin
-  saveDialog.Title := TITLE_SAVE_FILE_AS;
-end;
-
 function TfrmMain.showFileChangeDialog: TModalResult;
 begin
   Result := MessageDlg(CAPTION_FILE_CHANGED, MSG_SAVE_CHANGES, mtConfirmation, [mbYes, mbNo, mbCancel], 0);
@@ -359,12 +336,10 @@ end;
 
 procedure TfrmMain.actSettingsExecute(Sender: TObject);
 begin
-  with TfrmSettings.Create(Self) do
-    try
-      ShowModal;
-    finally
-      Free;
-    end;
+  if not Assigned(frmSettings) then
+    frmSettings := TfrmSettings.Create(Self);
+
+  frmSettings.Show;
 end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);

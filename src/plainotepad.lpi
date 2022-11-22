@@ -21,7 +21,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="184"/>
+      <BuildNr Value="187"/>
       <StringTable CompanyName="helltar.com" FileDescription="Plain text editor" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.2.0"/>
     </VersionInfo>
     <BuildModes>
@@ -34,7 +34,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="forms;units"/>
+            <OtherUnitFiles Value="forms;units;editor"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -74,7 +74,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="forms;units"/>
+            <OtherUnitFiles Value="forms;units;editor"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -105,6 +105,9 @@
       <FormatVersion Value="2"/>
     </RunParams>
     <RequiredPackages>
+      <Item>
+        <PackageName Value="atflatcontrols_package"/>
+      </Item>
       <Item>
         <PackageName Value="econtrol_package"/>
       </Item>
@@ -140,7 +143,7 @@
         <UnitName Value="uConfig"/>
       </Unit>
       <Unit>
-        <Filename Value="units/ueditor.pas"/>
+        <Filename Value="editor/ueditor.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="uEditor"/>
       </Unit>
@@ -182,6 +185,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uLicenseForm"/>
       </Unit>
+      <Unit>
+        <Filename Value="editor/ueditorhighlighter.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uEditorHighlighter"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -191,7 +199,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="forms;units"/>
+      <OtherUnitFiles Value="forms;units;editor"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

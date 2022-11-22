@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 461
-  Height = 381
-  Top = 272
-  Width = 717
+  Left = 497
+  Height = 410
+  Top = 297
+  Width = 720
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 381
-  ClientWidth = 717
+  ClientHeight = 410
+  ClientWidth = 720
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   OnCloseQuery = FormCloseQuery
@@ -22,11 +22,11 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 381
+    Height = 410
     Top = 0
-    Width = 717
+    Width = 720
     Anchors = [akTop, akLeft, akRight, akBottom]
-    DoubleBuffered = False
+    DoubleBuffered = True
     Font.Height = -12
     Font.Name = 'Courier New'
     ParentFont = False
@@ -80,6 +80,7 @@ object frmMain: TfrmMain
     end
   end
   object saveDialog: TSaveDialog
+    OnShow = saveDialogShow
     FileName = '/home/'
     InitialDir = '/home/'
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
@@ -87,7 +88,7 @@ object frmMain: TfrmMain
     Top = 56
   end
   object pmEditorTextMenu: TPopupMenu
-    Left = 456
+    Left = 464
     Top = 56
     object miFile: TMenuItem
       Caption = '&File'

@@ -13,6 +13,10 @@ const
   COLOR_THEME_DARK = 'dark';
   COLOR_THEME_WHITE = 'white';
 
+  DIR_COLOR_SCHEMES = 'color-schemes' + DirectorySeparator;
+  DIR_COLOR_SCHEMES_LEXERS = 'lexers' + DirectorySeparator;
+  COLOR_SCHEME_MAIN_FILE = 'main';
+
   URL_GITHUB = 'https://github.com/Helltar/plainotepad';
 
 implementation
