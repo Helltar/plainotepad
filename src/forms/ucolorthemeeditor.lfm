@@ -1,0 +1,199 @@
+object frmColorThemeEditor: TfrmColorThemeEditor
+  Left = 413
+  Height = 651
+  Top = 163
+  Width = 944
+  Caption = 'Color Theme Editor'
+  ClientHeight = 651
+  ClientWidth = 944
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 600
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '2.2.4.0'
+  object lblTheme: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 24
+    Height = 22
+    Top = 24
+    Width = 50
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 24
+    Caption = 'Theme'
+    ParentColor = False
+  end
+  object cmbEditColorTheme: TComboBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = lblTheme
+    AnchorSideTop.Side = asrBottom
+    Left = 24
+    Height = 36
+    Top = 58
+    Width = 200
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 12
+    ItemHeight = 22
+    OnChange = cmbEditColorThemeChange
+    ReadOnly = True
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 0
+  end
+  object sbMainColors: TScrollBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cmbEditColorTheme
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = splVert
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = splHoriz
+    Left = 24
+    Height = 185
+    Top = 106
+    Width = 397
+    HorzScrollBar.Increment = 1
+    HorzScrollBar.Page = 1
+    HorzScrollBar.Smooth = True
+    HorzScrollBar.Tracking = True
+    VertScrollBar.Increment = 1
+    VertScrollBar.Page = 1
+    VertScrollBar.Smooth = True
+    VertScrollBar.Tracking = True
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 12
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 24
+    TabOrder = 1
+  end
+  object splHoriz: TSplitter
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = splVert
+    AnchorSideBottom.Control = sbMainColors
+    AnchorSideBottom.Side = asrBottom
+    Cursor = crVSplit
+    Left = 0
+    Height = 6
+    Top = 315
+    Width = 439
+    Align = alNone
+    Anchors = [akLeft, akRight]
+    ResizeAnchor = akBottom
+  end
+  object lblLexer: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = splHoriz
+    Left = 24
+    Height = 22
+    Top = 339
+    Width = 40
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 24
+    Caption = 'Lexer'
+    ParentColor = False
+  end
+  object cmbLexers: TComboBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = lblLexer
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Side = asrBottom
+    Left = 24
+    Height = 36
+    Top = 373
+    Width = 200
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 12
+    ItemHeight = 22
+    OnChange = cmbLexersChange
+    ReadOnly = True
+    Sorted = True
+    Style = csDropDownList
+    TabOrder = 3
+  end
+  object sbLexerColors: TScrollBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = cmbLexers
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = splVert
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Button1
+    Left = 24
+    Height = 146
+    Top = 421
+    Width = 397
+    HorzScrollBar.Increment = 1
+    HorzScrollBar.Page = 1
+    HorzScrollBar.Smooth = True
+    HorzScrollBar.Tracking = True
+    VertScrollBar.Increment = 1
+    VertScrollBar.Page = 1
+    VertScrollBar.Smooth = True
+    VertScrollBar.Tracking = True
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 12
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 24
+    TabOrder = 4
+  end
+  object synEdit: TATSynEdit
+    AnchorSideLeft.Control = splVert
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Button1
+    Cursor = crIBeam
+    Left = 463
+    Height = 543
+    Top = 24
+    Width = 457
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 24
+    DoubleBuffered = True
+    Font.Height = -12
+    Font.Name = 'Courier New'
+    Font.Quality = fqCleartype
+    ParentFont = False
+    TabOrder = 5
+    TabStop = True
+    OptFoldEnabled = False
+    OptShowURLs = False
+    OptShowMouseSelFrame = False
+    OptCaretVirtual = False
+    OptRulerVisible = False
+    OptNumbersStyle = cNumbersAll
+    OptUnprintedVisible = False
+  end
+  object splVert: TSplitter
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Button1
+    Left = 439
+    Height = 567
+    Top = 0
+    Width = 6
+    Align = alNone
+    Anchors = [akTop, akBottom]
+  end
+  object Button1: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 871
+    Height = 36
+    Top = 591
+    Width = 49
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Around = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&OK'
+    OnClick = Button1Click
+    TabOrder = 7
+  end
+end

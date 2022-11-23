@@ -16,7 +16,6 @@ type
   TEditor = class
   private
     synEdit: TATSynEdit;
-    editorHighlighter: TEditorHighlighter;
     FFileModified: boolean;
     FLexerName: string;
     procedure addTextToParentCaption(AText: string);
@@ -24,6 +23,7 @@ type
     procedure synEditChange(Sender: TObject);
     procedure updateParentCaption();
   public
+    editorHighlighter: TEditorHighlighter;
     constructor Create(AOwner: TATSynEdit);
     destructor Destroy; override;
     function getCurrentFilename(): string;
@@ -179,8 +179,6 @@ begin
           TextBG := StringToColor(Values['TextBG']);
           TextFont := StringToColor(Values['TextFont']);
           TextSelBG := StringToColor(Values['TextSelBG']);
-
-          synEdit.Parent.Color := TextBG;
         end;
 
         editorHighlighter.setColorTheme(colorThemeName);

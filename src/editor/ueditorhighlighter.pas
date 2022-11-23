@@ -16,16 +16,24 @@ type
   TEditorHighlighter = class
   private
     adapterEControl: TATAdapterEControl;
-    currentColorTheme: string;
-    synEdit: TATSynEdit;
     syntaxManager: TecSyntaxManager;
+    synEdit: TATSynEdit;
+    currentColorTheme: string;
+    function GetLexer: TecSyntAnalyzer;
     function getLexerName(): string;
+    procedure SetLexer(AValue: TecSyntAnalyzer);
     procedure setLexerColorsFromFile(const filename: string);
+    procedure getLexersList();
   public
     constructor Create(AEditor: TATSynEdit);
     destructor Destroy; override;
+  public
+    function findAnalyzer(const lexerName: string): TecSyntAnalyzer;
+  public
     procedure setColorTheme(const colorThemeName: string);
     procedure setHighlighterByFilename(const filename: string);
+  public
+    property lexer: TecSyntAnalyzer read GetLexer write SetLexer;
     property lexerName: string read getLexerName;
   end;
 
@@ -62,6 +70,8 @@ begin
   adapterEControl.DynamicHiliteEnabled := True;
 
   synEdit.AdapterForHilite := adapterEControl;
+
+  getLexersList();
 end;
 
 destructor TEditorHighlighter.Destroy;
@@ -70,6 +80,11 @@ begin
   FreeAndNil(syntaxManager);
   FreeAndNil(synEdit);
   inherited Destroy;
+end;
+
+function TEditorHighlighter.findAnalyzer(const lexerName: string): TecSyntAnalyzer;
+begin
+  Result := syntaxManager.FindAnalyzer(lexerName);
 end;
 
 procedure TEditorHighlighter.setLexerColorsFromFile(const filename: string);
@@ -104,9 +119,40 @@ begin
     end;
 end;
 
+procedure TEditorHighlighter.getLexersList;
+var
+  i, j: integer;
+  list: TStringList;
+
+begin
+  list := TStringList.Create;
+  list.Sorted := True;
+
+  for i := 0 to syntaxManager.AnalyzerCount - 1 do
+  begin
+    for j := 0 to syntaxManager.Analyzers[i].Formats.Count - 1 do
+      list.Values[syntaxManager.Analyzers[i].Formats.Items[j].DisplayName] := ColorToString(syntaxManager.Analyzers[i].Formats.Items[j].Font.Color);
+
+    list.SaveToFile(GetAppConfigDir(False) + DIR_COLOR_SCHEMES + 'test/' + syntaxManager.Analyzers[i].LexerName);
+    list.Clear;
+  end;
+
+  FreeAndNil(list);
+end;
+
 function TEditorHighlighter.getLexerName: string;
 begin
   Result := adapterEControl.GetLexerName;
+end;
+
+function TEditorHighlighter.GetLexer: TecSyntAnalyzer;
+begin
+  Result := adapterEControl.Lexer;
+end;
+
+procedure TEditorHighlighter.SetLexer(AValue: TecSyntAnalyzer);
+begin
+  adapterEControl.Lexer := AValue;
 end;
 
 procedure TEditorHighlighter.setHighlighterByFilename(const filename: string);

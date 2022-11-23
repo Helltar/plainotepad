@@ -190,6 +190,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="uEditorHighlighter"/>
       </Unit>
+      <Unit>
+        <Filename Value="forms/ucolorthemeeditor.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmColorThemeEditor"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uColorThemeEditor"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

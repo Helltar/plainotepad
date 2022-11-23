@@ -10,7 +10,7 @@ uses
   Forms, lazcontrols,
   uMainForm, uAboutForm, uSettingsForm, uLicenseForm,
   uConsts, uUtils, uConfig, uLogger,
-  uEditor, uEditorHighlighter;
+  uEditor, uEditorHighlighter, uColorThemeEditor;
 
 {$R *.res}
 

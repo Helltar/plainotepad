@@ -7,8 +7,8 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
   LCLIntf, ColorBox, ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
-  ATSynEdit_Adapter_EControl, ec_proc_lexer, ec_SyntAnal, ATGroups, uConfig,
-  uEditor;
+  ATSynEdit_Adapter_EControl, ec_proc_lexer, ec_SyntAnal, ATGroups,
+  uConfig, uEditor, uSettingsForm;
 
 type
 
@@ -75,26 +75,23 @@ type
     function showFileChangeDialog(): TModalResult;
     procedure initComponents();
     procedure initEditor();
-    procedure loadEditorConfig();
     procedure loadFormConfig();
     procedure saveConfig();
   public
     appConfigFile: string;
+    config: TConfig;
+    editor: TEditor;
+    procedure loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; const changeParentColor: boolean = True);
     procedure updateConfig();
   end;
 
 var
   frmMain: TfrmMain;
-  editor: TEditor;
-  config: TConfig;
 
 implementation
 
 uses
-  uConsts, uAboutForm, uSettingsForm, uLogger;
-
-var
-  frmSettings: TfrmSettings;
+  uConsts, uAboutForm, uLogger;
 
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
@@ -125,7 +122,7 @@ begin
   initComponents();
 
   initEditor();
-  loadEditorConfig();
+  loadEditorConfig(synEdit, editor);
 
   if ParamCount > 0 then
     openFile(ParamStr(1));
@@ -241,9 +238,9 @@ begin
   end;
 end;
 
-procedure TfrmMain.loadEditorConfig;
+procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; const changeParentColor: boolean);
 begin
-  with synEdit do
+  with ASynEdit do
     with config do
     begin
       Font.Name := fontName;
@@ -286,7 +283,12 @@ begin
         OptScrollStyleVert := aessHide;
       end;
 
-      editor.setColorTheme(colorTheme);
+      AEditor.setColorTheme(colorTheme);
+
+      if changeParentColor then
+        ASynEdit.Parent.Color := Colors.TextBG;
+
+      Update();
     end;
 end;
 
@@ -304,7 +306,7 @@ end;
 
 procedure TfrmMain.updateConfig;
 begin
-  loadEditorConfig();
+  loadEditorConfig(synEdit, editor);
 end;
 
 procedure TfrmMain.saveConfig;
@@ -339,7 +341,7 @@ begin
   if not Assigned(frmSettings) then
     frmSettings := TfrmSettings.Create(Self);
 
-  frmSettings.Show;
+  frmSettings.ShowModal;
 end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);

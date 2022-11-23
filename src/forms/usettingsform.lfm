@@ -1,12 +1,13 @@
 object frmSettings: TfrmSettings
-  Left = 513
-  Height = 703
-  Top = 185
+  Left = 764
+  Height = 592
+  Top = 187
   Width = 600
   Caption = 'Settings'
-  ClientHeight = 703
+  ClientHeight = 592
   ClientWidth = 600
   Constraints.MinWidth = 600
+  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poOwnerFormCenter
@@ -18,7 +19,7 @@ object frmSettings: TfrmSettings
     AnchorSideRight.Side = asrBottom
     Left = 527
     Height = 36
-    Top = 643
+    Top = 532
     Width = 49
     Anchors = [akTop, akRight]
     AutoSize = True
@@ -36,7 +37,7 @@ object frmSettings: TfrmSettings
     AnchorSideBottom.Side = asrBottom
     Left = 24
     Height = 36
-    Top = 643
+    Top = 532
     Width = 167
     Anchors = [akLeft, akBottom]
     AutoSize = True
@@ -53,19 +54,19 @@ object frmSettings: TfrmSettings
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 595
+    Height = 484
     Top = 24
     Width = 552
-    ActivePage = tsThemeEditor
+    ActivePage = tsGeneral
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
     BorderSpacing.Around = 24
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object tsGeneral: TTabSheet
       AnchorSideBottom.Side = asrBottom
       Caption = 'General'
-      ClientHeight = 558
+      ClientHeight = 447
       ClientWidth = 544
       object scGeneral: TScrollBox
         AnchorSideLeft.Control = tsGeneral
@@ -75,15 +76,15 @@ object frmSettings: TfrmSettings
         AnchorSideBottom.Control = tsGeneral
         AnchorSideBottom.Side = asrBottom
         Left = 0
-        Height = 558
+        Height = 447
         Top = 0
         Width = 544
-        HorzScrollBar.Page = 359
-        VertScrollBar.Page = 526
+        HorzScrollBar.Page = 363
+        VertScrollBar.Page = 447
         Anchors = [akTop, akLeft, akRight, akBottom]
         BorderStyle = bsNone
-        ClientHeight = 558
-        ClientWidth = 544
+        ClientHeight = 447
+        ClientWidth = 523
         Color = clDefault
         ParentColor = False
         TabOrder = 0
@@ -126,7 +127,6 @@ object frmSettings: TfrmSettings
           MaxValue = 72
           MinValue = 6
           OnChange = seFontSizeChange
-          OnEditingDone = controlEditingDone
           TabOrder = 1
           Value = 6
         end
@@ -136,12 +136,13 @@ object frmSettings: TfrmSettings
           AnchorSideTop.Control = seFontSize
           AnchorSideTop.Side = asrCenter
           Left = 308
-          Height = 32
-          Top = 60
-          Width = 27
+          Height = 36
+          Top = 58
+          Width = 31
           AutoSize = True
           BorderSpacing.Left = 12
           BorderSpacing.Right = 24
+          BorderSpacing.InnerBorder = 2
           Caption = '...'
           OnClick = btnSelectFontClick
           TabOrder = 2
@@ -171,7 +172,6 @@ object frmSettings: TfrmSettings
           BorderSpacing.Left = 24
           ItemHeight = 22
           OnChange = cmbColorThemeChange
-          OnEditingDone = controlEditingDone
           ReadOnly = True
           Sorted = True
           Style = csDropDownList
@@ -203,7 +203,6 @@ object frmSettings: TfrmSettings
           Increment = 20
           MaxValue = 320
           OnChange = seRightMarginChange
-          OnEditingDone = controlEditingDone
           TabOrder = 4
         end
         object cbWordWrap: TCheckBox
@@ -218,7 +217,6 @@ object frmSettings: TfrmSettings
           BorderSpacing.Top = 24
           Caption = 'Word Wrap'
           OnChange = cbWordWrapChange
-          OnEditingDone = controlEditingDone
           TabOrder = 5
         end
         object cbHighlighter: TCheckBox
@@ -233,7 +231,6 @@ object frmSettings: TfrmSettings
           BorderSpacing.Top = 12
           Caption = 'Use Highlight'
           OnChange = cbHighlighterChange
-          OnEditingDone = controlEditingDone
           TabOrder = 6
         end
         object cbLineNumbers: TCheckBox
@@ -248,7 +245,6 @@ object frmSettings: TfrmSettings
           BorderSpacing.Top = 12
           Caption = 'Show Line Numbers'
           OnChange = cbLineNumbersChange
-          OnEditingDone = controlEditingDone
           TabOrder = 7
         end
         object lblMouseMiddleClickAction: TLabel
@@ -281,16 +277,34 @@ object frmSettings: TfrmSettings
             'Browser Scroll'
           )
           OnChange = cmbMouseMiddleClickActionChange
-          OnEditingDone = controlEditingDone
           ReadOnly = True
           Style = csDropDownList
           TabOrder = 8
+        end
+        object btnEditColorTheme: TButton
+          AnchorSideLeft.Control = cmbColorTheme
+          AnchorSideLeft.Side = asrBottom
+          AnchorSideTop.Control = cmbColorTheme
+          AnchorSideTop.Side = asrCenter
+          AnchorSideRight.Control = btnSelectFont
+          AnchorSideRight.Side = asrBottom
+          Left = 236
+          Height = 36
+          Top = 152
+          Width = 103
+          Anchors = [akTop, akLeft, akRight]
+          AutoSize = True
+          BorderSpacing.Left = 12
+          BorderSpacing.InnerBorder = 2
+          Caption = 'Edit'
+          OnClick = btnEditColorThemeClick
+          TabOrder = 9
         end
       end
     end
     object tsBorders: TTabSheet
       Caption = 'Borders'
-      ClientHeight = 558
+      ClientHeight = 447
       ClientWidth = 544
       object gbBorderSpace: TGroupBox
         AnchorSideLeft.Control = tsBorders
@@ -368,7 +382,6 @@ object frmSettings: TfrmSettings
           Width = 60
           MaxValue = 320
           OnChange = seTopSpaceChange
-          OnEditingDone = controlEditingDone
           TabOrder = 0
         end
         object seRightSpace: TSpinEdit
@@ -382,7 +395,6 @@ object frmSettings: TfrmSettings
           Width = 60
           MaxValue = 320
           OnChange = seRightSpaceChange
-          OnEditingDone = controlEditingDone
           TabOrder = 1
         end
         object seLeftSpace: TSpinEdit
@@ -396,7 +408,6 @@ object frmSettings: TfrmSettings
           Width = 60
           MaxValue = 320
           OnChange = seLeftSpaceChange
-          OnEditingDone = controlEditingDone
           TabOrder = 2
         end
         object seBottomSpace: TSpinEdit
@@ -413,7 +424,6 @@ object frmSettings: TfrmSettings
           BorderSpacing.Right = 24
           MaxValue = 320
           OnChange = seBottomSpaceChange
-          OnEditingDone = controlEditingDone
           TabOrder = 3
         end
       end
@@ -429,7 +439,6 @@ object frmSettings: TfrmSettings
         BorderSpacing.Top = 12
         Caption = 'Show Scroll Bars'
         OnChange = cbScrollBarsChange
-        OnEditingDone = controlEditingDone
         TabOrder = 1
       end
       object cbNonSystemScrollBars: TCheckBox
@@ -444,7 +453,6 @@ object frmSettings: TfrmSettings
         BorderSpacing.Top = 12
         Caption = 'Non System Scroll Bars'
         OnChange = cbNonSystemScrollBarsChange
-        OnEditingDone = controlEditingDone
         TabOrder = 2
       end
       object cbMiniMap: TCheckBox
@@ -458,145 +466,7 @@ object frmSettings: TfrmSettings
         BorderSpacing.Top = 24
         Caption = 'Mini Map'
         OnChange = cbMiniMapChange
-        OnEditingDone = controlEditingDone
         TabOrder = 3
-      end
-    end
-    object tsThemeEditor: TTabSheet
-      Caption = 'Theme Editor'
-      ClientHeight = 558
-      ClientWidth = 544
-      object lblTheme: TLabel
-        AnchorSideLeft.Control = tsThemeEditor
-        AnchorSideTop.Control = tsThemeEditor
-        Left = 24
-        Height = 22
-        Top = 24
-        Width = 50
-        BorderSpacing.Left = 24
-        BorderSpacing.Top = 24
-        Caption = 'Theme'
-        ParentColor = False
-      end
-      object sbLexerColors: TScrollBox
-        AnchorSideLeft.Control = tsThemeEditor
-        AnchorSideTop.Control = cmbLexers
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = tsThemeEditor
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = tsThemeEditor
-        AnchorSideBottom.Side = asrBottom
-        Left = 24
-        Height = 148
-        Top = 386
-        Width = 496
-        HorzScrollBar.Increment = 1
-        HorzScrollBar.Page = 1
-        HorzScrollBar.Smooth = True
-        HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 1
-        VertScrollBar.Page = 1
-        VertScrollBar.Smooth = True
-        VertScrollBar.Tracking = True
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        AutoSize = True
-        BorderSpacing.Left = 24
-        BorderSpacing.Top = 12
-        BorderSpacing.Right = 24
-        BorderSpacing.Bottom = 24
-        TabOrder = 0
-      end
-      object cmbEditColorTheme: TComboBox
-        AnchorSideLeft.Control = tsThemeEditor
-        AnchorSideTop.Control = lblTheme
-        AnchorSideTop.Side = asrBottom
-        Left = 24
-        Height = 36
-        Top = 58
-        Width = 200
-        BorderSpacing.Left = 24
-        BorderSpacing.Top = 12
-        ItemHeight = 22
-        OnChange = cmbEditColorThemeChange
-        OnEditingDone = controlEditingDone
-        ReadOnly = True
-        Sorted = True
-        Style = csDropDownList
-        TabOrder = 1
-      end
-      object lblLexer: TLabel
-        AnchorSideLeft.Control = tsThemeEditor
-        AnchorSideTop.Control = Splitter1
-        Left = 24
-        Height = 22
-        Top = 304
-        Width = 40
-        BorderSpacing.Left = 24
-        BorderSpacing.Top = 24
-        Caption = 'Lexer'
-        ParentColor = False
-      end
-      object cmbLexers: TComboBox
-        AnchorSideLeft.Control = tsThemeEditor
-        AnchorSideTop.Control = lblLexer
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = tsThemeEditor
-        AnchorSideRight.Side = asrBottom
-        Left = 24
-        Height = 36
-        Top = 338
-        Width = 200
-        BorderSpacing.Left = 24
-        BorderSpacing.Top = 12
-        ItemHeight = 22
-        OnChange = cmbLexersChange
-        OnEditingDone = controlEditingDone
-        ReadOnly = True
-        Sorted = True
-        Style = csDropDownList
-        TabOrder = 2
-      end
-      object sbMainColors: TScrollBox
-        AnchorSideLeft.Control = tsThemeEditor
-        AnchorSideTop.Control = cmbEditColorTheme
-        AnchorSideTop.Side = asrBottom
-        AnchorSideRight.Control = tsThemeEditor
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = Splitter1
-        Left = 24
-        Height = 150
-        Top = 106
-        Width = 496
-        HorzScrollBar.Increment = 1
-        HorzScrollBar.Page = 1
-        HorzScrollBar.Smooth = True
-        HorzScrollBar.Tracking = True
-        VertScrollBar.Increment = 1
-        VertScrollBar.Page = 1
-        VertScrollBar.Smooth = True
-        VertScrollBar.Tracking = True
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        AutoSize = True
-        BorderSpacing.Left = 24
-        BorderSpacing.Top = 12
-        BorderSpacing.Right = 24
-        BorderSpacing.Bottom = 24
-        TabOrder = 3
-      end
-      object Splitter1: TSplitter
-        AnchorSideLeft.Control = tsThemeEditor
-        AnchorSideRight.Control = tsThemeEditor
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = sbMainColors
-        AnchorSideBottom.Side = asrBottom
-        Cursor = crVSplit
-        Left = 0
-        Height = 6
-        Top = 280
-        Width = 544
-        Align = alNone
-        Anchors = [akLeft, akRight]
-        ResizeAnchor = akBottom
       end
     end
   end

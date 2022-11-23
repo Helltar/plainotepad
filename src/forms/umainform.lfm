@@ -1,11 +1,11 @@
 object frmMain: TfrmMain
   Left = 497
-  Height = 410
-  Top = 297
+  Height = 434
+  Top = 334
   Width = 720
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 410
+  ClientHeight = 434
   ClientWidth = 720
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
@@ -22,13 +22,14 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 410
+    Height = 434
     Top = 0
     Width = 720
     Anchors = [akTop, akLeft, akRight, akBottom]
     DoubleBuffered = True
     Font.Height = -12
     Font.Name = 'Courier New'
+    Font.Quality = fqCleartype
     ParentFont = False
     TabOrder = 0
     TabStop = True
