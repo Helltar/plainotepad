@@ -3,9 +3,9 @@
     <br><br>
     Plainotepad
     <br><br>
-    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_25102022_195504.png" alt="plainotepad_light"/>
+    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083044.png" alt="plainotepad_light"/>
     <br><br>
-    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_25102022_195405.png" alt="plainotepad_dark"/>
+    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083008.png" alt="plainotepad_dark"/>
 </h3>
 
 
