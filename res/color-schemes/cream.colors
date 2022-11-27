@@ -84,24 +84,24 @@ Label=clRed
 
 [LEXER-CSS]
 Style=clNavy
-Prop correct=clGreen
-Prop incorrect=clGreen
+Prop correct=clBlack
+Prop incorrect=clMaroon
 Value=clPurple
-Symbol=clMaroon
+Symbol=clGray
 Comment=clGray
 Current block BG=clWindowText
-Color=clLime
-String=clTeal
+Color=clTeal
+String=clGreen
 Number=clNavy
 Style suffix=clOlive
 Prop user=clBlue
 PHP tag=clRed
-Media=clFuchsia
+Media=$00804000
 Value unit=clRed
 Value unit incorrect=clRed
 Std function=clBlue
 Name.=clMaroon
-Name#=clAqua
+Name#=clMaroon
 
 [LEXER-HTML]
 Text=clBlack
@@ -111,8 +111,8 @@ Number=clNavy
 Tag string=clTeal
 Tag prop=$0000B900
 Tag unknown text=clBlack
-Tag id correct=$00FF8000
-Tag id incorrect=$00FF8000
+Tag id correct=$00B05800
+Tag id incorrect=clGray
 Tag id hilite BG=clBlue
 Tag brackets hilite BG=clBlue
 Sublexer BG=clNone
@@ -141,13 +141,13 @@ Id upcase const=clGreen
 String ticks=$0072A451
 
 [LEXER-JSON]
-Symbol=clMaroon
-Number=clNavy
-String=clTeal
-String key=clOlive
-Id keyword=clBlack
+Symbol=clGray
+Number=$003C37D7
+String=$00FF8000
+String key=clGreen
+Id keyword=clNone
 Comment=clGray
-Symbol bad=clBlack
+Symbol bad=clNone
 
 [LEXER-Markdown]
 Heading=clMaroon
@@ -180,24 +180,6 @@ Math BG=clNavy
 Table BG=clWindowText
 ``` edge=clRed
 
-[LEXER-PHP]
-Text=clBlack
-Tag bound=clGray
-Comment=clGray
-Number=clNavy
-Tag string=clTeal
-Tag prop=$0000B900
-Tag unknown text=clBlack
-Tag id correct=$00FF8000
-Tag id incorrect=$00FF8000
-Tag id hilite BG=clBlue
-Tag brackets hilite BG=clBlue
-Sublexer BG=clNone
-Color=clOlive
-Entity=clMaroon
-Include tag=clRed
-Comment doc=$00C08080
-
 [LEXER-Python]
 Number=clNavy
 String=clTeal
@@ -207,16 +189,16 @@ Id=clBlack
 Id keyword=clNavy
 Id keyword def=clBlack
 Id function=clBlue
-Id func name=clFuchsia
+Id func name=$00B812AF
 Id types=clPurple
 Id exception=clOlive
 Id const=clGreen
-Decorator=$0000C800
+Decorator=$00C08000
 
 [LEXER-XML]
 Comment=clGray
 Tag bound=clGray
-Tag id=$00FF8080
+Tag id=$00FF5757
 Tag param=clGreen
 Tag val=clTeal
 CDATA bound=clNavy
@@ -244,7 +226,54 @@ Number=clNavy
 Timestamp=clOlive
 Handle=clRed
 Directive=clFuchsia
-Alias=clLime
+Alias=clGreen
 Env var=clGreen
 Brackets BG=clWindowText
 \Char=clRed
+
+[LEXER-PHP]
+Symbol=clGray
+Number=$00850BFF
+String=clGreen
+Identifier=clNone
+Reserved word=clMaroon
+Comment=clGray
+Variable=clTeal
+Current Block=clNone
+Code border=$00800040
+HTML=clNone
+Exec=clNone
+
+[LEXER-Java]
+Symbol=clGray
+Number=clMaroon
+String=clGreen
+Id=$00121212
+Id keyword=clNavy
+Comment=clGray
+Comment doc=clGray
+Id type=$00800040
+Id const=$008000FF
+Id modifier=$00C08000
+Annotation=clOlive
+
+[LEXER-Kotlin]
+Comment=clGray
+Symbol=clGray
+Number=clMaroon
+String=clGreen
+Id=$00121212
+Id keyword=clNone
+Id type=clTeal
+Id const=$00A00000
+Id spec=$00A26D00
+Id var=$004080FF
+
+[LEXER-Ini files]
+Section=clMaroon
+Key=clPurple
+Value=clGreen
+Symbol=clGray
+Comment=clGray
+Number=clRed
+Const=$00FF0080
