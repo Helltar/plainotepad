@@ -85,6 +85,9 @@ type
 
 implementation
 
+uses
+  uConsts;
+
 const
   SECTION_MAIN = 'MAIN';
   SECTION_FORM = 'FORM';
@@ -113,7 +116,7 @@ end;
 
 function TConfig.GetColorTheme: string;
 begin
-  Result := ReadString(SECTION_MAIN, 'colorTheme', 'cream');
+  Result := ReadString(SECTION_MAIN, 'colorTheme', COLOR_THEME_DARK);
 end;
 
 function TConfig.GetFontName: string;
