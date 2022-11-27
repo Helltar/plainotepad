@@ -352,24 +352,32 @@ end;
 
 procedure TfrmMain.initialSetup;
 var
-  dirLexlib: string;
+  dirLexlib, dirThemes: string;
 
 begin
-  if DirectoryExists(getConfigDir()) then
-    exit;
+  if not DirectoryExists(getConfigDir()) then
+    if not CreateDir(getConfigDir()) then
+    begin
+      addLog(ERROR_MK_CONFIG_DIR);
+      Exit;
+    end;
 
-  if CreateDir(getConfigDir()) then
+  dirLexlib := getConfigDir() + DIR_LEXLIB;
+
+  if not DirectoryExists(dirLexlib) then
   begin
-    dirLexlib := getConfigDir() + DIR_LEXLIB;
     copyResToDir(RES_SYNT_ANALYZERS, dirLexlib);
     unzipArchive(dirLexlib + RES_SYNT_ANALYZERS.ToLower, dirLexlib);
     DeleteFile(dirLexlib + RES_SYNT_ANALYZERS.ToLower);
+  end;
 
-    copyResToDir(COLOR_THEME_CREAM + FILE_EXT_COLOR_SCHEME, getConfigDir() + DIR_COLOR_SCHEMES);
-    copyResToDir(COLOR_THEME_DARK + FILE_EXT_COLOR_SCHEME, getConfigDir() + DIR_COLOR_SCHEMES);
-  end
-  else
-    addLog(ERROR_MK_CONFIG_DIR);
+  dirThemes := getConfigDir() + DIR_COLOR_SCHEMES;
+
+  if not DirectoryExists(dirThemes) then
+  begin
+    copyResToDir(COLOR_THEME_DARK + FILE_EXT_COLOR_SCHEME, dirThemes);
+    copyResToDir(COLOR_THEME_CREAM + FILE_EXT_COLOR_SCHEME, dirThemes);
+  end;
 end;
 
 function TfrmMain.showFileChangeDialog: TModalResult;

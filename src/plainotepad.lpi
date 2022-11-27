@@ -17,14 +17,14 @@
         <Resource_0 FileName="../icons/plainotepad.svg" Type="RCDATA" ResourceName="PLAINOTEPAD.SVG"/>
         <Resource_1 FileName="../res/color-schemes/cream.colors" Type="RCDATA" ResourceName="CREAM.COLORS"/>
         <Resource_2 FileName="../res/color-schemes/dark.colors" Type="RCDATA" ResourceName="DARK.COLORS"/>
-        <Resource_3 FileName="..\res\synt-analyzers\synt-analyzers.zip" Type="RCDATA" ResourceName="SYNT-ANALYZERS"/>
+        <Resource_3 FileName="..\res\synt-analyzers.zip" Type="RCDATA" ResourceName="SYNT-ANALYZERS"/>
       </Resources>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
-      <BuildNr Value="250"/>
+      <BuildNr Value="253"/>
       <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.0"/>
     </VersionInfo>
     <BuildModes>

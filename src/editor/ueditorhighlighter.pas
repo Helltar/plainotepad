@@ -22,7 +22,6 @@ type
     function GetLexer: TecSyntAnalyzer;
     function getLexerName(): string;
     procedure SetLexer(AValue: TecSyntAnalyzer);
-    procedure setLexerColorsFromFile(const filename: string);
     procedure loadLexers();
   public
     constructor Create(AEditor: TATSynEdit);
@@ -31,6 +30,7 @@ type
     procedure getLexersList(var lexList: TStringList);
     procedure setColorTheme(const colorThemeName: string);
     procedure setHighlighterByFilename(const filename: string);
+    procedure setLexerColorsFromFile(const filename: string);
     property lexer: TecSyntAnalyzer read GetLexer write SetLexer;
     property lexerName: string read getLexerName;
     property syntaxManager: TecSyntaxManager read FSyntaxManager;
@@ -42,15 +42,11 @@ uses
   uUtils, uConsts, uLogger;
 
 resourcestring
-  ERROR_OPEN_COLOR_THEME = 'Error when opening a color theme: %s';
   ERROR_LOAD_LEXLIB = 'Failed to load lexlib: %s';
 
 { TEditorHighlighter }
 
 constructor TEditorHighlighter.Create(AEditor: TATSynEdit);
-var
-  lexlibFilename: string;
-
 begin
   synEdit := AEditor;
 

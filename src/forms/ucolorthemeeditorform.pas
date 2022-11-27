@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, IniFiles,
   StdCtrls, ExtCtrls, ColorBox, FileUtil, LCLIntf, ActnList,
-  ATSynEdit, ec_SyntAnal,
+  ATSynEdit, ec_SyntAnal, ec_syntax_collection,
   uEditor;
 
 type
@@ -47,13 +47,13 @@ type
     function getColorThemeFilename(): string;
     function getSelectedColorThemeName(): string;
     function getSelectedLexerName(): string;
-    procedure initColorEditControls();
-    procedure initThemeEditControls();
+    procedure initLexerColorBoxControls();
+    procedure initThemeColorBoxControls();
     procedure loadEditorConfiig();
     procedure loadLexersList();
-    procedure updateControls();
-    procedure updateSelectedLexer();
     procedure updateEditorLexer();
+    procedure updateSelectedLexer();
+    procedure updateThemesList();
   end;
 
 implementation
@@ -63,10 +63,7 @@ uses
 
 resourcestring
   COLOR_THEME_ALREADY_EXISTS = 'A color theme with this name already exists';
-  ERROR_COPY_FILE = 'Error when copy a file: %s';
-  ERROR_LOAD_CONFIG_FILE = 'Error when load a color theme config file: %s';
-  ERROR_OPEN_FILE = 'Error when opening a file: %s';
-  ERROR_SAVE_FILE = 'Error when saving the file: %s';
+  ERROR_COPY_COLOR_THEME = 'Error when copy a color theme: %s';
   TITLE_TYPE_NEW_NAME = 'Type in a new name';
 
 {$R *.lfm}
@@ -83,10 +80,11 @@ begin
 
   editor := TEditor.Create(synEdit);
 
-  cmbEditColorTheme.Items := frmSettings.cmbColorTheme.Items;
-  cmbEditColorTheme.ItemIndex := frmSettings.cmbColorTheme.ItemIndex;
-
-  updateControls();
+  updateThemesList();
+  loadEditorConfiig();
+  initThemeColorBoxControls();
+  loadLexersList();
+  initLexerColorBoxControls();
 
   cmbLexers.Enabled := cmbLexers.Items.Count > 0;
 end;
@@ -98,8 +96,8 @@ end;
 
 procedure TfrmColorThemeEditor.cmbEditColorThemeChange(Sender: TObject);
 begin
-  updateControls();
-  synEdit.Update;
+  initThemeColorBoxControls();
+  initLexerColorBoxControls();
 end;
 
 procedure TfrmColorThemeEditor.btnOkClick(Sender: TObject);
@@ -123,14 +121,11 @@ begin
     begin
       if CopyFile(getColorThemeFilename(), filename) then
       begin
-        updateControls();
-        synEdit.Update;
-        frmSettings.loadColorThemes();
-        cmbEditColorTheme.Items := frmSettings.cmbColorTheme.Items;
+        updateThemesList();
         cmbEditColorTheme.ItemIndex := cmbEditColorTheme.Items.IndexOf(newName);
       end
       else
-        addLog(Format(ERROR_COPY_FILE, [filename]));
+        addLog(Format(ERROR_COPY_COLOR_THEME, [filename]));
     end
     else
       addLog(COLOR_THEME_ALREADY_EXISTS);
@@ -140,11 +135,7 @@ end;
 procedure TfrmColorThemeEditor.actDelExecute(Sender: TObject);
 begin
   DeleteFile(getColorThemeFilename());
-  frmSettings.loadColorThemes();
-  cmbEditColorTheme.Items := frmSettings.cmbColorTheme.Items;
-  cmbEditColorTheme.ItemIndex := 0;
-  updateControls();
-  synEdit.Update;
+  updateThemesList();
 end;
 
 procedure TfrmColorThemeEditor.actDelUpdate(Sender: TObject);
@@ -155,22 +146,39 @@ end;
 procedure TfrmColorThemeEditor.cmbLexersChange(Sender: TObject);
 begin
   updateEditorLexer();
-  initColorEditControls();
+  initLexerColorBoxControls();
+  editor.setColorTheme(getSelectedColorThemeName());
 end;
 
 procedure TfrmColorThemeEditor.FormShow(Sender: TObject);
 begin
-  updateSelectedLexer();
+  cmbLexersChange(nil);
 end;
 
 procedure TfrmColorThemeEditor.lexerColorBoxChange(Sender: TObject);
+var
+  analyzer: TecSyntAnalyzer;
+  syntItem: TSyntCollectionItem;
+
 begin
+  analyzer := editor.editorHighlighter.findAnalyzer(getSelectedLexerName());
+
+  if Assigned(analyzer) then
+  begin
+    syntItem := analyzer.Formats.ItemByName(TWinControl(Sender).AnchorSideTop.Control.Caption);
+    if Assigned(syntItem) then
+      analyzer.Formats.Items[syntItem.Index].Font.Color := TColorBox(Sender).Selected;
+  end;
+
+  synEdit.Update();
   colorBoxChange(Sender, COLOR_SCHEME_CONFIG_SECTION_LEXER + getSelectedLexerName());
 end;
 
 procedure TfrmColorThemeEditor.themeColorBoxChange(Sender: TObject);
 begin
   colorBoxChange(Sender, COLOR_SCHEME_CONFIG_SECTION_MAIN);
+  editor.setColorTheme(getSelectedColorThemeName());
+  synEdit.Update();
 end;
 
 procedure TfrmColorThemeEditor.colorBoxChange(Sender: TObject; const iniFileSection: string);
@@ -181,9 +189,6 @@ begin
     finally
       Free;
     end;
-
-  editor.setColorTheme(getSelectedColorThemeName());
-  synEdit.Update();
 end;
 
 function TfrmColorThemeEditor.getColorThemeFilename: string;
@@ -211,7 +216,7 @@ begin
         Result := Items[ItemIndex];
 end;
 
-procedure TfrmColorThemeEditor.initColorEditControls;
+procedure TfrmColorThemeEditor.initLexerColorBoxControls;
 var
   i: integer;
   syntAnalyzer: TecSyntAnalyzer;
@@ -255,8 +260,8 @@ begin
       AnchorSideTop.Side := asrCenter;
       BorderSpacing.Around := 24;
       Parent := sbLexerColors;
-      OnChange := @lexerColorBoxChange;
       Style := [cbPrettyNames, cbStandardColors, cbExtendedColors, cbCustomColor, cbCustomColors, cbIncludeNone];
+      Width := 200;
 
       with TIniFile.Create(getColorThemeFilename()) do
         try
@@ -267,11 +272,11 @@ begin
           Free;
         end;
 
-      Width := 200;
+      OnChange := @lexerColorBoxChange;
     end;
 end;
 
-procedure TfrmColorThemeEditor.initThemeEditControls;
+procedure TfrmColorThemeEditor.initThemeColorBoxControls;
 var
   i: integer;
   sections: TStringList;
@@ -319,8 +324,8 @@ begin
       AnchorSideTop.Side := asrCenter;
       BorderSpacing.Around := 24;
       Parent := sbMainColors;
-      OnChange := @themeColorBoxChange;
       Style := [cbPrettyNames, cbStandardColors, cbExtendedColors, cbCustomColor, cbCustomColors];
+      OnChange := @themeColorBoxChange;
       Selected := StringToColor(sections.ValueFromIndex[i]);
       Width := 200;
     end;
@@ -388,12 +393,13 @@ begin
   end;
 end;
 
-procedure TfrmColorThemeEditor.updateControls;
+procedure TfrmColorThemeEditor.updateThemesList;
 begin
-  loadEditorConfiig();
-  initThemeEditControls();
-  loadLexersList();
-  initColorEditControls();
+  frmSettings.loadColorThemes();
+  cmbEditColorTheme.Items := frmSettings.cmbColorTheme.Items;
+  cmbEditColorTheme.ItemIndex := frmSettings.cmbColorTheme.ItemIndex;
+  editor.setColorTheme(getSelectedColorThemeName());
+  synEdit.Update();
 end;
 
 end.

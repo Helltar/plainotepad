@@ -1,7 +1,7 @@
 object frmColorThemeEditor: TfrmColorThemeEditor
-  Left = 470
+  Left = 434
   Height = 547
-  Top = 251
+  Top = 222
   Width = 917
   Caption = 'Color Theme Editor'
   ClientHeight = 547

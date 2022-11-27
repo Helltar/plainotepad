@@ -220,6 +220,7 @@ end;
 procedure TfrmSettings.loadColorThemes;
 var
   searchRec: TSearchRec;
+  index: integer;
 
 begin
   cmbColorTheme.Items.Clear;
@@ -241,7 +242,12 @@ begin
     FindClose(searchRec);
   end;
 
-  cmbColorTheme.ItemIndex := cmbColorTheme.Items.IndexOf(frmMain.config.colorTheme);
+  index := cmbColorTheme.Items.IndexOf(frmMain.config.colorTheme);
+
+  if index = -1 then
+    index := 0;
+
+  cmbColorTheme.ItemIndex := index;
 end;
 
 function TfrmSettings.getSelectedColorThemeName: string;
