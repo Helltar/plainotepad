@@ -28,7 +28,7 @@ type
     constructor Create(AEditor: TATSynEdit);
     destructor Destroy; override;
     function findAnalyzer(const lexerName: string): TecSyntAnalyzer;
-    function getLexersList(): TStringList;
+    procedure getLexersList(var lexList: TStringList);
     procedure setColorTheme(const colorThemeName: string);
     procedure setHighlighterByFilename(const filename: string);
     property lexer: TecSyntAnalyzer read GetLexer write SetLexer;
@@ -106,13 +106,12 @@ begin
   FreeAndNil(iniFile);
 end;
 
-function TEditorHighlighter.getLexersList: TStringList;
+procedure TEditorHighlighter.getLexersList(var lexList: TStringList);
 var
   searchRec: TSearchRec;
   dirLexlib: string;
 
 begin
-  Result := TStringList.Create;
   dirLexlib := getConfigDir() + DIR_LEXLIB;
 
   if FindFirst(dirLexlib + '*' + FILE_EXT_SYNT_ANALYZER, faAnyFile, searchRec) = 0 then
@@ -120,7 +119,7 @@ begin
     repeat
       with searchRec do
         if (Attr and faDirectory) = 0 then
-          Result.Add(ExtractFileNameWithoutExt(Name));
+          lexList.Add(ExtractFileNameWithoutExt(Name));
     until FindNext(searchRec) <> 0;
 
     FindClose(searchRec);
@@ -135,7 +134,7 @@ var
 
 begin
   lexList := TStringList.Create;
-  lexList := getLexersList();
+  getLexersList(lexList);
 
   dirLexlib := getConfigDir() + DIR_LEXLIB;
 
@@ -148,8 +147,6 @@ begin
     end;
 
   FreeAndNil(lexList);
-
-  synEdit.Text := FSyntaxManager.AnalyzerCount.ToString;
 end;
 
 function TEditorHighlighter.getLexerName: string;

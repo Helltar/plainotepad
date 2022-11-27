@@ -5,7 +5,7 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, LCLIntf, process,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, LCLIntf,
   ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
   uConfig, uEditor, uSettingsForm;
 
@@ -87,6 +87,7 @@ type
     procedure loadFormConfig();
     procedure saveConfig();
     procedure updateSaveDialogTitle();
+    procedure initialSetup();
   public
     appConfigFile: string;
     config: TConfig;
@@ -115,23 +116,12 @@ resourcestring
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var
-  appConfigDir: string;
   i: integer;
 
 begin
-  appConfigDir := getConfigDir();
-  appConfigFile := appConfigDir + APP_CONFIG_FILE_NAME;
+  initialSetup();
 
-  if not DirectoryExists(appConfigDir) then
-    if CreateDir(appConfigDir) then
-    begin
-      copyResToDir(COLOR_THEME_CREAM + FILE_EXT_COLOR_SCHEME, appConfigDir + DIR_COLOR_SCHEMES);
-      copyResToDir(COLOR_THEME_DARK + FILE_EXT_COLOR_SCHEME, appConfigDir + DIR_COLOR_SCHEMES);
-    end
-    else
-      addLog(ERROR_MK_CONFIG_DIR);
-
-  config := TConfig.Create(appConfigFile);
+  config := TConfig.Create(getConfigDir() + APP_CONFIG_FILE_NAME);
   editor := TEditor.Create(synEdit);
 
   loadFormConfig();
@@ -358,6 +348,28 @@ begin
 
   if not filename.IsEmpty then
     saveDialog.Title := saveDialog.FileName + ' - ' + TITLE_SAVE_FILE_AS;
+end;
+
+procedure TfrmMain.initialSetup;
+var
+  dirLexlib: string;
+
+begin
+  if DirectoryExists(getConfigDir()) then
+    exit;
+
+  if CreateDir(getConfigDir()) then
+  begin
+    dirLexlib := getConfigDir() + DIR_LEXLIB;
+    copyResToDir(RES_SYNT_ANALYZERS, dirLexlib);
+    unzipArchive(dirLexlib + RES_SYNT_ANALYZERS.ToLower, dirLexlib);
+    DeleteFile(dirLexlib + RES_SYNT_ANALYZERS.ToLower);
+
+    copyResToDir(COLOR_THEME_CREAM + FILE_EXT_COLOR_SCHEME, getConfigDir() + DIR_COLOR_SCHEMES);
+    copyResToDir(COLOR_THEME_DARK + FILE_EXT_COLOR_SCHEME, getConfigDir() + DIR_COLOR_SCHEMES);
+  end
+  else
+    addLog(ERROR_MK_CONFIG_DIR);
 end;
 
 function TfrmMain.showFileChangeDialog: TModalResult;

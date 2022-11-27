@@ -87,6 +87,8 @@ begin
   cmbEditColorTheme.ItemIndex := frmSettings.cmbColorTheme.ItemIndex;
 
   updateControls();
+
+  cmbLexers.Enabled := cmbLexers.Items.Count > 0;
 end;
 
 procedure TfrmColorThemeEditor.FormDestroy(Sender: TObject);
@@ -221,6 +223,9 @@ begin
 
   syntAnalyzer := editor.editorHighlighter.findAnalyzer(getSelectedLexerName());
 
+  if not Assigned(syntAnalyzer) then
+    Exit;
+
   for i := 0 to syntAnalyzer.Formats.Count - 1 do
     with TLabel.Create(sbLexerColors) do
     begin
@@ -339,7 +344,7 @@ begin
   cmbLexers.Items.Clear;
 
   lexList := TStringList.Create;
-  lexList := editor.editorHighlighter.getLexersList();
+  editor.editorHighlighter.getLexersList(lexList);
 
   for lexName in lexList do
     cmbLexers.Items.Add(lexName);

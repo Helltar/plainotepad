@@ -5,7 +5,7 @@ unit uUtils;
 interface
 
 uses
-  SysUtils, Classes, fileinfo, LCLType, process;
+  SysUtils, Classes, fileinfo, LCLType, process, Zipper;
 
 function createDesktopEntry(): boolean;
 function getAppFileVersion(): string;
@@ -15,6 +15,7 @@ function getAppPath: string;
 function getConfigDir: string;
 procedure runProcess(const AExecutable: string; const AParameters: string = '');
 procedure copyResToDir(const resName: string; const destDir: string);
+procedure unzipArchive(const AFilename: string; const AOutputPath: string);
 
 implementation
 
@@ -141,6 +142,19 @@ begin
   finally
     FreeAndNil(resStream);
   end;
+end;
+
+procedure unzipArchive(const AFilename: string; const AOutputPath: string);
+begin
+  with TUnZipper.Create do
+    try
+      FileName := AFilename;
+      OutputPath := AOutputPath;
+      Examine;
+      UnZipAllFiles;
+    finally
+      Free;
+    end;
 end;
 
 end.

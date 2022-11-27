@@ -131,6 +131,9 @@ begin
       else
         ItemIndex := 0;
     end;
+
+  btnEditColorTheme.Enabled := cmbColorTheme.Items.Count > 0;
+  cmbColorTheme.Enabled := btnEditColorTheme.Enabled;
 end;
 
 procedure TfrmSettings.btnSelectFontClick(Sender: TObject);
