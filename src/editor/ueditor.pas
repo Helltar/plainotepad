@@ -5,7 +5,7 @@ unit uEditor;
 interface
 
 uses
-  Classes, SysUtils, Graphics, Dialogs, IniFiles,
+  Classes, SysUtils, Graphics, Dialogs, IniFiles, Forms,
   ATSynEdit,
   uEditorHighlighter;
 
@@ -88,6 +88,7 @@ begin
     AText := ' ' + AText;
 
   synEdit.Parent.Caption := ExtractFileName(getCurrentFilename()) + AText;
+  Application.Title := synEdit.Parent.Caption;
 end;
 
 procedure TEditor.SetHighlighter(AValue: boolean);
