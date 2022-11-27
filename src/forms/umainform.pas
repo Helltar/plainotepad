@@ -76,7 +76,6 @@ type
     procedure miSelectAllClick(Sender: TObject);
     procedure miUndoClick(Sender: TObject);
     procedure miEditDeleteClick(Sender: TObject);
-    procedure saveDialogShow(Sender: TObject);
   private
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
@@ -87,6 +86,7 @@ type
     procedure initEditor();
     procedure loadFormConfig();
     procedure saveConfig();
+    procedure updateSaveDialogTitle();
   public
     appConfigFile: string;
     config: TConfig;
@@ -196,18 +196,6 @@ begin
   synEdit.DoCommand(cCommand_TextDeleteSelection, cInvokeMenuContext);
 end;
 
-procedure TfrmMain.saveDialogShow(Sender: TObject);
-var
-  filename: string;
-
-begin
-  saveDialog.Title := TITLE_SAVE_FILE_AS;
-  filename := editor.getCurrentFilename();
-
-  if not filename.IsEmpty then
-    saveDialog.Title := ExtractFileName(filename) + ' - ' + TITLE_SAVE_FILE_AS;
-end;
-
 function TfrmMain.openFile(fileName: string): boolean;
 begin
   Result := False;
@@ -224,7 +212,10 @@ begin
     Result := editor.saveCurrentFile()
   else
   if saveDialog.Execute then
+  begin
+    updateSaveDialogTitle();
     Result := editor.saveFile(saveDialog.FileName);
+  end;
 end;
 
 procedure TfrmMain.closeFile;
@@ -344,6 +335,19 @@ begin
   end;
 end;
 
+procedure TfrmMain.updateSaveDialogTitle;
+var
+  filename: string;
+
+begin
+  filename := editor.getCurrentFilename();
+  saveDialog.FileName := ExtractFileName(filename);
+  saveDialog.Title := TITLE_SAVE_FILE_AS;
+
+  if not filename.IsEmpty then
+    saveDialog.Title := saveDialog.FileName + ' - ' + TITLE_SAVE_FILE_AS;
+end;
+
 function TfrmMain.showFileChangeDialog: TModalResult;
 begin
   Result := MessageDlg(CAPTION_FILE_CHANGED, MSG_SAVE_CHANGES, mtConfirmation, [mbYes, mbNo, mbCancel], 0);
@@ -438,6 +442,8 @@ end;
 
 procedure TfrmMain.actSaveFileAsExecute(Sender: TObject);
 begin
+  updateSaveDialogTitle();
+
   if saveDialog.Execute then
     if editor.saveFile(saveDialog.FileName) then
       editor.openFile(saveDialog.FileName);
