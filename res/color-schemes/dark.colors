@@ -11,3 +11,240 @@ MinimapTooltipBorder=$00555555
 TextBG=$001E1E1E
 TextFont=clWhite
 TextSelBG=clSilver
+
+[LEXER-Assembly]
+Comment=clNone
+Id=clNone
+Id operators=clNone
+Number=clNone
+Label=clNone
+String=clNone
+Symbol=clNone
+Id registers=clNone
+Id directives=clNone
+Id vars=clNone
+
+[LEXER-Bash script]
+Comment=clGray
+Comment shebang=clMedGray
+Keywords=$00FFAE06
+Command=clAqua
+String=$0000CE00
+Symbol=clSilver
+Var=clTeal
+Number=$0000D2D2
+Var block BG=clNone
+Ticks block BG=clNone
+Command std=$000080FF
+Command param=$00C08080
+Func name=$00FF80FF
+Symbol2=clWhite
+Var %=clOlive
+Math BG=clNone
+Heredoc BG=clNone
+Heredoc begin=clFuchsia
+String regexp=$0040FF00
+
+[LEXER-Batch files]
+Label=clAqua
+Comment=clGray
+Keywords=$00FFAC00
+Commands=$000080FF
+Text=clCream
+String=$002FB900
+Symbol=clSilver
+Number=$0000E8E8
+Var=clMoneyGreen
+Exec block=$00C08080
+
+[LEXER-C]
+Symbol=clNone
+Number=clNone
+String=clNone
+Comment=clNone
+Id=clNone
+Id keyword=clNone
+Id special=clNone
+Id types=clNone
+Preprocessor=clNone
+Asm BG=clNone
+
+[LEXER-C++]
+Symbol=clNone
+Number=clNone
+String=clNone
+Id=clNone
+Id keyword=clNone
+Id type=clNone
+Id special=clNone
+Comment=clNone
+Preprocessor=clNone
+Asm BG=clNone
+Label=clNone
+
+[LEXER-CSS]
+Style=clSkyBlue
+Prop correct=$00F7A700
+Prop incorrect=clGray
+Value=clAqua
+Symbol=clSilver
+Comment=clGray
+Current block BG=clNone
+Color=$00FF8080
+String=$0036D900
+Number=$0000E3E3
+Style suffix=$000080FF
+Prop user=$00C080FF
+PHP tag=clWhite
+Media=$00FF80FF
+Value unit=clMoneyGreen
+Value unit incorrect=clNone
+Std function=clWhite
+Name.=clCream
+Name#=clTeal
+
+[LEXER-HTML]
+Text=clNone
+Tag bound=clNone
+Comment=clNone
+Number=clNone
+Tag string=clNone
+Tag prop=clNone
+Tag unknown text=clNone
+Tag id correct=clNone
+Tag id incorrect=clNone
+Tag id hilite BG=clNone
+Tag brackets hilite BG=clNone
+Sublexer BG=clNone
+Color=clNone
+Entity=clNone
+Include tag=clNone
+Comment doc=clNone
+SVG BG=clNone
+
+[LEXER-JavaScript]
+Symbol=clNone
+Number=clNone
+String=clNone
+String regex=clNone
+Identifier=clNone
+Id keyword=clNone
+Id standard=clNone
+Id std=clNone
+Comment=clNone
+Comment doc=clNone
+Current block=clNone
+PHP tag=clNone
+Id func name=clNone
+HTML tag name=clNone
+Id upcase const=clNone
+String ticks=clNone
+
+[LEXER-JSON]
+Symbol=clSilver
+Number=$00FF7D7D
+String=$0032C600
+String key=$0000C6C6
+Id keyword=$000080FF
+Comment=clGray
+Symbol bad=clGray
+
+[LEXER-Markdown]
+Heading=clNone
+Comment=clNone
+Quote BG=clNone
+Text=clNone
+Codeblock=clNone
+Block=clNone
+Link=clNone
+Image=clNone
+Reference=clNone
+Footnote=clNone
+HTML Code=clNone
+Style bold=clNone
+Style italic=clNone
+Style bold-italic=clNone
+Style cross=clNone
+Style bold-cross=clNone
+Style italic-cross=clNone
+Style bold-italic-cross=clNone
+Symbol font styles=clNone
+Definition=clNone
+List=clNone
+Mark-added=clNone
+Mark-deleted=clNone
+Mark-edited=clNone
+Mark-comment=clNone
+Symbols=clNone
+Math BG=clNone
+Table BG=clNone
+``` edge=clNone
+
+[LEXER-YAML]
+Comment=clNone
+Id key=clNone
+Id value=clNone
+Id special=clNone
+String=clNone
+Symbol=clNone
+NewDoc=clNone
+Number=clNone
+Timestamp=clNone
+Handle=clNone
+Directive=clNone
+Alias=clNone
+Env var=clNone
+Brackets BG=clNone
+\Char=clNone
+
+[LEXER-PHP]
+Text=clNone
+Tag bound=clNone
+Comment=clNone
+Number=clNone
+Tag string=clNone
+Tag prop=clNone
+Tag unknown text=clNone
+Tag id correct=clNone
+Tag id incorrect=clNone
+Tag id hilite BG=clNone
+Tag brackets hilite BG=clNone
+Sublexer BG=clNone
+Color=clNone
+Entity=clNone
+Include tag=clNone
+Comment doc=clNone
+
+[LEXER-Python]
+Number=clNone
+String=clNone
+Symbol=clNone
+Comment=clNone
+Id=clNone
+Id keyword=clNone
+Id keyword def=clNone
+Id function=clNone
+Id func name=clNone
+Id types=clNone
+Id exception=clNone
+Id const=clNone
+Decorator=clNone
+
+[LEXER-XML]
+Comment=clNone
+Tag bound=clNone
+Tag id=clNone
+Tag param=clNone
+Tag val=clNone
+CDATA bound=clNone
+CDATA text=clNone
+Error content=clNone
+Current tag=clNone
+Current tag id=clNone
+DTD element type=clNone
+DTD bound=clNone
+Spec char=clNone
+Comment doc=clNone
+Text=clNone
+Number=clNone
+Sublexer BG=clNone

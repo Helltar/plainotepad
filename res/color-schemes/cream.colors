@@ -11,3 +11,240 @@ MinimapTooltipBorder=$00DDDDDD
 TextBG=clCream
 TextFont=$00222222
 TextSelBG=$00EEEEEE
+
+[LEXER-Assembly]
+Comment=clGray
+Id=clBlack
+Id operators=clNavy
+Number=clNavy
+Label=clOlive
+String=clTeal
+Symbol=clMaroon
+Id registers=clBlue
+Id directives=clPurple
+Id vars=clGreen
+
+[LEXER-Bash script]
+Comment=clGray
+Comment shebang=$0062A45D
+Keywords=clBlack
+Command=clBlack
+String=clTeal
+Symbol=clMaroon
+Var=clGreen
+Number=clNavy
+Var block BG=clWindowText
+Ticks block BG=clWindowText
+Command std=clNavy
+Command param=clPurple
+Func name=clMaroon
+Symbol2=clRed
+Var %=clOlive
+Math BG=clWindowText
+Heredoc BG=clMaroon
+Heredoc begin=clOlive
+String regexp=clLime
+
+[LEXER-Batch files]
+Label=clRed
+Comment=clGray
+Keywords=clBlack
+Commands=$00FF8000
+Text=$00800040
+String=clTeal
+Symbol=clMaroon
+Number=clNavy
+Var=clGreen
+Exec block=clOlive
+
+[LEXER-C]
+Symbol=clMaroon
+Number=clNavy
+String=clTeal
+Comment=clGray
+Id=clBlack
+Id keyword=clBlack
+Id special=clOlive
+Id types=clPurple
+Preprocessor=clGreen
+Asm BG=clBlack
+
+[LEXER-C++]
+Symbol=clMaroon
+Number=clNavy
+String=clTeal
+Id=clBlack
+Id keyword=clBlack
+Id type=clPurple
+Id special=clOlive
+Comment=clGray
+Preprocessor=clGreen
+Asm BG=clWindowText
+Label=clRed
+
+[LEXER-CSS]
+Style=clNavy
+Prop correct=clGreen
+Prop incorrect=clGreen
+Value=clPurple
+Symbol=clMaroon
+Comment=clGray
+Current block BG=clWindowText
+Color=clLime
+String=clTeal
+Number=clNavy
+Style suffix=clOlive
+Prop user=clBlue
+PHP tag=clRed
+Media=clFuchsia
+Value unit=clRed
+Value unit incorrect=clRed
+Std function=clBlue
+Name.=clMaroon
+Name#=clAqua
+
+[LEXER-HTML]
+Text=clBlack
+Tag bound=clGray
+Comment=clGray
+Number=clNavy
+Tag string=clTeal
+Tag prop=$0000B900
+Tag unknown text=clBlack
+Tag id correct=$00FF8000
+Tag id incorrect=$00FF8000
+Tag id hilite BG=clBlue
+Tag brackets hilite BG=clBlue
+Sublexer BG=clNone
+Color=clOlive
+Entity=clMaroon
+Include tag=clRed
+Comment doc=$00C08080
+SVG BG=clWindowText
+
+[LEXER-JavaScript]
+Symbol=clMaroon
+Number=clNavy
+String=clTeal
+String regex=clOlive
+Identifier=clBlack
+Id keyword=clBlack
+Id standard=clNavy
+Id std=clPurple
+Comment=clGray
+Comment doc=$00C08080
+Current block=clMaroon
+PHP tag=clRed
+Id func name=clBlue
+HTML tag name=clGreen
+Id upcase const=clGreen
+String ticks=$0072A451
+
+[LEXER-JSON]
+Symbol=clMaroon
+Number=clNavy
+String=clTeal
+String key=clOlive
+Id keyword=clBlack
+Comment=clGray
+Symbol bad=clBlack
+
+[LEXER-Markdown]
+Heading=clMaroon
+Comment=clGray
+Quote BG=clBlack
+Text=clBlack
+Codeblock=clBlack
+Block=clBlack
+Link=clRed
+Image=clBlue
+Reference=clGreen
+Footnote=clFuchsia
+HTML Code=clTeal
+Style bold=clBlack
+Style italic=clBlack
+Style bold-italic=clBlack
+Style cross=clBlack
+Style bold-cross=clBlack
+Style italic-cross=clBlack
+Style bold-italic-cross=clBlack
+Symbol font styles=clOlive
+Definition=clWindowText
+List=clWindowText
+Mark-added=clBlack
+Mark-deleted=clBlack
+Mark-edited=clBlack
+Mark-comment=clBlack
+Symbols=clMaroon
+Math BG=clNavy
+Table BG=clWindowText
+``` edge=clRed
+
+[LEXER-PHP]
+Text=clBlack
+Tag bound=clGray
+Comment=clGray
+Number=clNavy
+Tag string=clTeal
+Tag prop=$0000B900
+Tag unknown text=clBlack
+Tag id correct=$00FF8000
+Tag id incorrect=$00FF8000
+Tag id hilite BG=clBlue
+Tag brackets hilite BG=clBlue
+Sublexer BG=clNone
+Color=clOlive
+Entity=clMaroon
+Include tag=clRed
+Comment doc=$00C08080
+
+[LEXER-Python]
+Number=clNavy
+String=clTeal
+Symbol=clMaroon
+Comment=clGray
+Id=clBlack
+Id keyword=clNavy
+Id keyword def=clBlack
+Id function=clBlue
+Id func name=clFuchsia
+Id types=clPurple
+Id exception=clOlive
+Id const=clGreen
+Decorator=$0000C800
+
+[LEXER-XML]
+Comment=clGray
+Tag bound=clGray
+Tag id=$00FF8080
+Tag param=clGreen
+Tag val=clTeal
+CDATA bound=clNavy
+CDATA text=clTeal
+Error content=clRed
+Current tag=clWindowText
+Current tag id=clNone
+DTD element type=clGray
+DTD bound=clPurple
+Spec char=clMaroon
+Comment doc=$00C08080
+Text=clBlack
+Number=clNavy
+Sublexer BG=clWindowText
+
+[LEXER-YAML]
+Comment=clGray
+Id key=clNavy
+Id value=clBlack
+Id special=clPurple
+String=clTeal
+Symbol=clMaroon
+NewDoc=clBlue
+Number=clNavy
+Timestamp=clOlive
+Handle=clRed
+Directive=clFuchsia
+Alias=clLime
+Env var=clGreen
+Brackets BG=clWindowText
+\Char=clRed
