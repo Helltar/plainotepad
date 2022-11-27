@@ -16,7 +16,7 @@ begin
   if showForm then
     ShowMessage(msg);
 
-  WriteLn(msg);
+  //WriteLn(msg);
 end;
 
 end.

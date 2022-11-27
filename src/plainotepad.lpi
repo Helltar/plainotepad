@@ -13,15 +13,18 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="1">
-        <Resource_0 FileName="../icons/plainotepad.svg" Type="RCDATA" ResourceName="APP_ICON"/>
+      <Resources Count="4">
+        <Resource_0 FileName="../icons/plainotepad.svg" Type="RCDATA" ResourceName="PLAINOTEPAD.SVG"/>
+        <Resource_1 FileName="../res/color-schemes/cream.colors" Type="RCDATA" ResourceName="CREAM.COLORS"/>
+        <Resource_2 FileName="../res/color-schemes/dark.colors" Type="RCDATA" ResourceName="DARK.COLORS"/>
+        <Resource_3 FileName="../res/lexlib/lib.lxl" Type="RCDATA" ResourceName="LIB.LXL"/>
       </Resources>
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="2"/>
-      <BuildNr Value="187"/>
+      <BuildNr Value="210"/>
       <StringTable CompanyName="helltar.com" FileDescription="Plain text editor" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.2.0"/>
     </VersionInfo>
     <BuildModes>
@@ -50,6 +53,9 @@
               <StackChecks Value="True"/>
             </Checks>
             <VerifyObjMethodCallValidity Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
@@ -106,7 +112,7 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="atflatcontrols_package"/>
+        <PackageName Value="LCL"/>
       </Item>
       <Item>
         <PackageName Value="econtrol_package"/>
@@ -116,12 +122,6 @@
       </Item>
       <Item>
         <PackageName Value="atsynedit_package"/>
-      </Item>
-      <Item>
-        <PackageName Value="LazControls"/>
-      </Item>
-      <Item>
-        <PackageName Value="LCL"/>
       </Item>
     </RequiredPackages>
     <Units>
@@ -182,6 +182,7 @@
         <Filename Value="forms/ulicenseform.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmLicense"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uLicenseForm"/>
       </Unit>
@@ -191,12 +192,12 @@
         <UnitName Value="uEditorHighlighter"/>
       </Unit>
       <Unit>
-        <Filename Value="forms/ucolorthemeeditor.pas"/>
+        <Filename Value="forms/ucolorthemeeditorform.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmColorThemeEditor"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="uColorThemeEditor"/>
+        <UnitName Value="uColorThemeEditorForm"/>
       </Unit>
     </Units>
   </ProjectOptions>

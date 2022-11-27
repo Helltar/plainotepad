@@ -5,13 +5,15 @@ unit uUtils;
 interface
 
 uses
-  SysUtils, Classes, fileinfo;
+  SysUtils, Classes, fileinfo, LCLType;
 
 function createDesktopEntry(): boolean;
 function getAppFileVersion(): string;
 function getAppInfo(const AType: string): string;
 function getAppOriginalFilename(): string;
 function getAppPath: string;
+function getConfigDir: string;
+procedure copyResToDir(const resName: string; const destDir: string);
 
 implementation
 
@@ -20,34 +22,9 @@ uses
 
 resourcestring
   FILE_CREATION_ERROR = 'File creation error: %s';
+  DIR_CREATION_ERROR = 'Error when create a directory: %s';
 
 function createDesktopEntry: boolean;
-
-  procedure saveIcon(const dir, filename: string);
-  var
-    S: TResourceStream;
-    F: TFileStream;
-
-  begin
-    {$IFDEF MSWINDOWS}
-    S := nil;
-    {$Else}
-    S := TResourceStream.Create(HInstance, 'APP_ICON', RT_RCDATA);
-    {$ENDIF}
-
-    try
-      CreateDir(dir);
-      F := TFileStream.Create(dir + filename, fmCreate);
-      try
-        F.CopyFrom(S, S.Size);
-      finally
-        FreeAndNil(F);
-      end;
-    finally
-      FreeAndNil(S);
-    end;
-  end;
-
 const
   iconName = APP_FILE_NAME + '.svg';
 
@@ -58,7 +35,7 @@ var
 begin
   Result := False;
 
-  iconPath := GetAppConfigDir(False) + 'icons' + DirectorySeparator;
+  iconPath := getConfigDir() + 'icons' + DirectorySeparator;
 
   with TStringList.Create do
     try
@@ -76,7 +53,7 @@ begin
       Add('StartupWMClass=' + APP_FILE_NAME);
 
       try
-        saveIcon(iconPath, iconName.ToLower);
+        copyResToDir(iconName, iconPath);
         dotDesktopFile := GetUserDir + '.local/share/applications/' + APP_FILE_NAME + '.desktop';
         SaveToFile(dotDesktopFile);
         Result := True;
@@ -114,6 +91,37 @@ end;
 function getAppPath: string;
 begin
   Result := ExtractFilePath(ParamStr(0));
+end;
+
+function getConfigDir: string;
+begin
+  Result := getAppConfigDir(False);
+end;
+
+procedure copyResToDir(const resName: string; const destDir: string);
+var
+  resStream: TResourceStream;
+  fileStream: TFileStream;
+
+begin
+  if not DirectoryExists(destDir) then
+    if not CreateDir(destDir) then
+    begin
+      addLog(Format(DIR_CREATION_ERROR, [destDir]));
+      Exit;
+    end;
+
+  try
+    resStream := TResourceStream.Create(HInstance, UpperCase(resName), RT_RCDATA);
+    fileStream := TFileStream.Create(destDir + resName.ToLower, fmCreate);
+    try
+      fileStream.CopyFrom(resStream, resStream.Size);
+    finally
+      FreeAndNil(fileStream);
+    end;
+  finally
+    FreeAndNil(resStream);
+  end;
 end;
 
 end.

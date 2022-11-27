@@ -1,14 +1,16 @@
 object frmMain: TfrmMain
-  Left = 497
-  Height = 434
-  Top = 334
-  Width = 720
+  Left = 473
+  Height = 440
+  Top = 215
+  Width = 659
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 434
-  ClientWidth = 720
-  Constraints.MinHeight = 240
-  Constraints.MinWidth = 320
+  ClientHeight = 415
+  ClientWidth = 659
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 400
+  DesignTimePPI = 120
+  Menu = mmMain
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -21,30 +23,33 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
+    Cursor = crIBeam
     Left = 0
-    Height = 434
+    Height = 415
     Top = 0
-    Width = 720
+    Width = 659
     Anchors = [akTop, akLeft, akRight, akBottom]
     DoubleBuffered = True
-    Font.Height = -12
+    Font.Height = -15
     Font.Name = 'Courier New'
-    Font.Quality = fqCleartype
     ParentFont = False
     TabOrder = 0
     TabStop = True
     OptFoldEnabled = False
     OptShowURLs = False
+    OptShowCurLine = True
+    OptShowScrollHint = True
     OptShowMouseSelFrame = False
     OptCaretVirtual = False
     OptBorderVisible = False
     OptRulerVisible = False
     OptNumbersStyle = cNumbersAll
     OptUnprintedVisible = False
+    OptMouse2ClickOpensURL = False
   end
   object actionList: TActionList
-    Left = 120
-    Top = 56
+    Left = 150
+    Top = 70
     object actSaveFile: TAction
       Caption = '&Save'
       Hint = 'Save'
@@ -67,6 +72,7 @@ object frmMain: TfrmMain
     object actOpenFile: TAction
       Caption = '&Open ...'
       OnExecute = actOpenFileExecute
+      ShortCut = 16463
     end
     object actSaveFileAs: TAction
       Caption = 'Save &As ...'
@@ -79,120 +85,129 @@ object frmMain: TfrmMain
       OnExecute = actSettingsExecute
       ShortCut = 24764
     end
+    object actShowMenubar: TAction
+      Caption = 'Show Menubar'
+      Checked = True
+      OnExecute = actShowMenubarExecute
+      ShortCut = 16461
+    end
+    object actNewFile: TAction
+      Caption = '&New'
+      OnExecute = actNewFileExecute
+      ShortCut = 16462
+    end
+    object actNewWindow: TAction
+      Caption = 'New &Window'
+      OnExecute = actNewWindowExecute
+      ShortCut = 24654
+    end
   end
   object saveDialog: TSaveDialog
     OnShow = saveDialogShow
-    FileName = '/home/'
-    InitialDir = '/home/'
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    Left = 288
-    Top = 56
+    Left = 296
+    Top = 176
   end
-  object pmEditorTextMenu: TPopupMenu
-    Left = 464
-    Top = 56
+  object openDialog: TOpenDialog
+    Left = 150
+    Top = 176
+  end
+  object mmMain: TMainMenu
+    Left = 296
+    Top = 70
     object miFile: TMenuItem
       Caption = '&File'
-      Hint = 'File'
-      object miOpenFile: TMenuItem
-        Action = actOpenFile
-        ShortCut = 16463
+      object miNewFile: TMenuItem
+        Action = actNewFile
+      end
+      object miNewWindow: TMenuItem
+        Action = actNewWindow
       end
       object Separator7: TMenuItem
+        Caption = '-'
+      end
+      object miOpenFile: TMenuItem
+        Action = actOpenFile
+      end
+      object separator1: TMenuItem
         Caption = '-'
       end
       object miSaveFile: TMenuItem
         Action = actSaveFile
       end
-      object miSaveAs: TMenuItem
+      object miSaveFileAs: TMenuItem
         Action = actSaveFileAs
       end
-      object Separator1: TMenuItem
+      object separator2: TMenuItem
         Caption = '-'
       end
       object miSettings: TMenuItem
         Action = actSettings
       end
-      object Separator5: TMenuItem
+      object separator3: TMenuItem
         Caption = '-'
       end
-      object miQuit: TMenuItem
+      object miClose: TMenuItem
         Action = actClose
       end
     end
     object miEdit: TMenuItem
       Caption = '&Edit'
-      Hint = 'Edit'
       object miCut: TMenuItem
         Caption = 'Cu&t'
-        Hint = 'Cut'
         ShortCut = 16472
         OnClick = miCutClick
       end
       object miCopy: TMenuItem
         Caption = '&Copy'
-        Hint = 'Copy'
         ShortCut = 16451
         OnClick = miCopyClick
       end
       object miPaste: TMenuItem
         Caption = '&Paste'
-        Hint = 'Paste'
         ShortCut = 16470
         OnClick = miPasteClick
       end
-      object Separator2: TMenuItem
+      object separator4: TMenuItem
         Caption = '-'
       end
       object miSelectAll: TMenuItem
         Caption = 'Select &All'
-        Hint = 'Select All'
         ShortCut = 16449
         OnClick = miSelectAllClick
       end
-      object Separator3: TMenuItem
+      object separator5: TMenuItem
         Caption = '-'
       end
       object miUndo: TMenuItem
         Caption = '&Undo'
-        Hint = 'Undo'
         ShortCut = 16474
         OnClick = miUndoClick
       end
-      object Separator4: TMenuItem
+      object separator6: TMenuItem
         Caption = '-'
       end
-      object miDelete: TMenuItem
+      object miEditDelete: TMenuItem
         Caption = '&Delete'
-        Hint = 'Delete'
         ShortCut = 46
-        OnClick = miDeleteClick
+        OnClick = miEditDeleteClick
       end
     end
     object miView: TMenuItem
       Caption = '&View'
-      Hint = 'View'
       object miFullscreen: TMenuItem
         Action = actFullscreen
       end
-    end
-    object Separator6: TMenuItem
-      Caption = '-'
+      object miShowMenubar: TMenuItem
+        Action = actShowMenubar
+      end
     end
     object miHelp: TMenuItem
       Caption = '&Help'
-      Hint = 'Help'
       object miAbout: TMenuItem
         Caption = '&About'
-        Hint = 'About'
         OnClick = miAboutClick
       end
     end
-  end
-  object openDialog: TOpenDialog
-    FileName = '/home/'
-    InitialDir = '/home/'
-    Left = 288
-    Top = 152
   end
 end

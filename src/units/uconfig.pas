@@ -32,6 +32,7 @@ type
     function GetNonSystemScrollBars: boolean;
     function GetRightEdge: integer;
     function GetScrollBars: boolean;
+    function GetShowMenubar: boolean;
     function GetWordWrap: boolean;
     procedure SetBorderSpaceBottom(AValue: integer);
     procedure SetBorderSpaceLeft(AValue: integer);
@@ -53,6 +54,7 @@ type
     procedure SetNonSystemScrollBars(AValue: boolean);
     procedure SetRightEdge(AValue: integer);
     procedure SetScrollBars(AValue: boolean);
+    procedure SetShowMenubar(AValue: boolean);
     procedure SetWordWrap(AValue: boolean);
   public
     property formHeight: integer read GetFormHeight write SetFormHeight;
@@ -60,6 +62,7 @@ type
     property formTop: integer read GetFormTop write SetFormTop;
     property formWidth: integer read GetFormWidth write SetFormWidth;
     property fullScreen: boolean read GetFullScreen write SetFullScreen;
+    property showMenubar: boolean read GetShowMenubar write SetShowMenubar;
 
     property colorTheme: string read GetColorTheme write SetColorTheme;
     property fontName: string read GetFontName write SetFontName;
@@ -68,11 +71,11 @@ type
     property lineNumbers: boolean read GetLineNumbers write SetLineNumbers;
     property miniMap: boolean read GetMiniMap write SetMiniMap;
     property miniMapWidth: integer read GetMiniMapWidth write SetMiniMapWidth;
+    property mouseMiddleClickAction: integer read GetMouseMiddleClickAction write SetMouseMiddleClickAction;
     property nonSystemScrollBars: boolean read GetNonSystemScrollBars write SetNonSystemScrollBars;
     property rightEdge: integer read GetRightEdge write SetRightEdge;
     property scrollBars: boolean read GetScrollBars write SetScrollBars;
     property wordWrap: boolean read GetWordWrap write SetWordWrap;
-    property mouseMiddleClickAction: integer read GetMouseMiddleClickAction write SetMouseMiddleClickAction;
 
     property borderSpaceBottom: integer read GetBorderSpaceBottom write SetBorderSpaceBottom;
     property borderSpaceLeft: integer read GetBorderSpaceLeft write SetBorderSpaceLeft;
@@ -114,13 +117,27 @@ begin
 end;
 
 function TConfig.GetFontName: string;
+const
+  {$IfDef MSWINDOWS}
+  FONT_NAME = 'Consolas';
+  {$else}
+  FONT_NAME = 'Monospace'
+  {$EndIf}
+
 begin
-  Result := ReadString(SECTION_MAIN, 'fontName', 'Monospace');
+  Result := ReadString(SECTION_MAIN, 'fontName', FONT_NAME);
 end;
 
 function TConfig.GetFontSize: integer;
+const
+  {$IfDef MSWINDOWS}
+  FONT_SIZE = 10;
+  {$else}
+  FONT_SIZE = 12;
+  {$EndIf}
+
 begin
-  Result := ReadInteger(SECTION_MAIN, 'fontSize', 12);
+  Result := ReadInteger(SECTION_MAIN, 'fontSize', FONT_SIZE);
 end;
 
 function TConfig.GetFormHeight: integer;
@@ -160,7 +177,7 @@ end;
 
 function TConfig.GetMiniMap: boolean;
 begin
-  Result := ReadBool(SECTION_MAIN, 'miniMap', False);
+  Result := ReadBool(SECTION_MAIN, 'miniMap', True);
 end;
 
 function TConfig.GetMiniMapWidth: integer;
@@ -186,6 +203,11 @@ end;
 function TConfig.GetScrollBars: boolean;
 begin
   Result := ReadBool(SECTION_MAIN, 'scrollBars', True);
+end;
+
+function TConfig.GetShowMenubar: boolean;
+begin
+  Result := ReadBool(SECTION_MAIN, 'showMenubar', True);
 end;
 
 function TConfig.GetWordWrap: boolean;
@@ -291,6 +313,11 @@ end;
 procedure TConfig.SetScrollBars(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'scrollBars', AValue);
+end;
+
+procedure TConfig.SetShowMenubar(AValue: boolean);
+begin
+  WriteBool(SECTION_MAIN, 'showMenubar', AValue);
 end;
 
 procedure TConfig.SetWordWrap(AValue: boolean);

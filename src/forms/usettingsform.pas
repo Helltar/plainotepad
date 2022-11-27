@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, Forms, Graphics, Dialogs,
-  StdCtrls, Spin, ComCtrls, ColorBox, ExtCtrls, ATButtons, FileUtil;
+  StdCtrls, Spin, ComCtrls, LazFileUtils;
 
 type
 
@@ -61,7 +61,6 @@ type
     procedure edtFontNameChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure seBottomSpaceChange(Sender: TObject);
     procedure seFontSizeChange(Sender: TObject);
     procedure seLeftSpaceChange(Sender: TObject);
@@ -70,8 +69,9 @@ type
     procedure seTopSpaceChange(Sender: TObject);
     procedure tsThemeEditorShow(Sender: TObject);
   private
-    procedure loadColorThemes();
     function getSelectedColorThemeName(): string;
+  public
+    procedure loadColorThemes();
   end;
 
 var
@@ -80,7 +80,7 @@ var
 implementation
 
 uses
-  uMainForm, uConsts, uUtils, uLogger, uColorThemeEditor;
+  uMainForm, uConsts, uUtils, uLogger, uColorThemeEditorForm;
 
 resourcestring
   DESKTOP_ENTRY_CREATED = 'Desktop entry created';
@@ -214,37 +214,25 @@ begin
     end;
 end;
 
-procedure TfrmSettings.FormShow(Sender: TObject);
-begin
-  Constraints.MinHeight := Height;
-  Constraints.MinWidth := Width;
-end;
-
 procedure TfrmSettings.loadColorThemes;
 var
   searchRec: TSearchRec;
-  themeDir, themesDir: string;
 
 begin
-  themesDir := GetAppConfigDir(False) + DIR_COLOR_SCHEMES;
+  cmbColorTheme.Items.Clear;
 
-  if FindFirst(themesDir + '*', faDirectory, searchRec) = 0 then
+  if FindFirst(getConfigDir() + DIR_COLOR_SCHEMES + '*' + COLOR_SCHEME_CONFIG_FILE_EXT, faAnyFile, searchRec) = 0 then
   begin
     repeat
       with searchRec do
-        if (Attr and faDirectory) <> 0 then
-          if (Name <> '.') and (Name <> '..') then
-          begin
-            themeDir := themesDir + Name + DirectorySeparator;
-
-            if FileExists(themeDir + COLOR_SCHEME_MAIN_FILE) then
-              if DirectoryExists(themeDir + DIR_COLOR_SCHEMES_LEXERS) then
-                cmbColorTheme.Items.Add(Name);
-          end;
+        if (Attr and faDirectory) = 0 then
+          cmbColorTheme.Items.Add(ExtractFileNameWithoutExt(Name));
     until FindNext(searchRec) <> 0;
 
     FindClose(searchRec);
   end;
+
+  cmbColorTheme.ItemIndex := cmbColorTheme.Items.IndexOf(frmMain.config.colorTheme);
 end;
 
 function TfrmSettings.getSelectedColorThemeName: string;

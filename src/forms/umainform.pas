@@ -5,9 +5,8 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
-  LCLIntf, ColorBox, ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
-  ATSynEdit_Adapter_EControl, ec_proc_lexer, ec_SyntAnal, ATGroups,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, LCLIntf, process,
+  ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
   uConfig, uEditor, uSettingsForm;
 
 type
@@ -17,62 +16,73 @@ type
   TfrmMain = class(TForm)
     actFullscreen: TAction;
     actClose: TAction;
+    actNewWindow: TAction;
+    actNewFile: TAction;
+    actShowMenubar: TAction;
     actSettings: TAction;
     actSaveFileAs: TAction;
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
-    synEdit: TATSynEdit;
-    miOpenFile: TMenuItem;
-    miSaveAs: TMenuItem;
-    miSettings: TMenuItem;
-    miFullscreen: TMenuItem;
-    miView: TMenuItem;
-    miDelete: TMenuItem;
+    miNewWindow: TMenuItem;
+    miNewFile: TMenuItem;
+    mmMain: TMainMenu;
+    miFile: TMenuItem;
     miAbout: TMenuItem;
-    miQuit: TMenuItem;
-    miHelp: TMenuItem;
-    miEdit: TMenuItem;
+    miFullscreen: TMenuItem;
     miCut: TMenuItem;
     miCopy: TMenuItem;
     miPaste: TMenuItem;
     miSelectAll: TMenuItem;
     miUndo: TMenuItem;
-    miFile: TMenuItem;
+    miEditDelete: TMenuItem;
+    miShowMenubar: TMenuItem;
+    miEdit: TMenuItem;
+    miView: TMenuItem;
+    miHelp: TMenuItem;
+    miOpenFile: TMenuItem;
     miSaveFile: TMenuItem;
-    openDialog: TOpenDialog;
-    pmEditorTextMenu: TPopupMenu;
-    saveDialog: TSaveDialog;
-    Separator1: TMenuItem;
-    Separator2: TMenuItem;
-    Separator3: TMenuItem;
-    Separator4: TMenuItem;
-    Separator5: TMenuItem;
-    Separator6: TMenuItem;
+    miSaveFileAs: TMenuItem;
+    miSettings: TMenuItem;
+    miClose: TMenuItem;
+    separator1: TMenuItem;
+    separator4: TMenuItem;
+    separator5: TMenuItem;
+    separator6: TMenuItem;
+    separator3: TMenuItem;
+    separator2: TMenuItem;
     Separator7: TMenuItem;
-    procedure actFullscreenExecute(Sender: TObject);
+    synEdit: TATSynEdit;
+    openDialog: TOpenDialog;
+    saveDialog: TSaveDialog;
     procedure actCloseExecute(Sender: TObject);
+    procedure actNewFileExecute(Sender: TObject);
+    procedure actFullscreenExecute(Sender: TObject);
+    procedure actNewWindowExecute(Sender: TObject);
     procedure actOpenFileExecute(Sender: TObject);
     procedure actSaveFileAsExecute(Sender: TObject);
     procedure actSaveFileExecute(Sender: TObject);
     procedure actSaveFileUpdate(Sender: TObject);
     procedure actSettingsExecute(Sender: TObject);
+    procedure actShowMenubarExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure miAboutClick(Sender: TObject);
-    procedure miCopyClick(Sender: TObject);
     procedure miCutClick(Sender: TObject);
-    procedure miDeleteClick(Sender: TObject);
+    procedure miCopyClick(Sender: TObject);
     procedure miPasteClick(Sender: TObject);
     procedure miSelectAllClick(Sender: TObject);
     procedure miUndoClick(Sender: TObject);
+    procedure miEditDeleteClick(Sender: TObject);
     procedure saveDialogShow(Sender: TObject);
   private
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
     function showFileChangeDialog(): TModalResult;
+    function checkFileModifiedStatus(): boolean;
+    procedure closeFile();
     procedure initComponents();
     procedure initEditor();
     procedure loadFormConfig();
@@ -91,12 +101,12 @@ var
 implementation
 
 uses
-  uConsts, uAboutForm, uLogger;
+  uConsts, uAboutForm, uLogger, uUtils;
 
 resourcestring
   CAPTION_FILE_CHANGED = 'File changed';
-  MSG_SAVE_CHANGES = 'Save the changes?';
   ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
+  MSG_SAVE_CHANGES = 'Save the changes?';
   TITLE_SAVE_FILE_AS = 'Save file as';
 
 {$R *.lfm}
@@ -108,11 +118,17 @@ var
   appConfigDir: string;
 
 begin
-  appConfigDir := GetAppConfigDir(False);
+  appConfigDir := getConfigDir();
   appConfigFile := appConfigDir + APP_CONFIG_FILE_NAME;
 
   if not DirectoryExists(appConfigDir) then
-    if not CreateDir(appConfigDir) then
+    if CreateDir(appConfigDir) then
+    begin
+      copyResToDir(LEXLIB_FILE_NAME, appConfigDir);
+      copyResToDir(COLOR_THEME_CREAM + COLOR_SCHEME_CONFIG_FILE_EXT, appConfigDir + DIR_COLOR_SCHEMES);
+      copyResToDir(COLOR_THEME_DARK + COLOR_SCHEME_CONFIG_FILE_EXT, appConfigDir + DIR_COLOR_SCHEMES);
+    end
+    else
       addLog(ERROR_MK_CONFIG_DIR);
 
   config := TConfig.Create(appConfigFile);
@@ -150,19 +166,14 @@ begin
     end;
 end;
 
-procedure TfrmMain.miCopyClick(Sender: TObject);
-begin
-  synEdit.DoCommand(cCommand_ClipboardCopy, cInvokeMenuContext);
-end;
-
 procedure TfrmMain.miCutClick(Sender: TObject);
 begin
   synEdit.DoCommand(cCommand_ClipboardCut, cInvokeMenuContext);
 end;
 
-procedure TfrmMain.miDeleteClick(Sender: TObject);
+procedure TfrmMain.miCopyClick(Sender: TObject);
 begin
-  synEdit.DoCommand(cCommand_TextDeleteSelection, cInvokeMenuContext);
+  synEdit.DoCommand(cCommand_ClipboardCopy, cInvokeMenuContext);
 end;
 
 procedure TfrmMain.miPasteClick(Sender: TObject);
@@ -178,6 +189,11 @@ end;
 procedure TfrmMain.miUndoClick(Sender: TObject);
 begin
   synEdit.DoCommand(cCommand_Undo, cInvokeMenuContext);
+end;
+
+procedure TfrmMain.miEditDeleteClick(Sender: TObject);
+begin
+  synEdit.DoCommand(cCommand_TextDeleteSelection, cInvokeMenuContext);
 end;
 
 procedure TfrmMain.saveDialogShow(Sender: TObject);
@@ -196,15 +212,8 @@ function TfrmMain.openFile(fileName: string): boolean;
 begin
   Result := False;
 
-  if editor.fileModified then
-    case showFileChangeDialog() of
-      mrYes:
-        if not saveFile() then
-          Exit;
-      mrCancel: Exit;
-    end;
-
-  Result := editor.openFile(fileName);
+  if checkFileModifiedStatus() then
+    Result := editor.openFile(fileName);
 end;
 
 function TfrmMain.saveFile: boolean;
@@ -216,6 +225,12 @@ begin
   else
   if saveDialog.Execute then
     Result := editor.saveFile(saveDialog.FileName);
+end;
+
+procedure TfrmMain.closeFile;
+begin
+  if checkFileModifiedStatus() then
+    editor.closeFile();
 end;
 
 procedure TfrmMain.loadFormConfig;
@@ -235,6 +250,9 @@ begin
 
     if fullScreen then
       WindowState := wsFullScreen;
+
+    if not showMenubar then
+      Menu := nil;
   end;
 end;
 
@@ -269,7 +287,11 @@ begin
       BorderSpacing.Left := borderSpaceLeft;
       BorderSpacing.Right := borderSpaceRight;
       BorderSpacing.Top := borderSpaceTop;
-      BorderSpacing.Bottom := borderSpaceBottom;
+
+      if borderSpaceBottom > 0 then
+        BorderSpacing.Bottom := borderSpaceBottom
+      else
+        BorderSpacing.Bottom := 1; // fullscreen mouse-select down-scroll
 
       if scrollBars then
       begin
@@ -283,6 +305,7 @@ begin
         OptScrollStyleVert := aessHide;
       end;
 
+      AEditor.highlighter := highlighter;
       AEditor.setColorTheme(colorTheme);
 
       if changeParentColor then
@@ -295,7 +318,6 @@ end;
 procedure TfrmMain.initEditor;
 begin
   synEdit.Gutter[synEdit.Gutter.FindIndexByTag(ATEditorOptions.GutterTagBookmarks)].Visible := False;
-  synEdit.PopupText := pmEditorTextMenu;
 end;
 
 procedure TfrmMain.initComponents;
@@ -318,12 +340,28 @@ begin
     formHeight := Height;
     formWidth := Width;
     fullScreen := WindowState = wsFullScreen;
+    showMenubar := Assigned(Menu);
   end;
 end;
 
 function TfrmMain.showFileChangeDialog: TModalResult;
 begin
   Result := MessageDlg(CAPTION_FILE_CHANGED, MSG_SAVE_CHANGES, mtConfirmation, [mbYes, mbNo, mbCancel], 0);
+end;
+
+function TfrmMain.checkFileModifiedStatus: boolean;
+begin
+  Result := False;
+
+  if editor.fileModified then
+    case showFileChangeDialog() of
+      mrYes:
+        if not saveFile() then
+          Exit;
+      mrCancel: Exit;
+    end;
+
+  Result := True;
 end;
 
 procedure TfrmMain.actSaveFileExecute(Sender: TObject);
@@ -344,32 +382,52 @@ begin
   frmSettings.ShowModal;
 end;
 
-procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+procedure TfrmMain.actShowMenubarExecute(Sender: TObject);
 begin
-  CanClose := False;
-
-  if editor.fileModified then
-    case showFileChangeDialog() of
-      mrYes:
-        if not saveFile() then
-          Exit;
-      mrCancel: Exit;
-    end;
-
-  CanClose := True;
+  if Assigned(Menu) then
+    Menu := nil
+  else
+    Menu := mmMain;
 end;
 
-procedure TfrmMain.actFullscreenExecute(Sender: TObject);
+procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
-  if WindowState <> wsFullScreen then
-    WindowState := wsFullScreen
-  else
-    WindowState := wsNormal;
+  CanClose := checkFileModifiedStatus();
 end;
 
 procedure TfrmMain.actCloseExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmMain.actNewFileExecute(Sender: TObject);
+begin
+  closeFile();
+end;
+
+procedure TfrmMain.actFullscreenExecute(Sender: TObject);
+begin
+  if WindowState <> wsFullScreen then
+  begin
+    WindowState := wsFullScreen;
+    BorderStyle := bsNone;
+  end
+  else
+  begin
+    WindowState := wsNormal;
+    BorderStyle := bsSizeable;
+  end;
+end;
+
+procedure TfrmMain.actNewWindowExecute(Sender: TObject);
+begin
+  with TProcess.Create(nil) do
+    try
+      Executable := ParamStr(0);
+      Execute;
+    finally
+      Free;
+    end;
 end;
 
 procedure TfrmMain.actOpenFileExecute(Sender: TObject);

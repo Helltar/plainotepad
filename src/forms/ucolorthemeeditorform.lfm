@@ -1,25 +1,26 @@
 object frmColorThemeEditor: TfrmColorThemeEditor
-  Left = 413
-  Height = 651
-  Top = 163
-  Width = 944
+  Left = 470
+  Height = 547
+  Top = 251
+  Width = 917
   Caption = 'Color Theme Editor'
-  ClientHeight = 651
-  ClientWidth = 944
-  Constraints.MinHeight = 400
-  Constraints.MinWidth = 600
+  ClientHeight = 547
+  ClientWidth = 917
+  Constraints.MinHeight = 500
+  Constraints.MinWidth = 750
+  DesignTimePPI = 120
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  Position = poOwnerFormCenter
+  Position = poDesktopCenter
   LCLVersion = '2.2.4.0'
   object lblTheme: TLabel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     Left = 24
-    Height = 22
+    Height = 20
     Top = 24
-    Width = 50
+    Width = 45
     BorderSpacing.Left = 24
     BorderSpacing.Top = 24
     Caption = 'Theme'
@@ -29,13 +30,15 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = lblTheme
     AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = btnCopy
     Left = 24
-    Height = 36
-    Top = 58
-    Width = 200
+    Height = 28
+    Top = 56
+    Width = 217
+    Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
-    ItemHeight = 22
+    ItemHeight = 20
     OnChange = cmbEditColorThemeChange
     ReadOnly = True
     Sorted = True
@@ -50,9 +53,9 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = splHoriz
     Left = 24
-    Height = 185
-    Top = 106
-    Width = 397
+    Height = 140
+    Top = 96
+    Width = 416
     HorzScrollBar.Increment = 1
     HorzScrollBar.Page = 1
     HorzScrollBar.Smooth = True
@@ -66,8 +69,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
     BorderSpacing.Right = 24
-    BorderSpacing.Bottom = 24
-    TabOrder = 1
+    BorderSpacing.Bottom = 12
+    TabOrder = 3
   end
   object splHoriz: TSplitter
     AnchorSideLeft.Control = Owner
@@ -77,8 +80,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     Cursor = crVSplit
     Left = 0
     Height = 6
-    Top = 315
-    Width = 439
+    Top = 248
+    Width = 458
     Align = alNone
     Anchors = [akLeft, akRight]
     ResizeAnchor = akBottom
@@ -87,11 +90,11 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = splHoriz
     Left = 24
-    Height = 22
-    Top = 339
-    Width = 40
+    Height = 20
+    Top = 260
+    Width = 35
     BorderSpacing.Left = 24
-    BorderSpacing.Top = 24
+    BorderSpacing.Top = 12
     Caption = 'Lexer'
     ParentColor = False
   end
@@ -99,19 +102,22 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = lblLexer
     AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = splVert
     AnchorSideRight.Side = asrBottom
     Left = 24
-    Height = 36
-    Top = 373
-    Width = 200
+    Height = 28
+    Top = 292
+    Width = 416
+    Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
-    ItemHeight = 22
+    BorderSpacing.Right = 24
+    ItemHeight = 20
     OnChange = cmbLexersChange
     ReadOnly = True
     Sorted = True
     Style = csDropDownList
-    TabOrder = 3
+    TabOrder = 5
   end
   object sbLexerColors: TScrollBox
     AnchorSideLeft.Control = Owner
@@ -119,11 +125,11 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = splVert
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = Button1
+    AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 146
-    Top = 421
-    Width = 397
+    Height = 133
+    Top = 332
+    Width = 416
     HorzScrollBar.Increment = 1
     HorzScrollBar.Page = 1
     HorzScrollBar.Smooth = True
@@ -138,30 +144,31 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     BorderSpacing.Top = 12
     BorderSpacing.Right = 24
     BorderSpacing.Bottom = 24
-    TabOrder = 4
+    TabOrder = 6
   end
   object synEdit: TATSynEdit
     AnchorSideLeft.Control = splVert
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = Button1
+    AnchorSideBottom.Control = btnOk
     Cursor = crIBeam
-    Left = 463
-    Height = 543
+    Left = 482
+    Height = 441
     Top = 24
-    Width = 457
+    Width = 411
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     DoubleBuffered = True
-    Font.Height = -12
+    Font.Height = -15
     Font.Name = 'Courier New'
     Font.Quality = fqCleartype
     ParentFont = False
-    TabOrder = 5
+    TabOrder = 8
     TabStop = True
     OptFoldEnabled = False
     OptShowURLs = False
+    OptShowCurLine = True
     OptShowMouseSelFrame = False
     OptCaretVirtual = False
     OptRulerVisible = False
@@ -169,31 +176,84 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     OptUnprintedVisible = False
   end
   object splVert: TSplitter
+    AnchorSideLeft.Control = btnDelete
+    AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = Button1
-    Left = 439
-    Height = 567
+    AnchorSideBottom.Control = btnOk
+    Left = 458
+    Height = 465
     Top = 0
     Width = 6
     Align = alNone
     Anchors = [akTop, akBottom]
   end
-  object Button1: TButton
+  object btnOk: TButton
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 871
-    Height = 36
-    Top = 591
-    Width = 49
+    Left = 843
+    Height = 34
+    Top = 489
+    Width = 50
     Anchors = [akRight, akBottom]
     AutoSize = True
     BorderSpacing.Around = 24
     BorderSpacing.InnerBorder = 2
     Caption = '&OK'
-    OnClick = Button1Click
-    TabOrder = 7
+    OnClick = btnOkClick
+    TabOrder = 9
+  end
+  object btnCopy: TButton
+    AnchorSideLeft.Control = cmbEditColorTheme
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cmbEditColorTheme
+    AnchorSideRight.Control = btnDelete
+    AnchorSideBottom.Control = cmbEditColorTheme
+    AnchorSideBottom.Side = asrBottom
+    Left = 265
+    Height = 28
+    Top = 56
+    Width = 77
+    Action = actCopy
+    Anchors = [akTop, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 24
+    BorderSpacing.InnerBorder = 2
+    TabOrder = 1
+  end
+  object btnDelete: TButton
+    AnchorSideLeft.Control = btnCopy
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = cmbEditColorTheme
+    AnchorSideRight.Control = splVert
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = cmbEditColorTheme
+    AnchorSideBottom.Side = asrBottom
+    Left = 366
+    Height = 28
+    Top = 56
+    Width = 74
+    Action = actDel
+    Anchors = [akTop, akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 24
+    BorderSpacing.Right = 24
+    BorderSpacing.InnerBorder = 2
+    TabOrder = 2
+  end
+  object actlMain: TActionList
+    Left = 160
+    Top = 136
+    object actCopy: TAction
+      Caption = '&Copy ...'
+      OnExecute = actCopyExecute
+    end
+    object actDel: TAction
+      Caption = '&Delete'
+      OnExecute = actDelExecute
+      OnUpdate = actDelUpdate
+    end
   end
 end

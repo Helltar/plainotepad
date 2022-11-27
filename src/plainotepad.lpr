@@ -6,15 +6,16 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
-  Interfaces,
-  Forms, lazcontrols,
-  uMainForm, uAboutForm, uSettingsForm, uLicenseForm,
-  uConsts, uUtils, uConfig, uLogger,
-  uEditor, uEditorHighlighter, uColorThemeEditor;
+  Interfaces, Forms,
+  SysUtils,
+  uMainForm;
 
 {$R *.res}
 
 begin
+  //DeleteFile('trace.log');
+  //SetHeapTraceOutput('trace.log');
+
   RequireDerivedFormResource := True;
   Application.Scaled:=True;
   Application.Initialize;

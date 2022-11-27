@@ -5,9 +5,9 @@ unit uEditorHighlighter;
 interface
 
 uses
-  Classes, SysUtils, Graphics,
+  Classes, SysUtils, Graphics, IniFiles,
   ATSynEdit, ATSynEdit_Adapter_EControl,
-  ec_proc_lexer, ec_syntax_collection, ec_SyntAnal;
+  ec_SyntAnal, ec_proc_lexer, ec_syntax_collection;
 
 type
 
@@ -57,7 +57,7 @@ begin
 
   syntaxManager := TecSyntaxManager.Create(nil);
 
-  lexlibFilename := getAppPath() + 'lib.lxl';
+  lexlibFilename := getConfigDir() + LEXLIB_FILE_NAME;
 
   try
     syntaxManager.LoadFromFile(lexlibFilename);
@@ -69,16 +69,13 @@ begin
   adapterEControl.AddEditor(synEdit);
   adapterEControl.DynamicHiliteEnabled := True;
 
-  synEdit.AdapterForHilite := adapterEControl;
-
-  getLexersList();
+  //getLexersList();
 end;
 
 destructor TEditorHighlighter.Destroy;
 begin
   FreeAndNil(adapterEControl);
   FreeAndNil(syntaxManager);
-  FreeAndNil(synEdit);
   inherited Destroy;
 end;
 
@@ -90,54 +87,70 @@ end;
 procedure TEditorHighlighter.setLexerColorsFromFile(const filename: string);
 var
   analyzer: TecSyntAnalyzer;
-  item: TSyntCollectionItem;
   i, j: integer;
+  iniFile: TIniFile;
+  item: TSyntCollectionItem;
+  list: TStringList;
 
 begin
-  with TStringList.Create do
-    try
-      try
-        Duplicates := dupIgnore;
-        LoadFromFile(filename);
+  iniFile := TIniFile.Create(filename);
+  list := TStringList.Create;
 
-        analyzer := adapterEControl.Lexer;
+  analyzer := adapterEControl.Lexer;
 
-        if Assigned(analyzer) then
-          for i := 0 to analyzer.Formats.Count - 1 do
-            for j := 0 to Count - 1 do
-            begin
-              item := analyzer.Formats.ItemByName(Names[j]);
+  if Assigned(analyzer) then
+  begin
+    iniFile.ReadSectionRaw(COLOR_SCHEME_CONFIG_SECTION_LEXER + analyzer.LexerName, list);
 
-              if Assigned(item) then
-                analyzer.Formats.Items[item.Index].Font.Color := StringToColor(ValueFromIndex[j]);
-            end;
-      except
-        addLog(Format(ERROR_OPEN_COLOR_THEME, [filename]));
+    for i := 0 to analyzer.Formats.Count - 1 do
+      for j := 0 to list.Count - 1 do
+      begin
+        item := analyzer.Formats.ItemByName(list.Names[j]);
+
+        if Assigned(item) then
+          analyzer.Formats.Items[item.Index].Font.Color := StringToColor(list.ValueFromIndex[j]);
       end;
-    finally
-      Free;
-    end;
+  end;
+
+  FreeAndNil(list);
+  FreeAndNil(iniFile);
 end;
 
 procedure TEditorHighlighter.getLexersList;
 var
+  iniFile: TIniFile;
   i, j: integer;
-  list: TStringList;
 
 begin
-  list := TStringList.Create;
-  list.Sorted := True;
+  iniFile := TIniFile.Create(getConfigDir() + DIR_COLOR_SCHEMES + 'test' + COLOR_SCHEME_CONFIG_FILE_EXT);
+
+  with synEdit.Colors do
+    with iniFile do
+    begin
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'CurrentLineBG', ColorToString(CurrentLineBG));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'GutterBG', ColorToString(GutterBG));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'GutterCaretBG', ColorToString(GutterCaretBG));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'GutterFoldBG', ColorToString(GutterFoldBG));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'GutterFont', ColorToString(GutterFont));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'MarginRight', ColorToString(MarginRight));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'MinimapBorder', ColorToString(MinimapBorder));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'MinimapTooltipBG', ColorToString(MinimapTooltipBG));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'MinimapTooltipBorder', ColorToString(MinimapTooltipBorder));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'TextBG', ColorToString(TextBG));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'TextFont', ColorToString(TextFont));
+      WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, 'TextSelBG', ColorToString(TextSelBG));
+    end;
 
   for i := 0 to syntaxManager.AnalyzerCount - 1 do
   begin
     for j := 0 to syntaxManager.Analyzers[i].Formats.Count - 1 do
-      list.Values[syntaxManager.Analyzers[i].Formats.Items[j].DisplayName] := ColorToString(syntaxManager.Analyzers[i].Formats.Items[j].Font.Color);
-
-    list.SaveToFile(GetAppConfigDir(False) + DIR_COLOR_SCHEMES + 'test/' + syntaxManager.Analyzers[i].LexerName);
-    list.Clear;
+      iniFile.WriteString(
+        COLOR_SCHEME_CONFIG_SECTION_LEXER + syntaxManager.Analyzers[i].LexerName,
+        syntaxManager.Analyzers[i].Formats.Items[j].DisplayName,
+        ColorToString(syntaxManager.Analyzers[i].Formats.Items[j].Font.Color));
   end;
 
-  FreeAndNil(list);
+  FreeAndNil(iniFile);
 end;
 
 function TEditorHighlighter.getLexerName: string;
@@ -173,8 +186,7 @@ begin
   currentColorTheme := colorThemeName;
 
   if getLexerName() <> '-' then
-    setLexerColorsFromFile(
-      GetAppConfigDir(False) + DIR_COLOR_SCHEMES + colorThemeName + DirectorySeparator + DIR_COLOR_SCHEMES_LEXERS + getLexerName());
+    setLexerColorsFromFile(getConfigDir() + DIR_COLOR_SCHEMES + colorThemeName + COLOR_SCHEME_CONFIG_FILE_EXT);
 end;
 
 end.
