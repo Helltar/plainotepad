@@ -116,6 +116,7 @@ resourcestring
 procedure TfrmMain.FormCreate(Sender: TObject);
 var
   appConfigDir: string;
+  i: integer;
 
 begin
   appConfigDir := getConfigDir();
@@ -141,7 +142,13 @@ begin
   loadEditorConfig(synEdit, editor);
 
   if ParamCount > 0 then
+  begin
     openFile(ParamStr(1));
+
+    if ParamCount > 1 then
+      for i := 2 to ParamCount do
+        runProcess(ParamStr(0), ParamStr(i));
+  end;
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -152,8 +159,14 @@ begin
 end;
 
 procedure TfrmMain.FormDropFiles(Sender: TObject; const FileNames: array of string);
+var
+  i: integer;
+
 begin
   openFile(FileNames[0]);
+
+  for i := 1 to Length(FileNames) - 1 do
+    runProcess(ParamStr(0), FileNames[i]);
 end;
 
 procedure TfrmMain.miAboutClick(Sender: TObject);
@@ -425,13 +438,7 @@ end;
 
 procedure TfrmMain.actNewWindowExecute(Sender: TObject);
 begin
-  with TProcess.Create(nil) do
-    try
-      Executable := ParamStr(0);
-      Execute;
-    finally
-      Free;
-    end;
+  runProcess(ParamStr(0));
 end;
 
 procedure TfrmMain.actOpenFileExecute(Sender: TObject);

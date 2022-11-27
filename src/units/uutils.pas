@@ -5,7 +5,7 @@ unit uUtils;
 interface
 
 uses
-  SysUtils, Classes, fileinfo, LCLType;
+  SysUtils, Classes, fileinfo, LCLType, process;
 
 function createDesktopEntry(): boolean;
 function getAppFileVersion(): string;
@@ -13,6 +13,7 @@ function getAppInfo(const AType: string): string;
 function getAppOriginalFilename(): string;
 function getAppPath: string;
 function getConfigDir: string;
+procedure runProcess(const AExecutable: string; const AParameters: string = '');
 procedure copyResToDir(const resName: string; const destDir: string);
 
 implementation
@@ -101,6 +102,19 @@ begin
   {$Else}
   Result := getAppConfigDir(False);
   {$EndIf}
+end;
+
+procedure runProcess(const AExecutable: string; const AParameters: string);
+begin
+  with TProcess.Create(nil) do
+    try
+      Executable := AExecutable;
+      if not AParameters.IsEmpty then
+        Parameters.Text := AParameters;
+      Execute;
+    finally
+      Free;
+    end;
 end;
 
 procedure copyResToDir(const resName: string; const destDir: string);
