@@ -23,8 +23,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = 12645824
-      FormatType = ftColor
     end
     item
       DisplayName = 'Text'
@@ -41,7 +39,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = 15659207
     end
     item
       DisplayName = 'Block'
@@ -50,7 +47,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = 15779980
     end
     item
       DisplayName = 'Link'
@@ -163,8 +159,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = 14737357
-      BorderColorLeft = 16384
     end
     item
       DisplayName = 'List'
@@ -173,7 +167,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = 16763594
     end
     item
       DisplayName = 'Mark-added'
@@ -182,7 +175,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = 8454016
     end
     item
       DisplayName = 'Mark-deleted'
@@ -191,7 +183,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = 8421631
     end
     item
       DisplayName = 'Mark-edited'
@@ -200,7 +191,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = clYellow
     end
     item
       DisplayName = 'Mark-comment'
@@ -209,7 +199,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = clFuchsia
     end
     item
       DisplayName = 'Symbols'
@@ -226,8 +215,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = clYellow
-      FormatType = ftColor
     end
     item
       DisplayName = 'Table BG'
@@ -236,8 +223,6 @@ object SyntAnal13: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = clMoneyGreen
-      FormatType = ftBackGround
     end
     item
       DisplayName = '``` edge'

@@ -47,7 +47,6 @@ object SyntAnal20: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
-      BgColor = clSilver
     end
     item
       DisplayName = 'CDATA text'

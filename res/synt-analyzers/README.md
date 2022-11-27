@@ -1,0 +1,2 @@
+- https://sourceforge.net/projects/cudatext/files/addons/lexers/
+- https://github.com/Alexey-T/CudaText/tree/master/app/cudatext.app/Contents/Resources/data/lexlib
