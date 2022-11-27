@@ -502,6 +502,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <    
@@ -1192,6 +1211,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -1967,6 +2005,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -2939,6 +2996,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <    
@@ -3432,6 +3508,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -4137,6 +4232,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -4970,6 +5084,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -6108,6 +6241,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -7351,6 +7503,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <>
@@ -7894,6 +8065,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <>
@@ -8089,6 +8279,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <>
@@ -8109,7 +8318,7 @@ object TecSyntaxManager
       'Value'
       'Section'
     )
-    Extentions = 'ini dsk dti dof inf lng srv reg sas cfg'
+    Extentions = 'ini dsk dti dof inf lng srv reg sas cfg colors'
     LexerName = 'Ini files'
     LineComment = ';'
     Charset = DEFAULT_CHARSET
@@ -8509,6 +8718,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -9206,6 +9434,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <>
@@ -9228,7 +9475,10 @@ object TecSyntaxManager
       'echo text'
       'echo cmd'
     )
-    Extentions = 'sh csh bash'
+    Extentions = 
+      'sh bash zsh fish csh ksh command /.bashrc /.zshrc /.bash_aliases' +
+      ' /.bash_completions /.bash_functions /.bash_login /.bash_logout ' +
+      '/.bash_profile /.bash_variables /.profile /.textmate_init'
     LexerName = 'Bash script'
     SkipSpaces = False
     Notes.Strings = (
@@ -10686,6 +10936,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <    
@@ -11201,6 +11470,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <>
@@ -11442,6 +11730,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -11801,6 +12108,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -12524,6 +12850,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <>
@@ -13036,6 +13381,25 @@ object TecSyntaxManager
         DisplayInTree = False
         HighlightPos = cpAny
         IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
       end>
     CodeTemplates = <>
     SubAnalyzers = <>
@@ -13513,6 +13877,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
@@ -14132,6 +14515,25 @@ object TecSyntaxManager
       end    
       item
         DisplayName = 'auto_cmt_2'
+        Enabled = False
+        BlockType = btRangeEnd
+        ConditionList = <>
+        DisplayInTree = False
+        HighlightPos = cpAny
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 1'
+        Enabled = False
+        ConditionList = <>
+        BlockEnd = 'Tag block rule 2'
+        DisplayInTree = False
+        HighlightPos = cpAny
+        CollapseFmt = '// ...'
+        IgnoreAsParent = False
+      end    
+      item
+        DisplayName = 'Tag block rule 2'
         Enabled = False
         BlockType = btRangeEnd
         ConditionList = <>
