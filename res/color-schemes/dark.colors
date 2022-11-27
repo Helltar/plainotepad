@@ -1,0 +1,291 @@
+[MAIN]
+CurrentLineBG=$002E2E2E
+GutterBG=$001E1E1E
+GutterCaretBG=$002E2E2E
+GutterFoldBG=$001E1E1E
+GutterFont=$00606060
+MarginRight=$00303030
+MinimapBorder=$00303030
+MinimapTooltipBG=$00333333
+MinimapTooltipBorder=$00555555
+TextBG=$001E1E1E
+TextFont=clWhite
+TextSelBG=clSilver
+
+[LEXER-C]
+Default=$00EEEEEE
+Symbol=clSilver
+Number=$0000ECEC
+String=$0000DF00
+Identifier=$00F2A400
+Reserved word=$000080FF
+Comment=clGray
+Preprocessor=clOlive
+Current block=clCream
+Asm BG=clMoneyGreen
+
+[LEXER-C++]
+Default=$00EFEFEF
+Symbol=clSilver
+Number=$0000F4F4
+String=$0000BD00
+Id=$00F9A800
+Id keyword=$000080FF
+Comment=clGray
+Preprocessor=clOlive
+Current block BG=clMaroon
+Asm BG=clCream
+Id in angles=clAqua
+
+[LEXER-Assembly]
+Default=clCream
+Comment=clGray
+Id=$00F6F6F6
+Id std=clAqua
+Number=clYellow
+Label=clTeal
+Registers=clFuchsia
+String=$0032C600
+Symbol=clSilver
+
+[LEXER-C#]
+Default=$00EEEEEE
+Symbol=clSilver
+Number=$0000F2F2
+String=$0038DF00
+Identifier=$00F7A700
+Reserved word=$000080FF
+Comment=clGray
+Preprocessor=clGreen
+Current block=clCream
+
+[LEXER-PHP]
+Symbol=clMaroon
+Number=clNavy
+String=clTeal
+Identifier=clBlack
+Reserved word=clBlack
+Comment=clGray
+Variable=clNavy
+Code block=clNone
+Code border=clWindow
+HTML=clNone
+Current Block=clNone
+Exec=clBlack
+
+[LEXER-VBScript]
+Default=clBlack
+Comment=clGray
+Identifier=clBlack
+String=clTeal
+Number=clNavy
+Symbol=clMaroon
+Reserved word=clNavy
+Function separator=clBlack
+Function background=clWindowText
+Current block bound=clMaroon
+Operator Keywords=clPurple
+
+[LEXER-JavaScript]
+Symbol=clMaroon
+Number=clNavy
+String=clTeal
+String regex=clOlive
+Identifier=clBlack
+Id keyword=clNavy
+Id standard=clPurple
+Id jquery=clBlue
+Comment=clGray
+Current block=clMaroon
+
+[LEXER-HTML]
+Tag id=clBlack
+Tag id - underlines=clRed
+Text=clBlack
+Tag bound=clGray
+Comment=clGray
+Tag attrib=clPurple
+Tag attrib - underlines=clPurple
+Tag param=clTeal
+Unknown tag content=clFuchsia
+Tag Key=clMaroon
+Number=clNavy
+Marked block=clHighlightText
+Tree item (attribute)=clBlue
+Tree item (tag)=clWindowText
+Current Block=clNone
+Current Tag=clWindowText
+Sublexer BG=clNone
+
+[LEXER-CSS]
+Style=clNavy
+Param correct=clBlack
+Param incorrect=clBlack
+Value=clBlue
+Symbol=clMaroon
+Comment=clGray
+Current block=clWindowText
+Color=clPurple
+String=clTeal
+Number=clPurple
+StyleSuffix=clGreen
+
+[LEXER-XML]
+Default=clBlack
+Text=clBlack
+Tag bound=clBlue
+Comment=clGray
+CDATA=clBlue
+Tag Key=clMaroon
+ERROR content=clRed
+Tag ident=clGreen
+Tag param=clNavy
+Tag properties=clNavy
+Current tag=clWindowText
+Current Block=clNone
+DTD element type=clGray
+DTD bound=clPurple
+Tree item (attribute)=clBlue
+Tree item (tag)=clBlack
+
+[LEXER-Ini files]
+Default=$00EFEFEF
+Section=$00FFBD35
+Parameter=$000080FF
+Value=$0000E800
+Symbol=clSilver
+Comment=clGray
+Number=$0000DFDF
+
+[LEXER-Batch files]
+Label=clCream
+Comment=clGray
+Key words=$00FFC142
+Commands=clSkyBlue
+Params=$00E9E9E9
+Echo=clGreen
+Symbol=clSilver
+QuotationMarks=$0000D200
+Variable=$000080FF
+Int=$0000E1E1
+
+[LEXER-Bash script]
+Comment=clGray
+Key words=$00EFEFEF
+Params=clMoneyGreen
+Echo=clGreen
+Shebang=clGray
+QuotMarks=$00FF8080
+Symbol=clSilver
+Variable=$0000D700
+Int=$0000ECEC
+$(...)=clCream
+
+[LEXER-Pascal]
+Default=clWindowText
+Symbol=clMaroon
+Number=clNavy
+String=clTeal
+Identifier=clWindowText
+Reserved word=clWindowText
+Comment=clGray
+Preprocessor=clGreen
+Assembler=clNone
+Marked block=clHighlightText
+Interface section=clHighlight
+Implemenation Section=clWindowText
+Function separator=clWindowText
+Current block=clMaroon
+Current function=clMaroon
+Current Line=clWindowText
+Search Match=clWindow
+Group (tree)=clNavy
+Intern. function (tree)=clBlue
+class (tree)=clWindowText
+Invalid symbol=clRed
+Id exit=clPurple
+
+[LEXER-Lua]
+Comment=clGray
+String=clTeal
+Number=clNavy
+Symbol=clMaroon
+Id=clBlack
+Id reserved=clNavy
+Id func=clGreen
+Id standard=clPurple
+
+[LEXER-JSON]
+Symbol=clSilver
+Number=$00FF8080
+String=$0000D7D7
+Identifier=$00FFAF0B
+Reserved word=clAqua
+
+[LEXER-Markdown]
+Heading=clMaroon
+Comment=clGreen
+Quote=clBlack
+Text=clBlack
+Codeblock=clBlack
+Block=clBlack
+Link=$003232E6
+Image=$00E63232
+Reference=$000032E6
+Footnote=$003200E6
+HTML Code=$00804000
+Bold=clWindowText
+Italic=clWindowText
+Bold-Italic=clWindowText
+Definition=clWindowText
+List=clWindowText
+Crossed out=clWindowText
+
+[LEXER-Python]
+Number=clNavy
+String=clTeal
+Symbol=clMaroon
+Comment=clGray
+Id=clBlack
+Id keyword=clNavy
+Id keyword def=clBlack
+Id function=clGreen
+Id func name=clMaroon
+Id types=clPurple
+Id exception=clOlive
+Decorator=$0000C800
+
+[LEXER-Tcl]
+Comment=clGray
+Shebang=clTeal
+Var=clGreen
+String=clTeal
+Number=clNavy
+Id=clBlack
+Keywords=clPurple
+Symbol=clMaroon
+
+[LEXER-Kotlin]
+Comment=clGray
+Symbol=clSilver
+Number=$0000D0D0
+String=$0000C100
+Id=$004080FF
+Id keyword=$0048A4FF
+Id type=clAqua
+Id const=$00FF8080
+Id spec=$00C08000
+Id var=clLime
+
+[LEXER-Java]
+Symbol=clSilver
+Number=$0000C8C8
+String=$0000CA00
+Id=$00FFAD04
+Id keyword=$000080FF
+Comment=clGray
+Comment doc=clSilver
+Id type=clAqua
+Id const=$00FF8080
+Id modifier=$00C08000
+Annotation=clOlive
