@@ -95,7 +95,12 @@ end;
 
 function getConfigDir: string;
 begin
+  // todo: getConfigDir
+  {$IfDef MSWINDOWS}
+  Result := GetUserDir + 'AppData\Local\' + APP_NAME + '\';
+  {$Else}
   Result := getAppConfigDir(False);
+  {$EndIf}
 end;
 
 procedure copyResToDir(const resName: string; const destDir: string);
