@@ -3,7 +3,6 @@
 *.lrj
 *.mo
 *.sh
-*.zip
 .directory
 
 backup/
