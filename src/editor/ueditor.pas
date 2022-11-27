@@ -188,7 +188,7 @@ var
   iniFile: TIniFile;
 
 begin
-  iniFile := TIniFile.Create(getConfigDir() + DIR_COLOR_SCHEMES + colorThemeName + COLOR_SCHEME_CONFIG_FILE_EXT);
+  iniFile := TIniFile.Create(getConfigDir() + DIR_COLOR_SCHEMES + colorThemeName + FILE_EXT_COLOR_SCHEME);
 
   with synEdit.Colors do
   begin

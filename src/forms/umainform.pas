@@ -125,9 +125,8 @@ begin
   if not DirectoryExists(appConfigDir) then
     if CreateDir(appConfigDir) then
     begin
-      copyResToDir(LEXLIB_FILE_NAME, appConfigDir);
-      copyResToDir(COLOR_THEME_CREAM + COLOR_SCHEME_CONFIG_FILE_EXT, appConfigDir + DIR_COLOR_SCHEMES);
-      copyResToDir(COLOR_THEME_DARK + COLOR_SCHEME_CONFIG_FILE_EXT, appConfigDir + DIR_COLOR_SCHEMES);
+      copyResToDir(COLOR_THEME_CREAM + FILE_EXT_COLOR_SCHEME, appConfigDir + DIR_COLOR_SCHEMES);
+      copyResToDir(COLOR_THEME_DARK + FILE_EXT_COLOR_SCHEME, appConfigDir + DIR_COLOR_SCHEMES);
     end
     else
       addLog(ERROR_MK_CONFIG_DIR);

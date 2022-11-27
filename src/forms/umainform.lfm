@@ -103,7 +103,6 @@ object frmMain: TfrmMain
     end
   end
   object saveDialog: TSaveDialog
-    OnShow = saveDialogShow
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     Left = 296
     Top = 176

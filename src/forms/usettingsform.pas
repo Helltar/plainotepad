@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, Controls, SysUtils, Forms, Graphics, Dialogs,
-  StdCtrls, Spin, ComCtrls, LazFileUtils;
+  StdCtrls, Spin, ComCtrls, LazFileUtils, IniFiles;
 
 type
 
@@ -221,12 +221,18 @@ var
 begin
   cmbColorTheme.Items.Clear;
 
-  if FindFirst(getConfigDir() + DIR_COLOR_SCHEMES + '*' + COLOR_SCHEME_CONFIG_FILE_EXT, faAnyFile, searchRec) = 0 then
+  if FindFirst(getConfigDir() + DIR_COLOR_SCHEMES + '*' + FILE_EXT_COLOR_SCHEME, faAnyFile, searchRec) = 0 then
   begin
     repeat
       with searchRec do
         if (Attr and faDirectory) = 0 then
-          cmbColorTheme.Items.Add(ExtractFileNameWithoutExt(Name));
+          with TIniFile.Create(getConfigDir() + DIR_COLOR_SCHEMES + Name) do
+            try
+              if SectionExists(COLOR_SCHEME_CONFIG_SECTION_MAIN) then
+                cmbColorTheme.Items.Add(ExtractFileNameWithoutExt(Name));
+            finally
+              Free;
+            end;
     until FindNext(searchRec) <> 0;
 
     FindClose(searchRec);

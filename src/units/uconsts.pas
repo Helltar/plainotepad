@@ -9,10 +9,12 @@ const
   APP_FILE_NAME = 'plainotepad';
 
   APP_CONFIG_FILE_NAME = 'config.ini';
-  LEXLIB_FILE_NAME = 'lib.lxl';
 
   DIR_COLOR_SCHEMES = 'color-schemes' + DirectorySeparator;
-  COLOR_SCHEME_CONFIG_FILE_EXT = '.colors';
+  DIR_LEXLIB = 'synt-analyzers' + DirectorySeparator;
+
+  FILE_EXT_SYNT_ANALYZER = '.lcf';
+  FILE_EXT_COLOR_SCHEME = '.colors';
 
   COLOR_THEME_DARK = 'dark';
   COLOR_THEME_CREAM = 'cream';

@@ -43,13 +43,11 @@ type
     procedure lexerColorBoxChange(Sender: TObject);
     procedure themeColorBoxChange(Sender: TObject);
   private
+    editor: TEditor;
     function getColorThemeFilename(): string;
     function getSelectedColorThemeName(): string;
     function getSelectedLexerName(): string;
-  private
-    editor: TEditor;
     procedure initColorEditControls();
-    procedure initControls(AParent: TWinControl; onChangeEvent: TNotifyEvent; const iniFileSection: string);
     procedure initThemeEditControls();
     procedure loadEditorConfiig();
     procedure loadLexersList();
@@ -117,7 +115,7 @@ begin
     if newName.IsEmpty then
       Exit;
 
-    filename := getConfigDir() + DIR_COLOR_SCHEMES + newName + COLOR_SCHEME_CONFIG_FILE_EXT;
+    filename := getConfigDir() + DIR_COLOR_SCHEMES + newName + FILE_EXT_COLOR_SCHEME;
 
     if not FileExists(filename) then
     begin
@@ -188,7 +186,7 @@ end;
 
 function TfrmColorThemeEditor.getColorThemeFilename: string;
 begin
-  Result := getConfigDir() + DIR_COLOR_SCHEMES + getSelectedColorThemeName() + COLOR_SCHEME_CONFIG_FILE_EXT;
+  Result := getConfigDir() + DIR_COLOR_SCHEMES + getSelectedColorThemeName() + FILE_EXT_COLOR_SCHEME;
 end;
 
 function TfrmColorThemeEditor.getSelectedColorThemeName: string;
@@ -212,70 +210,117 @@ begin
 end;
 
 procedure TfrmColorThemeEditor.initColorEditControls;
+var
+  i: integer;
+  syntAnalyzer: TecSyntAnalyzer;
+
 begin
-  initControls(sbLexerColors, @lexerColorBoxChange, COLOR_SCHEME_CONFIG_SECTION_LEXER + getSelectedLexerName());
+  if sbLexerColors.ControlCount > 0 then
+    for i := sbLexerColors.ControlCount - 1 downto 0 do
+      sbLexerColors.Controls[i].Free;
+
+  syntAnalyzer := editor.editorHighlighter.findAnalyzer(getSelectedLexerName());
+
+  for i := 0 to syntAnalyzer.Formats.Count - 1 do
+    with TLabel.Create(sbLexerColors) do
+    begin
+      AutoSize := True;
+      Parent := sbLexerColors;
+      Caption := syntAnalyzer.Formats.Items[i].DisplayName;
+
+      if i <> 0 then
+      begin
+        AnchorSideTop.Control := sbLexerColors.Controls[i - 1];
+        AnchorSideTop.Side := asrBottom;
+      end
+      else
+        AnchorSideTop.Control := sbLexerColors;
+
+      AnchorSideLeft.Control := sbLexerColors;
+      BorderSpacing.Around := 24;
+    end;
+
+  for i := 0 to syntAnalyzer.Formats.Count - 1 do
+    with TColorBox.Create(sbLexerColors) do
+    begin
+      Anchors := [akTop, akRight];
+      AnchorSideRight.Control := sbLexerColors;
+      AnchorSideRight.Side := asrBottom;
+      AnchorSideTop.Control := sbLexerColors.Controls[i];
+      AnchorSideTop.Side := asrCenter;
+      BorderSpacing.Around := 24;
+      Parent := sbLexerColors;
+      OnChange := @lexerColorBoxChange;
+      Style := [cbPrettyNames, cbStandardColors, cbExtendedColors, cbCustomColor, cbCustomColors, cbIncludeNone];
+
+      with TIniFile.Create(getColorThemeFilename()) do
+        try
+          Selected :=
+            StringToColor(ReadString(COLOR_SCHEME_CONFIG_SECTION_LEXER + syntAnalyzer.LexerName,
+            syntAnalyzer.Formats.Items[i].DisplayName, 'clNone'));
+        finally
+          Free;
+        end;
+
+      Width := 200;
+    end;
 end;
 
-procedure TfrmColorThemeEditor.initControls(AParent: TWinControl; onChangeEvent: TNotifyEvent; const iniFileSection: string);
+procedure TfrmColorThemeEditor.initThemeEditControls;
 var
-  i, j: integer;
+  i: integer;
   sections: TStringList;
 
 begin
-  if AParent.ControlCount > 0 then
-    for i := AParent.ControlCount - 1 downto 0 do
-      AParent.Controls[i].Free;
+  if sbMainColors.ControlCount > 0 then
+    for i := sbMainColors.ControlCount - 1 downto 0 do
+      sbMainColors.Controls[i].Free;
 
   sections := TStringList.Create;
 
   with TIniFile.Create(getColorThemeFilename()) do
     try
-      ReadSectionRaw(iniFileSection, sections)
+      ReadSectionRaw(COLOR_SCHEME_CONFIG_SECTION_MAIN, sections)
     finally
       Free;
     end;
 
   for i := 0 to sections.Count - 1 do
-    with TLabel.Create(AParent) do
+    with TLabel.Create(sbMainColors) do
     begin
       AutoSize := True;
-      Parent := AParent;
+      Parent := sbMainColors;
       Caption := sections.Names[i];
 
       if i <> 0 then
       begin
-        AnchorSideTop.Control := AParent.Controls[i - 1];
+        AnchorSideTop.Control := sbMainColors.Controls[i - 1];
         AnchorSideTop.Side := asrBottom;
       end
       else
-        AnchorSideTop.Control := AParent;
+        AnchorSideTop.Control := sbMainColors;
 
-      AnchorSideLeft.Control := AParent;
+      AnchorSideLeft.Control := sbMainColors;
       BorderSpacing.Around := 24;
     end;
 
   for i := 0 to sections.Count - 1 do
-    with TColorBox.Create(AParent) do
+    with TColorBox.Create(sbMainColors) do
     begin
       Anchors := [akTop, akRight];
-      AnchorSideRight.Control := AParent;
+      AnchorSideRight.Control := sbMainColors;
       AnchorSideRight.Side := asrBottom;
-      AnchorSideTop.Control := AParent.Controls[i];
+      AnchorSideTop.Control := sbMainColors.Controls[i];
       AnchorSideTop.Side := asrCenter;
       BorderSpacing.Around := 24;
-      Parent := AParent;
-      OnChange := onChangeEvent;
+      Parent := sbMainColors;
+      OnChange := @themeColorBoxChange;
       Style := [cbPrettyNames, cbStandardColors, cbExtendedColors, cbCustomColor, cbCustomColors];
       Selected := StringToColor(sections.ValueFromIndex[i]);
       Width := 200;
     end;
 
   FreeAndNil(sections);
-end;
-
-procedure TfrmColorThemeEditor.initThemeEditControls;
-begin
-  initControls(sbMainColors, @themeColorBoxChange, COLOR_SCHEME_CONFIG_SECTION_MAIN);
 end;
 
 procedure TfrmColorThemeEditor.loadEditorConfiig;
@@ -285,27 +330,21 @@ end;
 
 procedure TfrmColorThemeEditor.loadLexersList;
 var
-  i, selectedIndex: integer;
-  sections: TStringList;
+  selectedIndex: integer;
+  lexList: TStringList;
+  lexName: string;
 
 begin
   selectedIndex := cmbLexers.ItemIndex;
   cmbLexers.Items.Clear;
 
-  sections := TStringList.Create;
+  lexList := TStringList.Create;
+  lexList := editor.editorHighlighter.getLexersList();
 
-  with TIniFile.Create(getConfigDir() + DIR_COLOR_SCHEMES + getSelectedColorThemeName() + COLOR_SCHEME_CONFIG_FILE_EXT) do
-    try
-      ReadSections(sections);
-    finally
-      Free;
-    end;
+  for lexName in lexList do
+    cmbLexers.Items.Add(lexName);
 
-  for i := 0 to sections.Count - 1 do
-    if sections[i].StartsWith(COLOR_SCHEME_CONFIG_SECTION_LEXER) then
-      cmbLexers.Items.Add(Copy(sections[i], 7, sections[i].Length));
-
-  FreeAndNil(sections);
+  FreeAndNil(lexList);
 
   if selectedIndex >= 0 then
     cmbLexers.ItemIndex := selectedIndex

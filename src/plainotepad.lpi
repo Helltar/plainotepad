@@ -112,10 +112,10 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="LCL"/>
+        <PackageName Value="econtrol_package"/>
       </Item>
       <Item>
-        <PackageName Value="econtrol_package"/>
+        <PackageName Value="LCL"/>
       </Item>
       <Item>
         <PackageName Value="atsynedit_ex_package"/>
