@@ -3,11 +3,10 @@
     <br><br>
     Plainotepad
     <br><br>
-    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083044.png" alt="plainotepad_light"/>
+    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083044.png" alt="plainotepad_light" width="50%"/>
     <br><br>
-    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083008.png" alt="plainotepad_dark"/>
+    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083008.png" alt="plainotepad_dark" width="50%"/>
 </h3>
-
 
 Download
 --------
