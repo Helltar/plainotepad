@@ -1,0 +1,905 @@
+object SyntAnal5: TLibSyntAnalyzer
+  Formats = <
+    item
+      DisplayName = 'Symbol'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Number'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'String'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clTeal
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Id type'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id special'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clOlive
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Comment'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Preprocessor'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Asm BG'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+      BgColor = 14938312
+      FormatType = ftBackGround
+    end
+    item
+      DisplayName = 'Label'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end>
+  TokenRules = <
+    item
+      DisplayName = 'String'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '(u8|L|u|U)?"(\\.|.)*?("s?|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String raw'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = 
+        '(?s)(u8R|LR|uR|UR|R)"\( .+? \)"s? |'#13#10'(?s)(u8R|LR|uR|UR|R)"(.+?)\' +
+        '( .+? \)\1"s?'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String in define'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '(?<=\#include\x20*)<.+?>'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id keyword'
+      StyleName = 'Id keyword'
+      TokenType = 7
+      Expression = '\b(catch|else|for|if|switch|while)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Label'
+      StyleName = 'Label'
+      TokenType = 14
+      Expression = '(?<=^[\x20\x09]*)[a-z_]\w*(?=:[^:])'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Label 2'
+      StyleName = 'Label'
+      TokenType = 14
+      Expression = '(?<=\bgoto\x20+)[a-z_]\w*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Char'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '(u8|L|u|U)?'#39'.*?('#39'|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '~Id'
+      StyleName = 'Id'
+      TokenType = 15
+      Expression = '(?<=^\s*) ~[a-z_][\w\$]* (?=\x20*\()'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '~Id with ::'
+      StyleName = 'Id'
+      TokenType = 16
+      Expression = '(?<=::) ~[a-z_][\w\$]*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id'
+      StyleName = 'Id'
+      TokenType = 2
+      Expression = '[a-z_][\w\$]*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Num hex float'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = 
+        '0x\h[\h'#39']* (\. \h[\h'#39']*)? p[\+\-]? \h[\h'#39']* \b |'#13#10'0x\h[\h'#39']* \. ' +
+        '\h[\h'#39']* \b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Num hex'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '0x[\h'#39']+ [ul]*\b |'#13#10'0b[01'#39']+ [ul]*\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Num float'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = 
+        '\d[\d'#39']* (\.[\d'#39']*)? e[\+\-]? \d+ [Lf]?\b |'#13#10'\. [\d'#39']+ e[\+\-]? ' +
+        '\d+ [Lf]?\b |'#13#10'\d[\d'#39']* \. (\d[\d'#39']*)? [Lf]?\b |'#13#10'\. \d[\d'#39']* [L' +
+        'f]?\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Num decimal'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '\d[\d'#39']* [ul]*\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Directive'
+      StyleName = 'Preprocessor'
+      TokenType = 6
+      Expression = 
+        '\#\x20*(define|undef|include|if|ifdef|ifndef|else|elif|endif|lin' +
+        'e|error|pragma)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment 1'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)/\*.*?(\*/|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment 2'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '//.*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol ;'
+      StyleName = 'Symbol'
+      TokenType = 13
+      Expression = ';'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol ->'
+      StyleName = 'Symbol'
+      TokenType = 12
+      Expression = '\->'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol { }'
+      StyleName = 'Symbol'
+      TokenType = 8
+      Expression = '[\{\}]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol ::'
+      StyleName = 'Symbol'
+      TokenType = 9
+      Expression = '::'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol ( )'
+      StyleName = 'Symbol'
+      TokenType = 10
+      Expression = '[\(\)]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol'
+      StyleName = 'Symbol'
+      TokenType = 3
+      Expression = 
+        '\[\[| \]\]| \.\.\.| [\[\],\.:\\\?] |<=> |'#13#10'[\-\+<>\|\&\^]{2}=? |' +
+        ' \#{1,2}|'#13#10'[\+\-\*/&\|\^!<>=~%]=?'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end>
+  BlockRules = <
+    item
+      DisplayName = 'id keywords'
+      StyleName = 'Id keyword'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '__asm'
+            '_asm'
+            '_Pragma'
+            'alignas'
+            'alignof'
+            'and'
+            'and_eq'
+            'asm'
+            'bitand'
+            'bitor'
+            'break'
+            'case'
+            'catch'
+            'class'
+            'co_await'
+            'co_return'
+            'co_yield'
+            'compl'
+            'concept'
+            'continue'
+            'default'
+            'delete'
+            'do'
+            'else'
+            'enum'
+            'for'
+            'goto'
+            'if'
+            'import'
+            'module'
+            'namespace'
+            'new'
+            'not'
+            'not_eq'
+            'operator'
+            'or'
+            'or_eq'
+            'requires'
+            'return'
+            'sizeof'
+            'struct'
+            'switch'
+            'template'
+            'throw'
+            'try'
+            'typedef'
+            'typeid'
+            'typename'
+            'union'
+            'using'
+            'while'
+            'xor'
+            'xor_eq')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpBound
+      TokenType = 7
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'id modifiers'
+      StyleName = 'Id special'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '__attribute'
+            '__attribute__'
+            '__cdecl'
+            '__clrcall'
+            '__declspec'
+            '__fastcall'
+            '__regcall'
+            '__restrict'
+            '__restrict__'
+            '__stdcall'
+            '__thiscall'
+            'const'
+            'const_cast'
+            'consteval'
+            'constexpr'
+            'constinit'
+            'decltype'
+            'dynamic_cast'
+            'explicit'
+            'export'
+            'extern'
+            'final'
+            'friend'
+            'inline'
+            'mutable'
+            'noexcept'
+            'override'
+            'private'
+            'protected'
+            'public'
+            'register'
+            'reinterpret_cast'
+            'restrict'
+            'static'
+            'static_assert'
+            'static_cast'
+            'this'
+            'thread_local'
+            'virtual'
+            'volatile')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      TokenType = 11
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'id types'
+      StyleName = 'Id type'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '__asm__'
+            '_Bool'
+            '_Complex'
+            '_Imaginary'
+            'asm'
+            'auto'
+            'bool'
+            'char'
+            'char16_t'
+            'char32_t'
+            'char8_t'
+            'cin'
+            'cout'
+            'double'
+            'false'
+            'FALSE'
+            'float'
+            'int'
+            'long'
+            'null'
+            'NULL'
+            'nullptr'
+            'nullptr_t'
+            'short'
+            'signed'
+            'string'
+            'stringstream'
+            'true'
+            'TRUE'
+            'uint16_t'
+            'uint32_t'
+            'unsigned'
+            'vector'
+            'void'
+            'wchar_t')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'class'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 256
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 2622
+        end
+        item
+          TagList.Strings = (
+            'class')
+          TokenTypes = 128
+        end>
+      BlockEnd = '}'
+      NameFmt = 'class %s-1~[{]1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      CancelNextRules = True
+      CollapseFmt = '%sz0'
+      TreeItemImage = 1
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'func :: ::'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            ')')
+          TokenTypes = 1024
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 622
+        end
+        item
+          TagList.Strings = (
+            '(')
+          TokenTypes = 1024
+        end
+        item
+          TokenTypes = 65540
+        end
+        item
+          TokenTypes = 512
+        end
+        item
+          TokenTypes = 65540
+        end
+        item
+          TokenTypes = 512
+        end
+        item
+          TokenTypes = 4
+        end
+        item
+          TagList.Strings = (
+            '-'
+            '^'
+            '^^'
+            ','
+            ';'
+            ':'
+            '::'
+            '!'
+            '!='
+            '?'
+            '.'
+            '('
+            ')'
+            '['
+            ']'
+            '{'
+            '}'
+            '&'
+            '&&'
+            '+'
+            '<'
+            '<<'
+            '<='
+            '='
+            '=='
+            '>'
+            '->'
+            '>='
+            '>>'
+            '|'
+            '||'
+            'else'
+            'new'
+            'return')
+          CondType = tcNotEqual
+          TokenTypes = 14216
+        end>
+      BlockOffset = -1
+      NotCollapsed = True
+      NameFmt = '%s-5'
+      GroupFmt = '%s-1\%s-3'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      CollapseFmt = '%sz0'
+      SelfClose = True
+      NoEndRule = True
+      TreeItemImage = 6
+      TreeGroupImage = 1
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'func ::'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            ')')
+          TokenTypes = 1024
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 2670
+        end
+        item
+          TagList.Strings = (
+            '(')
+          TokenTypes = 1024
+        end
+        item
+          TokenTypes = 65540
+        end
+        item
+          TokenTypes = 512
+        end
+        item
+          TokenTypes = 4
+        end
+        item
+          TagList.Strings = (
+            '-'
+            '^'
+            '^^'
+            ','
+            ';'
+            ':'
+            '::'
+            '!'
+            '!='
+            '?'
+            '.'
+            '('
+            ')'
+            '['
+            ']'
+            '{'
+            '}'
+            '&'
+            '&&'
+            '+'
+            '<'
+            '<<'
+            '<='
+            '='
+            '=='
+            '>'
+            '->'
+            '>='
+            '>>'
+            '|'
+            '||'
+            'else'
+            'new'
+            'return')
+          CondType = tcNotEqual
+          TokenTypes = 14216
+        end>
+      BlockOffset = -1
+      NotCollapsed = True
+      NameFmt = '%s-3'
+      GroupFmt = '%s-1'
+      RefToCondEnd = True
+      HighlightPos = cpBound
+      CollapseFmt = '%sz0'
+      SelfClose = True
+      NoEndRule = True
+      TreeItemImage = 6
+      TreeGroupImage = 1
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'func'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 264
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 6862
+        end
+        item
+          TagList.Strings = (
+            ')')
+          TokenTypes = 1024
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 2622
+        end
+        item
+          TagList.Strings = (
+            '(')
+          TokenTypes = 1024
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 2
+        end
+        item
+          TokenTypes = 4
+        end
+        item
+          TagList.Strings = (
+            '-'
+            '^'
+            '^^'
+            ','
+            ';'
+            ':'
+            '::'
+            '!'
+            '!='
+            '?'
+            '.'
+            '('
+            ')'
+            '['
+            ']'
+            '{'
+            '}'
+            '&'
+            '&&'
+            '+'
+            '<'
+            '<<'
+            '<='
+            '='
+            '=='
+            '>'
+            '->'
+            '>='
+            '>>'
+            '|'
+            '||'
+            'else'
+            'new'
+            'return')
+          CondType = tcNotEqual
+          TokenTypes = 14216
+        end>
+      BlockOffset = -1
+      NotCollapsed = True
+      NameFmt = '%s-1'
+      RefToCondEnd = True
+      HighlightPos = cpBound
+      CollapseFmt = '%sz-1'
+      SelfClose = True
+      NoEndRule = True
+      TreeItemImage = 5
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'struct'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 256
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 526
+        end
+        item
+          TagList.Strings = (
+            'struct')
+          TokenTypes = 128
+        end>
+      BlockEnd = '}'
+      NameFmt = '%s-1~[{]1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      CancelNextRules = True
+      CollapseFmt = '%sz0'
+      TreeItemImage = 4
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'operator'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'operator')
+          TokenTypes = 128
+        end>
+      NameFmt = '%s0 %s-1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      CollapseFmt = '%sz0'
+      NoEndRule = True
+      TreeItemImage = 7
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = '{'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 256
+        end>
+      BlockEnd = '}'
+      DisplayInTree = False
+      HighlightPos = cpAny
+      DynSelectMin = True
+      DrawStaple = True
+      CollapseFmt = '{ ... }'
+      IgnoreAsParent = False
+      AutoCloseText = '}'
+    end
+    item
+      DisplayName = '}'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '}')
+          TokenTypes = 256
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'destructor'
+      ConditionList = <
+        item
+          TokenTypes = 32768
+        end>
+      HighlightPos = cpAny
+      NoEndRule = True
+      TreeItemImage = 5
+      IgnoreAsParent = False
+    end>
+  CodeTemplates = <>
+  SubAnalyzers = <
+    item
+      DisplayName = '__asm block'
+      StyleName = 'Asm BG'
+      StartExpression = '\b__?asm\x20*\{'
+      EndExpression = '\}'
+      SyntAnalyzer = SyntAnal1
+    end
+    item
+      DisplayName = '__asm line'
+      StyleName = 'Asm BG'
+      StartExpression = '\b__?asm\x20*(?=\w)'
+      EndExpression = '\x20*(;|\b__?asm\b)'
+      SyntAnalyzer = SyntAnal1
+    end>
+  SampleText.Strings = (
+    '/* Test */'
+    '#define max(a, b) ((a > b) ? a : b)'
+    '#  asm(" pop ax ");'
+    '#include <some/path.h>'
+    's = "text\"text" + L"test" + name<CName>;'
+    
+      'n = 1e2 + 0.12e+2 + 0xA'#39'B + 0b11'#39'00 + 1'#39'12'#39'23 + 0.1'#39'2f + 0xF.Ap3' +
+      ';  '
+    ''
+    'Id Template::getTemplate(const string &id) const {'
+    '  goto next;'
+    '  next: return id;'
+    '}'
+    ''
+    'double CNested1::CMonitor(MonitorIT* part) {'
+    '}'
+    ''
+    'void CNested2::CMonitor::getMonitor(MonitorIT* part) {'
+    '  return this;'
+    '}'
+    ''
+    'floatInterface* CNested2::CMonitor::getFlow() {'
+    '  return this;'
+    '}'
+    ''
+    'class CName1 {'
+    '}'
+    ' '
+    'class CName2 : public NameB {'
+    '    const int tot;'
+    '    unsigned long fib(unsigned long n) {'
+    '        return n < 2 ? n : fib(n - 1) + fib(n - 2);'
+    '    }'
+    '}'
+    '      '
+    'void main(int argc, char* argv) {'
+    '}'
+    ''
+    'struct Books {'
+    '  int book_id;'
+    '};'
+    ''
+    'typedef struct Name1'
+    '{'
+    '  int flags;'
+    '} Struct1;'
+    ''
+    'template <name T>'
+    'struct somedata<IReader>{'
+    '  IReader* val;'
+    '  int val2;'
+    '};'
+    ''
+    'operator >=(v1, v2) {}')
+  TokenTypeNames.Strings = (
+    'Unknown'
+    'Comment'
+    'Id'
+    'Symbol'
+    'String'
+    'Number'
+    'Preprocessor'
+    'Id keyword'
+    'Symbol {}'
+    'Symbol ::'
+    'Symbol ()'
+    'Id modifier'
+    'Symbol ->'
+    'Symbol ;'
+    'Goto label'
+    'Id after ~'
+    'Id after ::~')
+  Extentions = 'cpp cxx h hh hpp hxx cc c++ h++ ipp cppm'
+  LexerName = 'C++'
+  Notes.Strings = (
+    'Alexey (CudaText)')
+  RestartFromLineStart = True
+  LineComment = '//'
+  Charset = DEFAULT_CHARSET
+end

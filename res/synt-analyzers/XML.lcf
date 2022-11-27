@@ -1,0 +1,552 @@
+object SyntAnal20: TLibSyntAnalyzer
+  Formats = <
+    item
+      DisplayName = 'Comment'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Tag bound'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Tag id'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 16744576
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Tag param'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Tag val'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clTeal
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'CDATA bound'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+      BgColor = clSilver
+    end
+    item
+      DisplayName = 'CDATA text'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clTeal
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+      BorderColorLeft = clGray
+      BorderColorTop = clGray
+      BorderColorRight = clGray
+      BorderColorBottom = clGray
+      MultiLineBorder = True
+    end
+    item
+      DisplayName = 'Error content'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Current tag'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+      BgColor = 14540253
+      FormatType = ftBackGround
+    end
+    item
+      DisplayName = 'Current tag id'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNone
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+      BgColor = 15400927
+      BorderTypeLeft = blSolid
+      BorderColorLeft = clGray
+      BorderTypeTop = blSolid
+      BorderColorTop = clGray
+      BorderTypeRight = blSolid
+      BorderColorRight = clGray
+      BorderTypeBottom = blSolid
+      BorderColorBottom = clGray
+    end
+    item
+      DisplayName = 'DTD element type'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'DTD bound'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -19
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Spec char'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Comment doc'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 12615808
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Text'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Number'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Sublexer BG'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+      BgColor = clMoneyGreen
+      FormatType = ftBackGround
+    end>
+  TokenRules = <
+    item
+      DisplayName = 'Comment doc'
+      StyleName = 'Comment doc'
+      TokenType = 12
+      Expression = '(?s)<\?.*?(\?>|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)<!--.+?(?<!\-)(-->|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment 2'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)<%--.*?(--%>|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'CDATA start'
+      StyleName = 'CDATA bound'
+      TokenType = 11
+      Expression = '(?i-)<!\[CDATA\['
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'CDATA text'
+      StyleName = 'CDATA text'
+      BlockName = 'CDATA begin'
+      Expression = '[^\]\n\r<>]+'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'CDATA end'
+      StyleName = 'CDATA bound'
+      TokenType = 14
+      Expression = '\]\]>'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '<'
+      StyleName = 'Tag bound'
+      TokenType = 9
+      Expression = '<[\-\:\?/]*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '>'
+      StyleName = 'Tag bound'
+      TokenType = 10
+      Expression = '[/\?]?>'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'DTD Element type'
+      StyleName = 'DTD element type'
+      BlockName = 'DTD element start'
+      TokenType = 2
+      Expression = '(?s)\((\(.*?\)|.)*?\)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'DTD bounds: [ ] '
+      StyleName = 'DTD bound'
+      BlockName = 'DOCTYPE begin'
+      Expression = '[\[\]]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Tag value'
+      StyleName = 'Tag val'
+      TokenType = 4
+      Expression = '("|'#39').*?(\1|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '='
+      StyleName = 'Tag bound'
+      TokenType = 3
+      Expression = '='
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment invalid end'
+      StyleName = 'Error content'
+      Expression = '\-{3,}>'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Tag id'
+      StyleName = 'Tag id'
+      TokenType = 2
+      Expression = '(?<=</?)[!a-z_][\w\-:]*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Tag param with =".."'
+      StyleName = 'Tag param'
+      TokenType = 7
+      Expression = '[a-z_][\w\-]*(?==)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Tag param other'
+      StyleName = 'Tag param'
+      BlockName = 'Tag begin'
+      TokenType = 2
+      Expression = '[^>=\?\s/\[\]"\{\}%]+'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Error content'
+      StyleName = 'Error content'
+      BlockName = 'Tag begin'
+      Expression = '[^>\s]*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Html entity'
+      StyleName = 'Spec char'
+      TokenType = 6
+      Expression = '&\w+;'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Number'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '\b\d+\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Text'
+      StyleName = 'Text'
+      TokenType = 5
+      Expression = '[\w\-]+'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end>
+  BlockRules = <
+    item
+      DisplayName = 'Tag begin'
+      StyleName = 'Current tag'
+      ConditionList = <
+        item
+          TokenTypes = 512
+        end>
+      BlockEnd = 'Tag end'
+      NotCollapsed = True
+      DisplayInTree = False
+      HighlightPos = cpRange
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Tag end'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TokenTypes = 1024
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'DTD element start'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'DOCTYPE')
+          CondType = tcNotEqual
+          TokenTypes = 4
+          IgnoreCase = True
+        end
+        item
+          TagList.Strings = (
+            '<!')
+          TokenTypes = 512
+        end>
+      BlockOffset = 1
+      BlockEnd = 'DTD element end'
+      NameFmt = '%s-1'
+      HighlightPos = cpBound
+      CollapseFmt = '< %s0 %s-1 >'
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'DTD element end'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TokenTypes = 1024
+        end>
+      HighlightPos = cpBound
+      CancelNextRules = True
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'DOCTYPE begin'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'DOCTYPE')
+          TokenTypes = 4
+          IgnoreCase = True
+        end
+        item
+          TagList.Strings = (
+            '<!')
+          TokenTypes = 512
+        end>
+      BlockOffset = 1
+      BlockEnd = 'DOCTYPE end'
+      NameFmt = 'Document structure'
+      HighlightPos = cpBound
+      CollapseFmt = 'Document structure'
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'DOCTYPE end'
+      BlockName = 'DOCTYPE begin'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '>')
+          TokenTypes = 1024
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Tag block begin'
+      StyleName = 'Current tag id'
+      ConditionList = <
+        item
+          TokenTypes = 4
+        end
+        item
+          TagList.Strings = (
+            '<')
+          TokenTypes = 512
+        end>
+      BlockEnd = 'Tag block end'
+      NameFmt = '<%s0>'
+      DynHighlight = dhBound
+      HighlightPos = cpRange
+      DynSelectMin = True
+      CollapseFmt = '%s0...>'
+      IgnoreAsParent = False
+      AutoCloseMode = acmCloseOpened
+      AutoCloseText = '</%s0>'
+    end
+    item
+      DisplayName = 'Tag block end'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TokenTypes = 4
+          IgnoreCase = True
+        end
+        item
+          TagList.Strings = (
+            '</')
+          TokenTypes = 512
+        end>
+      SameIdent = True
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'End of simple tag'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '/>')
+          TokenTypes = 1024
+        end>
+      BlockEnd = 'Tag block begin'
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'CDATA begin'
+      ConditionList = <
+        item
+          TokenTypes = 2048
+        end>
+      BlockEnd = 'CDATA end'
+      NameFmt = '%s-1'
+      HighlightPos = cpBound
+      CollapseFmt = 'CDATA'
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'CDATA end'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TokenTypes = 16384
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end>
+  CodeTemplates = <>
+  SubAnalyzers = <
+    item
+      DisplayName = 'CSS style'
+      StyleName = 'Sublexer BG'
+      StartExpression = '<style\s+type="text/css"\s*>\s*<!\[CDATA\['
+      EndExpression = '\]\]'
+      SyntAnalyzer = SyntAnal6
+    end
+    item
+      DisplayName = 'JS script'
+      StyleName = 'Sublexer BG'
+      StartExpression = '<script\s+[^>]*?javascript[^>]*?>\s*<!\[CDATA\['
+      EndExpression = '\]\]'
+      SyntAnalyzer = SyntAnal9
+    end>
+  SampleText.Strings = (
+    '<?xml version="1.0" encoding="utf8" ?>'
+    '<!-- comment -->'
+    'Text &copy; text'
+    ''
+    '<!DOCTYPE web-app ['
+    '  <!ELEMENT web-app (icon?, display-name?, ejb-local-ref*)>'
+    '  <!ELEMENT auth-method (#PCDATA)>'
+    '  <!ATTLIST exception-type id ID #IMPLIED>'
+    ']>'
+    ''
+    '<![CDATA['
+    'Included text '
+    ']]>'
+    ''
+    '<web-app>'
+    '    <display-name abc="123" def="true">'
+    '    </display-name>'
+    '    <description>12</description>'
+    '    <filter:mapping>'
+    '    </filter:mapping>'
+    '</web-app>')
+  TokenTypeNames.Strings = (
+    'Unknown'
+    'Comment'
+    'Id'
+    'Symbol'
+    'String'
+    'Text'
+    'HTML entity'
+    'Tag param'
+    '-'
+    'Tag open'
+    'Tag close'
+    'CDATA'
+    'Comment doc'
+    'Attrib value'
+    'CDATA end')
+  Extentions = 
+    'xml appxmanifest axl bdsproj csproj dae dproj fsproj fxml jsproj' +
+    ' kml lpi lpk manifest menu mmpa mmpr msc mxml owl plist props rd' +
+    'f rss sqlproj sti storyboard sublime-snippet svg targets tmLangu' +
+    'age tmPreferences tmSnippet tmTheme vbproj vcproj vcxproj vcxpro' +
+    'j.filters wml xaml xsd xsl xslt xul'
+  LexerName = 'XML'
+  Notes.Strings = (
+    'Based on original XML lexer from EControl'
+    'Changed by Alexey Torgashin (CudaText)')
+  Charset = DEFAULT_CHARSET
+  Left = 140
+  Top = 160
+end
