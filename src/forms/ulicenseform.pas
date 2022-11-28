@@ -5,7 +5,7 @@ unit uLicenseForm;
 interface
 
 uses
-  Forms, StdCtrls;
+  Forms, StdCtrls, Classes;
 
 type
 

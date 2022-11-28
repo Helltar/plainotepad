@@ -59,12 +59,7 @@ type
 implementation
 
 uses
-  uLogger, uConsts, uMainForm, uSettingsForm, uUtils;
-
-resourcestring
-  COLOR_THEME_ALREADY_EXISTS = 'A color theme with this name already exists';
-  ERROR_COPY_COLOR_THEME = 'Error when copy a color theme: %s';
-  TITLE_TYPE_NEW_NAME = 'Type in a new name';
+  uLogger, uConsts, uMainForm, uSettingsForm, uUtils, uColorThemeNewNameDialog;
 
 {$R *.lfm}
 
@@ -108,30 +103,20 @@ begin
 end;
 
 procedure TfrmColorThemeEditor.actCopyExecute(Sender: TObject);
-var
-  newName, filename: string;
-
 begin
-  if InputQuery(getSelectedColorThemeName(), TITLE_TYPE_NEW_NAME, False, newName) then
-  begin
-    if newName.IsEmpty then
-      Exit;
-
-    filename := getConfigDir() + DIR_COLOR_SCHEMES + newName + FILE_EXT_COLOR_SCHEME;
-
-    if not FileExists(filename) then
-    begin
-      if CopyFile(getColorThemeFilename(), filename) then
+  with TdlgColorThemeNewName.Create(Self) do
+    try
+      formCaption := getSelectedColorThemeName();
+      colorThemeFilename := getColorThemeFilename();
+      ShowModal;
+      if copyFileResultOk then
       begin
         updateThemesList();
-        cmbEditColorTheme.ItemIndex := cmbEditColorTheme.Items.IndexOf(newName);
-      end
-      else
-        addLog(Format(ERROR_COPY_COLOR_THEME, [filename]));
-    end
-    else
-      addLog(COLOR_THEME_ALREADY_EXISTS);
-  end;
+        cmbEditColorTheme.ItemIndex := cmbEditColorTheme.Items.IndexOf(colorThemeNewName);
+      end;
+    finally
+      Free;
+    end;
 end;
 
 procedure TfrmColorThemeEditor.actDelExecute(Sender: TObject);

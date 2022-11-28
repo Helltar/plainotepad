@@ -25,9 +25,9 @@ type
     cbWordWrap: TCheckBox;
     cmbMouseMiddleClickAction: TComboBox;
     cmbColorTheme: TComboBox;
-    edtFontName: TEdit;
     fontDialog: TFontDialog;
     gbBorderSpace: TGroupBox;
+    lblFontName: TLabel;
     lblMouseMiddleClickAction: TLabel;
     lblRightMargin: TLabel;
     lblBottomSpace: TLabel;
@@ -57,7 +57,6 @@ type
     procedure cbWordWrapChange(Sender: TObject);
     procedure cmbColorThemeChange(Sender: TObject);
     procedure cmbMouseMiddleClickActionChange(Sender: TObject);
-    procedure edtFontNameChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -102,7 +101,7 @@ begin
     cbNonSystemScrollBars.Enabled := scrollBars;
     cbScrollBars.Checked := scrollBars;
     cbWordWrap.Checked := wordWrap;
-    edtFontName.Text := fontName;
+    lblFontName.Caption := fontName;
     seBottomSpace.Value := borderSpaceBottom;
     seFontSize.Value := fontSize;
     seLeftSpace.Value := borderSpaceLeft;
@@ -146,8 +145,9 @@ procedure TfrmSettings.btnSelectFontClick(Sender: TObject);
 begin
   if fontDialog.Execute then
   begin
-    edtFontName.Text := fontDialog.Font.Name;
+    lblFontName.Caption := fontDialog.Font.Name;
     seFontSize.Value := fontDialog.Font.Size;
+    frmMain.config.fontName := lblFontName.Caption;
   end;
 end;
 
@@ -190,11 +190,6 @@ end;
 procedure TfrmSettings.cmbMouseMiddleClickActionChange(Sender: TObject);
 begin
   frmMain.config.mouseMiddleClickAction := cmbMouseMiddleClickAction.ItemIndex;
-end;
-
-procedure TfrmSettings.edtFontNameChange(Sender: TObject);
-begin
-  frmMain.config.fontName := edtFontName.Text;
 end;
 
 procedure TfrmSettings.FormClose(Sender: TObject; var CloseAction: TCloseAction);

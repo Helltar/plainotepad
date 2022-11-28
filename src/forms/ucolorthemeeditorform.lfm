@@ -40,6 +40,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     BorderSpacing.Top = 12
     ItemHeight = 20
     OnChange = cmbEditColorThemeChange
+    ParentFont = False
     ReadOnly = True
     Sorted = True
     Style = csDropDownList
@@ -114,6 +115,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     BorderSpacing.Right = 24
     ItemHeight = 20
     OnChange = cmbLexersChange
+    ParentFont = False
     ReadOnly = True
     Sorted = True
     Style = csDropDownList
