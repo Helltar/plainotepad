@@ -1,18 +1,19 @@
 object frmSettings: TfrmSettings
   Left = 562
-  Height = 640
-  Top = 171
-  Width = 550
+  Height = 636
+  Top = 173
+  Width = 452
   AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Settings'
-  ClientHeight = 640
-  ClientWidth = 550
+  ClientHeight = 636
+  ClientWidth = 452
   Constraints.MinHeight = 530
   Constraints.MinWidth = 340
   DesignTimePPI = 120
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'
   object btnOk: TButton
@@ -22,9 +23,9 @@ object frmSettings: TfrmSettings
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 476
+    Left = 378
     Height = 34
-    Top = 582
+    Top = 578
     Width = 50
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -42,7 +43,7 @@ object frmSettings: TfrmSettings
     AnchorSideBottom.Side = asrBottom
     Left = 24
     Height = 34
-    Top = 582
+    Top = 578
     Width = 169
     AutoSize = True
     BorderSpacing.Around = 24
@@ -58,9 +59,9 @@ object frmSettings: TfrmSettings
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 534
+    Height = 530
     Top = 24
-    Width = 502
+    Width = 404
     ActivePage = tsGeneral
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
@@ -70,248 +71,221 @@ object frmSettings: TfrmSettings
     object tsGeneral: TTabSheet
       AnchorSideBottom.Side = asrBottom
       Caption = 'General'
-      ClientHeight = 501
-      ClientWidth = 494
-      object scGeneral: TScrollBox
+      ClientHeight = 497
+      ClientWidth = 396
+      object lblFont: TLabel
         AnchorSideLeft.Control = tsGeneral
         AnchorSideTop.Control = tsGeneral
-        AnchorSideRight.Control = tsGeneral
-        AnchorSideRight.Side = asrBottom
-        AnchorSideBottom.Control = tsGeneral
-        AnchorSideBottom.Side = asrBottom
-        Left = 0
-        Height = 501
-        Top = 0
-        Width = 494
-        HorzScrollBar.Page = 436
-        HorzScrollBar.Tracking = True
-        VertScrollBar.Page = 480
-        VertScrollBar.Tracking = True
-        Anchors = [akTop, akLeft, akRight, akBottom]
-        AutoSize = True
-        BorderStyle = bsNone
-        ClientHeight = 501
-        ClientWidth = 494
-        Color = clDefault
+        Left = 24
+        Height = 20
+        Top = 24
+        Width = 29
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 24
+        BorderSpacing.Bottom = 12
+        Caption = 'Font'
         ParentColor = False
+      end
+      object edtFontName: TEdit
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = lblFont
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 28
+        Top = 56
+        Width = 250
+        BorderSpacing.Left = 24
+        OnChange = edtFontNameChange
+        ReadOnly = True
         TabOrder = 0
-        object lblFont: TLabel
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = scGeneral
-          Left = 24
-          Height = 20
-          Top = 24
-          Width = 29
-          BorderSpacing.Left = 24
-          BorderSpacing.Top = 24
-          BorderSpacing.Bottom = 12
-          Caption = 'Font'
-          ParentColor = False
-        end
-        object edtFontName: TEdit
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = lblFont
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 28
-          Top = 56
-          Width = 250
-          BorderSpacing.Left = 24
-          OnChange = edtFontNameChange
-          ReadOnly = True
-          TabOrder = 0
-        end
-        object seFontSize: TSpinEdit
-          AnchorSideLeft.Control = edtFontName
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Control = edtFontName
-          AnchorSideTop.Side = asrCenter
-          Left = 286
-          Height = 28
-          Top = 56
-          Width = 75
-          BorderSpacing.Left = 12
-          MaxValue = 72
-          MinValue = 6
-          OnChange = seFontSizeChange
-          TabOrder = 1
-          Value = 6
-        end
-        object btnSelectFont: TButton
-          AnchorSideLeft.Control = seFontSize
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Control = seFontSize
-          AnchorSideTop.Side = asrCenter
-          Left = 373
-          Height = 34
-          Top = 53
-          Width = 39
-          AutoSize = True
-          BorderSpacing.Left = 12
-          BorderSpacing.Right = 24
-          BorderSpacing.InnerBorder = 2
-          Caption = '...'
-          OnClick = btnSelectFontClick
-          TabOrder = 2
-        end
-        object lblColorTheme: TLabel
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = edtFontName
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 20
-          Top = 108
-          Width = 85
-          BorderSpacing.Left = 24
-          BorderSpacing.Top = 24
-          BorderSpacing.Bottom = 12
-          Caption = 'Color Theme'
-          ParentColor = False
-        end
-        object cmbColorTheme: TComboBox
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = lblColorTheme
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 28
-          Top = 140
-          Width = 250
-          BorderSpacing.Left = 24
-          ItemHeight = 20
-          OnChange = cmbColorThemeChange
-          ReadOnly = True
-          Sorted = True
-          Style = csDropDownList
-          TabOrder = 3
-        end
-        object lblRightMargin: TLabel
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = cmbColorTheme
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 20
-          Top = 192
-          Width = 86
-          BorderSpacing.Left = 24
-          BorderSpacing.Top = 24
-          BorderSpacing.Bottom = 12
-          Caption = 'Right Margin'
-          ParentColor = False
-        end
-        object seRightMargin: TSpinEdit
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = lblRightMargin
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 28
-          Top = 224
-          Width = 75
-          BorderSpacing.Left = 24
-          Increment = 20
-          MaxValue = 320
-          OnChange = seRightMarginChange
-          TabOrder = 5
-        end
-        object cbWordWrap: TCheckBox
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = seRightMargin
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 24
-          Top = 276
-          Width = 101
-          BorderSpacing.Left = 24
-          BorderSpacing.Top = 24
-          Caption = 'Word Wrap'
-          OnChange = cbWordWrapChange
-          TabOrder = 6
-        end
-        object cbHighlighter: TCheckBox
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = cbWordWrap
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 24
-          Top = 312
-          Width = 114
-          BorderSpacing.Left = 24
-          BorderSpacing.Top = 12
-          Caption = 'Use Highlight'
-          OnChange = cbHighlighterChange
-          TabOrder = 7
-        end
-        object cbLineNumbers: TCheckBox
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = cbHighlighter
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 24
-          Top = 348
-          Width = 155
-          BorderSpacing.Left = 24
-          BorderSpacing.Top = 12
-          Caption = 'Show Line Numbers'
-          OnChange = cbLineNumbersChange
-          TabOrder = 8
-        end
-        object lblMouseMiddleClickAction: TLabel
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = cbLineNumbers
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 20
-          Top = 396
-          Width = 177
-          BorderSpacing.Left = 24
-          BorderSpacing.Top = 24
-          BorderSpacing.Bottom = 12
-          Caption = 'Mouse Middle Click Action'
-          ParentColor = False
-        end
-        object cmbMouseMiddleClickAction: TComboBox
-          AnchorSideLeft.Control = scGeneral
-          AnchorSideTop.Control = lblMouseMiddleClickAction
-          AnchorSideTop.Side = asrBottom
-          Left = 24
-          Height = 28
-          Top = 428
-          Width = 250
-          BorderSpacing.Left = 24
-          BorderSpacing.Bottom = 24
-          ItemHeight = 20
-          Items.Strings = (
-            'Paste'
-            'Browser Scrolling'
-          )
-          OnChange = cmbMouseMiddleClickActionChange
-          ReadOnly = True
-          Style = csDropDownList
-          TabOrder = 9
-        end
-        object btnEditColorTheme: TButton
-          AnchorSideLeft.Control = cmbColorTheme
-          AnchorSideLeft.Side = asrBottom
-          AnchorSideTop.Control = cmbColorTheme
-          AnchorSideTop.Side = asrCenter
-          AnchorSideRight.Control = btnSelectFont
-          AnchorSideRight.Side = asrBottom
-          Left = 286
-          Height = 34
-          Top = 137
-          Width = 69
-          AutoSize = True
-          BorderSpacing.Left = 12
-          BorderSpacing.InnerBorder = 2
-          Caption = 'Edit ...'
-          OnClick = btnEditColorThemeClick
-          TabOrder = 4
-        end
+      end
+      object seFontSize: TSpinEdit
+        AnchorSideLeft.Control = edtFontName
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = edtFontName
+        AnchorSideTop.Side = asrCenter
+        Left = 286
+        Height = 28
+        Top = 56
+        Width = 75
+        BorderSpacing.Left = 12
+        MaxValue = 72
+        MinValue = 6
+        OnChange = seFontSizeChange
+        TabOrder = 1
+        Value = 6
+      end
+      object btnSelectFont: TButton
+        AnchorSideLeft.Control = seFontSize
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = seFontSize
+        AnchorSideTop.Side = asrCenter
+        Left = 373
+        Height = 30
+        Top = 55
+        Width = 35
+        AutoSize = True
+        BorderSpacing.Left = 12
+        BorderSpacing.Right = 24
+        Caption = '...'
+        OnClick = btnSelectFontClick
+        TabOrder = 2
+      end
+      object lblColorTheme: TLabel
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = edtFontName
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 20
+        Top = 108
+        Width = 85
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 24
+        BorderSpacing.Bottom = 12
+        Caption = 'Color Theme'
+        ParentColor = False
+      end
+      object cmbColorTheme: TComboBox
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = lblColorTheme
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 28
+        Top = 140
+        Width = 250
+        BorderSpacing.Left = 24
+        ItemHeight = 20
+        OnChange = cmbColorThemeChange
+        ReadOnly = True
+        Sorted = True
+        Style = csDropDownList
+        TabOrder = 3
+      end
+      object lblRightMargin: TLabel
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = cmbColorTheme
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 20
+        Top = 192
+        Width = 86
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 24
+        BorderSpacing.Bottom = 12
+        Caption = 'Right Margin'
+        ParentColor = False
+      end
+      object seRightMargin: TSpinEdit
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = lblRightMargin
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 28
+        Top = 224
+        Width = 75
+        BorderSpacing.Left = 24
+        Increment = 20
+        MaxValue = 320
+        OnChange = seRightMarginChange
+        TabOrder = 4
+      end
+      object cbWordWrap: TCheckBox
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = seRightMargin
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 24
+        Top = 276
+        Width = 101
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 24
+        Caption = 'Word Wrap'
+        OnChange = cbWordWrapChange
+        TabOrder = 5
+      end
+      object cbHighlighter: TCheckBox
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = cbWordWrap
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 24
+        Top = 312
+        Width = 114
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 12
+        Caption = 'Use Highlight'
+        OnChange = cbHighlighterChange
+        TabOrder = 6
+      end
+      object cbLineNumbers: TCheckBox
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = cbHighlighter
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 24
+        Top = 348
+        Width = 155
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 12
+        Caption = 'Show Line Numbers'
+        OnChange = cbLineNumbersChange
+        TabOrder = 7
+      end
+      object lblMouseMiddleClickAction: TLabel
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = cbLineNumbers
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 20
+        Top = 396
+        Width = 177
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 24
+        BorderSpacing.Bottom = 12
+        Caption = 'Mouse Middle Click Action'
+        ParentColor = False
+      end
+      object cmbMouseMiddleClickAction: TComboBox
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = lblMouseMiddleClickAction
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 28
+        Top = 428
+        Width = 250
+        BorderSpacing.Left = 24
+        BorderSpacing.Bottom = 24
+        ItemHeight = 20
+        Items.Strings = (
+          'Paste'
+          'Browser Scrolling'
+        )
+        OnChange = cmbMouseMiddleClickActionChange
+        ReadOnly = True
+        Style = csDropDownList
+        TabOrder = 8
+      end
+      object btnEditColorTheme: TButton
+        AnchorSideLeft.Control = cmbColorTheme
+        AnchorSideLeft.Side = asrBottom
+        AnchorSideTop.Control = cmbColorTheme
+        AnchorSideTop.Side = asrCenter
+        AnchorSideRight.Side = asrBottom
+        Left = 286
+        Height = 30
+        Top = 139
+        Width = 65
+        AutoSize = True
+        BorderSpacing.Left = 12
+        Caption = 'Edit ...'
+        OnClick = btnEditColorThemeClick
+        TabOrder = 9
       end
     end
     object tsBorders: TTabSheet
       Caption = 'Borders'
-      ClientHeight = 501
-      ClientWidth = 494
+      ClientHeight = 497
+      ClientWidth = 396
       object gbBorderSpace: TGroupBox
         AnchorSideLeft.Control = tsBorders
         AnchorSideTop.Control = cbNonSystemScrollBars
@@ -321,13 +295,13 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 225
         Top = 144
-        Width = 446
+        Width = 348
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
         BorderSpacing.Around = 24
         Caption = 'Border Space'
         ClientHeight = 200
-        ClientWidth = 442
+        ClientWidth = 344
         TabOrder = 3
         object lblBottomSpace: TLabel
           AnchorSideLeft.Control = gbBorderSpace
@@ -382,7 +356,7 @@ object frmSettings: TfrmSettings
           AnchorSideTop.Control = lblTopSpace
           AnchorSideTop.Side = asrCenter
           AnchorSideRight.Side = asrBottom
-          Left = 343
+          Left = 245
           Height = 28
           Top = 152
           Width = 75
@@ -395,7 +369,7 @@ object frmSettings: TfrmSettings
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Control = lblRightSpace
           AnchorSideTop.Side = asrCenter
-          Left = 343
+          Left = 245
           Height = 28
           Top = 108
           Width = 75
@@ -408,7 +382,7 @@ object frmSettings: TfrmSettings
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Control = lblLeftSpace
           AnchorSideTop.Side = asrCenter
-          Left = 343
+          Left = 245
           Height = 28
           Top = 64
           Width = 75
@@ -422,7 +396,7 @@ object frmSettings: TfrmSettings
           AnchorSideTop.Side = asrCenter
           AnchorSideRight.Control = gbBorderSpace
           AnchorSideRight.Side = asrBottom
-          Left = 343
+          Left = 245
           Height = 28
           Top = 20
           Width = 75

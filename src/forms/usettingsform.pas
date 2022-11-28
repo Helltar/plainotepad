@@ -37,7 +37,6 @@ type
     lblColorTheme: TLabel;
     lblFont: TLabel;
     pcSettings: TPageControl;
-    scGeneral: TScrollBox;
     seFontSize: TSpinEdit;
     seRightMargin: TSpinEdit;
     seBottomSpace: TSpinEdit;
@@ -61,6 +60,7 @@ type
     procedure edtFontNameChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure seBottomSpaceChange(Sender: TObject);
     procedure seFontSizeChange(Sender: TObject);
     procedure seLeftSpaceChange(Sender: TObject);
@@ -134,6 +134,12 @@ begin
 
   btnEditColorTheme.Enabled := cmbColorTheme.Items.Count > 0;
   cmbColorTheme.Enabled := btnEditColorTheme.Enabled;
+end;
+
+procedure TfrmSettings.FormShow(Sender: TObject);
+begin
+  Constraints.MinHeight := Height;
+  Constraints.MinWidth := Width;
 end;
 
 procedure TfrmSettings.btnSelectFontClick(Sender: TObject);
