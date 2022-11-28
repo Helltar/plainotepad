@@ -444,9 +444,21 @@ end;
 procedure TfrmMain.actFullscreenExecute(Sender: TObject);
 begin
   if WindowState <> wsFullScreen then
-    WindowState := wsFullScreen
+  begin
+    {$IfDef MSWINDOWS}
+    BorderStyle := bsNone;
+    {$EndIf}
+
+    WindowState := wsFullScreen;
+  end
   else
+  begin
+    {$IfDef MSWINDOWS}
+    BorderStyle := bsSizeable;
+    {$EndIf}
+
     WindowState := wsNormal;
+  end;
 end;
 
 procedure TfrmMain.actNewWindowExecute(Sender: TObject);
