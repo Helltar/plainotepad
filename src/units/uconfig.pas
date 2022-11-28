@@ -111,7 +111,7 @@ end;
 
 function TConfig.GetBorderSpaceTop: integer;
 begin
-  Result := ReadInteger(SECTION_MAIN, 'borderSpaceTop', 24);
+  Result := ReadInteger(SECTION_MAIN, 'borderSpaceTop', 12);
 end;
 
 function TConfig.GetColorTheme: string;
@@ -124,7 +124,7 @@ const
   {$IfDef MSWINDOWS}
   FONT_NAME = 'Consolas';
   {$else}
-  FONT_NAME = 'Monospace'
+  FONT_NAME = 'Monospace';
   {$EndIf}
 
 begin
@@ -195,7 +195,7 @@ end;
 
 function TConfig.GetNonSystemScrollBars: boolean;
 begin
-  Result := ReadBool(SECTION_MAIN, 'nonSystemScrollBars', False);
+  Result := ReadBool(SECTION_MAIN, 'nonSystemScrollBars', True);
 end;
 
 function TConfig.GetRightEdge: integer;
