@@ -1,13 +1,13 @@
 object frmLicense: TfrmLicense
-  Left = 544
-  Height = 530
-  Top = 253
-  Width = 750
+  Left = 619
+  Height = 500
+  Top = 234
+  Width = 600
   Caption = 'GNU General Public License v3.0'
-  ClientHeight = 530
-  ClientWidth = 750
+  ClientHeight = 500
+  ClientWidth = 600
   Constraints.MinHeight = 500
-  Constraints.MinWidth = 750
+  Constraints.MinWidth = 500
   DesignTimePPI = 120
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'
@@ -19,14 +19,13 @@ object frmLicense: TfrmLicense
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 24
-    Height = 482
+    Height = 452
     Top = 24
-    Width = 702
+    Width = 552
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     BorderStyle = bsNone
     Color = clForm
-    Font.Name = 'Monospace'
     Lines.Strings = (
       '                    GNU GENERAL PUBLIC LICENSE'
       '                       Version 3, 29 June 2007'
@@ -705,7 +704,7 @@ object frmLicense: TfrmLicense
     )
     ParentFont = False
     ReadOnly = True
-    ScrollBars = ssAutoBoth
+    ScrollBars = ssAutoVertical
     TabOrder = 0
   end
 end
