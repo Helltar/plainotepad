@@ -87,6 +87,8 @@ begin
   initLexerColorBoxControls();
 
   cmbLexers.Enabled := cmbLexers.Items.Count > 0;
+  splVert.Left := Width div 2;
+  splHoriz.Top := Height div 2;
 end;
 
 procedure TfrmColorThemeEditor.FormDestroy(Sender: TObject);

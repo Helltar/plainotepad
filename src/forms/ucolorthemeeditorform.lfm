@@ -1,7 +1,7 @@
 object frmColorThemeEditor: TfrmColorThemeEditor
-  Left = 434
+  Left = 395
   Height = 547
-  Top = 222
+  Top = 186
   Width = 917
   Caption = 'Color Theme Editor'
   ClientHeight = 547
@@ -34,7 +34,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     Left = 24
     Height = 28
     Top = 56
-    Width = 217
+    Width = 249
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -209,38 +209,38 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideLeft.Control = cmbEditColorTheme
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = cmbEditColorTheme
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = btnDelete
     AnchorSideBottom.Control = cmbEditColorTheme
     AnchorSideBottom.Side = asrBottom
-    Left = 265
-    Height = 28
-    Top = 56
-    Width = 77
+    Left = 285
+    Height = 30
+    Top = 55
+    Width = 73
     Action = actCopy
-    Anchors = [akTop, akRight, akBottom]
+    Anchors = [akTop, akRight]
     AutoSize = True
-    BorderSpacing.Left = 24
-    BorderSpacing.InnerBorder = 2
+    BorderSpacing.Left = 12
     TabOrder = 1
   end
   object btnDelete: TButton
     AnchorSideLeft.Control = btnCopy
     AnchorSideLeft.Side = asrBottom
     AnchorSideTop.Control = cmbEditColorTheme
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = splVert
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = cmbEditColorTheme
     AnchorSideBottom.Side = asrBottom
-    Left = 366
-    Height = 28
-    Top = 56
-    Width = 74
+    Left = 370
+    Height = 30
+    Top = 55
+    Width = 70
     Action = actDel
-    Anchors = [akTop, akRight, akBottom]
+    Anchors = [akTop, akRight]
     AutoSize = True
-    BorderSpacing.Left = 24
+    BorderSpacing.Left = 12
     BorderSpacing.Right = 24
-    BorderSpacing.InnerBorder = 2
     TabOrder = 2
   end
   object actlMain: TActionList
