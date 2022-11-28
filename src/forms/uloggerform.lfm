@@ -1,0 +1,53 @@
+object frmLogger: TfrmLogger
+  Left = 746
+  Height = 197
+  Top = 287
+  Width = 322
+  AutoSize = True
+  BorderIcons = [biSystemMenu]
+  Caption = 'frmLogger'
+  ClientHeight = 197
+  ClientWidth = 322
+  Constraints.MinWidth = 200
+  DesignTimePPI = 120
+  OnShow = FormShow
+  Position = poWorkAreaCenter
+  LCLVersion = '2.2.4.0'
+  object btnOk: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 248
+    Height = 34
+    Top = 139
+    Width = 50
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&OK'
+    ModalResult = 11
+    TabOrder = 0
+  end
+  object lblLogMessage: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = btnOk
+    Left = 24
+    Height = 91
+    Top = 24
+    Width = 274
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 24
+    Caption = 'lblLogMessage'
+    Font.Color = 7102687
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+  end
+end
