@@ -97,11 +97,11 @@ end;
 
 function getConfigDir: string;
 begin
-  // todo: getConfigDir
+  // todo: getAppConfigDir()
   {$IfDef MSWINDOWS}
   Result := GetUserDir + 'AppData\Local\' + APP_NAME + '\';
   {$Else}
-  Result := getAppConfigDir(False);
+  Result := GetUserDir + '.config/' + APP_NAME.ToLower + '/';
   {$EndIf}
 end;
 
