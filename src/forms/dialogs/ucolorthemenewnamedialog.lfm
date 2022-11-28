@@ -1,0 +1,86 @@
+object dlgColorThemeNewName: TdlgColorThemeNewName
+  Left = 732
+  Height = 200
+  Top = 355
+  Width = 300
+  BorderIcons = [biSystemMenu]
+  Caption = 'dlgColorThemeNewName'
+  ClientHeight = 200
+  ClientWidth = 300
+  Constraints.MinHeight = 200
+  Constraints.MinWidth = 200
+  DesignTimePPI = 120
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '2.2.4.0'
+  object edtNewName: TEdit
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = lblNewName
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Side = asrBottom
+    Left = 24
+    Height = 28
+    Top = 56
+    Width = 252
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 12
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 24
+    Font.Style = [fsBold]
+    OnChange = edtNewNameChange
+    OnKeyDown = edtNewNameKeyDown
+    ParentFont = False
+    TabOrder = 0
+  end
+  object btnCancel: TButton
+    AnchorSideRight.Control = btnOk
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 140
+    Height = 34
+    Top = 142
+    Width = 74
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Right = 12
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&Cancel'
+    ModalResult = 2
+    TabOrder = 1
+  end
+  object lblNewName: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    Left = 24
+    Height = 20
+    Top = 24
+    Width = 131
+    BorderSpacing.Left = 24
+    BorderSpacing.Top = 24
+    Caption = 'Type in a new name'
+    ParentColor = False
+  end
+  object btnOk: TButton
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 226
+    Height = 34
+    Top = 142
+    Width = 50
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&OK'
+    Enabled = False
+    OnClick = btnOkClick
+    TabOrder = 2
+  end
+end
