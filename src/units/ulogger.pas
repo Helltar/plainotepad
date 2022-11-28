@@ -5,7 +5,7 @@ unit uLogger;
 interface
 
 uses
-  Classes, SysUtils, Dialogs;
+  Classes, SysUtils, Dialogs, uLoggerForm;
 
 procedure addLog(const msg: string; const showForm: boolean = True);
 
@@ -14,9 +14,16 @@ implementation
 procedure addLog(const msg: string; const showForm: boolean = True);
 begin
   if showForm then
-    ShowMessage(msg);
+    with TfrmLogger.Create(nil, msg) do
+      try
+        ShowModal;
+      finally
+        Free;
+      end;
 
-  //WriteLn(msg);
+  {$IfDef UNIX}
+  WriteLn(msg);
+  {$EndIf}
 end;
 
 end.
