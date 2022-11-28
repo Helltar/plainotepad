@@ -115,9 +115,6 @@ begin
 end;
 
 function TEditor.openFile(const filename: string): boolean;
-var
-  errMsg: string;
-
 begin
   Result := False;
 
@@ -126,25 +123,24 @@ begin
 
   try
     synEdit.LoadFromFile(filename);
-
-    if FHighlighter then
-      editorHighlighter.setHighlighterByFilename(filename);
-
-    FLexerName := editorHighlighter.lexerName;
-    FFileModified := False;
-
-    if not FileIsReadOnly(filename) then
-      updateParentCaption()
-    else
-      setTextToParentCaption(Format(TITLE_READONLY, [ExtractFileName(filename)]));
-
-    Result := True;
   except
-    setTextToParentCaption(APP_NAME);
-    errMsg := Format(ERROR_OPEN_FILE, [filename]);
-    synEdit.Text := errMsg;
-    addLog(errMsg, False);
+    closeFile();
+    addLog(Format(ERROR_OPEN_FILE, [filename]));
+    Exit;
   end;
+
+  if FHighlighter then
+    editorHighlighter.setHighlighterByFilename(filename);
+
+  FFileModified := False;
+  FLexerName := editorHighlighter.lexerName;
+
+  if not FileIsReadOnly(filename) then
+    updateParentCaption()
+  else
+    setTextToParentCaption(Format(TITLE_READONLY, [ExtractFileName(filename)]));
+
+  Result := True;
 end;
 
 function TEditor.saveFile(const filename: string): boolean;
