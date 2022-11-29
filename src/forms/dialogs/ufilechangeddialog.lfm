@@ -1,0 +1,87 @@
+object dlgFileChanged: TdlgFileChanged
+  Left = 746
+  Height = 218
+  Top = 299
+  Width = 369
+  AutoSize = True
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'File changed'
+  ClientHeight = 218
+  ClientWidth = 369
+  Constraints.MinHeight = 150
+  Constraints.MinWidth = 300
+  DesignTimePPI = 120
+  Position = poOwnerFormCenter
+  LCLVersion = '2.2.4.0'
+  object lblTitle: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = btnYes
+    Left = 24
+    Height = 112
+    Top = 24
+    Width = 321
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 24
+    Caption = 'Save the changes?'
+    ParentColor = False
+    WordWrap = True
+  end
+  object btnYes: TButton
+    AnchorSideRight.Control = btnNo
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 145
+    Height = 34
+    Top = 160
+    Width = 52
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Left = 24
+    BorderSpacing.Right = 12
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&Yes'
+    OnClick = ButtonClick
+    TabOrder = 0
+  end
+  object btnNo: TButton
+    Tag = 1
+    AnchorSideRight.Control = btnCancel
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 209
+    Height = 34
+    Top = 160
+    Width = 50
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Right = 12
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&No'
+    OnClick = ButtonClick
+    TabOrder = 1
+  end
+  object btnCancel: TButton
+    Tag = 2
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 271
+    Height = 34
+    Top = 160
+    Width = 74
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&Cancel'
+    OnClick = ButtonClick
+    TabOrder = 2
+  end
+end
