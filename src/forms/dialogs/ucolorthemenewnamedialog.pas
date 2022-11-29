@@ -40,6 +40,7 @@ uses
 resourcestring
   COLOR_THEME_ALREADY_EXISTS = 'A color theme with this name already exists';
   ERROR_COPY_COLOR_THEME = 'Error when copy a color theme: %s';
+  CAPTION_COPY = 'Copy: %s';
 
 {$R *.lfm}
 
@@ -81,7 +82,7 @@ end;
 
 procedure TdlgColorThemeNewName.FormShow(Sender: TObject);
 begin
-  Caption := FFormCaption + ' - copy';
+  Caption := Format(CAPTION_COPY, [FFormCaption]);
 end;
 
 end.

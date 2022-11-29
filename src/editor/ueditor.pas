@@ -111,7 +111,7 @@ end;
 
 function TEditor.isNotNewFile: boolean;
 begin
-  Result := not getCurrentFilename().IsEmpty;
+  Result := not synEdit.FileName.IsEmpty;
 end;
 
 function TEditor.openFile(const filename: string): boolean;

@@ -24,7 +24,7 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
-      <BuildNr Value="253"/>
+      <BuildNr Value="257"/>
       <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.0"/>
     </VersionInfo>
     <BuildModes>
@@ -37,7 +37,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="forms;units;editor"/>
+            <OtherUnitFiles Value="forms;units;editor;forms/dialogs"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -80,7 +80,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="forms;units;editor"/>
+            <OtherUnitFiles Value="forms;units;editor;forms/dialogs"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -111,6 +111,9 @@
       <FormatVersion Value="2"/>
     </RunParams>
     <RequiredPackages>
+      <Item>
+        <PackageName Value="atflatcontrols_package"/>
+      </Item>
       <Item>
         <PackageName Value="atsynedit_package"/>
       </Item>
@@ -199,6 +202,27 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uColorThemeEditorForm"/>
       </Unit>
+      <Unit>
+        <Filename Value="forms/dialogs/ucolorthemenewnamedialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dlgColorThemeNewName"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uColorThemeNewNameDialog"/>
+      </Unit>
+      <Unit>
+        <Filename Value="forms/uloggerform.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="frmLogger"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uLoggerForm"/>
+      </Unit>
+      <Unit>
+        <Filename Value="forms/dialogs/ufilechangeddialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dlgFileChanged"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFileChangedDialog"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -208,7 +232,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="forms;units;editor"/>
+      <OtherUnitFiles Value="forms;units;editor;forms/dialogs"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

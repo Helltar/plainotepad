@@ -79,7 +79,6 @@ type
   private
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
-    function showFileChangeDialog(): TModalResult;
     function checkFileModifiedStatus(): boolean;
     procedure closeFile();
     procedure initComponents();
@@ -89,7 +88,6 @@ type
     procedure updateSaveDialogTitle();
     procedure initialSetup();
   public
-    appConfigFile: string;
     config: TConfig;
     editor: TEditor;
     procedure loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; const changeParentColor: boolean = True);
@@ -102,12 +100,10 @@ var
 implementation
 
 uses
-  uConsts, uAboutForm, uLogger, uUtils;
+  uConsts, uAboutForm, uLogger, uUtils, uFileChangedDialog;
 
 resourcestring
-  CAPTION_FILE_CHANGED = 'File changed';
   ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
-  MSG_SAVE_CHANGES = 'Save the changes?';
   TITLE_SAVE_FILE_AS = 'Save file as';
 
 {$R *.lfm}
@@ -343,11 +339,10 @@ var
 
 begin
   filename := editor.getCurrentFilename();
-  saveDialog.FileName := ExtractFileName(filename);
   saveDialog.Title := TITLE_SAVE_FILE_AS;
 
   if not filename.IsEmpty then
-    saveDialog.Title := saveDialog.FileName + ' - ' + TITLE_SAVE_FILE_AS;
+    saveDialog.Title := ExtractFileName(filename) + ' - ' + TITLE_SAVE_FILE_AS;
 end;
 
 procedure TfrmMain.initialSetup;
@@ -380,22 +375,23 @@ begin
   end;
 end;
 
-function TfrmMain.showFileChangeDialog: TModalResult;
-begin
-  Result := MessageDlg(CAPTION_FILE_CHANGED, MSG_SAVE_CHANGES, mtConfirmation, [mbYes, mbNo, mbCancel], 0);
-end;
-
 function TfrmMain.checkFileModifiedStatus: boolean;
 begin
   Result := False;
 
   if editor.fileModified then
-    case showFileChangeDialog() of
-      mrYes:
-        if not saveFile() then
-          Exit;
-      mrCancel: Exit;
-    end;
+    with TdlgFileChanged.Create(Self, editor.getCurrentFilename()) do
+      try
+        ShowModal;
+        case dlgResult of
+          dlgResOk:
+            if not saveFile() then
+              Exit;
+          dlgResCancel: Exit;
+        end;
+      finally
+        Free;
+      end;
 
   Result := True;
 end;
