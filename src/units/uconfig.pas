@@ -215,7 +215,7 @@ end;
 
 function TConfig.GetWordWrap: boolean;
 begin
-  Result := ReadBool(SECTION_MAIN, 'wordWrap', False);
+  Result := ReadBool(SECTION_MAIN, 'wordWrap', True);
 end;
 
 procedure TConfig.SetBorderSpaceBottom(AValue: integer);
