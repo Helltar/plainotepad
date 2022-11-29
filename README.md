@@ -11,10 +11,11 @@
 Download
 --------
 
-- [plainotepad-0.2.0.tar.gz](https://github.com/Helltar/plainotepad/releases/download/0.2.0/plainotepad-0.2.0.tar.gz) (1.37 MB)
- 
-Installation
-------------
+- [plainotepad-0.9.1-linux.tar.xz](https://github.com/Helltar/plainotepad/releases/download/0.9.1/plainotepad-0.9.1-linux.tar.xz) (1.48 MB)
+- [plainotepad-0.9.1-windows.zip](https://github.com/Helltar/plainotepad/releases/download/0.9.1/plainotepad-0.9.1-windows.zip) (2.39 MB)
+
+Installation (Linux)
+--------------------
 
 NOTE: **Arch** users can just install **Plainotepad** from the **AUR**: ([plainotepad](https://aur.archlinux.org/packages/plainotepad)) and skip next section.
 
@@ -38,22 +39,24 @@ sudo apt install libqt5pas1
 sudo dnf install qt5pas
 ```
 
-Usage
------
-
-Unpack and run:
+Done, unpack and run:
 
 ```
 cd ~/Downloads/
 ```
 ```
-tar -xvzf plainotepad-0.2.0.tar.gz
+tar -xvf plainotepad-0.9.1-linux.tar.xz
 ```
 ```
 ./plainotepad
 ```
 
 To make available in your list of applications, got to **Settings** > **Create Desktop Entry**.
+
+Installation (Windows)
+----------------------
+
+Just run **plainotepad.exe** from unzip archive (it's portable app).
 
 Build from source
 -----------------
