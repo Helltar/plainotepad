@@ -3,9 +3,9 @@
     <br><br>
     Plainotepad
     <br><br>
-    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083044.png" alt="plainotepad_light" width="50%"/>
+    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_28112022_083009.png" alt="plainotepad_dark_linux" width="60%"/>
     <br><br>
-    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_23112022_083008.png" alt="plainotepad_dark" width="50%"/>
+    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_2022-11-28_231748.png" alt="plainotepad_cream_windows" width="60%"/>
 </h3>
 
 Download
