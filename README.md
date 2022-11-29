@@ -58,6 +58,8 @@ Installation (Windows)
 
 Just run **plainotepad.exe** from unzip archive (it's portable app).
 
+NOTE: your antivirus maybe marks the app as dangerous.
+
 Build from source
 -----------------
 
