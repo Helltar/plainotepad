@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 501
-  Height = 440
-  Top = 232
-  Width = 659
+  Left = 521
+  Height = 452
+  Top = 198
+  Width = 673
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 415
-  ClientWidth = 659
+  ClientHeight = 427
+  ClientWidth = 673
   Constraints.MinHeight = 300
   Constraints.MinWidth = 400
   DesignTimePPI = 120
@@ -16,36 +16,53 @@ object frmMain: TfrmMain
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
   LCLVersion = '2.2.4.0'
-  object synEdit: TATSynEdit
+  object pnlEditor: TPanel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Cursor = crIBeam
     Left = 0
-    Height = 415
+    Height = 427
     Top = 0
-    Width = 659
+    Width = 673
     Anchors = [akTop, akLeft, akRight, akBottom]
-    DoubleBuffered = True
-    Font.Height = -15
-    Font.Name = 'Courier New'
-    ParentFont = False
+    BevelColor = clNone
+    BevelOuter = bvNone
+    ClientHeight = 427
+    ClientWidth = 673
     TabOrder = 0
-    TabStop = True
-    OptFoldEnabled = False
-    OptShowURLs = False
-    OptShowCurLine = True
-    OptShowScrollHint = True
-    OptShowMouseSelFrame = False
-    OptCaretVirtual = False
-    OptBorderVisible = False
-    OptRulerVisible = False
-    OptNumbersStyle = cNumbersAll
-    OptUnprintedVisible = False
-    OptMouse2ClickOpensURL = False
+    object synEdit: TATSynEdit
+      AnchorSideLeft.Control = pnlEditor
+      AnchorSideTop.Control = pnlEditor
+      AnchorSideRight.Control = pnlEditor
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = pnlEditor
+      AnchorSideBottom.Side = asrBottom
+      Cursor = crIBeam
+      Left = 0
+      Height = 427
+      Top = 0
+      Width = 673
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      DoubleBuffered = True
+      Font.Height = -15
+      Font.Name = 'Courier New'
+      ParentFont = False
+      TabOrder = 0
+      TabStop = True
+      OptShowURLs = False
+      OptShowCurLine = True
+      OptShowScrollHint = True
+      OptShowMouseSelFrame = False
+      OptCaretVirtual = False
+      OptBorderVisible = False
+      OptRulerVisible = False
+      OptNumbersStyle = cNumbersAll
+      OptUnprintedVisible = False
+      OptMouse2ClickOpensURL = False
+    end
   end
   object actionList: TActionList
     Left = 150

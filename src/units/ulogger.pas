@@ -5,7 +5,7 @@ unit uLogger;
 interface
 
 uses
-  Classes, SysUtils, Dialogs, uLoggerForm;
+  uLoggerForm;
 
 procedure addLog(const msg: string; const showForm: boolean = True);
 

@@ -5,7 +5,7 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, LCLIntf,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, LCLIntf, ExtCtrls,
   ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
   uConfig, uEditor, uSettingsForm;
 
@@ -45,6 +45,7 @@ type
     miSaveFileAs: TMenuItem;
     miSettings: TMenuItem;
     miClose: TMenuItem;
+    pnlEditor: TPanel;
     separator1: TMenuItem;
     separator4: TMenuItem;
     separator5: TMenuItem;
@@ -299,6 +300,9 @@ begin
 
       if changeParentColor then
         ASynEdit.Parent.Color := Colors.TextBG;
+
+      PopupGutterFold := TPopupMenu.Create(Self);
+      OptFoldEnabled := False;
 
       Update();
     end;

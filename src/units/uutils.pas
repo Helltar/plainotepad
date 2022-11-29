@@ -13,8 +13,8 @@ function getAppInfo(const AType: string): string;
 function getAppOriginalFilename(): string;
 function getAppPath: string;
 function getConfigDir: string;
-procedure runProcess(const AExecutable: string; const AParameters: string = '');
 procedure copyResToDir(const resName: string; const destDir: string);
+procedure runProcess(const AExecutable: string; const AParameters: string = '');
 procedure unzipArchive(const AFilename: string; const AOutputPath: string);
 
 implementation

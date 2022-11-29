@@ -49,7 +49,6 @@ uses
 resourcestring
   ERROR_OPEN_FILE = 'Error when opening a file: %s';
   ERROR_SAVE_FILE = 'Error when saving the file: %s';
-  ERROR_OPEN_COLOR_THEME = 'Error when opening a color theme: %s';
   TITLE_READONLY = '%s - ReadOnly';
 
 { TEditor }
@@ -87,8 +86,9 @@ begin
   if not AText.IsEmpty then
     AText := ' ' + AText;
 
-  synEdit.Parent.Caption := ExtractFileName(getCurrentFilename()) + AText;
-  Application.Title := synEdit.Parent.Caption;
+  // todo: Parent.Parent - synedit on panel, qt5 mainmenu color
+  synEdit.Parent.Parent.Caption := ExtractFileName(getCurrentFilename()) + AText;
+  Application.Title := synEdit.Parent.Parent.Caption;
 end;
 
 procedure TEditor.SetHighlighter(AValue: boolean);
@@ -101,7 +101,8 @@ end;
 
 procedure TEditor.setTextToParentCaption(const AText: string);
 begin
-  synEdit.Parent.Caption := AText;
+  // todo: Parent.Parent - synedit on panel, qt5 mainmenu color
+  synEdit.Parent.Parent.Caption := AText;
 end;
 
 procedure TEditor.updateParentCaption;
@@ -162,6 +163,7 @@ end;
 
 procedure TEditor.closeFile;
 begin
+  editorHighlighter.lexer := nil;
   setTextToParentCaption(APP_NAME);
   synEdit.FileName := '';
   synEdit.Text := '';
