@@ -43,7 +43,6 @@ object frmLogger: TfrmLogger
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     Caption = 'lblLogMessage'
-    Font.Color = 7102687
     Font.Style = [fsBold]
     ParentColor = False
     ParentFont = False

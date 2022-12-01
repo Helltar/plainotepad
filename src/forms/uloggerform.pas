@@ -15,8 +15,11 @@ type
     btnOk: TButton;
     lblLogMessage: TLabel;
     procedure FormShow(Sender: TObject);
+  private
+    FFontColor: TColor;
   public
     constructor Create(TheOwner: TComponent; const logMessage: string);
+    property fontColor: TColor write FFontColor;
   end;
 
 implementation
@@ -31,6 +34,7 @@ uses
 procedure TfrmLogger.FormShow(Sender: TObject);
 begin
   Constraints.MinHeight := Height;
+  lblLogMessage.Font.Color := FFontColor;
 end;
 
 constructor TfrmLogger.Create(TheOwner: TComponent; const logMessage: string);

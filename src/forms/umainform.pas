@@ -168,7 +168,7 @@ end;
 procedure TfrmMain.miCreateDesktopEntryClick(Sender: TObject);
 begin
   if createDesktopEntry() then
-    addLog(DESKTOP_ENTRY_CREATED);
+    addLog(DESKTOP_ENTRY_CREATED, True, False);
 end;
 
 procedure TfrmMain.miAboutClick(Sender: TObject);
