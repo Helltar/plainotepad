@@ -223,6 +223,17 @@ begin
 end;
 
 procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; const changeParentColor: boolean);
+
+  procedure initDefault();
+  begin
+    with ASynEdit do
+    begin
+      OptSpacingY := 0;
+      OptFoldEnabled := False;
+      PopupGutterFold := TPopupMenu.Create(Self);
+    end;
+  end;
+
 begin
   with ASynEdit do
     with config do
@@ -277,8 +288,7 @@ begin
       if changeParentColor then
         ASynEdit.Parent.Color := Colors.TextBG;
 
-      PopupGutterFold := TPopupMenu.Create(Self);
-      OptFoldEnabled := False;
+      initDefault();
 
       Update();
     end;
