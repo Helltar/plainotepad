@@ -33,6 +33,7 @@ type
     function GetRightEdge: integer;
     function GetScrollBars: boolean;
     function GetShowMenubar: boolean;
+    function GetShowToolBar: boolean;
     function GetWordWrap: boolean;
     procedure SetBorderSpaceBottom(AValue: integer);
     procedure SetBorderSpaceLeft(AValue: integer);
@@ -55,6 +56,7 @@ type
     procedure SetRightEdge(AValue: integer);
     procedure SetScrollBars(AValue: boolean);
     procedure SetShowMenubar(AValue: boolean);
+    procedure SetShowToolBar(AValue: boolean);
     procedure SetWordWrap(AValue: boolean);
   public
     property formHeight: integer read GetFormHeight write SetFormHeight;
@@ -63,6 +65,7 @@ type
     property formWidth: integer read GetFormWidth write SetFormWidth;
     property fullScreen: boolean read GetFullScreen write SetFullScreen;
     property showMenubar: boolean read GetShowMenubar write SetShowMenubar;
+    property showToolBar: boolean read GetShowToolBar write SetShowToolBar;
 
     property colorTheme: string read GetColorTheme write SetColorTheme;
     property fontName: string read GetFontName write SetFontName;
@@ -213,6 +216,11 @@ begin
   Result := ReadBool(SECTION_MAIN, 'showMenubar', True);
 end;
 
+function TConfig.GetShowToolBar: boolean;
+begin
+  Result := ReadBool(SECTION_MAIN, 'showToolBar', False);
+end;
+
 function TConfig.GetWordWrap: boolean;
 begin
   Result := ReadBool(SECTION_MAIN, 'wordWrap', True);
@@ -321,6 +329,11 @@ end;
 procedure TConfig.SetShowMenubar(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'showMenubar', AValue);
+end;
+
+procedure TConfig.SetShowToolBar(AValue: boolean);
+begin
+  WriteBool(SECTION_MAIN, 'showToolBar', AValue);
 end;
 
 procedure TConfig.SetWordWrap(AValue: boolean);

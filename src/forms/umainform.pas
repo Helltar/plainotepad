@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
   LCLIntf, ExtCtrls, StdActns, ComCtrls, ATSynEdit, ATSynEdit_Globals,
-  ATSynEdit_Commands, uConfig, uEditor, uSettingsForm;
+  ATSynEdit_Commands, ATFlatToolbar, uConfig, uEditor, uSettingsForm;
 
 type
 
@@ -30,6 +30,7 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
+    miShowToolBar: TMenuItem;
     miCreateDesktopEntry: TMenuItem;
     miNewWindow: TMenuItem;
     miNewFile: TMenuItem;
@@ -61,9 +62,18 @@ type
     separator2: TMenuItem;
     Separator7: TMenuItem;
     Separator8: TMenuItem;
+    Separator9: TMenuItem;
     synEdit: TATSynEdit;
     openDialog: TOpenDialog;
     saveDialog: TSaveDialog;
+    tbEditor: TToolBar;
+    tbtnNewFile: TToolButton;
+    tbtnOpenFile: TToolButton;
+    tbtnSaveFile: TToolButton;
+    tbtnSaveFileAs: TToolButton;
+    tbtnSeparator: TToolButton;
+    tbtnNewWindow: TToolButton;
+    ToolButton1: TToolButton;
     procedure actCloseExecute(Sender: TObject);
     procedure actCopyExecute(Sender: TObject);
     procedure actCutExecute(Sender: TObject);
@@ -86,6 +96,7 @@ type
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure miCreateDesktopEntryClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
+    procedure miShowToolBarClick(Sender: TObject);
   private
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
@@ -181,6 +192,14 @@ begin
     end;
 end;
 
+procedure TfrmMain.miShowToolBarClick(Sender: TObject);
+begin
+  if tbEditor.Visible then
+    tbEditor.Visible := False
+  else
+    tbEditor.Visible := True;
+end;
+
 function TfrmMain.openFile(fileName: string): boolean;
 begin
   Result := False;
@@ -229,6 +248,8 @@ begin
 
     if not showMenubar then
       Menu := nil;
+
+    tbEditor.Visible := showToolBar;
   end;
 end;
 
@@ -330,6 +351,7 @@ begin
     formWidth := Width;
     fullScreen := WindowState = wsFullScreen;
     showMenubar := Assigned(Menu);
+    showToolBar := tbEditor.Visible;
   end;
 end;
 

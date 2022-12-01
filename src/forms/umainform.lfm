@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 496
-  Height = 454
-  Top = 264
-  Width = 656
+  Left = 561
+  Height = 486
+  Top = 253
+  Width = 669
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 420
-  ClientWidth = 656
+  ClientHeight = 452
+  ClientWidth = 669
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   Menu = mmMain
@@ -17,20 +17,21 @@ object frmMain: TfrmMain
   LCLVersion = '2.2.4.0'
   object pnlEditor: TPanel
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = Owner
+    AnchorSideTop.Control = tbEditor
+    AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
     Height = 420
-    Top = 0
-    Width = 656
+    Top = 32
+    Width = 669
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
     ClientHeight = 420
-    ClientWidth = 656
+    ClientWidth = 669
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -43,7 +44,7 @@ object frmMain: TfrmMain
       Left = 0
       Height = 420
       Top = 0
-      Width = 656
+      Width = 669
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
       Font.Height = -12
@@ -61,6 +62,66 @@ object frmMain: TfrmMain
       OptNumbersStyle = cNumbersAll
       OptUnprintedVisible = False
       OptMouse2ClickOpensURL = False
+    end
+  end
+  object tbEditor: TToolBar
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Top = 0
+    Width = 669
+    AutoSize = True
+    ButtonHeight = 32
+    ButtonWidth = 32
+    Caption = 'tbEditor'
+    EdgeBorders = []
+    ShowCaptions = True
+    TabOrder = 1
+    object tbtnNewFile: TToolButton
+      Left = 1
+      Top = 0
+      Action = actNewFile
+      Caption = '  New  '
+    end
+    object tbtnOpenFile: TToolButton
+      Left = 57
+      Top = 0
+      Action = actOpenFile
+      Caption = '  Open  '
+    end
+    object tbtnSaveFile: TToolButton
+      Left = 126
+      Top = 0
+      Action = actSaveFile
+      Caption = '  Save  '
+    end
+    object tbtnSaveFileAs: TToolButton
+      Left = 184
+      Top = 0
+      Action = actSaveFileAs
+      Caption = '  Save As  '
+    end
+    object tbtnSeparator: TToolButton
+      Left = 118
+      Height = 32
+      Top = 0
+      Caption = 'tbtnSeparator'
+      Style = tbsSeparator
+    end
+    object tbtnNewWindow: TToolButton
+      Left = 273
+      Top = 0
+      Action = actNewWindow
+      Caption = '  New Window  '
+    end
+    object ToolButton1: TToolButton
+      Left = 265
+      Height = 32
+      Top = 0
+      Caption = 'ToolButton1'
+      Style = tbsSeparator
     end
   end
   object actionList: TActionList
@@ -237,8 +298,17 @@ object frmMain: TfrmMain
       object miFullscreen: TMenuItem
         Action = actFullscreen
       end
+      object Separator9: TMenuItem
+        Caption = '-'
+      end
       object miShowMenubar: TMenuItem
         Action = actShowMenubar
+      end
+      object miShowToolBar: TMenuItem
+        AutoCheck = True
+        Caption = 'Show ToolBar'
+        Checked = True
+        OnClick = miShowToolBarClick
       end
     end
     object miHelp: TMenuItem
