@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 397
-  Height = 502
-  Top = 203
-  Width = 919
+  Left = 496
+  Height = 454
+  Top = 264
+  Width = 656
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 468
-  ClientWidth = 919
+  ClientHeight = 420
+  ClientWidth = 656
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   Menu = mmMain
@@ -23,14 +23,14 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 468
+    Height = 420
     Top = 0
-    Width = 919
+    Width = 656
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 468
-    ClientWidth = 919
+    ClientHeight = 420
+    ClientWidth = 656
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -41,9 +41,9 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 468
+      Height = 420
       Top = 0
-      Width = 919
+      Width = 656
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
       Font.Height = -12
@@ -243,6 +243,13 @@ object frmMain: TfrmMain
     end
     object miHelp: TMenuItem
       Caption = '&Help'
+      object miCreateDesktopEntry: TMenuItem
+        Caption = 'Create Desktop Entry'
+        OnClick = miCreateDesktopEntryClick
+      end
+      object Separator8: TMenuItem
+        Caption = '-'
+      end
       object miAbout: TMenuItem
         Caption = '&About'
         OnClick = miAboutClick

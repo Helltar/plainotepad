@@ -1,13 +1,13 @@
 object frmSettings: TfrmSettings
-  Left = 942
-  Height = 672
-  Top = 198
-  Width = 396
+  Left = 900
+  Height = 669
+  Top = 185
+  Width = 394
   AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Settings'
-  ClientHeight = 672
-  ClientWidth = 396
+  ClientHeight = 669
+  ClientWidth = 394
   Constraints.MinHeight = 424
   Constraints.MinWidth = 272
   OnClose = FormClose
@@ -16,15 +16,14 @@ object frmSettings: TfrmSettings
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'
   object btnOk: TButton
-    AnchorSideTop.Control = btnCreateDesktopEntry
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 323
+    Left = 321
     Height = 36
-    Top = 612
+    Top = 609
     Width = 49
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -34,23 +33,6 @@ object frmSettings: TfrmSettings
     OnClick = btnOkClick
     TabOrder = 1
   end
-  object btnCreateDesktopEntry: TButton
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = btnOk
-    AnchorSideTop.Side = asrCenter
-    AnchorSideBottom.Control = Owner
-    AnchorSideBottom.Side = asrBottom
-    Left = 24
-    Height = 36
-    Top = 612
-    Width = 167
-    AutoSize = True
-    BorderSpacing.Around = 24
-    BorderSpacing.InnerBorder = 2
-    Caption = 'Create Desktop Entry'
-    OnClick = btnCreateDesktopEntryClick
-    TabOrder = 2
-  end
   object pcSettings: TPageControl
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
@@ -58,9 +40,9 @@ object frmSettings: TfrmSettings
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 564
+    Height = 561
     Top = 24
-    Width = 348
+    Width = 346
     ActivePage = tsGeneral
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
@@ -71,8 +53,8 @@ object frmSettings: TfrmSettings
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
       Caption = 'General'
-      ClientHeight = 529
-      ClientWidth = 344
+      ClientHeight = 526
+      ClientWidth = 342
       object lblFont: TLabel
         AnchorSideLeft.Control = tsGeneral
         AnchorSideTop.Control = tsGeneral
@@ -92,7 +74,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Control = lblFontName
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = btnSelectFont
-        Left = 221
+        Left = 219
         Height = 36
         Top = 51
         Width = 60
@@ -111,7 +93,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = tsGeneral
         AnchorSideRight.Side = asrBottom
-        Left = 293
+        Left = 291
         Height = 32
         Top = 53
         Width = 27
@@ -145,7 +127,7 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 36
         Top = 138
-        Width = 226
+        Width = 224
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 24
         ItemHeight = 22
@@ -250,7 +232,7 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 36
         Top = 452
-        Width = 296
+        Width = 294
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 24
         BorderSpacing.Right = 24
@@ -273,7 +255,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = tsGeneral
         AnchorSideRight.Side = asrBottom
-        Left = 262
+        Left = 260
         Height = 32
         Top = 140
         Width = 58
@@ -293,7 +275,7 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 22
         Top = 58
-        Width = 185
+        Width = 183
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 24
         Caption = 'Font Name'
@@ -304,8 +286,8 @@ object frmSettings: TfrmSettings
     end
     object tsBorders: TTabSheet
       Caption = 'Borders'
-      ClientHeight = 529
-      ClientWidth = 344
+      ClientHeight = 526
+      ClientWidth = 342
       object gbBorderSpace: TGroupBox
         AnchorSideLeft.Control = tsBorders
         AnchorSideTop.Control = cbNonSystemScrollBars
@@ -315,13 +297,13 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 242
         Top = 150
-        Width = 296
+        Width = 294
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
         BorderSpacing.Around = 24
         Caption = 'Border Space'
         ClientHeight = 208
-        ClientWidth = 292
+        ClientWidth = 290
         TabOrder = 3
         object lblBottomSpace: TLabel
           AnchorSideLeft.Control = gbBorderSpace
@@ -376,7 +358,7 @@ object frmSettings: TfrmSettings
           AnchorSideTop.Control = lblTopSpace
           AnchorSideTop.Side = asrCenter
           AnchorSideRight.Side = asrBottom
-          Left = 208
+          Left = 206
           Height = 36
           Top = 155
           Width = 60
@@ -389,7 +371,7 @@ object frmSettings: TfrmSettings
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Control = lblRightSpace
           AnchorSideTop.Side = asrCenter
-          Left = 208
+          Left = 206
           Height = 36
           Top = 109
           Width = 60
@@ -402,7 +384,7 @@ object frmSettings: TfrmSettings
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Control = lblLeftSpace
           AnchorSideTop.Side = asrCenter
-          Left = 208
+          Left = 206
           Height = 36
           Top = 63
           Width = 60
@@ -416,7 +398,7 @@ object frmSettings: TfrmSettings
           AnchorSideTop.Side = asrCenter
           AnchorSideRight.Control = gbBorderSpace
           AnchorSideRight.Side = asrBottom
-          Left = 208
+          Left = 206
           Height = 36
           Top = 17
           Width = 60

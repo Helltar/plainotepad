@@ -30,6 +30,7 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
+    miCreateDesktopEntry: TMenuItem;
     miNewWindow: TMenuItem;
     miNewFile: TMenuItem;
     mmMain: TMainMenu;
@@ -59,6 +60,7 @@ type
     separator3: TMenuItem;
     separator2: TMenuItem;
     Separator7: TMenuItem;
+    Separator8: TMenuItem;
     synEdit: TATSynEdit;
     openDialog: TOpenDialog;
     saveDialog: TSaveDialog;
@@ -82,6 +84,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure miCreateDesktopEntryClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
   private
     function openFile(fileName: string): boolean;
@@ -112,6 +115,7 @@ uses
 resourcestring
   ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
   TITLE_SAVE_FILE_AS = 'Save file as';
+  DESKTOP_ENTRY_CREATED = 'Desktop entry created';
 
 {$R *.lfm}
 
@@ -159,6 +163,12 @@ begin
 
   for i := 1 to Length(FileNames) - 1 do
     runProcess(ParamStr(0), FileNames[i]);
+end;
+
+procedure TfrmMain.miCreateDesktopEntryClick(Sender: TObject);
+begin
+  if createDesktopEntry() then
+    addLog(DESKTOP_ENTRY_CREATED);
 end;
 
 procedure TfrmMain.miAboutClick(Sender: TObject);

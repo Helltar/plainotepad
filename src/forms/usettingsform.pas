@@ -15,7 +15,6 @@ type
   TfrmSettings = class(TForm)
     btnSelectFont: TButton;
     btnOk: TButton;
-    btnCreateDesktopEntry: TButton;
     btnEditColorTheme: TButton;
     cbHighlighter: TCheckBox;
     cbLineNumbers: TCheckBox;
@@ -45,7 +44,6 @@ type
     seTopSpace: TSpinEdit;
     tsGeneral: TTabSheet;
     tsBorders: TTabSheet;
-    procedure btnCreateDesktopEntryClick(Sender: TObject);
     procedure btnEditColorThemeClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure btnSelectFontClick(Sender: TObject);
@@ -81,9 +79,6 @@ implementation
 uses
   uMainForm, uConsts, uUtils, uLogger, uColorThemeEditorForm;
 
-resourcestring
-  DESKTOP_ENTRY_CREATED = 'Desktop entry created';
-
 {$R *.lfm}
 
 { TfrmSettings }
@@ -115,10 +110,6 @@ begin
       ItemIndex := frmMain.config.mouseMiddleClickAction
     else
       ItemIndex := 0;
-
-  {$IFDEF MSWINDOWS}
-  btnCreateDesktopEntry.Visible := False;
-  {$ENDIF}
 
   loadColorThemes();
 
@@ -200,12 +191,6 @@ end;
 procedure TfrmSettings.btnOkClick(Sender: TObject);
 begin
   Close;
-end;
-
-procedure TfrmSettings.btnCreateDesktopEntryClick(Sender: TObject);
-begin
-  if createDesktopEntry() then
-    addLog(DESKTOP_ENTRY_CREATED);
 end;
 
 procedure TfrmSettings.btnEditColorThemeClick(Sender: TObject);
