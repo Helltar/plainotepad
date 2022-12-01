@@ -5,7 +5,7 @@ unit uUtils;
 interface
 
 uses
-  SysUtils, Classes, fileinfo, LCLType, process, Zipper;
+  SysUtils, Classes, FileInfo, LCLType, Process, Zipper;
 
 function createDesktopEntry(): boolean;
 function getAppFileVersion(): string;
