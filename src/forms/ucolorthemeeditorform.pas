@@ -257,8 +257,7 @@ begin
       with TIniFile.Create(getColorThemeFilename()) do
         try
           Selected :=
-            StringToColor(ReadString(COLOR_SCHEME_CONFIG_SECTION_LEXER + syntAnalyzer.LexerName, syntAnalyzer.Formats.Items[i].DisplayName,
-            'clNone'));
+            StringToColor(ReadString(COLOR_SCHEME_CONFIG_SECTION_LEXER + syntAnalyzer.LexerName, syntAnalyzer.Formats.Items[i].DisplayName, 'clNone'));
         finally
           Free;
         end;

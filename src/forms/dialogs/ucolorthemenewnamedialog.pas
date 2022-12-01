@@ -5,7 +5,7 @@ unit uColorThemeNewNameDialog;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, FileUtil, LCLType;
+  Classes, SysUtils, Forms, Dialogs, StdCtrls, FileUtil, LCLType;
 
 type
 

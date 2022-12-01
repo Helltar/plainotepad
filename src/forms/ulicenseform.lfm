@@ -17,12 +17,12 @@ object frmLicense: TfrmLicense
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 19
-    Height = 362
-    Top = 19
-    Width = 612
+    Left = 24
+    Height = 352
+    Top = 24
+    Width = 602
     Anchors = [akTop, akLeft, akRight, akBottom]
-    BorderSpacing.Around = 19
+    BorderSpacing.Around = 24
     BorderStyle = bsNone
     Color = clForm
     Lines.Strings = (
