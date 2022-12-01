@@ -88,7 +88,10 @@ begin
 
   // todo: Parent.Parent - synedit on panel, qt5 mainmenu color
   synEdit.Parent.Parent.Caption := ExtractFileName(getCurrentFilename()) + AText;
+
+  {$IfDef MSWINDOWS}
   Application.Title := synEdit.Parent.Parent.Caption;
+  {$EndIf}
 end;
 
 procedure TEditor.SetHighlighter(AValue: boolean);
