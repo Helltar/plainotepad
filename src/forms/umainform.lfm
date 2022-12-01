@@ -1,15 +1,14 @@
 object frmMain: TfrmMain
-  Left = 521
-  Height = 452
-  Top = 198
-  Width = 673
+  Left = 281
+  Height = 502
+  Top = 232
+  Width = 919
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 427
-  ClientWidth = 673
-  Constraints.MinHeight = 300
-  Constraints.MinWidth = 400
-  DesignTimePPI = 120
+  ClientHeight = 468
+  ClientWidth = 919
+  Constraints.MinHeight = 240
+  Constraints.MinWidth = 320
   Menu = mmMain
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -24,14 +23,14 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 427
+    Height = 468
     Top = 0
-    Width = 673
+    Width = 919
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 427
-    ClientWidth = 673
+    ClientHeight = 468
+    ClientWidth = 919
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -42,12 +41,11 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 427
+      Height = 468
       Top = 0
-      Width = 673
+      Width = 919
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
-      Font.Height = -15
       Font.Name = 'Courier New'
       ParentFont = False
       TabOrder = 0
@@ -65,8 +63,8 @@ object frmMain: TfrmMain
     end
   end
   object actionList: TActionList
-    Left = 150
-    Top = 70
+    Left = 120
+    Top = 56
     object actSaveFile: TAction
       Caption = '&Save'
       Hint = 'Save'
@@ -118,19 +116,55 @@ object frmMain: TfrmMain
       OnExecute = actNewWindowExecute
       ShortCut = 24654
     end
+    object actCut: TAction
+      Category = 'Edit'
+      Caption = 'Cu&t'
+      OnExecute = actCutExecute
+      ShortCut = 16472
+    end
+    object actCopy: TAction
+      Category = 'Edit'
+      Caption = '&Copy'
+      OnExecute = actCopyExecute
+      ShortCut = 16451
+    end
+    object actPaste: TAction
+      Category = 'Edit'
+      Caption = '&Paste'
+      OnExecute = actPasteExecute
+      ShortCut = 16470
+    end
+    object actSelectAll: TAction
+      Category = 'Edit'
+      Caption = 'Select &All'
+      OnExecute = actSelectAllExecute
+      ShortCut = 16449
+    end
+    object actUndo: TAction
+      Category = 'Edit'
+      Caption = '&Undo'
+      OnExecute = actUndoExecute
+      ShortCut = 16474
+    end
+    object actDelete: TAction
+      Category = 'Edit'
+      Caption = '&Delete'
+      OnExecute = actDeleteExecute
+      ShortCut = 46
+    end
   end
   object saveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    Left = 296
-    Top = 176
+    Left = 237
+    Top = 141
   end
   object openDialog: TOpenDialog
-    Left = 150
-    Top = 176
+    Left = 120
+    Top = 141
   end
   object mmMain: TMainMenu
-    Left = 296
-    Top = 70
+    Left = 237
+    Top = 56
     object miFile: TMenuItem
       Caption = '&File'
       object miNewFile: TMenuItem
@@ -170,43 +204,31 @@ object frmMain: TfrmMain
     object miEdit: TMenuItem
       Caption = '&Edit'
       object miCut: TMenuItem
-        Caption = 'Cu&t'
-        ShortCut = 16472
-        OnClick = miCutClick
+        Action = actCut
       end
       object miCopy: TMenuItem
-        Caption = '&Copy'
-        ShortCut = 16451
-        OnClick = miCopyClick
+        Action = actCopy
       end
       object miPaste: TMenuItem
-        Caption = '&Paste'
-        ShortCut = 16470
-        OnClick = miPasteClick
+        Action = actPaste
       end
       object separator4: TMenuItem
         Caption = '-'
       end
       object miSelectAll: TMenuItem
-        Caption = 'Select &All'
-        ShortCut = 16449
-        OnClick = miSelectAllClick
+        Action = actSelectAll
       end
       object separator5: TMenuItem
         Caption = '-'
       end
       object miUndo: TMenuItem
-        Caption = '&Undo'
-        ShortCut = 16474
-        OnClick = miUndoClick
+        Action = actUndo
       end
       object separator6: TMenuItem
         Caption = '-'
       end
       object miEditDelete: TMenuItem
-        Caption = '&Delete'
-        ShortCut = 46
-        OnClick = miEditDeleteClick
+        Action = actDelete
       end
     end
     object miView: TMenuItem

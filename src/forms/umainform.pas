@@ -5,9 +5,9 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus, LCLIntf, ExtCtrls,
-  ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
-  uConfig, uEditor, uSettingsForm;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
+  LCLIntf, ExtCtrls, StdActns, ComCtrls, ATSynEdit, ATSynEdit_Globals,
+  ATSynEdit_Commands, uConfig, uEditor, uSettingsForm;
 
 type
 
@@ -16,6 +16,12 @@ type
   TfrmMain = class(TForm)
     actFullscreen: TAction;
     actClose: TAction;
+    actCut: TAction;
+    actCopy: TAction;
+    actDelete: TAction;
+    actUndo: TAction;
+    actPaste: TAction;
+    actSelectAll: TAction;
     actNewWindow: TAction;
     actNewFile: TAction;
     actShowMenubar: TAction;
@@ -57,26 +63,26 @@ type
     openDialog: TOpenDialog;
     saveDialog: TSaveDialog;
     procedure actCloseExecute(Sender: TObject);
+    procedure actCopyExecute(Sender: TObject);
+    procedure actCutExecute(Sender: TObject);
+    procedure actDeleteExecute(Sender: TObject);
     procedure actNewFileExecute(Sender: TObject);
     procedure actFullscreenExecute(Sender: TObject);
     procedure actNewWindowExecute(Sender: TObject);
     procedure actOpenFileExecute(Sender: TObject);
+    procedure actPasteExecute(Sender: TObject);
     procedure actSaveFileAsExecute(Sender: TObject);
     procedure actSaveFileExecute(Sender: TObject);
     procedure actSaveFileUpdate(Sender: TObject);
+    procedure actSelectAllExecute(Sender: TObject);
     procedure actSettingsExecute(Sender: TObject);
     procedure actShowMenubarExecute(Sender: TObject);
+    procedure actUndoExecute(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure miAboutClick(Sender: TObject);
-    procedure miCutClick(Sender: TObject);
-    procedure miCopyClick(Sender: TObject);
-    procedure miPasteClick(Sender: TObject);
-    procedure miSelectAllClick(Sender: TObject);
-    procedure miUndoClick(Sender: TObject);
-    procedure miEditDeleteClick(Sender: TObject);
   private
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
@@ -163,36 +169,6 @@ begin
     finally
       Free;
     end;
-end;
-
-procedure TfrmMain.miCutClick(Sender: TObject);
-begin
-  synEdit.DoCommand(cCommand_ClipboardCut, cInvokeMenuContext);
-end;
-
-procedure TfrmMain.miCopyClick(Sender: TObject);
-begin
-  synEdit.DoCommand(cCommand_ClipboardCopy, cInvokeMenuContext);
-end;
-
-procedure TfrmMain.miPasteClick(Sender: TObject);
-begin
-  synEdit.DoCommand(cCommand_ClipboardPaste, cInvokeMenuContext);
-end;
-
-procedure TfrmMain.miSelectAllClick(Sender: TObject);
-begin
-  synEdit.DoCommand(cCommand_SelectAll, cInvokeMenuContext);
-end;
-
-procedure TfrmMain.miUndoClick(Sender: TObject);
-begin
-  synEdit.DoCommand(cCommand_Undo, cInvokeMenuContext);
-end;
-
-procedure TfrmMain.miEditDeleteClick(Sender: TObject);
-begin
-  synEdit.DoCommand(cCommand_TextDeleteSelection, cInvokeMenuContext);
 end;
 
 function TfrmMain.openFile(fileName: string): boolean;
@@ -410,6 +386,11 @@ begin
   actSaveFile.Enabled := editor.fileModified;
 end;
 
+procedure TfrmMain.actSelectAllExecute(Sender: TObject);
+begin
+  synEdit.DoCommand(cCommand_SelectAll, cInvokeMenuContext);
+end;
+
 procedure TfrmMain.actSettingsExecute(Sender: TObject);
 begin
   if not Assigned(frmSettings) then
@@ -426,6 +407,11 @@ begin
     Menu := mmMain;
 end;
 
+procedure TfrmMain.actUndoExecute(Sender: TObject);
+begin
+  synEdit.DoCommand(cCommand_Undo, cInvokeMenuContext);
+end;
+
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   CanClose := checkFileModifiedStatus();
@@ -434,6 +420,21 @@ end;
 procedure TfrmMain.actCloseExecute(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TfrmMain.actCopyExecute(Sender: TObject);
+begin
+  synEdit.DoCommand(cCommand_ClipboardCopy, cInvokeMenuContext);
+end;
+
+procedure TfrmMain.actCutExecute(Sender: TObject);
+begin
+  synEdit.DoCommand(cCommand_ClipboardCut, cInvokeMenuContext);
+end;
+
+procedure TfrmMain.actDeleteExecute(Sender: TObject);
+begin
+  synEdit.DoCommand(cCommand_TextDeleteSelection, cInvokeMenuContext);
 end;
 
 procedure TfrmMain.actNewFileExecute(Sender: TObject);
@@ -470,6 +471,11 @@ procedure TfrmMain.actOpenFileExecute(Sender: TObject);
 begin
   if openDialog.Execute then
     openFile(openDialog.FileName);
+end;
+
+procedure TfrmMain.actPasteExecute(Sender: TObject);
+begin
+  synEdit.DoCommand(cCommand_ClipboardPaste, cInvokeMenuContext);
 end;
 
 procedure TfrmMain.actSaveFileAsExecute(Sender: TObject);
