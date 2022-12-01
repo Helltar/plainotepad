@@ -65,7 +65,7 @@ type
     property formWidth: integer read GetFormWidth write SetFormWidth;
     property fullScreen: boolean read GetFullScreen write SetFullScreen;
     property showMenubar: boolean read GetShowMenubar write SetShowMenubar;
-    property showToolBar: boolean read GetShowToolBar write SetShowToolBar;
+    property showToolbar: boolean read GetShowToolbar write SetShowToolbar;
 
     property colorTheme: string read GetColorTheme write SetColorTheme;
     property fontName: string read GetFontName write SetFontName;
@@ -218,7 +218,7 @@ end;
 
 function TConfig.GetShowToolBar: boolean;
 begin
-  Result := ReadBool(SECTION_MAIN, 'showToolBar', False);
+  Result := ReadBool(SECTION_MAIN, 'showToolbar', False);
 end;
 
 function TConfig.GetWordWrap: boolean;
@@ -333,7 +333,7 @@ end;
 
 procedure TConfig.SetShowToolBar(AValue: boolean);
 begin
-  WriteBool(SECTION_MAIN, 'showToolBar', AValue);
+  WriteBool(SECTION_MAIN, 'showToolbar', AValue);
 end;
 
 procedure TConfig.SetWordWrap(AValue: boolean);
