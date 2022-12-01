@@ -198,6 +198,8 @@ begin
     tbEditor.Visible := False
   else
     tbEditor.Visible := True;
+
+  config.showToolbar := tbEditor.Visible;
 end;
 
 function TfrmMain.openFile(fileName: string): boolean;
@@ -249,7 +251,8 @@ begin
     if not showMenubar then
       Menu := nil;
 
-    tbEditor.Visible := showToolBar;
+    tbEditor.Visible := showToolbar;
+    miShowToolBar.Checked := showToolbar;
   end;
 end;
 
@@ -349,9 +352,6 @@ begin
     formTop := Top;
     formHeight := Height;
     formWidth := Width;
-    fullScreen := WindowState = wsFullScreen;
-    showMenubar := Assigned(Menu);
-    showToolBar := tbEditor.Visible;
   end;
 end;
 
@@ -447,6 +447,8 @@ begin
     Menu := nil
   else
     Menu := mmMain;
+
+  config.showMenubar := Assigned(Menu);
 end;
 
 procedure TfrmMain.actUndoExecute(Sender: TObject);
@@ -502,6 +504,8 @@ begin
 
     WindowState := wsNormal;
   end;
+
+  config.fullScreen := WindowState = wsFullScreen;
 end;
 
 procedure TfrmMain.actNewWindowExecute(Sender: TObject);

@@ -306,7 +306,7 @@ object frmMain: TfrmMain
       end
       object miShowToolBar: TMenuItem
         AutoCheck = True
-        Caption = 'Show ToolBar'
+        Caption = 'Show Toolbar'
         Checked = True
         OnClick = miShowToolBarClick
       end
