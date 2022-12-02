@@ -1,5 +1,5 @@
 <h3 align="center">
-    <img src="icons/plainotepad.svg" height="96" alt="plainotepad_icon"/>
+    <img src="icons/scalable/plainotepad.svg" height="96" alt="plainotepad_icon"/>
     <br><br>
     Plainotepad
     <br><br>
