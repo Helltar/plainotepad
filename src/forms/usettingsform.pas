@@ -132,7 +132,7 @@ end;
 procedure TfrmSettings.FormShow(Sender: TObject);
 begin
   Constraints.MinHeight := Height;
-  Constraints.MinWidth := Width;
+  Constraints.MinWidth := Width + 48;
 end;
 
 procedure TfrmSettings.btnSelectFontClick(Sender: TObject);
