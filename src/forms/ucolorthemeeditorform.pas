@@ -93,9 +93,6 @@ end;
 
 procedure TfrmColorThemeEditor.cmbEditColorThemeChange(Sender: TObject);
 begin
-  sbMainColors.Enabled := getSelectedColorThemeName() <> COLOR_THEME_DARK;
-  sbLexerColors.Enabled := sbMainColors.Enabled;
-
   initThemeColorBoxControls();
   initLexerColorBoxControls();
 end;
@@ -116,7 +113,6 @@ begin
       begin
         updateThemesList();
         cmbEditColorTheme.ItemIndex := cmbEditColorTheme.Items.IndexOf(colorThemeNewName);
-        cmbEditColorThemeChange(nil);
       end;
     finally
       Free;

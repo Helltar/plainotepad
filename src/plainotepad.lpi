@@ -24,9 +24,9 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
-      <RevisionNr Value="1"/>
-      <BuildNr Value="262"/>
-      <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.1"/>
+      <RevisionNr Value="3"/>
+      <BuildNr Value="284"/>
+      <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.3"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
@@ -207,6 +207,7 @@
         <Filename Value="forms/dialogs/ucolorthemenewnamedialog.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="dlgColorThemeNewName"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uColorThemeNewNameDialog"/>
       </Unit>
@@ -214,6 +215,7 @@
         <Filename Value="forms/uloggerform.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmLogger"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uLoggerForm"/>
       </Unit>
@@ -221,6 +223,7 @@
         <Filename Value="forms/dialogs/ufilechangeddialog.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="dlgFileChanged"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFileChangedDialog"/>
       </Unit>

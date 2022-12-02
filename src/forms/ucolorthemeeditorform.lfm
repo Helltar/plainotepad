@@ -1,11 +1,11 @@
 object frmColorThemeEditor: TfrmColorThemeEditor
-  Left = 912
-  Height = 530
-  Top = 232
-  Width = 855
+  Left = 549
+  Height = 454
+  Top = 248
+  Width = 872
   Caption = 'Color Theme Editor'
-  ClientHeight = 530
-  ClientWidth = 855
+  ClientHeight = 454
+  ClientWidth = 872
   Constraints.MinHeight = 400
   Constraints.MinWidth = 600
   OnCreate = FormCreate
@@ -33,7 +33,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     Left = 24
     Height = 36
     Top = 58
-    Width = 214
+    Width = 223
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -53,9 +53,9 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = splHoriz
     Left = 24
-    Height = 122
+    Height = 87
     Top = 106
-    Width = 384
+    Width = 393
     HorzScrollBar.Increment = 1
     HorzScrollBar.Page = 1
     HorzScrollBar.Smooth = True
@@ -80,8 +80,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 240
-    Width = 427
+    Top = 205
+    Width = 436
     Align = alNone
     Anchors = [akLeft, akRight]
     ResizeAnchor = akBottom
@@ -91,7 +91,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideTop.Control = splHoriz
     Left = 24
     Height = 22
-    Top = 252
+    Top = 217
     Width = 40
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -106,8 +106,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     Left = 24
     Height = 36
-    Top = 286
-    Width = 384
+    Top = 251
+    Width = 393
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -128,9 +128,9 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 112
-    Top = 334
-    Width = 384
+    Height = 71
+    Top = 299
+    Width = 393
     HorzScrollBar.Increment = 1
     HorzScrollBar.Page = 1
     HorzScrollBar.Smooth = True
@@ -154,10 +154,10 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Cursor = crIBeam
-    Left = 451
-    Height = 422
+    Left = 460
+    Height = 346
     Top = 24
-    Width = 380
+    Width = 388
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     DoubleBuffered = True
@@ -182,8 +182,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideTop.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
-    Left = 427
-    Height = 446
+    Left = 436
+    Height = 370
     Top = 0
     Width = 5
     Align = alNone
@@ -194,9 +194,9 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 782
+    Left = 799
     Height = 36
-    Top = 470
+    Top = 394
     Width = 49
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -214,7 +214,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Control = btnDelete
     AnchorSideBottom.Control = cmbEditColorTheme
     AnchorSideBottom.Side = asrBottom
-    Left = 250
+    Left = 259
     Height = 32
     Top = 60
     Width = 77
@@ -233,7 +233,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = cmbEditColorTheme
     AnchorSideBottom.Side = asrBottom
-    Left = 339
+    Left = 348
     Height = 32
     Top = 60
     Width = 69

@@ -43,11 +43,11 @@ object frmSettings: TfrmSettings
     Height = 561
     Top = 24
     Width = 346
-    ActivePage = tsGeneral
+    ActivePage = tsBorders
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
     BorderSpacing.Around = 24
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object tsGeneral: TTabSheet
       AnchorSideRight.Side = asrBottom

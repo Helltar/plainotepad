@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
   Left = 561
-  Height = 486
+  Height = 446
   Top = 253
-  Width = 669
+  Width = 676
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 452
-  ClientWidth = 669
+  ClientHeight = 412
+  ClientWidth = 676
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   Menu = mmMain
@@ -24,14 +24,14 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 420
+    Height = 380
     Top = 32
-    Width = 669
+    Width = 676
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 420
-    ClientWidth = 669
+    ClientHeight = 380
+    ClientWidth = 676
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -42,9 +42,9 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 420
+      Height = 380
       Top = 0
-      Width = 669
+      Width = 676
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
       Font.Height = -12
@@ -71,7 +71,7 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     Left = 0
     Top = 0
-    Width = 669
+    Width = 676
     AutoSize = True
     ButtonHeight = 32
     ButtonWidth = 32
@@ -125,8 +125,8 @@ object frmMain: TfrmMain
     end
   end
   object actionList: TActionList
-    Left = 120
-    Top = 56
+    Left = 192
+    Top = 80
     object actSaveFile: TAction
       Caption = '&Save'
       Hint = 'Save'
@@ -217,16 +217,16 @@ object frmMain: TfrmMain
   end
   object saveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    Left = 237
-    Top = 141
+    Left = 336
+    Top = 168
   end
   object openDialog: TOpenDialog
-    Left = 120
-    Top = 141
+    Left = 192
+    Top = 168
   end
   object mmMain: TMainMenu
-    Left = 237
-    Top = 56
+    Left = 336
+    Top = 80
     object miFile: TMenuItem
       Caption = '&File'
       object miNewFile: TMenuItem
