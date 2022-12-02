@@ -11,6 +11,9 @@ MinimapTooltipBorder=$00555555
 TextBG=$001E1E1E
 TextFont=clWhite
 TextSelBG=clSilver
+UnprintedBG=clCream
+UnprintedFont=clGray
+UnprintedHexFont=clGray
 
 [LEXER-Assembly]
 Comment=clGray
