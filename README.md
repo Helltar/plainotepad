@@ -11,7 +11,7 @@
 Download
 --------
 
-- [plainotepad-0.9.1-linux.tar.xz](https://github.com/Helltar/plainotepad/releases/download/0.9.1/plainotepad-0.9.1-linux.tar.xz) (1.48 MB)
+- [plainotepad-0.9.6-linux.tar.gz](https://github.com/Helltar/plainotepad/releases/download/0.9.6/plainotepad-0.9.6-linux.tar.gz) (2.30 MB)
 - [plainotepad-0.9.1-windows.7z](https://github.com/Helltar/plainotepad/releases/download/0.9.1/plainotepad-0.9.1-windows.7z) (1.47 MB)
 
 Installation (Linux)
@@ -45,7 +45,7 @@ Done, unpack and run:
 cd ~/Downloads/
 ```
 ```
-tar -xvf plainotepad-0.9.1-linux.tar.xz
+tar -xvf plainotepad-0.9.6-linux.tar.gz
 ```
 ```
 ./plainotepad
