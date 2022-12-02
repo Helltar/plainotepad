@@ -156,7 +156,7 @@ begin
 
   if ParamCount > 0 then
   begin
-    openFile(ParamStr(1));
+    openFile(ExpandFileName(ParamStr(1)));
 
     if ParamCount > 1 then
       for i := 2 to ParamCount do
