@@ -51,7 +51,7 @@ tar -xvf plainotepad-0.9.6-linux.tar.gz
 ./plainotepad
 ```
 
-To make available in your list of applications, got to **Settings** > **Create Desktop Entry**.
+To make available in your list of applications, got to **Help** > **Create Desktop Entry**.
 
 Installation (Windows)
 ----------------------
