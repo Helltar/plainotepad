@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
-  Left = 561
+  Left = 254
   Height = 459
-  Top = 253
+  Top = 232
   Width = 727
   AllowDropFiles = True
   Caption = 'Plainotepad'
@@ -61,7 +61,6 @@ object frmMain: TfrmMain
       OptBorderVisible = False
       OptRulerVisible = False
       OptNumbersStyle = cNumbersAll
-      OptUnprintedVisible = False
       OptMouse2ClickOpensURL = False
     end
   end
@@ -84,25 +83,25 @@ object frmMain: TfrmMain
       Left = 1
       Top = 0
       Action = actNewFile
-      Caption = '  New  '
+      Caption = '  &New  '
     end
     object tbtnOpenFile: TToolButton
       Left = 57
       Top = 0
       Action = actOpenFile
-      Caption = '  Open  '
+      Caption = '  &Open  '
     end
     object tbtnSaveFile: TToolButton
       Left = 126
       Top = 0
       Action = actSaveFile
-      Caption = '  Save  '
+      Caption = '  &Save  '
     end
     object tbtnSaveFileAs: TToolButton
       Left = 184
       Top = 0
       Action = actSaveFileAs
-      Caption = '  Save As  '
+      Caption = '  Save &As  '
     end
     object tbtnSeparator: TToolButton
       Left = 118
@@ -115,7 +114,7 @@ object frmMain: TfrmMain
       Left = 273
       Top = 0
       Action = actNewWindow
-      Caption = '  New Window  '
+      Caption = '  New &Window  '
     end
     object ToolButton1: TToolButton
       Left = 265
@@ -164,7 +163,7 @@ object frmMain: TfrmMain
       ShortCut = 24764
     end
     object actShowMenubar: TAction
-      Caption = 'Show Menubar'
+      Caption = 'Show &Menubar'
       Checked = True
       OnExecute = actShowMenubarExecute
       ShortCut = 16461
@@ -243,7 +242,7 @@ object frmMain: TfrmMain
         Action = actOpenFile
       end
       object miOpenRecent: TMenuItem
-        Caption = 'Open Recent'
+        Caption = 'Open &Recent'
         Enabled = False
       end
       object separator1: TMenuItem
@@ -311,7 +310,7 @@ object frmMain: TfrmMain
       end
       object miShowToolBar: TMenuItem
         AutoCheck = True
-        Caption = 'Show Toolbar'
+        Caption = 'Show &Toolbar'
         Checked = True
         OnClick = miShowToolBarClick
       end
@@ -319,7 +318,7 @@ object frmMain: TfrmMain
     object miHelp: TMenuItem
       Caption = '&Help'
       object miCreateDesktopEntry: TMenuItem
-        Caption = 'Create Desktop Entry'
+        Caption = 'Create &Desktop Entry'
         OnClick = miCreateDesktopEntryClick
       end
       object Separator8: TMenuItem

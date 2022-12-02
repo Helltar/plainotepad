@@ -34,6 +34,7 @@ type
     function GetScrollBars: boolean;
     function GetShowMenubar: boolean;
     function GetShowToolBar: boolean;
+    function GetUnprintedVisible: boolean;
     function GetWordWrap: boolean;
     procedure SetBorderSpaceBottom(AValue: integer);
     procedure SetBorderSpaceLeft(AValue: integer);
@@ -57,6 +58,7 @@ type
     procedure SetScrollBars(AValue: boolean);
     procedure SetShowMenubar(AValue: boolean);
     procedure SetShowToolBar(AValue: boolean);
+    procedure SetUnprintedVisible(AValue: boolean);
     procedure SetWordWrap(AValue: boolean);
   public
     destructor Destroy; override;
@@ -81,6 +83,7 @@ type
     property rightEdge: integer read GetRightEdge write SetRightEdge;
     property scrollBars: boolean read GetScrollBars write SetScrollBars;
     property wordWrap: boolean read GetWordWrap write SetWordWrap;
+    property unprintedVisible: boolean read GetUnprintedVisible write SetUnprintedVisible;
 
     property borderSpaceBottom: integer read GetBorderSpaceBottom write SetBorderSpaceBottom;
     property borderSpaceLeft: integer read GetBorderSpaceLeft write SetBorderSpaceLeft;
@@ -223,6 +226,11 @@ begin
   Result := ReadBool(SECTION_MAIN, 'showToolbar', False);
 end;
 
+function TConfig.GetUnprintedVisible: boolean;
+begin
+  Result := ReadBool(SECTION_MAIN, 'unprintedVisible', False);
+end;
+
 function TConfig.GetWordWrap: boolean;
 begin
   Result := ReadBool(SECTION_MAIN, 'wordWrap', True);
@@ -336,6 +344,11 @@ end;
 procedure TConfig.SetShowToolBar(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'showToolbar', AValue);
+end;
+
+procedure TConfig.SetUnprintedVisible(AValue: boolean);
+begin
+  WriteBool(SECTION_MAIN, 'unprintedVisible', AValue);
 end;
 
 procedure TConfig.SetWordWrap(AValue: boolean);

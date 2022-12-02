@@ -18,6 +18,7 @@ type
     btnEditColorTheme: TButton;
     cbHighlighter: TCheckBox;
     cbLineNumbers: TCheckBox;
+    cbUnprintedVisible: TCheckBox;
     cbScrollBars: TCheckBox;
     cbNonSystemScrollBars: TCheckBox;
     cbMiniMap: TCheckBox;
@@ -52,6 +53,7 @@ type
     procedure cbMiniMapChange(Sender: TObject);
     procedure cbNonSystemScrollBarsChange(Sender: TObject);
     procedure cbScrollBarsChange(Sender: TObject);
+    procedure cbUnprintedVisibleChange(Sender: TObject);
     procedure cbWordWrapChange(Sender: TObject);
     procedure cmbColorThemeChange(Sender: TObject);
     procedure cmbMouseMiddleClickActionChange(Sender: TObject);
@@ -96,6 +98,7 @@ begin
     cbNonSystemScrollBars.Enabled := scrollBars;
     cbScrollBars.Checked := scrollBars;
     cbWordWrap.Checked := wordWrap;
+    cbUnprintedVisible.Checked := unprintedVisible;
     lblFontName.Caption := fontName;
     seBottomSpace.Value := borderSpaceBottom;
     seFontSize.Value := fontSize;
@@ -166,6 +169,11 @@ procedure TfrmSettings.cbScrollBarsChange(Sender: TObject);
 begin
   frmMain.config.scrollBars := cbScrollBars.Checked;
   cbNonSystemScrollBars.Enabled := cbScrollBars.Checked;
+end;
+
+procedure TfrmSettings.cbUnprintedVisibleChange(Sender: TObject);
+begin
+  frmMain.config.unprintedVisible := cbUnprintedVisible.Checked;
 end;
 
 procedure TfrmSettings.cbWordWrapChange(Sender: TObject);

@@ -77,6 +77,9 @@ end;
 
 function TEditor.getColorFromConfigSectionMain(iniFile: TIniFile; const AIdent: string; const ADefault: string): TColor;
 begin
+  if not iniFile.ValueExists(COLOR_SCHEME_CONFIG_SECTION_MAIN, AIdent) then
+    iniFile.WriteString(COLOR_SCHEME_CONFIG_SECTION_MAIN, AIdent, ADefault);
+
   Result := StringToColor(iniFile.ReadString(COLOR_SCHEME_CONFIG_SECTION_MAIN, AIdent, ADefault));
 end;
 
@@ -207,6 +210,9 @@ begin
     TextBG := getColorFromConfigSectionMain(iniFile, 'TextBG', '$001E1E1E');
     TextFont := getColorFromConfigSectionMain(iniFile, 'TextFont', 'clWhite');
     TextSelBG := getColorFromConfigSectionMain(iniFile, 'TextSelBG', 'clSilver');
+    UnprintedBG := getColorFromConfigSectionMain(iniFile, 'UnprintedBG', 'clNone');
+    UnprintedFont := getColorFromConfigSectionMain(iniFile, 'UnprintedFont', 'clGray');
+    UnprintedHexFont := getColorFromConfigSectionMain(iniFile, 'UnprintedHexFont', 'clGray');
   end;
 
   FreeAndNil(iniFile);

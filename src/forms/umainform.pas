@@ -288,6 +288,7 @@ procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; cons
     begin
       OptSpacingY := 0;
       OptFoldEnabled := False;
+      OptUnprintedEnds := False;
       PopupGutterFold := TPopupMenu.Create(Self);
     end;
   end;
@@ -301,6 +302,7 @@ begin
 
       Gutter[Gutter.FindIndexByTag(ATEditorOptions.GutterTagNumbers)].Visible := lineNumbers;
       OptMinimapVisible := miniMap;
+      OptUnprintedVisible := unprintedVisible;
 
       case mouseMiddleClickAction of
         0: OptMouseMiddleClickAction := mcaPaste;
