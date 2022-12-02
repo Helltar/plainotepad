@@ -6,7 +6,8 @@ uses
   {$IFDEF UNIX}
   cthreads,
   {$ENDIF}
-  Interfaces, Forms,
+  Interfaces,
+  Forms,
   SysUtils,
   uMainForm;
 

@@ -91,6 +91,7 @@ type
     procedure actSettingsExecute(Sender: TObject);
     procedure actShowMenubarExecute(Sender: TObject);
     procedure actUndoExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -165,15 +166,6 @@ end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
-  if isUniqueInstance() then
-    with config do
-    begin
-      formLeft := Left;
-      formTop := Top;
-      formHeight := Height;
-      formWidth := Width;
-    end;
-
   FreeAndNil(editor);
   FreeAndNil(config);
 end;
@@ -559,6 +551,21 @@ end;
 procedure TfrmMain.actUndoExecute(Sender: TObject);
 begin
   synEdit.DoCommand(cCommand_Undo, cInvokeMenuContext);
+end;
+
+procedure TfrmMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+begin
+  try
+    with config do
+    begin
+      formLeft := Left;
+      formTop := Top;
+      formHeight := Height;
+      formWidth := Width;
+    end;
+  except
+    // todo: Exception at 00000000004653BA: EFCreateError
+  end;
 end;
 
 procedure TfrmMain.FormCloseQuery(Sender: TObject; var CanClose: boolean);

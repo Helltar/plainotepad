@@ -10,6 +10,7 @@ object frmMain: TfrmMain
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   Menu = mmMain
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy

@@ -59,6 +59,8 @@ type
     procedure SetShowToolBar(AValue: boolean);
     procedure SetWordWrap(AValue: boolean);
   public
+    destructor Destroy; override;
+
     property formHeight: integer read GetFormHeight write SetFormHeight;
     property formLeft: integer read GetFormLeft write SetFormLeft;
     property formTop: integer read GetFormTop write SetFormTop;
@@ -339,6 +341,11 @@ end;
 procedure TConfig.SetWordWrap(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'wordWrap', AValue);
+end;
+
+destructor TConfig.Destroy;
+begin
+  inherited Destroy;
 end;
 
 end.

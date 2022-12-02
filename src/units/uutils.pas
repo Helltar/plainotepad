@@ -5,15 +5,11 @@ unit uUtils;
 interface
 
 uses
-  SysUtils, Classes, FileInfo, LCLType, Process, Zipper;
+  SysUtils, Classes, Process, Zipper;
 
 function createDesktopEntry(): boolean;
-function getAppFileVersion(): string;
-function getAppInfo(const AType: string): string;
-function getAppOriginalFilename(): string;
 function getAppPath: string;
 function getConfigDir: string;
-function isUniqueInstance(): boolean;
 procedure copyResToDir(const resName: string; const destDir: string);
 procedure runProcess(const AExecutable: string; const AParameters: string = '');
 procedure unzipArchive(const AFilename: string; const AOutputPath: string);
@@ -68,29 +64,6 @@ begin
     end;
 end;
 
-function getAppFileVersion: string;
-begin
-  Result := getAppInfo('FileVersion');
-end;
-
-function getAppInfo(const AType: string): string;
-begin
-  Result := APP_NAME;
-
-  with TFileVersionInfo.Create(nil) do
-    try
-      ReadFileInfo;
-      Result := VersionStrings.Values[AType];
-    finally
-      Free;
-    end;
-end;
-
-function getAppOriginalFilename: string;
-begin
-  Result := getAppInfo('OriginalFilename');
-end;
-
 function getAppPath: string;
 begin
   Result := ExtractFilePath(ParamStr(0));
@@ -114,33 +87,6 @@ begin
       if not AParameters.IsEmpty then
         Parameters.Text := AParameters;
       Execute;
-    finally
-      Free;
-    end;
-end;
-
-function isUniqueInstance: boolean;
-begin
-  Result := True;
-
-  with TProcess.Create(nil) do
-    try
-      try
-        Executable := 'pgrep';
-        Options := [poStderrToOutPut, poUsePipes];
-        Parameters.Text := APP_FILE_NAME;
-        Execute;
-        with TStringList.Create do
-          try
-            LoadFromStream(Output);
-            if Count > 1 then
-              Result := False;
-          finally
-            Free;
-          end;
-      except
-        // todo: except?
-      end;
     finally
       Free;
     end;
