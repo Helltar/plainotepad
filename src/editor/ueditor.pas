@@ -16,11 +16,11 @@ type
   TEditor = class
   private
     synEdit: TATSynEdit;
-    FFileModified: boolean;
     FLexerName: string;
     FHighlighter: boolean;
     function getColorFromConfigSectionMain(iniFile: TIniFile; const AIdent: string; const ADefault: string): TColor;
     procedure addTextToParentCaption(AText: string);
+    function GetFileModified: boolean;
     procedure SetHighlighter(AValue: boolean);
     procedure setTextToParentCaption(const AText: string);
     procedure synEditChange(Sender: TObject);
@@ -36,7 +36,7 @@ type
     function saveFile(const filename: string): boolean;
     procedure closeFile();
     procedure setColorTheme(const colorThemeName: string);
-    property fileModified: boolean read FFileModified;
+    property fileModified: boolean read GetFileModified;
     property lexerName: string read FLexerName;
     property highlighter: boolean read FHighlighter write setHighlighter;
   end;
@@ -58,6 +58,7 @@ begin
   synEdit := AOwner;
   synEdit.OnChange := @synEditChange;
   synEdit.Colors.TextSelFont := clBlack;
+  synEdit.Modified := False;
 
   editorHighlighter := TEditorHighlighter.Create(synEdit);
 end;
@@ -70,8 +71,6 @@ end;
 
 procedure TEditor.synEditChange(Sender: TObject);
 begin
-  FFileModified := True;
-
   if isNotNewFile() then
     addTextToParentCaption('*');
 end;
@@ -92,6 +91,11 @@ begin
   {$IfDef MSWINDOWS}
   Application.Title := synEdit.Parent.Parent.Caption;
   {$EndIf}
+end;
+
+function TEditor.GetFileModified: boolean;
+begin
+  Result := synEdit.Modified;
 end;
 
 procedure TEditor.SetHighlighter(AValue: boolean);
@@ -136,7 +140,6 @@ begin
   if FHighlighter then
     editorHighlighter.setHighlighterByFilename(filename);
 
-  FFileModified := False;
   FLexerName := editorHighlighter.lexerName;
 
   if not FileIsReadOnly(filename) then
@@ -154,7 +157,6 @@ begin
   try
     synEdit.SaveToFile(filename);
 
-    FFileModified := False;
     synEdit.Update();
     updateParentCaption();
 
@@ -171,7 +173,7 @@ begin
   synEdit.FileName := '';
   synEdit.Text := '';
   FLexerName := '';
-  FFileModified := False;
+  synEdit.Modified := False;
 end;
 
 function TEditor.saveCurrentFile: boolean;
