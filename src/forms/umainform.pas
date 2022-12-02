@@ -289,6 +289,8 @@ procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; cons
       OptSpacingY := 0;
       OptFoldEnabled := False;
       OptUnprintedEnds := False;
+      OptTabSpaces := True;
+      OptTabSize := 4;
       PopupGutterFold := TPopupMenu.Create(Self);
     end;
   end;
