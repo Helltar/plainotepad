@@ -106,7 +106,6 @@ type
     procedure initComponents();
     procedure initEditor();
     procedure loadFormConfig();
-    procedure saveConfig();
     procedure updateSaveDialogTitle();
     procedure initialSetup();
     procedure addFilenameToRecent(const filename: string);
@@ -166,7 +165,15 @@ end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
-  saveConfig();
+  if isUniqueInstance() then
+    with config do
+    begin
+      formLeft := Left;
+      formTop := Top;
+      formHeight := Height;
+      formWidth := Width;
+    end;
+
   FreeAndNil(editor);
   FreeAndNil(config);
 end;
@@ -367,17 +374,6 @@ end;
 procedure TfrmMain.updateConfig;
 begin
   loadEditorConfig(synEdit, editor);
-end;
-
-procedure TfrmMain.saveConfig;
-begin
-  with config do
-  begin
-    formLeft := Left;
-    formTop := Top;
-    formHeight := Height;
-    formWidth := Width;
-  end;
 end;
 
 procedure TfrmMain.updateSaveDialogTitle;
