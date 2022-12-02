@@ -3,7 +3,7 @@
     <br><br>
     Plainotepad
     <br><br>
-    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_28112022_083009.png" alt="plainotepad_dark_linux" width="70%"/>
+    <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_03122022_002624.png" alt="plainotepad_dark_linux" width="70%"/>
     <br><br>
     <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_2022-11-28_231748.png" alt="plainotepad_cream_windows" width="70%"/>
 </h3>
