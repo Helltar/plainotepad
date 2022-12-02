@@ -53,15 +53,6 @@ object frmMain: TfrmMain
       ParentFont = False
       TabOrder = 0
       TabStop = True
-      OptShowURLs = False
-      OptShowCurLine = True
-      OptShowScrollHint = True
-      OptShowMouseSelFrame = False
-      OptCaretVirtual = False
-      OptBorderVisible = False
-      OptRulerVisible = False
-      OptNumbersStyle = cNumbersAll
-      OptMouse2ClickOpensURL = False
     end
   end
   object tbEditor: TToolBar

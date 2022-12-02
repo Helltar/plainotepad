@@ -286,11 +286,21 @@ procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; cons
   begin
     with ASynEdit do
     begin
-      OptSpacingY := 0;
+      OptBorderVisible := False;
+      OptCaretVirtual := False;
       OptFoldEnabled := False;
-      OptUnprintedEnds := False;
-      OptTabSpaces := True;
+      OptMouse2ClickOpensURL := False;
+      OptNumbersStyle := cNumbersAll;
+      OptRulerVisible := False;
+      OptShowCurLine := True;
+      OptShowMouseSelFrame := False;
+      OptShowScrollHint := True;
+      OptShowURLs := False;
+      OptSpacingY := 0;
       OptTabSize := 4;
+      OptTabSpaces := True;
+      OptUnprintedEnds := False;
+
       PopupGutterFold := TPopupMenu.Create(Self);
     end;
   end;

@@ -1,11 +1,11 @@
 object frmColorThemeEditor: TfrmColorThemeEditor
   Left = 549
-  Height = 454
+  Height = 480
   Top = 248
-  Width = 872
+  Width = 877
   Caption = 'Color Theme Editor'
-  ClientHeight = 454
-  ClientWidth = 872
+  ClientHeight = 480
+  ClientWidth = 877
   Constraints.MinHeight = 400
   Constraints.MinWidth = 600
   OnCreate = FormCreate
@@ -33,7 +33,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     Left = 24
     Height = 36
     Top = 58
-    Width = 223
+    Width = 226
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -53,9 +53,9 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = splHoriz
     Left = 24
-    Height = 87
+    Height = 99
     Top = 106
-    Width = 393
+    Width = 396
     HorzScrollBar.Increment = 1
     HorzScrollBar.Page = 1
     HorzScrollBar.Smooth = True
@@ -80,8 +80,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 205
-    Width = 436
+    Top = 217
+    Width = 439
     Align = alNone
     Anchors = [akLeft, akRight]
     ResizeAnchor = akBottom
@@ -91,7 +91,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideTop.Control = splHoriz
     Left = 24
     Height = 22
-    Top = 217
+    Top = 229
     Width = 40
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -106,8 +106,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     Left = 24
     Height = 36
-    Top = 251
-    Width = 393
+    Top = 263
+    Width = 396
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -128,9 +128,9 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 71
-    Top = 299
-    Width = 393
+    Height = 85
+    Top = 311
+    Width = 396
     HorzScrollBar.Increment = 1
     HorzScrollBar.Page = 1
     HorzScrollBar.Smooth = True
@@ -154,27 +154,14 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Cursor = crIBeam
-    Left = 460
-    Height = 346
+    Left = 463
+    Height = 372
     Top = 24
-    Width = 388
+    Width = 390
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     DoubleBuffered = True
-    Font.Height = -12
-    Font.Name = 'Courier New'
-    Font.Quality = fqCleartype
-    ParentFont = False
     TabOrder = 8
-    TabStop = True
-    OptFoldEnabled = False
-    OptShowURLs = False
-    OptShowCurLine = True
-    OptShowMouseSelFrame = False
-    OptCaretVirtual = False
-    OptRulerVisible = False
-    OptNumbersStyle = cNumbersAll
-    OptUnprintedVisible = False
   end
   object splVert: TSplitter
     AnchorSideLeft.Control = btnDelete
@@ -182,8 +169,8 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideTop.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
-    Left = 436
-    Height = 370
+    Left = 439
+    Height = 396
     Top = 0
     Width = 5
     Align = alNone
@@ -194,9 +181,9 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 799
+    Left = 804
     Height = 36
-    Top = 394
+    Top = 420
     Width = 49
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -214,7 +201,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Control = btnDelete
     AnchorSideBottom.Control = cmbEditColorTheme
     AnchorSideBottom.Side = asrBottom
-    Left = 259
+    Left = 262
     Height = 32
     Top = 60
     Width = 77
@@ -233,7 +220,7 @@ object frmColorThemeEditor: TfrmColorThemeEditor
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = cmbEditColorTheme
     AnchorSideBottom.Side = asrBottom
-    Left = 348
+    Left = 351
     Height = 32
     Top = 60
     Width = 69
