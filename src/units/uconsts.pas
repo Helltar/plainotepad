@@ -9,6 +9,7 @@ const
   APP_FILE_NAME = 'plainotepad';
 
   APP_CONFIG_FILE_NAME = 'config.ini';
+  APP_RECENT_FILES_FILENAME = 'recent_files';
 
   DIR_COLOR_SCHEMES = 'color-schemes' + DirectorySeparator;
   DIR_LEXLIB = 'synt-analyzers' + DirectorySeparator;

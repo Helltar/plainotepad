@@ -6,8 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
-  LCLIntf, ExtCtrls, StdActns, ComCtrls, ATSynEdit, ATSynEdit_Globals,
-  ATSynEdit_Commands, ATFlatToolbar, uConfig, uEditor, uSettingsForm;
+  LCLIntf, ExtCtrls, ComCtrls, ATSynEdit, ATSynEdit_Globals,
+  ATSynEdit_Commands, uConfig, uEditor, uSettingsForm;
 
 type
 
@@ -30,6 +30,7 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
+    miOpenRecent: TMenuItem;
     miShowToolBar: TMenuItem;
     miCreateDesktopEntry: TMenuItem;
     miNewWindow: TMenuItem;
@@ -108,6 +109,10 @@ type
     procedure saveConfig();
     procedure updateSaveDialogTitle();
     procedure initialSetup();
+    procedure addFilenameToRecent(const filename: string);
+    procedure initRecentFilesItems();
+    procedure miRecentFileClick(Sender: TObject);
+    procedure miClearRecentListClick(Sender: TObject);
   public
     config: TConfig;
     editor: TEditor;
@@ -127,6 +132,7 @@ resourcestring
   ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
   TITLE_SAVE_FILE_AS = 'Save file as';
   DESKTOP_ENTRY_CREATED = 'Desktop entry created';
+  CAPTION_CLEAR_LIST = 'Clear List';
 
 {$R *.lfm}
 
@@ -202,12 +208,29 @@ begin
   config.showToolbar := tbEditor.Visible;
 end;
 
+procedure TfrmMain.miRecentFileClick(Sender: TObject);
+begin
+  openFile(TMenuItem(Sender).Hint);
+end;
+
+procedure TfrmMain.miClearRecentListClick(Sender: TObject);
+begin
+  if DeleteFile(getConfigDir + APP_RECENT_FILES_FILENAME) then
+  begin
+    miOpenRecent.Enabled := False;
+    miOpenRecent.Clear;
+  end;
+end;
+
 function TfrmMain.openFile(fileName: string): boolean;
 begin
   Result := False;
 
   if checkFileModifiedStatus() then
     Result := editor.openFile(fileName);
+
+  if Result then
+    addFilenameToRecent(fileName);
 end;
 
 function TfrmMain.saveFile: boolean;
@@ -254,6 +277,8 @@ begin
     tbEditor.Visible := showToolbar;
     miShowToolBar.Checked := showToolbar;
   end;
+
+  initRecentFilesItems();
 end;
 
 procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; const changeParentColor: boolean);
@@ -395,6 +420,90 @@ begin
     copyResToDir(COLOR_THEME_DARK + FILE_EXT_COLOR_SCHEME, dirThemes);
     copyResToDir(COLOR_THEME_CREAM + FILE_EXT_COLOR_SCHEME, dirThemes);
   end;
+end;
+
+procedure TfrmMain.addFilenameToRecent(const filename: string);
+var
+  list: TStringList;
+  recentFilesConfig: string;
+
+begin
+  try
+    list := TStringList.Create;
+
+    with list do
+    begin
+      recentFilesConfig := getConfigDir + APP_RECENT_FILES_FILENAME;
+
+      if FileExists(recentFilesConfig) then
+        LoadFromFile(recentFilesConfig);
+
+      if Text.IndexOf(filename) > -1 then
+        Exit;
+
+      if Count > 10 then
+      begin
+        Insert(0, ExtractFileName(filename) + '=' + filename);
+        Delete(Count - 1);
+      end
+      else
+        AddPair(ExtractFileName(filename), filename);
+
+      SaveToFile(recentFilesConfig);
+
+      initRecentFilesItems();
+    end;
+  finally
+    FreeAndNil(list);
+  end;
+end;
+
+procedure TfrmMain.initRecentFilesItems;
+var
+  i: integer;
+  list: TStringList;
+  mItem: TMenuItem;
+  filename: string;
+
+begin
+  filename := getConfigDir + APP_RECENT_FILES_FILENAME;
+
+  if not FileExists(filename) then
+    Exit;
+
+  if miOpenRecent.Count > 0 then
+    miOpenRecent.Clear;
+
+  try
+    list := TStringList.Create;
+
+    with list do
+    begin
+      LoadFromFile(filename);
+
+      for i := 0 to Count - 1 do
+      begin
+        mItem := TMenuItem.Create(miOpenRecent);
+        mItem.Caption := Names[i] + ' --> ' + ValueFromIndex[i];
+        mItem.Hint := ValueFromIndex[i];
+        mItem.OnClick := @miRecentFileClick;
+        miOpenRecent.Add(mItem);
+      end;
+
+      mItem := TMenuItem.Create(miOpenRecent);
+      mItem.Caption := '-';
+      miOpenRecent.Add(mItem);
+
+      mItem := TMenuItem.Create(miOpenRecent);
+      mItem.Caption := CAPTION_CLEAR_LIST;
+      mItem.OnClick := @miClearRecentListClick;
+      miOpenRecent.Add(mItem);
+    end;
+  finally
+    FreeAndNil(list);
+  end;
+
+  miOpenRecent.Enabled := miOpenRecent.Count > 0;
 end;
 
 function TfrmMain.checkFileModifiedStatus: boolean;

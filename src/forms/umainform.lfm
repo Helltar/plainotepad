@@ -241,6 +241,10 @@ object frmMain: TfrmMain
       object miOpenFile: TMenuItem
         Action = actOpenFile
       end
+      object miOpenRecent: TMenuItem
+        Caption = 'Open Recent'
+        Enabled = False
+      end
       object separator1: TMenuItem
         Caption = '-'
       end
