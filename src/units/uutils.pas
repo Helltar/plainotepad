@@ -50,6 +50,7 @@ begin
       Add('Terminal=false');
       Add('Categories=Qt;Utility;TextEditor;');
       Add('StartupWMClass=' + APP_FILE_NAME);
+      Add('StartupNotify=true');
 
       try
         copyResToDir(iconName, iconPath);
