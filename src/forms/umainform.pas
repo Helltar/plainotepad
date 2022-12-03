@@ -437,21 +437,25 @@ begin
     begin
       recentFilesConfig := getConfigDir + APP_RECENT_FILES_FILENAME;
 
-      if FileExists(recentFilesConfig) then
-        LoadFromFile(recentFilesConfig);
+      try
+        if FileExists(recentFilesConfig) then
+          LoadFromFile(recentFilesConfig);
 
-      if Text.IndexOf(filename) > -1 then
-        Exit;
+        if Text.IndexOf(filename) > -1 then
+          Exit;
 
-      if Count > 10 then
-      begin
-        Insert(0, ExtractFileName(filename) + '=' + filename);
-        Delete(Count - 1);
-      end
-      else
-        AddPair(ExtractFileName(filename), filename);
+        if Count > 10 then
+        begin
+          Insert(0, ExtractFileName(filename) + '=' + filename);
+          Delete(Count - 1);
+        end
+        else
+          AddPair(ExtractFileName(filename), filename);
 
-      SaveToFile(recentFilesConfig);
+        SaveToFile(recentFilesConfig);
+      except
+        // todo: Exception at 00000000004653BA: EFCreateError
+      end;
 
       initRecentFilesItems();
     end;

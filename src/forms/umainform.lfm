@@ -1,7 +1,7 @@
 object frmMain: TfrmMain
   Left = 547
   Height = 394
-  Top = 269
+  Top = 306
   Width = 708
   AllowDropFiles = True
   Caption = 'Plainotepad'
