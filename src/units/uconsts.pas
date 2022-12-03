@@ -13,6 +13,7 @@ const
 
   DIR_COLOR_SCHEMES = 'color-schemes' + DirectorySeparator;
   DIR_LEXLIB = 'synt-analyzers' + DirectorySeparator;
+  DIR_HELP = 'help' + DirectorySeparator;
 
   FILE_EXT_SYNT_ANALYZER = '.lcf';
   FILE_EXT_COLOR_SCHEME = '.colors';
@@ -20,6 +21,7 @@ const
   COLOR_THEME_DARK = 'dark';
   COLOR_THEME_CREAM = 'cream';
   RES_SYNT_ANALYZERS = 'SYNT-ANALYZERS';
+  RES_SHORTCUTS_HTML = 'SHORTCUTS.HTML';
 
   COLOR_SCHEME_CONFIG_SECTION_MAIN = 'MAIN';
   COLOR_SCHEME_CONFIG_SECTION_LEXER = 'LEXER-';

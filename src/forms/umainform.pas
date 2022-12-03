@@ -30,6 +30,8 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
+    MenuItem1: TMenuItem;
+    miShortcuts: TMenuItem;
     miOpenRecent: TMenuItem;
     miShowToolBar: TMenuItem;
     miCreateDesktopEntry: TMenuItem;
@@ -56,6 +58,7 @@ type
     miClose: TMenuItem;
     pnlEditor: TPanel;
     separator1: TMenuItem;
+    Separator10: TMenuItem;
     separator4: TMenuItem;
     separator5: TMenuItem;
     separator6: TMenuItem;
@@ -96,6 +99,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
+    procedure miShortcutsClick(Sender: TObject);
     procedure miCreateDesktopEntryClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure miShowToolBarClick(Sender: TObject);
@@ -179,6 +183,19 @@ begin
 
   for i := 1 to Length(FileNames) - 1 do
     runProcess(ParamStr(0), FileNames[i]);
+end;
+
+procedure TfrmMain.miShortcutsClick(Sender: TObject);
+var
+  dirHelp: string;
+
+begin
+  dirHelp := getConfigDir() + DIR_HELP;
+
+  if not DirectoryExists(dirHelp) then
+    copyResToDir(RES_SHORTCUTS_HTML, dirHelp);
+
+  OpenURL(dirHelp + RES_SHORTCUTS_HTML.ToLower);
 end;
 
 procedure TfrmMain.miCreateDesktopEntryClick(Sender: TObject);

@@ -13,11 +13,12 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="4">
+      <Resources Count="5">
         <Resource_0 FileName="../res/color-schemes/cream.colors" Type="RCDATA" ResourceName="CREAM.COLORS"/>
         <Resource_1 FileName="../res/color-schemes/dark.colors" Type="RCDATA" ResourceName="DARK.COLORS"/>
         <Resource_2 FileName="../icons/scalable/plainotepad.svg" Type="RCDATA" ResourceName="PLAINOTEPAD.SVG"/>
         <Resource_3 FileName="../res/synt-analyzers.zip" Type="RCDATA" ResourceName="SYNT-ANALYZERS"/>
+        <Resource_4 FileName="../res/help/shortcuts.html" Type="RCDATA" ResourceName="SHORTCUTS.HTML"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -25,7 +26,7 @@
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
       <RevisionNr Value="6"/>
-      <BuildNr Value="346"/>
+      <BuildNr Value="348"/>
       <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.6"/>
     </VersionInfo>
     <BuildModes>

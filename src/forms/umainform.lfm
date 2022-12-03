@@ -315,10 +315,20 @@ object frmMain: TfrmMain
       object Separator8: TMenuItem
         Caption = '-'
       end
+      object miShortcuts: TMenuItem
+        Caption = 'Keyboard / Mouse &Shortcuts ...'
+        OnClick = miShortcutsClick
+      end
+      object Separator10: TMenuItem
+        Caption = '-'
+      end
       object miAbout: TMenuItem
         Caption = '&About'
         OnClick = miAboutClick
       end
+    end
+    object MenuItem1: TMenuItem
+      Caption = 'MenuItem1'
     end
   end
 end
