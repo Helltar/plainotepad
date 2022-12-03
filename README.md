@@ -6,6 +6,8 @@
     <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_03122022_003158.png" alt="plainotepad_dark_linux" width="70%"/>
     <br><br>
     <img src="https://helltar.com/projects/plainotepad/screenshots/screenshot_2022-11-28_231748.png" alt="plainotepad_cream_windows" width="70%"/>
+    <br><br>
+    <a href="https://youtu.be/tGdTD2mYP8U">youtu.be/tGdTD2mYP8U</a>
 </h3>
 
 Download
