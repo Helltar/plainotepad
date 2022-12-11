@@ -22,6 +22,7 @@ type
     cbScrollBars: TCheckBox;
     cbNonSystemScrollBars: TCheckBox;
     cbMiniMap: TCheckBox;
+    cbAppendNewline: TCheckBox;
     cbWordWrap: TCheckBox;
     cmbMouseMiddleClickAction: TComboBox;
     cmbColorTheme: TComboBox;
@@ -48,6 +49,7 @@ type
     procedure btnEditColorThemeClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure btnSelectFontClick(Sender: TObject);
+    procedure cbAppendNewlineChange(Sender: TObject);
     procedure cbHighlighterChange(Sender: TObject);
     procedure cbLineNumbersChange(Sender: TObject);
     procedure cbMiniMapChange(Sender: TObject);
@@ -99,6 +101,7 @@ begin
     cbScrollBars.Checked := scrollBars;
     cbWordWrap.Checked := wordWrap;
     cbUnprintedVisible.Checked := unprintedVisible;
+    cbAppendNewline.Checked := appendNewline;
     lblFontName.Caption := fontName;
     seBottomSpace.Value := borderSpaceBottom;
     seFontSize.Value := fontSize;
@@ -143,6 +146,11 @@ begin
     seFontSize.Value := fontDialog.Font.Size;
     frmMain.config.fontName := lblFontName.Caption;
   end;
+end;
+
+procedure TfrmSettings.cbAppendNewlineChange(Sender: TObject);
+begin
+  frmMain.config.appendNewline := cbAppendNewline.Checked;
 end;
 
 procedure TfrmSettings.cbHighlighterChange(Sender: TObject);

@@ -12,6 +12,7 @@ type
 
   TConfig = class(TIniFile)
   private
+    function GetAppendNewline: boolean;
     function GetBorderSpaceBottom: integer;
     function GetBorderSpaceLeft: integer;
     function GetBorderSpaceRight: integer;
@@ -36,6 +37,7 @@ type
     function GetShowToolBar: boolean;
     function GetUnprintedVisible: boolean;
     function GetWordWrap: boolean;
+    procedure SetAppendNewline(AValue: boolean);
     procedure SetBorderSpaceBottom(AValue: integer);
     procedure SetBorderSpaceLeft(AValue: integer);
     procedure SetBorderSpaceRight(AValue: integer);
@@ -84,6 +86,7 @@ type
     property scrollBars: boolean read GetScrollBars write SetScrollBars;
     property wordWrap: boolean read GetWordWrap write SetWordWrap;
     property unprintedVisible: boolean read GetUnprintedVisible write SetUnprintedVisible;
+    property appendNewline: boolean read GetAppendNewline write SetAppendNewline;
 
     property borderSpaceBottom: integer read GetBorderSpaceBottom write SetBorderSpaceBottom;
     property borderSpaceLeft: integer read GetBorderSpaceLeft write SetBorderSpaceLeft;
@@ -101,6 +104,11 @@ const
   SECTION_FORM = 'FORM';
 
 { TConfig }
+
+function TConfig.GetAppendNewline: boolean;
+begin
+  Result := ReadBool(SECTION_MAIN, 'appendNewline', True);
+end;
 
 function TConfig.GetBorderSpaceBottom: integer;
 begin
@@ -234,6 +242,11 @@ end;
 function TConfig.GetWordWrap: boolean;
 begin
   Result := ReadBool(SECTION_MAIN, 'wordWrap', True);
+end;
+
+procedure TConfig.SetAppendNewline(AValue: boolean);
+begin
+  WriteBool(SECTION_MAIN, 'appendNewline', AValue);
 end;
 
 procedure TConfig.SetBorderSpaceBottom(AValue: integer);

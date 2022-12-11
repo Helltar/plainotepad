@@ -348,7 +348,6 @@ procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; cons
       OptMouse2ClickOpensURL := False;
       OptNumbersStyle := cNumbersAll;
       OptRulerVisible := False;
-      OptSavingForceFinalEol := True;
       OptShowCurLine := True;
       OptShowMouseSelFrame := False;
       OptShowScrollHint := True;
@@ -372,6 +371,7 @@ begin
       Gutter[Gutter.FindIndexByTag(ATEditorOptions.GutterTagNumbers)].Visible := lineNumbers;
       OptMinimapVisible := miniMap;
       OptUnprintedVisible := unprintedVisible;
+      OptSavingForceFinalEol := appendNewline;
 
       case mouseMiddleClickAction of
         0: OptMouseMiddleClickAction := mcaPaste;

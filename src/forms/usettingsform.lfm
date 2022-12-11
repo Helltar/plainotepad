@@ -1,13 +1,13 @@
 object frmSettings: TfrmSettings
-  Left = 900
-  Height = 690
-  Top = 185
-  Width = 479
+  Left = 573
+  Height = 751
+  Top = 122
+  Width = 494
   AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Settings'
-  ClientHeight = 690
-  ClientWidth = 479
+  ClientHeight = 751
+  ClientWidth = 494
   Constraints.MinHeight = 424
   Constraints.MinWidth = 272
   OnClose = FormClose
@@ -21,9 +21,9 @@ object frmSettings: TfrmSettings
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 406
+    Left = 421
     Height = 36
-    Top = 630
+    Top = 691
     Width = 49
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -40,9 +40,9 @@ object frmSettings: TfrmSettings
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 582
+    Height = 643
     Top = 24
-    Width = 431
+    Width = 446
     ActivePage = tsGeneral
     Anchors = [akTop, akLeft, akRight, akBottom]
     AutoSize = True
@@ -53,8 +53,8 @@ object frmSettings: TfrmSettings
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Side = asrBottom
       Caption = 'General'
-      ClientHeight = 547
-      ClientWidth = 427
+      ClientHeight = 608
+      ClientWidth = 442
       object lblFont: TLabel
         AnchorSideLeft.Control = tsGeneral
         AnchorSideTop.Control = tsGeneral
@@ -74,7 +74,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Control = lblFontName
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = btnSelectFont
-        Left = 304
+        Left = 319
         Height = 36
         Top = 51
         Width = 60
@@ -93,7 +93,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = tsGeneral
         AnchorSideRight.Side = asrBottom
-        Left = 376
+        Left = 391
         Height = 32
         Top = 53
         Width = 27
@@ -127,7 +127,7 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 36
         Top = 138
-        Width = 309
+        Width = 324
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 24
         ItemHeight = 22
@@ -211,11 +211,11 @@ object frmSettings: TfrmSettings
       end
       object lblMouseMiddleClickAction: TLabel
         AnchorSideLeft.Control = tsGeneral
-        AnchorSideTop.Control = cbUnprintedVisible
+        AnchorSideTop.Control = cbAppendNewline
         AnchorSideTop.Side = asrBottom
         Left = 24
         Height = 22
-        Top = 456
+        Top = 494
         Width = 190
         BorderSpacing.Left = 24
         BorderSpacing.Top = 24
@@ -231,8 +231,8 @@ object frmSettings: TfrmSettings
         AnchorSideRight.Side = asrBottom
         Left = 24
         Height = 36
-        Top = 490
-        Width = 379
+        Top = 528
+        Width = 394
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 24
         BorderSpacing.Right = 24
@@ -255,7 +255,7 @@ object frmSettings: TfrmSettings
         AnchorSideTop.Side = asrCenter
         AnchorSideRight.Control = tsGeneral
         AnchorSideRight.Side = asrBottom
-        Left = 345
+        Left = 360
         Height = 32
         Top = 140
         Width = 58
@@ -275,7 +275,7 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 22
         Top = 58
-        Width = 268
+        Width = 283
         Anchors = [akTop, akLeft, akRight]
         BorderSpacing.Left = 24
         Caption = 'Font Name'
@@ -297,11 +297,25 @@ object frmSettings: TfrmSettings
         OnChange = cbUnprintedVisibleChange
         TabOrder = 9
       end
+      object cbAppendNewline: TCheckBox
+        AnchorSideLeft.Control = tsGeneral
+        AnchorSideTop.Control = cbUnprintedVisible
+        AnchorSideTop.Side = asrBottom
+        Left = 24
+        Height = 26
+        Top = 444
+        Width = 292
+        BorderSpacing.Left = 24
+        BorderSpacing.Top = 12
+        Caption = 'Append newline at end of file on save'
+        OnChange = cbAppendNewlineChange
+        TabOrder = 10
+      end
     end
     object tsBorders: TTabSheet
       Caption = 'Borders'
-      ClientHeight = 547
-      ClientWidth = 427
+      ClientHeight = 608
+      ClientWidth = 442
       object gbBorderSpace: TGroupBox
         AnchorSideLeft.Control = tsBorders
         AnchorSideTop.Control = cbNonSystemScrollBars
@@ -311,13 +325,13 @@ object frmSettings: TfrmSettings
         Left = 24
         Height = 242
         Top = 150
-        Width = 379
+        Width = 394
         Anchors = [akTop, akLeft, akRight]
         AutoSize = True
         BorderSpacing.Around = 24
         Caption = 'Border Space'
         ClientHeight = 208
-        ClientWidth = 375
+        ClientWidth = 390
         TabOrder = 3
         object lblBottomSpace: TLabel
           AnchorSideLeft.Control = gbBorderSpace
@@ -372,7 +386,7 @@ object frmSettings: TfrmSettings
           AnchorSideTop.Control = lblTopSpace
           AnchorSideTop.Side = asrCenter
           AnchorSideRight.Side = asrBottom
-          Left = 291
+          Left = 306
           Height = 36
           Top = 155
           Width = 60
@@ -385,7 +399,7 @@ object frmSettings: TfrmSettings
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Control = lblRightSpace
           AnchorSideTop.Side = asrCenter
-          Left = 291
+          Left = 306
           Height = 36
           Top = 109
           Width = 60
@@ -398,7 +412,7 @@ object frmSettings: TfrmSettings
           AnchorSideLeft.Side = asrCenter
           AnchorSideTop.Control = lblLeftSpace
           AnchorSideTop.Side = asrCenter
-          Left = 291
+          Left = 306
           Height = 36
           Top = 63
           Width = 60
@@ -412,7 +426,7 @@ object frmSettings: TfrmSettings
           AnchorSideTop.Side = asrCenter
           AnchorSideRight.Control = gbBorderSpace
           AnchorSideRight.Side = asrBottom
-          Left = 291
+          Left = 306
           Height = 36
           Top = 17
           Width = 60
