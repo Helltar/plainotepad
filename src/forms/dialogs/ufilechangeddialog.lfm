@@ -1,13 +1,13 @@
 object dlgFileChanged: TdlgFileChanged
   Left = 826
-  Height = 174
+  Height = 208
   Top = 332
-  Width = 295
+  Width = 343
   AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'File changed'
-  ClientHeight = 174
-  ClientWidth = 295
+  ClientHeight = 208
+  ClientWidth = 343
   Constraints.MinHeight = 120
   Constraints.MinWidth = 240
   Position = poOwnerFormCenter
@@ -19,9 +19,9 @@ object dlgFileChanged: TdlgFileChanged
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnYes
     Left = 24
-    Height = 66
+    Height = 100
     Top = 24
-    Width = 247
+    Width = 295
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     Caption = 'Save the changes?'
@@ -32,9 +32,9 @@ object dlgFileChanged: TdlgFileChanged
     AnchorSideRight.Control = btnNo
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 68
+    Left = 116
     Height = 36
-    Top = 114
+    Top = 148
     Width = 54
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -51,9 +51,9 @@ object dlgFileChanged: TdlgFileChanged
     AnchorSideRight.Control = btnCancel
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 134
+    Left = 182
     Height = 36
-    Top = 114
+    Top = 148
     Width = 48
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -70,9 +70,9 @@ object dlgFileChanged: TdlgFileChanged
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 194
+    Left = 242
     Height = 36
-    Top = 114
+    Top = 148
     Width = 77
     Anchors = [akRight, akBottom]
     AutoSize = True

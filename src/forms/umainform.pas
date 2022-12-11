@@ -30,7 +30,6 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
-    MenuItem1: TMenuItem;
     miShortcuts: TMenuItem;
     miOpenRecent: TMenuItem;
     miShowToolBar: TMenuItem;
@@ -77,6 +76,7 @@ type
     tbtnSaveFileAs: TToolButton;
     tbtnSeparator: TToolButton;
     tbtnNewWindow: TToolButton;
+    timFileModifiedCheck: TTimer;
     ToolButton1: TToolButton;
     procedure actCloseExecute(Sender: TObject);
     procedure actCopyExecute(Sender: TObject);
@@ -103,7 +103,9 @@ type
     procedure miCreateDesktopEntryClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure miShowToolBarClick(Sender: TObject);
+    procedure timFileModifiedCheckTimer(Sender: TObject);
   private
+    currentFileAge: longint;
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
     function checkFileModifiedStatus(): boolean;
@@ -130,7 +132,8 @@ var
 implementation
 
 uses
-  uConsts, uAboutForm, uLogger, uUtils, uFileChangedDialog;
+  uConsts, uAboutForm, uLogger, uUtils,
+  uFileChangedDialog, uFileChangedOnDiskDialog;
 
 resourcestring
   ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
@@ -224,6 +227,36 @@ begin
   config.showToolbar := tbEditor.Visible;
 end;
 
+procedure TfrmMain.timFileModifiedCheckTimer(Sender: TObject);
+var
+  filename: string;
+
+begin
+  if synEdit.Focused then
+    if editor.isNotNewFile() then
+    begin
+      filename := editor.getCurrentFilename();
+
+      if FileAge(filename) <> currentFileAge then
+        with TdlgFileChangedOnDisk.Create(Self, filename) do
+          try
+            ShowModal;
+
+            case dlgResult of
+              dlgResReload:
+              begin
+                editor.openFile(filename);
+                currentFileAge := FileAge(filename);
+              end;
+
+              dlgResIgnore: currentFileAge := FileAge(filename);
+            end;
+          finally
+            Free;
+          end;
+    end;
+end;
+
 procedure TfrmMain.miRecentFileClick(Sender: TObject);
 begin
   openFile(TMenuItem(Sender).Hint);
@@ -246,7 +279,10 @@ begin
     Result := editor.openFile(fileName);
 
   if Result then
+  begin
     addFilenameToRecent(fileName);
+    currentFileAge := FileAge(fileName);
+  end;
 end;
 
 function TfrmMain.saveFile: boolean;
@@ -261,6 +297,9 @@ begin
     updateSaveDialogTitle();
     Result := editor.saveFile(saveDialog.FileName);
   end;
+
+  if Result then
+    currentFileAge := FileAge(editor.getCurrentFilename());
 end;
 
 procedure TfrmMain.closeFile;
@@ -309,6 +348,7 @@ procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; cons
       OptMouse2ClickOpensURL := False;
       OptNumbersStyle := cNumbersAll;
       OptRulerVisible := False;
+      OptSavingForceFinalEol := True;
       OptShowCurLine := True;
       OptShowMouseSelFrame := False;
       OptShowScrollHint := True;

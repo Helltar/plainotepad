@@ -25,8 +25,8 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
-      <RevisionNr Value="6"/>
-      <BuildNr Value="348"/>
+      <RevisionNr Value="7"/>
+      <BuildNr Value="361"/>
       <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="2022 Helltar" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.6"/>
     </VersionInfo>
     <BuildModes>
@@ -227,6 +227,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="uFileChangedDialog"/>
+      </Unit>
+      <Unit>
+        <Filename Value="forms/dialogs/ufilechangedondiskdialog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="dlgFileChangedOnDisk"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="uFileChangedOnDiskDialog"/>
       </Unit>
     </Units>
   </ProjectOptions>

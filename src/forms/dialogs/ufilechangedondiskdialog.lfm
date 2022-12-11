@@ -1,0 +1,64 @@
+object dlgFileChangedOnDisk: TdlgFileChangedOnDisk
+  Left = 766
+  Height = 181
+  Top = 370
+  Width = 336
+  AutoSize = True
+  Caption = 'File Modified'
+  ClientHeight = 181
+  ClientWidth = 336
+  Position = poOwnerFormCenter
+  LCLVersion = '2.2.4.0'
+  object lblTitle: TLabel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = btnReload
+    Left = 24
+    Height = 73
+    Top = 24
+    Width = 288
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 24
+    Caption = 'The file was modified on disk:'
+    ParentColor = False
+    WordWrap = True
+  end
+  object btnReload: TButton
+    AnchorSideRight.Control = btnIgnore
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 150
+    Height = 36
+    Top = 121
+    Width = 77
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Right = 12
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&Reload'
+    OnClick = btnClick
+    TabOrder = 0
+  end
+  object btnIgnore: TButton
+    Tag = 1
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = Owner
+    AnchorSideBottom.Side = asrBottom
+    Left = 239
+    Height = 36
+    Top = 121
+    Width = 73
+    Anchors = [akRight, akBottom]
+    AutoSize = True
+    BorderSpacing.Right = 24
+    BorderSpacing.Bottom = 24
+    BorderSpacing.InnerBorder = 2
+    Caption = '&Ignore'
+    OnClick = btnClick
+    TabOrder = 1
+  end
+end
