@@ -5,6 +5,8 @@
 *.sh
 .directory
 
+res/test_files
+
 backup/
 lib/
 debug/
