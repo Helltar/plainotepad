@@ -37,6 +37,7 @@ type
     function GetShowToolBar: boolean;
     function GetUnprintedVisible: boolean;
     function GetWordWrap: boolean;
+    function GetWsMaximized: boolean;
     procedure SetAppendNewline(AValue: boolean);
     procedure SetBorderSpaceBottom(AValue: integer);
     procedure SetBorderSpaceLeft(AValue: integer);
@@ -62,6 +63,7 @@ type
     procedure SetShowToolBar(AValue: boolean);
     procedure SetUnprintedVisible(AValue: boolean);
     procedure SetWordWrap(AValue: boolean);
+    procedure SetWsMaximized(AValue: boolean);
   public
     destructor Destroy; override;
 
@@ -72,6 +74,7 @@ type
     property fullScreen: boolean read GetFullScreen write SetFullScreen;
     property showMenubar: boolean read GetShowMenubar write SetShowMenubar;
     property showToolbar: boolean read GetShowToolbar write SetShowToolbar;
+    property wsMaximized: boolean read GetWsMaximized write SetWsMaximized;
 
     property colorTheme: string read GetColorTheme write SetColorTheme;
     property fontName: string read GetFontName write SetFontName;
@@ -244,6 +247,11 @@ begin
   Result := ReadBool(SECTION_MAIN, 'wordWrap', True);
 end;
 
+function TConfig.GetWsMaximized: boolean;
+begin
+  Result := ReadBool(SECTION_FORM, 'wsMaximized', False);
+end;
+
 procedure TConfig.SetAppendNewline(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'appendNewline', AValue);
@@ -367,6 +375,11 @@ end;
 procedure TConfig.SetWordWrap(AValue: boolean);
 begin
   WriteBool(SECTION_MAIN, 'wordWrap', AValue);
+end;
+
+procedure TConfig.SetWsMaximized(AValue: boolean);
+begin
+  WriteBool(SECTION_FORM, 'wsMaximized', AValue);
 end;
 
 destructor TConfig.Destroy;

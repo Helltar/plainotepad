@@ -69,8 +69,8 @@ procedure TfrmColorThemeEditor.FormCreate(Sender: TObject);
 begin
   if (Screen.Height + Screen.Width) > 1400 then
   begin
-    Height := Screen.Height - 200;
-    Width := Screen.Width - 200;
+    Height := Screen.Height - 300;
+    Width := Screen.Width - 300;
   end;
 
   editor := TEditor.Create(synEdit);

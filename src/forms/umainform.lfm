@@ -1,14 +1,15 @@
 object frmMain: TfrmMain
-  Left = 401
-  Height = 442
-  Top = 297
-  Width = 801
+  Left = 480
+  Height = 570
+  Top = 227
+  Width = 889
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 408
-  ClientWidth = 801
-  Constraints.MinHeight = 240
-  Constraints.MinWidth = 320
+  ClientHeight = 545
+  ClientWidth = 889
+  Constraints.MinHeight = 300
+  Constraints.MinWidth = 400
+  DesignTimePPI = 120
   Menu = mmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -25,14 +26,14 @@ object frmMain: TfrmMain
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 0
-    Height = 376
-    Top = 32
-    Width = 801
+    Height = 505
+    Top = 40
+    Width = 889
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 376
-    ClientWidth = 801
+    ClientHeight = 505
+    ClientWidth = 889
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -43,12 +44,12 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 376
+      Height = 505
       Top = 0
-      Width = 801
+      Width = 889
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
-      Font.Height = -12
+      Font.Height = -15
       Font.Name = 'Courier New'
       ParentFont = False
       TabOrder = 0
@@ -61,11 +62,12 @@ object frmMain: TfrmMain
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 0
+    Height = 40
     Top = 0
-    Width = 801
+    Width = 889
     AutoSize = True
-    ButtonHeight = 32
-    ButtonWidth = 32
+    ButtonHeight = 40
+    ButtonWidth = 40
     Caption = 'tbEditor'
     EdgeBorders = []
     ShowCaptions = True
@@ -77,47 +79,47 @@ object frmMain: TfrmMain
       Caption = '  &New  '
     end
     object tbtnOpenFile: TToolButton
-      Left = 57
+      Left = 56
       Top = 0
       Action = actOpenFile
       Caption = '  &Open  '
     end
     object tbtnSaveFile: TToolButton
-      Left = 126
+      Left = 122
       Top = 0
       Action = actSaveFile
       Caption = '  &Save  '
     end
     object tbtnSaveFileAs: TToolButton
-      Left = 184
+      Left = 178
       Top = 0
       Action = actSaveFileAs
       Caption = '  Save &As  '
     end
     object tbtnSeparator: TToolButton
-      Left = 118
-      Height = 32
+      Left = 117
+      Height = 40
       Top = 0
       Caption = 'tbtnSeparator'
-      Style = tbsSeparator
+      Style = tbsDivider
     end
     object tbtnNewWindow: TToolButton
-      Left = 273
+      Left = 259
       Top = 0
       Action = actNewWindow
       Caption = '  New &Window  '
     end
     object ToolButton1: TToolButton
-      Left = 265
-      Height = 32
+      Left = 254
+      Height = 40
       Top = 0
       Caption = 'ToolButton1'
-      Style = tbsSeparator
+      Style = tbsDivider
     end
   end
   object actionList: TActionList
-    Left = 192
-    Top = 80
+    Left = 240
+    Top = 100
     object actSaveFile: TAction
       Caption = '&Save'
       Hint = 'Save'
@@ -208,16 +210,16 @@ object frmMain: TfrmMain
   end
   object saveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    Left = 336
-    Top = 168
+    Left = 420
+    Top = 210
   end
   object openDialog: TOpenDialog
-    Left = 192
-    Top = 168
+    Left = 240
+    Top = 210
   end
   object mmMain: TMainMenu
-    Left = 336
-    Top = 80
+    Left = 420
+    Top = 100
     object miFile: TMenuItem
       Caption = '&File'
       object miNewFile: TMenuItem
@@ -331,7 +333,7 @@ object frmMain: TfrmMain
   object timFileModifiedCheck: TTimer
     Interval = 3000
     OnTimer = timFileModifiedCheckTimer
-    Left = 504
-    Top = 80
+    Left = 630
+    Top = 100
   end
 end

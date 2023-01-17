@@ -324,7 +324,10 @@ begin
     Width := formWidth;
 
     if fullScreen then
-      WindowState := wsFullScreen;
+      WindowState := wsFullScreen
+    else
+    if wsMaximized then
+      WindowState := Forms.wsMaximized;
 
     if not showMenubar then
       Menu := nil;
@@ -332,6 +335,11 @@ begin
     tbEditor.Visible := showToolbar;
     miShowToolBar.Checked := showToolbar;
   end;
+
+  {$IfDef MSWINDOWS}
+  miCreateDesktopEntry.Visible := False;
+  Separator8.Visible := False;
+  {$EndIf}
 
   initRecentFilesItems();
 end;
@@ -637,6 +645,7 @@ begin
       formTop := Top;
       formHeight := Height;
       formWidth := Width;
+      wsMaximized := WindowState = Forms.wsMaximized;
     end;
   except
     // todo: Exception at 00000000004653BA: EFCreateError
