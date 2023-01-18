@@ -1,14 +1,13 @@
 object frmLicense: TfrmLicense
-  Left = 548
-  Height = 500
-  Top = 327
-  Width = 812
+  Left = 804
+  Height = 400
+  Top = 319
+  Width = 650
   Caption = 'GNU General Public License v3.0'
-  ClientHeight = 500
-  ClientWidth = 812
-  Constraints.MinHeight = 500
-  Constraints.MinWidth = 500
-  DesignTimePPI = 120
+  ClientHeight = 400
+  ClientWidth = 650
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 400
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'
   object memLicense: TMemo
@@ -19,9 +18,9 @@ object frmLicense: TfrmLicense
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
     Left = 24
-    Height = 452
+    Height = 352
     Top = 24
-    Width = 764
+    Width = 602
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     BorderStyle = bsNone

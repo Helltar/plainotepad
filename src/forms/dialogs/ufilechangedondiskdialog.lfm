@@ -1,13 +1,12 @@
 object dlgFileChangedOnDisk: TdlgFileChangedOnDisk
-  Left = 766
-  Height = 226
-  Top = 370
-  Width = 420
+  Left = 832
+  Height = 181
+  Top = 389
+  Width = 336
   AutoSize = True
   Caption = 'File Modified'
-  ClientHeight = 226
-  ClientWidth = 420
-  DesignTimePPI = 120
+  ClientHeight = 181
+  ClientWidth = 336
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'
   object lblTitle: TLabel
@@ -17,9 +16,9 @@ object dlgFileChangedOnDisk: TdlgFileChangedOnDisk
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnReload
     Left = 24
-    Height = 120
+    Height = 73
     Top = 24
-    Width = 372
+    Width = 288
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     Caption = 'The file was modified on disk:'
@@ -30,9 +29,9 @@ object dlgFileChangedOnDisk: TdlgFileChangedOnDisk
     AnchorSideRight.Control = btnIgnore
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 234
-    Height = 34
-    Top = 168
+    Left = 150
+    Height = 36
+    Top = 121
     Width = 77
     Anchors = [akRight, akBottom]
     AutoSize = True
@@ -49,9 +48,9 @@ object dlgFileChangedOnDisk: TdlgFileChangedOnDisk
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 323
-    Height = 34
-    Top = 168
+    Left = 239
+    Height = 36
+    Top = 121
     Width = 73
     Anchors = [akRight, akBottom]
     AutoSize = True
