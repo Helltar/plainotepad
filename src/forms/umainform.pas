@@ -66,6 +66,7 @@ type
     Separator7: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
+    stEditor: TStatusBar;
     synEdit: TATSynEdit;
     openDialog: TOpenDialog;
     saveDialog: TSaveDialog;
@@ -103,6 +104,7 @@ type
     procedure miCreateDesktopEntryClick(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
     procedure miShowToolBarClick(Sender: TObject);
+    procedure synEditChangeCaretPos(Sender: TObject);
     procedure timFileModifiedCheckTimer(Sender: TObject);
   private
     currentFileAge: longint;
@@ -225,6 +227,16 @@ begin
     tbEditor.Visible := True;
 
   config.showToolbar := tbEditor.Visible;
+end;
+
+procedure TfrmMain.synEditChangeCaretPos(Sender: TObject);
+var
+  x, y: string;
+
+begin
+  x := IntToStr(synEdit.Carets[0].PosX + 1);
+  y := IntToStr(synEdit.Carets[0].PosY + 1);
+  stEditor.Panels.Items[0].Text := y + ':  ' + x;
 end;
 
 procedure TfrmMain.timFileModifiedCheckTimer(Sender: TObject);

@@ -1,7 +1,7 @@
 object frmSettings: TfrmSettings
-  Left = 855
+  Left = 835
   Height = 791
-  Top = 153
+  Top = 123
   Width = 429
   AutoSize = True
   BorderIcons = [biSystemMenu, biMinimize]
