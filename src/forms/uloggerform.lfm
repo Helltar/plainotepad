@@ -1,14 +1,15 @@
 object frmLogger: TfrmLogger
   Left = 917
-  Height = 192
+  Height = 240
   Top = 356
-  Width = 277
+  Width = 346
   AutoSize = True
   BorderIcons = [biSystemMenu]
   Caption = 'frmLogger'
-  ClientHeight = 192
-  ClientWidth = 277
-  Constraints.MinWidth = 160
+  ClientHeight = 240
+  ClientWidth = 346
+  Constraints.MinWidth = 200
+  DesignTimePPI = 120
   OnShow = FormShow
   Position = poWorkAreaCenter
   LCLVersion = '2.2.4.0'
@@ -17,10 +18,10 @@ object frmLogger: TfrmLogger
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Owner
     AnchorSideBottom.Side = asrBottom
-    Left = 204
-    Height = 36
-    Top = 132
-    Width = 49
+    Left = 272
+    Height = 34
+    Top = 182
+    Width = 50
     Anchors = [akRight, akBottom]
     AutoSize = True
     BorderSpacing.Right = 24
@@ -37,9 +38,9 @@ object frmLogger: TfrmLogger
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = btnOk
     Left = 24
-    Height = 84
+    Height = 134
     Top = 24
-    Width = 229
+    Width = 298
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Around = 24
     Caption = 'lblLogMessage'

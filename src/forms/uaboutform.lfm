@@ -1,12 +1,13 @@
 object frmAbout: TfrmAbout
-  Left = 832
-  Height = 272
-  Top = 395
-  Width = 473
+  Left = 668
+  Height = 281
+  Top = 272
+  Width = 438
   AutoSize = True
   Caption = 'About'
-  ClientHeight = 272
-  ClientWidth = 473
+  ClientHeight = 281
+  ClientWidth = 438
+  DesignTimePPI = 120
   OnShow = FormShow
   Position = poOwnerFormCenter
   LCLVersion = '2.2.4.0'
@@ -18,7 +19,7 @@ object frmAbout: TfrmAbout
     Left = 24
     Height = 64
     Top = 24
-    Width = 425
+    Width = 390
     Anchors = [akTop, akLeft, akRight]
     AutoSize = True
     BorderSpacing.Around = 24
@@ -115,9 +116,9 @@ object frmAbout: TfrmAbout
     AnchorSideRight.Side = asrBottom
     Cursor = crHandPoint
     Left = 24
-    Height = 22
+    Height = 20
     Top = 112
-    Width = 425
+    Width = 390
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Right = 24
@@ -135,9 +136,9 @@ object frmAbout: TfrmAbout
     AnchorSideRight.Side = asrBottom
     Cursor = crHandPoint
     Left = 24
-    Height = 22
-    Top = 146
-    Width = 425
+    Height = 20
+    Top = 144
+    Width = 390
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
@@ -156,9 +157,9 @@ object frmAbout: TfrmAbout
     AnchorSideRight.Side = asrBottom
     Cursor = crHandPoint
     Left = 24
-    Height = 22
-    Top = 180
-    Width = 425
+    Height = 20
+    Top = 176
+    Width = 390
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 24
     BorderSpacing.Top = 12
