@@ -14,7 +14,7 @@ Download
 --------
 
 - [plainotepad-0.9.8.tar.gz](https://github.com/Helltar/plainotepad/releases/download/0.9.8/plainotepad-0.9.8.tar.gz) (2.31 MB)
-- [plainotepad-0.9.1-windows.7z](https://github.com/Helltar/plainotepad/releases/download/0.9.1/plainotepad-0.9.1-windows.7z) (1.47 MB)
+- [plainotepad-0.9.8-windows.zip](https://github.com/Helltar/plainotepad/releases/download/0.9.8/plainotepad-0.9.8-windows.zip) (2.41 MB)
 
 Installation (Linux)
 --------------------
