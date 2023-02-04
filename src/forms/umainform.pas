@@ -236,7 +236,7 @@ var
 begin
   x := IntToStr(synEdit.Carets[0].PosX + 1);
   y := IntToStr(synEdit.Carets[0].PosY + 1);
-  stEditor.Panels.Items[0].Text := y + ':  ' + x;
+  stEditor.Panels.Items[0].Text := y + ':  ' + x + '      ';
 end;
 
 procedure TfrmMain.timFileModifiedCheckTimer(Sender: TObject);
@@ -436,6 +436,9 @@ begin
 
       if changeParentColor then
         ASynEdit.Parent.Color := Colors.TextBG;
+
+      stEditor.Color := Colors.TextBG;
+      stEditor.Font.Color := Colors.TextFont;
 
       initDefault();
 
