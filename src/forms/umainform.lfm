@@ -1,15 +1,14 @@
 object frmMain: TfrmMain
-  Left = 509
-  Height = 416
-  Top = 268
-  Width = 754
+  Left = 513
+  Height = 432
+  Top = 258
+  Width = 709
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 391
-  ClientWidth = 754
-  Constraints.MinHeight = 300
-  Constraints.MinWidth = 400
-  DesignTimePPI = 120
+  ClientHeight = 401
+  ClientWidth = 709
+  Constraints.MinHeight = 240
+  Constraints.MinWidth = 320
   Menu = mmMain
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
@@ -25,14 +24,14 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = stEditor
     Left = 0
-    Height = 322
-    Top = 40
-    Width = 754
+    Height = 345
+    Top = 32
+    Width = 709
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 322
-    ClientWidth = 754
+    ClientHeight = 345
+    ClientWidth = 709
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -43,12 +42,12 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 322
+      Height = 345
       Top = 0
-      Width = 754
+      Width = 709
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
-      Font.Height = -15
+      Font.Height = -12
       Font.Name = 'Courier New'
       ParentFont = False
       TabOrder = 0
@@ -62,12 +61,11 @@ object frmMain: TfrmMain
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 0
-    Height = 40
     Top = 0
-    Width = 754
+    Width = 709
     AutoSize = True
-    ButtonHeight = 40
-    ButtonWidth = 40
+    ButtonHeight = 32
+    ButtonWidth = 32
     Caption = 'tbEditor'
     EdgeBorders = []
     ShowCaptions = True
@@ -79,39 +77,39 @@ object frmMain: TfrmMain
       Caption = '  &New  '
     end
     object tbtnOpenFile: TToolButton
-      Left = 56
+      Left = 57
       Top = 0
       Action = actOpenFile
       Caption = '  &Open  '
     end
     object tbtnSaveFile: TToolButton
-      Left = 122
+      Left = 123
       Top = 0
       Action = actSaveFile
       Caption = '  &Save  '
     end
     object tbtnSaveFileAs: TToolButton
-      Left = 178
+      Left = 181
       Top = 0
       Action = actSaveFileAs
       Caption = '  Save &As  '
     end
     object tbtnSeparator: TToolButton
-      Left = 117
-      Height = 40
+      Left = 118
+      Height = 32
       Top = 0
       Caption = 'tbtnSeparator'
       Style = tbsDivider
     end
     object tbtnNewWindow: TToolButton
-      Left = 259
+      Left = 267
       Top = 0
       Action = actNewWindow
       Caption = '  New &Window  '
     end
     object ToolButton1: TToolButton
-      Left = 254
-      Height = 40
+      Left = 262
+      Height = 32
       Top = 0
       Caption = 'ToolButton1'
       Style = tbsDivider
@@ -119,22 +117,22 @@ object frmMain: TfrmMain
   end
   object stEditor: TStatusBar
     Left = 0
-    Height = 29
-    Top = 362
-    Width = 730
-    BorderSpacing.Right = 24
+    Height = 24
+    Top = 377
+    Width = 709
     Panels = <    
       item
         Alignment = taRightJustify
         Bevel = pbNone
-        Width = 62
+        Width = 50
       end>
+    ParentColor = False
     SimplePanel = False
     SizeGrip = False
   end
   object actionList: TActionList
-    Left = 160
-    Top = 100
+    Left = 128
+    Top = 80
     object actSaveFile: TAction
       Caption = '&Save'
       Hint = 'Save'
@@ -225,16 +223,16 @@ object frmMain: TfrmMain
   end
   object saveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    Left = 280
-    Top = 208
+    Left = 256
+    Top = 166
   end
   object openDialog: TOpenDialog
-    Left = 160
-    Top = 208
+    Left = 128
+    Top = 166
   end
   object mmMain: TMainMenu
-    Left = 280
-    Top = 100
+    Left = 256
+    Top = 80
     object miFile: TMenuItem
       Caption = '&File'
       object miNewFile: TMenuItem
@@ -348,7 +346,7 @@ object frmMain: TfrmMain
   object timFileModifiedCheck: TTimer
     Interval = 3000
     OnTimer = timFileModifiedCheckTimer
-    Left = 432
-    Top = 100
+    Left = 416
+    Top = 80
   end
 end
