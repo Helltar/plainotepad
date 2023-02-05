@@ -206,6 +206,7 @@ end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
+  FreeAndNil(editorFinder);
   FreeAndNil(editor);
   FreeAndNil(config);
 end;
