@@ -5,9 +5,10 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
-  LCLIntf, ExtCtrls, ComCtrls, ATSynEdit, ATSynEdit_Globals,
-  ATSynEdit_Commands, uConfig, uEditor, uSettingsForm;
+  Classes, SysUtils, Forms, Controls, Graphics,
+  Dialogs, ActnList, Menus, LCLIntf, ExtCtrls, ComCtrls,
+  ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
+  uConfig, uEditor, uSettingsForm;
 
 type
 
@@ -108,20 +109,20 @@ type
     procedure timFileModifiedCheckTimer(Sender: TObject);
   private
     currentFileAge: longint;
+    function checkFileModifiedStatus(): boolean;
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
-    function checkFileModifiedStatus(): boolean;
+    procedure addFilenameToRecent(const filename: string);
     procedure closeFile();
     procedure initComponents();
     procedure initEditor();
+    procedure initialSetup();
+    procedure initRecentFilesItems();
     procedure initSynEdit(ASynEdit: TATSynEdit);
     procedure loadFormConfig();
-    procedure updateSaveDialogTitle();
-    procedure initialSetup();
-    procedure addFilenameToRecent(const filename: string);
-    procedure initRecentFilesItems();
-    procedure miRecentFileClick(Sender: TObject);
     procedure miClearRecentListClick(Sender: TObject);
+    procedure miRecentFileClick(Sender: TObject);
+    procedure updateSaveDialogTitle();
   public
     config: TConfig;
     editor: TEditor;
@@ -139,11 +140,11 @@ uses
   uFileChangedDialog, uFileChangedOnDiskDialog;
 
 resourcestring
+  CAPTION_CLEAR_LIST = 'Clear List';
+  DESKTOP_ENTRY_CREATED = 'Desktop entry created';
   ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
   ERROR_WHEN_SAVE_FILE = 'Error when save file: %s';
   TITLE_SAVE_FILE_AS = 'Save file as';
-  DESKTOP_ENTRY_CREATED = 'Desktop entry created';
-  CAPTION_CLEAR_LIST = 'Clear List';
 
 {$R *.lfm}
 

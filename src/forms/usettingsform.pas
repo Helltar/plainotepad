@@ -93,15 +93,15 @@ begin
 
   with frmMain.config do
   begin
+    cbAppendNewline.Checked := appendNewline;
     cbHighlighter.Checked := highlighter;
     cbLineNumbers.Checked := lineNumbers;
     cbMiniMap.Checked := miniMap;
     cbNonSystemScrollBars.Checked := nonSystemScrollBars;
     cbNonSystemScrollBars.Enabled := scrollBars;
     cbScrollBars.Checked := scrollBars;
-    cbWordWrap.Checked := wordWrap;
     cbUnprintedVisible.Checked := unprintedVisible;
-    cbAppendNewline.Checked := appendNewline;
+    cbWordWrap.Checked := wordWrap;
     lblFontName.Caption := fontName;
     seBottomSpace.Value := borderSpaceBottom;
     seFontSize.Value := fontSize;

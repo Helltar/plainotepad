@@ -1,7 +1,7 @@
 object frmLogger: TfrmLogger
-  Left = 883
+  Left = 733
   Height = 192
-  Top = 358
+  Top = 366
   Width = 277
   AutoSize = True
   BorderIcons = [biSystemMenu]

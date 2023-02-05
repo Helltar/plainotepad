@@ -366,7 +366,7 @@ var
 begin
   lexer := nil;
   editor.editorHighlighter.lexer := nil;
-  synEdit.Text := 'SampleText';
+  synEdit.Text := 'Lorem ipsum';
 
   lexer := editor.editorHighlighter.findAnalyzer(getSelectedLexerName());
 
