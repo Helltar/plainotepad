@@ -114,6 +114,7 @@ type
     procedure closeFile();
     procedure initComponents();
     procedure initEditor();
+    procedure initSynEdit(ASynEdit: TATSynEdit);
     procedure loadFormConfig();
     procedure updateSaveDialogTitle();
     procedure initialSetup();
@@ -139,6 +140,7 @@ uses
 
 resourcestring
   ERROR_MK_CONFIG_DIR = 'Configuration directory could not be created, editor settings will not be saved';
+  ERROR_WHEN_SAVE_FILE = 'Error when save file: %s';
   TITLE_SAVE_FILE_AS = 'Save file as';
   DESKTOP_ENTRY_CREATED = 'Desktop entry created';
   CAPTION_CLEAR_LIST = 'Clear List';
@@ -356,31 +358,31 @@ begin
   initRecentFilesItems();
 end;
 
-procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; const changeParentColor: boolean);
-
-  procedure initDefault();
+procedure TfrmMain.initSynEdit(ASynEdit: TATSynEdit);
+begin
+  with ASynEdit do
   begin
-    with ASynEdit do
-    begin
-      OptBorderVisible := False;
-      OptCaretVirtual := False;
-      OptFoldEnabled := False;
-      OptMouse2ClickOpensURL := False;
-      OptNumbersStyle := cNumbersAll;
-      OptRulerVisible := False;
-      OptShowCurLine := True;
-      OptShowMouseSelFrame := False;
-      OptShowScrollHint := True;
-      OptShowURLs := False;
-      OptSpacingY := 0;
-      OptTabSize := 4;
-      OptTabSpaces := True;
-      OptUnprintedEnds := False;
+    OptBorderVisible := False;
+    OptCaretVirtual := False;
+    OptFoldEnabled := False;
+    OptMouse2ClickOpensURL := False;
+    OptNumbersStyle := cNumbersAll;
+    OptRulerVisible := False;
+    OptShowCurLine := True;
+    OptShowMouseSelFrame := False;
+    OptShowScrollHint := True;
+    OptShowURLs := False;
+    OptSpacingY := 0;
+    OptTabSize := 4;
+    OptTabSpaces := True;
+    OptUnprintedEnds := False;
 
-      PopupGutterFold := TPopupMenu.Create(Self);
-    end;
+    PopupGutterFold := TPopupMenu.Create(Self);
   end;
+end;
 
+
+procedure TfrmMain.loadEditorConfig(ASynEdit: TATSynEdit; AEditor: TEditor; const changeParentColor: boolean);
 begin
   with ASynEdit do
     with config do
@@ -440,7 +442,7 @@ begin
       stEditor.Color := Colors.TextBG;
       stEditor.Font.Color := Colors.TextFont;
 
-      initDefault();
+      initSynEdit(ASynEdit);
 
       Update();
     end;
@@ -547,9 +549,9 @@ end;
 procedure TfrmMain.initRecentFilesItems;
 var
   i: integer;
-  list: TStringList;
-  mItem: TMenuItem;
   filename: string;
+  recentFileslist, list: TStringList;
+  mItem: TMenuItem;
 
 begin
   filename := getConfigDir + APP_RECENT_FILES_FILENAME;
@@ -561,31 +563,45 @@ begin
     miOpenRecent.Clear;
 
   try
+    recentFileslist := TStringList.Create;
     list := TStringList.Create;
 
-    with list do
+    with recentFileslist do
     begin
       LoadFromFile(filename);
 
       for i := 0 to Count - 1 do
+        if FileExists(ValueFromIndex[i]) then
+        begin
+          mItem := TMenuItem.Create(miOpenRecent);
+          mItem.Caption := Names[i] + ' --> ' + ValueFromIndex[i];
+          mItem.Hint := ValueFromIndex[i];
+          mItem.OnClick := @miRecentFileClick;
+          miOpenRecent.Add(mItem);
+
+          list.AddPair(Names[i], ValueFromIndex[i]);
+        end;
+
+      if list.Count > 0 then
       begin
         mItem := TMenuItem.Create(miOpenRecent);
-        mItem.Caption := Names[i] + ' --> ' + ValueFromIndex[i];
-        mItem.Hint := ValueFromIndex[i];
-        mItem.OnClick := @miRecentFileClick;
+        mItem.Caption := '-';
+        miOpenRecent.Add(mItem);
+
+        mItem := TMenuItem.Create(miOpenRecent);
+        mItem.Caption := CAPTION_CLEAR_LIST;
+        mItem.OnClick := @miClearRecentListClick;
         miOpenRecent.Add(mItem);
       end;
 
-      mItem := TMenuItem.Create(miOpenRecent);
-      mItem.Caption := '-';
-      miOpenRecent.Add(mItem);
-
-      mItem := TMenuItem.Create(miOpenRecent);
-      mItem.Caption := CAPTION_CLEAR_LIST;
-      mItem.OnClick := @miClearRecentListClick;
-      miOpenRecent.Add(mItem);
+      try
+        list.SaveToFile(filename);
+      except
+        addLog(Format(ERROR_WHEN_SAVE_FILE, [filename]));
+      end;
     end;
   finally
+    FreeAndNil(recentFileslist);
     FreeAndNil(list);
   end;
 
