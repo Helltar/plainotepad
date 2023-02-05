@@ -246,29 +246,37 @@ var
   filename: string;
 
 begin
-  if synEdit.Focused then
-    if editor.isNotNewFile() then
-    begin
-      filename := editor.getCurrentFilename();
+  if not synEdit.Focused then
+    Exit;
 
-      if FileAge(filename) <> currentFileAge then
-        with TdlgFileChangedOnDisk.Create(Self, filename) do
-          try
-            ShowModal;
+  if not editor.isNotNewFile() then
+    Exit;
 
-            case dlgResult of
-              dlgResReload:
-              begin
-                editor.openFile(filename);
-                currentFileAge := FileAge(filename);
-              end;
+  filename := editor.getCurrentFilename();
 
-              dlgResIgnore: currentFileAge := FileAge(filename);
-            end;
-          finally
-            Free;
+  if not FileExists(filename) then
+  begin
+    editor.fileModified := True;
+    Exit;
+  end;
+
+  if FileAge(filename) <> currentFileAge then
+    with TdlgFileChangedOnDisk.Create(Self, filename) do
+      try
+        ShowModal;
+
+        case dlgResult of
+          dlgResReload:
+          begin
+            editor.openFile(filename);
+            currentFileAge := FileAge(filename);
           end;
-    end;
+
+          dlgResIgnore: currentFileAge := FileAge(filename);
+        end;
+      finally
+        Free;
+      end;
 end;
 
 procedure TfrmMain.miRecentFileClick(Sender: TObject);

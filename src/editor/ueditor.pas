@@ -21,6 +21,7 @@ type
     function getColorFromConfigSectionMain(iniFile: TIniFile; const AIdent: string; const ADefault: string): TColor;
     procedure addTextToParentCaption(AText: string);
     function GetFileModified: boolean;
+    procedure SetFileModified(AValue: boolean);
     procedure SetHighlighter(AValue: boolean);
     procedure setTextToParentCaption(const AText: string);
     procedure synEditChange(Sender: TObject);
@@ -36,7 +37,7 @@ type
     function saveFile(const filename: string): boolean;
     procedure closeFile();
     procedure setColorTheme(const colorThemeName: string);
-    property fileModified: boolean read GetFileModified;
+    property fileModified: boolean read GetFileModified write SetFileModified;
     property lexerName: string read FLexerName;
     property highlighter: boolean read FHighlighter write setHighlighter;
   end;
@@ -99,6 +100,12 @@ end;
 function TEditor.GetFileModified: boolean;
 begin
   Result := synEdit.Modified;
+end;
+
+procedure TEditor.SetFileModified(AValue: boolean);
+begin
+  synEdit.Modified := AValue;
+  addTextToParentCaption('*');
 end;
 
 procedure TEditor.SetHighlighter(AValue: boolean);
