@@ -5,9 +5,10 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics,
-  Dialogs, ActnList, Menus, LCLIntf, ExtCtrls, ComCtrls,
-  ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
+  LCLIntf, ExtCtrls, ComCtrls, StdCtrls, ATSynEdit,
+  ATSynEdit_Globals, ATSynEdit_Commands, ATSynEdit_Edits,
+  ATSynEdit_Finder, ATSynEdit_Carets,
   uConfig, uEditor, uSettingsForm;
 
 type
@@ -20,6 +21,9 @@ type
     actCut: TAction;
     actCopy: TAction;
     actDelete: TAction;
+    actSearch: TAction;
+    actFindPrevious: TAction;
+    actFindNext: TAction;
     actUndo: TAction;
     actPaste: TAction;
     actSelectAll: TAction;
@@ -31,6 +35,14 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
+    btnFindNext: TButton;
+    btnFindPrevious: TButton;
+    btnCloseSearch: TButton;
+    edtFind: TATEdit;
+    miSearch: TMenuItem;
+    miFindNext: TMenuItem;
+    miFindPrevious: TMenuItem;
+    Separator11: TMenuItem;
     miShortcuts: TMenuItem;
     miOpenRecent: TMenuItem;
     miShowToolBar: TMenuItem;
@@ -56,6 +68,7 @@ type
     miSaveFileAs: TMenuItem;
     miSettings: TMenuItem;
     miClose: TMenuItem;
+    pnlSearch: TPanel;
     pnlEditor: TPanel;
     separator1: TMenuItem;
     Separator10: TMenuItem;
@@ -84,6 +97,11 @@ type
     procedure actCopyExecute(Sender: TObject);
     procedure actCutExecute(Sender: TObject);
     procedure actDeleteExecute(Sender: TObject);
+    procedure actFindNextUpdate(Sender: TObject);
+    procedure actFindPreviousUpdate(Sender: TObject);
+    procedure actSearchExecute(Sender: TObject);
+    procedure actFindPreviousExecute(Sender: TObject);
+    procedure actFindNextExecute(Sender: TObject);
     procedure actNewFileExecute(Sender: TObject);
     procedure actFullscreenExecute(Sender: TObject);
     procedure actNewWindowExecute(Sender: TObject);
@@ -96,6 +114,10 @@ type
     procedure actSettingsExecute(Sender: TObject);
     procedure actShowMenubarExecute(Sender: TObject);
     procedure actUndoExecute(Sender: TObject);
+    procedure btnFindNextClick(Sender: TObject);
+    procedure btnFindPreviousClick(Sender: TObject);
+    procedure btnCloseSearchClick(Sender: TObject);
+    procedure edtFindChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormCreate(Sender: TObject);
@@ -109,11 +131,13 @@ type
     procedure timFileModifiedCheckTimer(Sender: TObject);
   private
     currentFileAge: longint;
+    editorFinder: TATEditorFinder;
     function checkFileModifiedStatus(): boolean;
     function openFile(fileName: string): boolean;
     function saveFile(): boolean;
     procedure addFilenameToRecent(const filename: string);
     procedure closeFile();
+    procedure doFind(ANext: boolean);
     procedure initComponents();
     procedure initEditor();
     procedure initialSetup();
@@ -165,6 +189,10 @@ begin
 
   initEditor();
   loadEditorConfig(synEdit, editor);
+
+  editorFinder := TATEditorFinder.Create;
+  editorFinder.Editor := synEdit;
+  editorFinder.StrFind := edtFind.Text;
 
   if ParamCount > 0 then
   begin
@@ -357,6 +385,8 @@ begin
 
     tbEditor.Visible := showToolbar;
     miShowToolBar.Checked := showToolbar;
+    edtFind.Font.Name := fontName;
+    edtFind.Font.Size := fontSize;
   end;
 
   {$IfDef MSWINDOWS}
@@ -450,6 +480,7 @@ begin
 
       stEditor.Color := Colors.TextBG;
       stEditor.Font.Color := Colors.TextFont;
+      pnlSearch.Color := Colors.TextBG;
 
       initSynEdit(ASynEdit);
 
@@ -466,6 +497,7 @@ procedure TfrmMain.initComponents;
 begin
   saveDialog.InitialDir := GetUserDir;
   openDialog.InitialDir := GetUserDir;
+  pnlEditor.AnchorSideTop.Control := tbEditor;
 end;
 
 procedure TfrmMain.updateConfig;
@@ -483,6 +515,35 @@ begin
 
   if not filename.IsEmpty then
     saveDialog.Title := ExtractFileName(filename) + ' - ' + TITLE_SAVE_FILE_AS;
+end;
+
+procedure TfrmMain.doFind(ANext: boolean);
+var
+  aChanged: boolean;
+
+begin
+  edtFind.Colors.TextFont := clBlack;
+  edtFind.Colors.TextBG := clWhite;
+
+  if editorFinder.StrFind = '' then
+    Exit;
+
+  editorFinder.OptFromCaret := ANext;
+
+  if editorFinder.DoAction_FindOrReplace(False, False, aChanged, True) then
+  begin
+    edtFind.Colors.TextBG := $00BDE7AB;
+
+    synEdit.DoGotoPos(Point(editorFinder.MatchEdPos.X, editorFinder.MatchEdPos.Y),
+      Point(editorFinder.MatchEdEnd.X, editorFinder.MatchEdEnd.Y), 5, 2, True, True);
+  end
+  else
+  begin
+    edtFind.Colors.TextFont := clWhite;
+    edtFind.Colors.TextBG := $005050F0;
+  end;
+
+  edtFind.Update();
 end;
 
 procedure TfrmMain.initialSetup;
@@ -676,6 +737,32 @@ begin
   synEdit.DoCommand(cCommand_Undo, cInvokeMenuContext);
 end;
 
+procedure TfrmMain.btnFindNextClick(Sender: TObject);
+begin
+  editorFinder.OptBack := False;
+  DoFind(True);
+end;
+
+procedure TfrmMain.btnFindPreviousClick(Sender: TObject);
+begin
+  editorFinder.OptBack := True;
+  DoFind(True);
+end;
+
+procedure TfrmMain.btnCloseSearchClick(Sender: TObject);
+begin
+  pnlEditor.AnchorSideTop.Control := tbEditor;
+  pnlSearch.Enabled := False;
+  pnlSearch.Visible := False;
+end;
+
+procedure TfrmMain.edtFindChange(Sender: TObject);
+begin
+  btnFindNext.Enabled := edtFind.Text <> '';
+  btnFindPrevious.Enabled := btnFindNext.Enabled;
+  editorFinder.StrFind := edtFind.Text;
+end;
+
 procedure TfrmMain.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   try
@@ -715,6 +802,43 @@ end;
 procedure TfrmMain.actDeleteExecute(Sender: TObject);
 begin
   synEdit.DoCommand(cCommand_TextDeleteSelection, cInvokeMenuContext);
+end;
+
+procedure TfrmMain.actFindNextUpdate(Sender: TObject);
+begin
+  actFindNext.Enabled := editorFinder.StrFind <> '';
+end;
+
+procedure TfrmMain.actFindPreviousUpdate(Sender: TObject);
+begin
+  actFindPrevious.Enabled := actFindNext.Enabled;
+end;
+
+procedure TfrmMain.actSearchExecute(Sender: TObject);
+begin
+  with pnlEditor do
+    if AnchorSideTop.Control = pnlSearch then
+      AnchorSideTop.Control := tbEditor
+    else
+      AnchorSideTop.Control := pnlSearch;
+
+  pnlSearch.Enabled := not pnlSearch.Enabled;
+  pnlSearch.Visible := not pnlSearch.Visible;
+
+  if pnlSearch.Visible then
+    edtFind.SetFocus;
+end;
+
+procedure TfrmMain.actFindPreviousExecute(Sender: TObject);
+begin
+  editorFinder.OptBack := True;
+  DoFind(True);
+end;
+
+procedure TfrmMain.actFindNextExecute(Sender: TObject);
+begin
+  editorFinder.OptBack := False;
+  DoFind(True);
 end;
 
 procedure TfrmMain.actNewFileExecute(Sender: TObject);

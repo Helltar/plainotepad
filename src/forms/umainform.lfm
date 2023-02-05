@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 513
-  Height = 432
-  Top = 258
-  Width = 709
+  Left = 440
+  Height = 567
+  Top = 236
+  Width = 783
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 401
-  ClientWidth = 709
+  ClientHeight = 536
+  ClientWidth = 783
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   Menu = mmMain
@@ -18,20 +18,20 @@ object frmMain: TfrmMain
   LCLVersion = '2.2.4.0'
   object pnlEditor: TPanel
     AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = tbEditor
+    AnchorSideTop.Control = pnlSearch
     AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = stEditor
     Left = 0
-    Height = 345
-    Top = 32
-    Width = 709
+    Height = 430
+    Top = 82
+    Width = 783
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 345
-    ClientWidth = 709
+    ClientHeight = 430
+    ClientWidth = 783
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -42,9 +42,9 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 345
+      Height = 430
       Top = 0
-      Width = 709
+      Width = 783
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
       Font.Height = -12
@@ -62,7 +62,7 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     Left = 0
     Top = 0
-    Width = 709
+    Width = 783
     AutoSize = True
     ButtonHeight = 32
     ButtonWidth = 32
@@ -118,8 +118,8 @@ object frmMain: TfrmMain
   object stEditor: TStatusBar
     Left = 0
     Height = 24
-    Top = 377
-    Width = 709
+    Top = 512
+    Width = 783
     Panels = <    
       item
         Alignment = taRightJustify
@@ -130,9 +130,124 @@ object frmMain: TfrmMain
     SimplePanel = False
     SizeGrip = False
   end
+  object pnlSearch: TPanel
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = tbEditor
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 0
+    Height = 50
+    Top = 32
+    Width = 783
+    Anchors = [akTop, akLeft, akRight]
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 783
+    Enabled = False
+    TabOrder = 2
+    Visible = False
+    object edtFind: TATEdit
+      AnchorSideLeft.Control = pnlSearch
+      AnchorSideTop.Control = pnlSearch
+      AnchorSideRight.Control = btnFindNext
+      AnchorSideBottom.Control = pnlSearch
+      AnchorSideBottom.Side = asrBottom
+      Left = 12
+      Height = 26
+      Hint = 'Text to search for'
+      Top = 12
+      Width = 573
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Around = 12
+      DoubleBuffered = False
+      Font.Height = -16
+      Font.Name = 'Monospace'
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      TabStop = True
+      OnChange = edtFindChange
+      WantTabs = False
+      WantReturns = False
+      OptScrollStyleHorz = aessHide
+      OptScrollStyleVert = aessHide
+      OptScrollIndentCaretHorz = 0
+      OptShowURLs = False
+      OptShowMouseSelFrame = False
+      OptCaretManyAllowed = False
+      OptCaretVirtual = False
+      OptGutterVisible = False
+      OptRulerVisible = False
+      OptMarginRight = 1000
+      OptUnprintedVisible = False
+      OptMouseDragDrop = False
+      OptMouseWheelZooms = False
+      OptUndoLimit = 200
+    end
+    object btnFindNext: TButton
+      AnchorSideTop.Control = edtFind
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = btnFindPrevious
+      Left = 597
+      Height = 25
+      Hint = 'Find Next'
+      Top = 13
+      Width = 60
+      Anchors = [akTop, akRight]
+      BorderSpacing.Around = 12
+      Caption = '↓'
+      Enabled = False
+      Font.Style = [fsBold]
+      OnClick = btnFindNextClick
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+    end
+    object btnFindPrevious: TButton
+      AnchorSideTop.Control = btnFindNext
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = btnCloseSearch
+      Left = 669
+      Height = 25
+      Hint = 'Find Previous'
+      Top = 13
+      Width = 60
+      Anchors = [akTop, akRight]
+      Caption = '↑'
+      Enabled = False
+      Font.Style = [fsBold]
+      OnClick = btnFindPreviousClick
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+    end
+    object btnCloseSearch: TButton
+      AnchorSideTop.Control = btnFindPrevious
+      AnchorSideTop.Side = asrCenter
+      AnchorSideRight.Control = pnlSearch
+      AnchorSideRight.Side = asrBottom
+      Left = 741
+      Height = 25
+      Hint = 'Close Search'
+      Top = 13
+      Width = 30
+      Anchors = [akTop, akRight]
+      BorderSpacing.Around = 12
+      Caption = 'X'
+      OnClick = btnCloseSearchClick
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+    end
+  end
   object actionList: TActionList
-    Left = 128
-    Top = 80
+    Left = 264
+    Top = 128
     object actSaveFile: TAction
       Caption = '&Save'
       Hint = 'Save'
@@ -220,19 +335,39 @@ object frmMain: TfrmMain
       OnExecute = actDeleteExecute
       ShortCut = 46
     end
+    object actSearch: TAction
+      Category = 'Find'
+      Caption = '&Find →'
+      OnExecute = actSearchExecute
+      ShortCut = 16454
+    end
+    object actFindNext: TAction
+      Category = 'Find'
+      Caption = 'Find &Next ↓'
+      OnExecute = actFindNextExecute
+      OnUpdate = actFindNextUpdate
+      ShortCut = 114
+    end
+    object actFindPrevious: TAction
+      Category = 'Find'
+      Caption = 'Find &Previous ↑'
+      OnExecute = actFindPreviousExecute
+      OnUpdate = actFindPreviousUpdate
+      ShortCut = 8306
+    end
   end
   object saveDialog: TSaveDialog
     Options = [ofOverwritePrompt, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    Left = 256
-    Top = 166
+    Left = 136
+    Top = 216
   end
   object openDialog: TOpenDialog
-    Left = 128
-    Top = 166
+    Left = 136
+    Top = 128
   end
   object mmMain: TMainMenu
-    Left = 256
-    Top = 80
+    Left = 264
+    Top = 216
     object miFile: TMenuItem
       Caption = '&File'
       object miNewFile: TMenuItem
@@ -302,6 +437,18 @@ object frmMain: TfrmMain
       object miEditDelete: TMenuItem
         Action = actDelete
       end
+      object Separator11: TMenuItem
+        Caption = '-'
+      end
+      object miSearch: TMenuItem
+        Action = actSearch
+      end
+      object miFindNext: TMenuItem
+        Action = actFindNext
+      end
+      object miFindPrevious: TMenuItem
+        Action = actFindPrevious
+      end
     end
     object miView: TMenuItem
       Caption = '&View'
@@ -346,7 +493,7 @@ object frmMain: TfrmMain
   object timFileModifiedCheck: TTimer
     Interval = 3000
     OnTimer = timFileModifiedCheckTimer
-    Left = 416
-    Top = 80
+    Left = 264
+    Top = 304
   end
 end
