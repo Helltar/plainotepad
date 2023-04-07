@@ -38,7 +38,7 @@ type
     btnFindNext: TButton;
     btnFindPrevious: TButton;
     btnCloseSearch: TButton;
-    edtFind: TATEdit;
+    edtFind: TEdit;
     miSearch: TMenuItem;
     miFindNext: TMenuItem;
     miFindPrevious: TMenuItem;
@@ -302,7 +302,7 @@ begin
             currentFileAge := FileAge(filename);
           end;
 
-          dlgResIgnore: currentFileAge := FileAge(filename);
+          dlgResIgnore: timFileModifiedCheck.Enabled := False;
         end;
       finally
         Free;
@@ -334,6 +334,7 @@ begin
   begin
     addFilenameToRecent(fileName);
     currentFileAge := FileAge(fileName);
+    timFileModifiedCheck.Enabled := True;
   end;
 end;
 
@@ -351,7 +352,10 @@ begin
   end;
 
   if Result then
+  begin
     currentFileAge := FileAge(editor.getCurrentFilename());
+    timFileModifiedCheck.Enabled := True;
+  end;
 end;
 
 procedure TfrmMain.closeFile;
@@ -523,8 +527,8 @@ var
   aChanged: boolean;
 
 begin
-  edtFind.Colors.TextFont := clBlack;
-  edtFind.Colors.TextBG := clWhite;
+  edtFind.Font.Color := clBlack;
+  edtFind.Color := clWhite;
 
   if editorFinder.StrFind = '' then
     Exit;
@@ -533,15 +537,15 @@ begin
 
   if editorFinder.DoAction_FindOrReplace(False, False, aChanged, True) then
   begin
-    edtFind.Colors.TextBG := $00BDE7AB;
+    edtFind.Color := $00BDE7AB;
 
     synEdit.DoGotoPos(Point(editorFinder.MatchEdPos.X, editorFinder.MatchEdPos.Y),
       Point(editorFinder.MatchEdEnd.X, editorFinder.MatchEdEnd.Y), 5, 2, True, True);
   end
   else
   begin
-    edtFind.Colors.TextFont := clWhite;
-    edtFind.Colors.TextBG := $005050F0;
+    edtFind.Font.Color := clWhite;
+    edtFind.Color := $005050F0;
   end;
 
   edtFind.Update();

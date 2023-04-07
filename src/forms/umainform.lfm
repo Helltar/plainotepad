@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
-  Left = 440
-  Height = 567
-  Top = 236
-  Width = 783
+  Left = 432
+  Height = 515
+  Top = 235
+  Width = 780
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 536
-  ClientWidth = 783
+  ClientHeight = 484
+  ClientWidth = 780
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   Menu = mmMain
@@ -24,14 +24,14 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = stEditor
     Left = 0
-    Height = 430
+    Height = 378
     Top = 82
-    Width = 783
+    Width = 780
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 430
-    ClientWidth = 783
+    ClientHeight = 378
+    ClientWidth = 780
     TabOrder = 0
     object synEdit: TATSynEdit
       AnchorSideLeft.Control = pnlEditor
@@ -42,9 +42,9 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 430
+      Height = 378
       Top = 0
-      Width = 783
+      Width = 780
       Anchors = [akTop, akLeft, akRight, akBottom]
       DoubleBuffered = True
       Font.Height = -12
@@ -62,7 +62,7 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     Left = 0
     Top = 0
-    Width = 783
+    Width = 780
     AutoSize = True
     ButtonHeight = 32
     ButtonWidth = 32
@@ -118,8 +118,8 @@ object frmMain: TfrmMain
   object stEditor: TStatusBar
     Left = 0
     Height = 24
-    Top = 512
-    Width = 783
+    Top = 460
+    Width = 780
     Panels = <    
       item
         Alignment = taRightJustify
@@ -139,63 +139,23 @@ object frmMain: TfrmMain
     Left = 0
     Height = 50
     Top = 32
-    Width = 783
+    Width = 780
     Anchors = [akTop, akLeft, akRight]
     BevelOuter = bvNone
     ClientHeight = 50
-    ClientWidth = 783
+    ClientWidth = 780
     Enabled = False
     TabOrder = 2
     Visible = False
-    object edtFind: TATEdit
-      AnchorSideLeft.Control = pnlSearch
-      AnchorSideTop.Control = pnlSearch
-      AnchorSideRight.Control = btnFindNext
-      AnchorSideBottom.Control = pnlSearch
-      AnchorSideBottom.Side = asrBottom
-      Left = 12
-      Height = 26
-      Hint = 'Text to search for'
-      Top = 12
-      Width = 573
-      Anchors = [akTop, akLeft, akRight, akBottom]
-      BorderSpacing.Around = 12
-      DoubleBuffered = False
-      Font.Height = -16
-      Font.Name = 'Monospace'
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 0
-      TabStop = True
-      OnChange = edtFindChange
-      WantTabs = False
-      WantReturns = False
-      OptScrollStyleHorz = aessHide
-      OptScrollStyleVert = aessHide
-      OptScrollIndentCaretHorz = 0
-      OptShowURLs = False
-      OptShowMouseSelFrame = False
-      OptCaretManyAllowed = False
-      OptCaretVirtual = False
-      OptGutterVisible = False
-      OptRulerVisible = False
-      OptMarginRight = 1000
-      OptUnprintedVisible = False
-      OptMouseDragDrop = False
-      OptMouseWheelZooms = False
-      OptUndoLimit = 200
-    end
     object btnFindNext: TButton
-      AnchorSideTop.Control = edtFind
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = btnFindPrevious
-      Left = 597
+      Left = 594
       Height = 25
       Hint = 'Find Next'
-      Top = 13
+      Top = 12
       Width = 60
-      Anchors = [akTop, akRight]
+      Anchors = [akRight]
       BorderSpacing.Around = 12
       Caption = '↓'
       Enabled = False
@@ -210,10 +170,10 @@ object frmMain: TfrmMain
       AnchorSideTop.Control = btnFindNext
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = btnCloseSearch
-      Left = 669
+      Left = 666
       Height = 25
       Hint = 'Find Previous'
-      Top = 13
+      Top = 12
       Width = 60
       Anchors = [akTop, akRight]
       Caption = '↑'
@@ -230,10 +190,10 @@ object frmMain: TfrmMain
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = pnlSearch
       AnchorSideRight.Side = asrBottom
-      Left = 741
+      Left = 738
       Height = 25
       Hint = 'Close Search'
-      Top = 13
+      Top = 12
       Width = 30
       Anchors = [akTop, akRight]
       BorderSpacing.Around = 12
@@ -243,6 +203,21 @@ object frmMain: TfrmMain
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
+    end
+    object edtFind: TEdit
+      AnchorSideLeft.Control = pnlSearch
+      AnchorSideTop.Control = pnlSearch
+      AnchorSideRight.Control = btnFindNext
+      AnchorSideBottom.Control = pnlSearch
+      AnchorSideBottom.Side = asrBottom
+      Left = 12
+      Height = 26
+      Top = 12
+      Width = 570
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Around = 12
+      OnChange = edtFindChange
+      TabOrder = 0
     end
   end
   object actionList: TActionList
