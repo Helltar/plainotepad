@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
   LCLIntf, ExtCtrls, ComCtrls, StdCtrls, ATSynEdit,
-  ATSynEdit_Globals, ATSynEdit_Commands, ATSynEdit_Edits,
+  ATSynEdit_Globals, ATSynEdit_Commands,
   ATSynEdit_Finder, ATSynEdit_Carets,
   uConfig, uEditor, uSettingsForm;
 
