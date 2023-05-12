@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Graphics, Dialogs, IniFiles, Forms,
-  ATSynEdit,
+  ATSynEdit, ATStrings,
   uEditorHighlighter;
 
 type
@@ -140,7 +140,7 @@ begin
     Exit;
 
   try
-    synEdit.LoadFromFile(filename);
+    synEdit.LoadFromFile(filename, [cLoadOpFromUTF8]);
   except
     closeFile();
     addLog(Format(ERROR_OPEN_FILE, [filename]));
