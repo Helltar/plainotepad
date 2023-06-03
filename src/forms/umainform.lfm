@@ -15,7 +15,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
-  LCLVersion = '2.2.4.0'
+  LCLVersion = '2.2.6.0'
   object pnlEditor: TPanel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = pnlSearch

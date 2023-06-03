@@ -5,10 +5,11 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
-  LCLIntf, ExtCtrls, ComCtrls, StdCtrls, ATSynEdit,
-  ATSynEdit_Globals, ATSynEdit_Commands,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList,
+  Menus, LCLIntf, ExtCtrls, ComCtrls, StdCtrls,
+  ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
   ATSynEdit_Finder, ATSynEdit_Carets,
+  { --- }
   uConfig, uEditor, uSettingsForm;
 
 type
@@ -410,7 +411,7 @@ begin
     OptCaretVirtual := False;
     OptFoldEnabled := False;
     OptMouse2ClickOpensURL := False;
-    OptNumbersStyle := cNumbersAll;
+    OptNumbersStyle := TATEditorNumbersStyle.All;
     OptRulerVisible := False;
     OptShowCurLine := True;
     OptShowMouseSelFrame := False;
@@ -440,16 +441,16 @@ begin
       OptSavingForceFinalEol := appendNewline;
 
       case mouseMiddleClickAction of
-        0: OptMouseMiddleClickAction := mcaPaste;
-        1: OptMouseMiddleClickAction := mcaScrolling;
+        0: OptMouseMiddleClickAction := TATEditorMiddleClickAction.Paste;
+        1: OptMouseMiddleClickAction := TATEditorMiddleClickAction.Scrolling;
         else
-          OptMouseMiddleClickAction := mcaPaste;
+          OptMouseMiddleClickAction := TATEditorMiddleClickAction.Paste;
       end;
 
       if wordWrap then
-        OptWrapMode := cWrapOn
+        OptWrapMode := TATEditorWrapMode.ModeOn
       else
-        OptWrapMode := cWrapOff;
+        OptWrapMode := TATEditorWrapMode.ModeOff;
 
       if rightEdge = 0 then
         OptMarginRight := 10000
@@ -468,13 +469,13 @@ begin
       if scrollBars then
       begin
         synEdit.OptScrollbarsNew := nonSystemScrollBars;
-        OptScrollStyleHorz := aessAuto;
-        OptScrollStyleVert := aessAuto;
+        OptScrollStyleHorz := TATEditorScrollbarStyle.Auto;
+        OptScrollStyleVert := TATEditorScrollbarStyle.Auto;
       end
       else
       begin
-        OptScrollStyleHorz := aessHide;
-        OptScrollStyleVert := aessHide;
+        OptScrollStyleHorz := TATEditorScrollbarStyle.Hide;
+        OptScrollStyleVert := TATEditorScrollbarStyle.Hide;
       end;
 
       AEditor.highlighter := highlighter;
@@ -716,7 +717,7 @@ end;
 
 procedure TfrmMain.actSelectAllExecute(Sender: TObject);
 begin
-  synEdit.DoCommand(cCommand_SelectAll, cInvokeMenuContext);
+  synEdit.DoCommand(cCommand_SelectAll, TATCommandInvoke.MenuContext);
 end;
 
 procedure TfrmMain.actSettingsExecute(Sender: TObject);
@@ -739,7 +740,7 @@ end;
 
 procedure TfrmMain.actUndoExecute(Sender: TObject);
 begin
-  synEdit.DoCommand(cCommand_Undo, cInvokeMenuContext);
+  synEdit.DoCommand(cCommand_Undo, TATCommandInvoke.MenuContext);
 end;
 
 procedure TfrmMain.btnFindNextClick(Sender: TObject);
@@ -796,17 +797,17 @@ end;
 
 procedure TfrmMain.actCopyExecute(Sender: TObject);
 begin
-  synEdit.DoCommand(cCommand_ClipboardCopy, cInvokeMenuContext);
+  synEdit.DoCommand(cCommand_ClipboardCopy, TATCommandInvoke.MenuContext);
 end;
 
 procedure TfrmMain.actCutExecute(Sender: TObject);
 begin
-  synEdit.DoCommand(cCommand_ClipboardCut, cInvokeMenuContext);
+  synEdit.DoCommand(cCommand_ClipboardCut, TATCommandInvoke.MenuContext);
 end;
 
 procedure TfrmMain.actDeleteExecute(Sender: TObject);
 begin
-  synEdit.DoCommand(cCommand_TextDeleteSelection, cInvokeMenuContext);
+  synEdit.DoCommand(cCommand_TextDeleteSelection, TATCommandInvoke.MenuContext);
 end;
 
 procedure TfrmMain.actFindNextUpdate(Sender: TObject);
@@ -886,7 +887,7 @@ end;
 
 procedure TfrmMain.actPasteExecute(Sender: TObject);
 begin
-  synEdit.DoCommand(cCommand_ClipboardPaste, cInvokeMenuContext);
+  synEdit.DoCommand(cCommand_ClipboardPaste, TATCommandInvoke.MenuContext);
 end;
 
 procedure TfrmMain.actSaveFileAsExecute(Sender: TObject);

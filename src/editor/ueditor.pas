@@ -140,7 +140,7 @@ begin
     Exit;
 
   try
-    synEdit.LoadFromFile(filename, [cLoadOpFromUTF8]);
+    synEdit.LoadFromFile(filename, []);
   except
     closeFile();
     addLog(Format(ERROR_OPEN_FILE, [filename]));
