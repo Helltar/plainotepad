@@ -314,20 +314,20 @@ object frmMain: TfrmMain
     end
     object actSearch: TAction
       Category = 'Find'
-      Caption = '&Find →'
+      Caption = '&Find'
       OnExecute = actSearchExecute
       ShortCut = 16454
     end
     object actFindNext: TAction
       Category = 'Find'
-      Caption = 'Find &Next ↓'
+      Caption = 'Find &Next'
       OnExecute = actFindNextExecute
       OnUpdate = actFindNextUpdate
       ShortCut = 114
     end
     object actFindPrevious: TAction
       Category = 'Find'
-      Caption = 'Find &Previous ↑'
+      Caption = 'Find &Previous'
       OnExecute = actFindPreviousExecute
       OnUpdate = actFindPreviousUpdate
       ShortCut = 8306
@@ -421,15 +421,12 @@ object frmMain: TfrmMain
       end
       object miSearch: TMenuItem
         Action = actSearch
-        Caption = '&Find'
       end
       object miFindNext: TMenuItem
         Action = actFindNext
-        Caption = 'Find &Next'
       end
       object miFindPrevious: TMenuItem
         Action = actFindPrevious
-        Caption = 'Find &Previous'
       end
     end
     object miView: TMenuItem
