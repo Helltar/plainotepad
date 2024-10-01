@@ -421,12 +421,15 @@ object frmMain: TfrmMain
       end
       object miSearch: TMenuItem
         Action = actSearch
+        Caption = '&Find'
       end
       object miFindNext: TMenuItem
         Action = actFindNext
+        Caption = 'Find &Next'
       end
       object miFindPrevious: TMenuItem
         Action = actFindPrevious
+        Caption = 'Find &Previous'
       end
     end
     object miView: TMenuItem
