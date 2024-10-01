@@ -1,12 +1,12 @@
 object frmMain: TfrmMain
   Left = 432
-  Height = 515
+  Height = 862
   Top = 235
-  Width = 780
+  Width = 1054
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 515
-  ClientWidth = 780
+  ClientHeight = 862
+  ClientWidth = 1054
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
   Menu = mmMain
@@ -16,45 +16,6 @@ object frmMain: TfrmMain
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
   LCLVersion = '3.4.0.0'
-  object pnlEditor: TPanel
-    AnchorSideLeft.Control = Owner
-    AnchorSideTop.Control = pnlSearch
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = stEditor
-    Left = 0
-    Height = 407
-    Top = 82
-    Width = 780
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    BevelColor = clNone
-    BevelOuter = bvNone
-    ClientHeight = 407
-    ClientWidth = 780
-    TabOrder = 0
-    object synEdit: TATSynEdit
-      AnchorSideLeft.Control = pnlEditor
-      AnchorSideTop.Control = pnlEditor
-      AnchorSideRight.Control = pnlEditor
-      AnchorSideRight.Side = asrBottom
-      AnchorSideBottom.Control = pnlEditor
-      AnchorSideBottom.Side = asrBottom
-      Cursor = crIBeam
-      Left = 0
-      Height = 407
-      Top = 0
-      Width = 780
-      Anchors = [akTop, akLeft, akRight, akBottom]
-      DoubleBuffered = True
-      Font.Height = -12
-      Font.Name = 'Courier New'
-      ParentFont = False
-      TabOrder = 0
-      TabStop = True
-      OnChangeCaretPos = synEditChangeCaretPos
-    end
-  end
   object tbEditor: TToolBar
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
@@ -62,14 +23,14 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     Left = 0
     Top = 0
-    Width = 780
+    Width = 1054
     AutoSize = True
     ButtonHeight = 32
     ButtonWidth = 32
     Caption = 'tbEditor'
     EdgeBorders = []
     ShowCaptions = True
-    TabOrder = 1
+    TabOrder = 0
     object tbtnNewFile: TToolButton
       Left = 1
       Top = 0
@@ -115,21 +76,6 @@ object frmMain: TfrmMain
       Style = tbsDivider
     end
   end
-  object stEditor: TStatusBar
-    Left = 0
-    Height = 26
-    Top = 489
-    Width = 780
-    Panels = <    
-      item
-        Alignment = taRightJustify
-        Bevel = pbNone
-        Width = 50
-      end>
-    ParentColor = False
-    SimplePanel = False
-    SizeGrip = False
-  end
   object pnlSearch: TPanel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = tbEditor
@@ -139,18 +85,19 @@ object frmMain: TfrmMain
     Left = 0
     Height = 50
     Top = 32
-    Width = 780
+    Width = 1054
     Anchors = [akTop, akLeft, akRight]
     BevelOuter = bvNone
     ClientHeight = 50
-    ClientWidth = 780
+    ClientWidth = 1054
     Enabled = False
-    TabOrder = 2
+    ParentBackground = False
+    TabOrder = 1
     Visible = False
     object btnFindNext: TButton
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = btnFindPrevious
-      Left = 594
+      Left = 868
       Height = 25
       Hint = 'Find Next'
       Top = 12
@@ -170,7 +117,7 @@ object frmMain: TfrmMain
       AnchorSideTop.Control = btnFindNext
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = btnCloseSearch
-      Left = 666
+      Left = 940
       Height = 25
       Hint = 'Find Previous'
       Top = 12
@@ -190,7 +137,7 @@ object frmMain: TfrmMain
       AnchorSideTop.Side = asrCenter
       AnchorSideRight.Control = pnlSearch
       AnchorSideRight.Side = asrBottom
-      Left = 738
+      Left = 1012
       Height = 25
       Hint = 'Close Search'
       Top = 12
@@ -213,11 +160,58 @@ object frmMain: TfrmMain
       Left = 12
       Height = 26
       Top = 12
-      Width = 570
+      Width = 844
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Around = 12
       TabOrder = 0
       OnChange = edtFindChange
+    end
+  end
+  object atStatus: TATStatus
+    Left = 0
+    Height = 24
+    Top = 838
+    Width = 1054
+    Align = alBottom
+    DoubleBuffered = False
+    Padding = 24
+    Panels = <    
+      item
+        Width = 800
+      end>
+  end
+  object atPanelSimple: TATPanelSimple
+    AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = tbEditor
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = atStatus
+    Left = 0
+    Height = 806
+    Top = 32
+    Width = 1054
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    object synEdit: TATSynEdit
+      AnchorSideLeft.Control = atPanelSimple
+      AnchorSideTop.Control = atPanelSimple
+      AnchorSideRight.Control = atPanelSimple
+      AnchorSideRight.Side = asrCenter
+      AnchorSideBottom.Control = atPanelSimple
+      AnchorSideBottom.Side = asrCenter
+      Cursor = crIBeam
+      Left = 0
+      Height = 806
+      Top = 0
+      Width = 1053
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      DoubleBuffered = True
+      Font.Height = -12
+      Font.Name = 'Courier New'
+      ParentFont = False
+      TabOrder = 0
+      TabStop = True
+      OnChangeCaretPos = synEditChangeCaretPos
     end
   end
   object actionList: TActionList

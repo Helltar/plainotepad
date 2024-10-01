@@ -5,10 +5,11 @@ unit uMainForm;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList,
-  Menus, LCLIntf, ExtCtrls, ComCtrls, StdCtrls,
-  ATSynEdit, ATSynEdit_Globals, ATSynEdit_Commands,
-  ATSynEdit_Finder, ATSynEdit_Carets,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
+  LCLIntf, ExtCtrls, ComCtrls, StdCtrls, ATFlatToolbar, ATButtons,
+  ATPanelSimple, ATGauge, ATGroups, ATStatusBar, ATPanelColor, ATSynEdit,
+  ATSynEdit_Globals, ATSynEdit_Commands, ATSynEdit_Finder, ATSynEdit_Carets,
+  ATSynEdit_Edits,
   { --- }
   uConfig, uEditor, uSettingsForm;
 
@@ -36,6 +37,8 @@ type
     actOpenFile: TAction;
     actSaveFile: TAction;
     actionList: TActionList;
+    atPanelSimple: TATPanelSimple;
+    atStatus: TATStatus;
     btnFindNext: TButton;
     btnFindPrevious: TButton;
     btnCloseSearch: TButton;
@@ -70,7 +73,6 @@ type
     miSettings: TMenuItem;
     miClose: TMenuItem;
     pnlSearch: TPanel;
-    pnlEditor: TPanel;
     separator1: TMenuItem;
     Separator10: TMenuItem;
     separator4: TMenuItem;
@@ -81,7 +83,6 @@ type
     Separator7: TMenuItem;
     Separator8: TMenuItem;
     Separator9: TMenuItem;
-    stEditor: TStatusBar;
     synEdit: TATSynEdit;
     openDialog: TOpenDialog;
     saveDialog: TSaveDialog;
@@ -269,7 +270,8 @@ var
 begin
   x := IntToStr(synEdit.Carets[0].PosX + 1);
   y := IntToStr(synEdit.Carets[0].PosY + 1);
-  stEditor.Panels.Items[0].Text := y + ':  ' + x + '      ';
+  TATStatusData(atStatus.Panels.Items[0]).Caption := y + ':  ' + x + '      ';
+  atStatus.Update;
 end;
 
 procedure TfrmMain.timFileModifiedCheckTimer(Sender: TObject);
@@ -484,8 +486,11 @@ begin
       if changeParentColor then
         ASynEdit.Parent.Color := Colors.TextBG;
 
-      stEditor.Color := Colors.TextBG;
-      stEditor.Font.Color := Colors.TextFont;
+      atStatus.Color := Colors.TextBG;
+      atStatus.ColorBorderR := Colors.TextBG;
+      atStatus.ColorBorderTop := Colors.MarginRight;
+      TATStatusData(atStatus.Panels.Items[0]).ColorFont := Colors.TextFont;
+
       pnlSearch.Color := Colors.TextBG;
 
       initSynEdit(ASynEdit);
@@ -503,7 +508,7 @@ procedure TfrmMain.initComponents;
 begin
   saveDialog.InitialDir := GetUserDir;
   openDialog.InitialDir := GetUserDir;
-  pnlEditor.AnchorSideTop.Control := tbEditor;
+  atPanelSimple.AnchorSideTop.Control := tbEditor;
 end;
 
 procedure TfrmMain.updateConfig;
@@ -757,7 +762,7 @@ end;
 
 procedure TfrmMain.btnCloseSearchClick(Sender: TObject);
 begin
-  pnlEditor.AnchorSideTop.Control := tbEditor;
+  atPanelSimple.AnchorSideTop.Control := tbEditor;
   pnlSearch.Enabled := False;
   pnlSearch.Visible := False;
 end;
@@ -822,7 +827,7 @@ end;
 
 procedure TfrmMain.actSearchExecute(Sender: TObject);
 begin
-  with pnlEditor do
+  with atPanelSimple do
     if AnchorSideTop.Control = pnlSearch then
       AnchorSideTop.Control := tbEditor
     else
