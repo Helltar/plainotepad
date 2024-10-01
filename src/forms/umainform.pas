@@ -541,7 +541,7 @@ begin
     edtFind.Color := $00BDE7AB;
 
     synEdit.DoGotoPos(Point(editorFinder.MatchEdPos.X, editorFinder.MatchEdPos.Y),
-      Point(editorFinder.MatchEdEnd.X, editorFinder.MatchEdEnd.Y), 5, 2, True, True);
+      Point(editorFinder.MatchEdEnd.X, editorFinder.MatchEdEnd.Y), 5, 2, True, TATEditorActionIfFolded.Unfold);
   end
   else
   begin
