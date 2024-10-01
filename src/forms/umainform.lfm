@@ -5,7 +5,7 @@ object frmMain: TfrmMain
   Width = 780
   AllowDropFiles = True
   Caption = 'Plainotepad'
-  ClientHeight = 484
+  ClientHeight = 515
   ClientWidth = 780
   Constraints.MinHeight = 240
   Constraints.MinWidth = 320
@@ -15,7 +15,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
-  LCLVersion = '2.2.6.0'
+  LCLVersion = '3.4.0.0'
   object pnlEditor: TPanel
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = pnlSearch
@@ -24,13 +24,13 @@ object frmMain: TfrmMain
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = stEditor
     Left = 0
-    Height = 378
+    Height = 407
     Top = 82
     Width = 780
     Anchors = [akTop, akLeft, akRight, akBottom]
     BevelColor = clNone
     BevelOuter = bvNone
-    ClientHeight = 378
+    ClientHeight = 407
     ClientWidth = 780
     TabOrder = 0
     object synEdit: TATSynEdit
@@ -42,7 +42,7 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrBottom
       Cursor = crIBeam
       Left = 0
-      Height = 378
+      Height = 407
       Top = 0
       Width = 780
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -77,38 +77,38 @@ object frmMain: TfrmMain
       Caption = '  &New  '
     end
     object tbtnOpenFile: TToolButton
-      Left = 57
+      Left = 60
       Top = 0
       Action = actOpenFile
       Caption = '  &Open  '
     end
     object tbtnSaveFile: TToolButton
-      Left = 123
+      Left = 129
       Top = 0
       Action = actSaveFile
       Caption = '  &Save  '
     end
     object tbtnSaveFileAs: TToolButton
-      Left = 181
+      Left = 190
       Top = 0
       Action = actSaveFileAs
       Caption = '  Save &As  '
     end
     object tbtnSeparator: TToolButton
-      Left = 118
+      Left = 124
       Height = 32
       Top = 0
       Caption = 'tbtnSeparator'
       Style = tbsDivider
     end
     object tbtnNewWindow: TToolButton
-      Left = 267
+      Left = 280
       Top = 0
       Action = actNewWindow
       Caption = '  New &Window  '
     end
     object ToolButton1: TToolButton
-      Left = 262
+      Left = 275
       Height = 32
       Top = 0
       Caption = 'ToolButton1'
@@ -117,8 +117,8 @@ object frmMain: TfrmMain
   end
   object stEditor: TStatusBar
     Left = 0
-    Height = 24
-    Top = 460
+    Height = 26
+    Top = 489
     Width = 780
     Panels = <    
       item
@@ -160,11 +160,11 @@ object frmMain: TfrmMain
       Caption = '↓'
       Enabled = False
       Font.Style = [fsBold]
-      OnClick = btnFindNextClick
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
+      OnClick = btnFindNextClick
     end
     object btnFindPrevious: TButton
       AnchorSideTop.Control = btnFindNext
@@ -179,11 +179,11 @@ object frmMain: TfrmMain
       Caption = '↑'
       Enabled = False
       Font.Style = [fsBold]
-      OnClick = btnFindPreviousClick
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
+      OnClick = btnFindPreviousClick
     end
     object btnCloseSearch: TButton
       AnchorSideTop.Control = btnFindPrevious
@@ -198,11 +198,11 @@ object frmMain: TfrmMain
       Anchors = [akTop, akRight]
       BorderSpacing.Around = 12
       Caption = 'X'
-      OnClick = btnCloseSearchClick
       ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
+      OnClick = btnCloseSearchClick
     end
     object edtFind: TEdit
       AnchorSideLeft.Control = pnlSearch
@@ -216,8 +216,8 @@ object frmMain: TfrmMain
       Width = 570
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Around = 12
-      OnChange = edtFindChange
       TabOrder = 0
+      OnChange = edtFindChange
     end
   end
   object actionList: TActionList
@@ -307,8 +307,10 @@ object frmMain: TfrmMain
     object actDelete: TAction
       Category = 'Edit'
       Caption = '&Delete'
+      Enabled = False
       OnExecute = actDeleteExecute
       ShortCut = 46
+      Visible = False
     end
     object actSearch: TAction
       Category = 'Find'
@@ -414,6 +416,8 @@ object frmMain: TfrmMain
       end
       object Separator11: TMenuItem
         Caption = '-'
+        Enabled = False
+        Visible = False
       end
       object miSearch: TMenuItem
         Action = actSearch
