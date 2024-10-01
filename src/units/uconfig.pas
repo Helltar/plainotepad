@@ -120,7 +120,7 @@ end;
 
 function TConfig.GetBorderSpaceLeft: integer;
 begin
-  Result := ReadInteger(SECTION_MAIN, 'borderSpaceLeft', 12);
+  Result := ReadInteger(SECTION_MAIN, 'borderSpaceLeft', 6);
 end;
 
 function TConfig.GetBorderSpaceRight: integer;
@@ -130,7 +130,7 @@ end;
 
 function TConfig.GetBorderSpaceTop: integer;
 begin
-  Result := ReadInteger(SECTION_MAIN, 'borderSpaceTop', 12);
+  Result := ReadInteger(SECTION_MAIN, 'borderSpaceTop', 6);
 end;
 
 function TConfig.GetColorTheme: string;
