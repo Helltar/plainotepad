@@ -15,7 +15,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnDropFiles = FormDropFiles
-  LCLVersion = '3.4.0.0'
+  LCLVersion = '3.6.0.0'
   object tbEditor: TToolBar
     AnchorSideLeft.Control = Owner
     AnchorSideTop.Control = Owner
@@ -201,7 +201,7 @@ object frmMain: TfrmMain
       AnchorSideBottom.Side = asrCenter
       Cursor = crIBeam
       Left = 0
-      Height = 806
+      Height = 805
       Top = 0
       Width = 1053
       Anchors = [akTop, akLeft, akRight, akBottom]
