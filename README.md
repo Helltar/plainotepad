@@ -65,4 +65,11 @@ NOTE: your antivirus maybe marks the app as dangerous.
 Build from source
 -----------------
 
+Required Packages:
+
+* [ATSynEdit](https://github.com/Alexey-T/ATSynEdit)
+* [ATSynEdit_Ex](https://github.com/Alexey-T/ATSynEdit_Ex)
+* [ATFlatControls](https://github.com/Alexey-T/ATFlatControls)
+* [EControl](https://github.com/Alexey-T/EControl)
+
 [![LazarusIDE](http://wiki.lazarus.freepascal.org/images/9/94/built_with_lazarus_logo.png)](http://www.lazarus-ide.org)
