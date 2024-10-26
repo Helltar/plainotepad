@@ -886,6 +886,8 @@ end;
 
 procedure TfrmMain.actOpenFileExecute(Sender: TObject);
 begin
+  openDialog.FileName := editor.getCurrentFilename();
+
   if openDialog.Execute then
     openFile(openDialog.FileName);
 end;
@@ -898,6 +900,8 @@ end;
 procedure TfrmMain.actSaveFileAsExecute(Sender: TObject);
 begin
   updateSaveDialogTitle();
+
+  saveDialog.FileName := editor.getCurrentFilename();
 
   if saveDialog.Execute then
     if editor.saveFile(saveDialog.FileName) then
