@@ -280,3 +280,17 @@ Symbol=clGray
 Comment=clGray
 Number=$007F55FF
 Const=$00FF0080
+
+[LEXER-C#]
+Symbol=clGray
+Number=clMaroon
+String=$00438B00
+Id=clBlack
+Id keyword=$00906000
+Id spec=clPurple
+Id Linq=$007F55AA
+Comment=clMedGray
+Comment doc=clMedGray
+Id modifier=$00916100
+Preproc string=clBlack
+Generic types=$00993366

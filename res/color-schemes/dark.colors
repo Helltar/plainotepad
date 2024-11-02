@@ -280,3 +280,18 @@ Id type=clSkyBlue
 Id const=$00C08080
 Id spec=$00EC9F00
 Id var=clGreen
+
+[LEXER-C#]
+Symbol=clMedGray
+Number=clAqua
+String=clLime
+Id=clWhite
+Id keyword=clMoneyGreen
+Id spec=clMoneyGreen
+Id Linq=clCream
+Comment=clGray
+Comment doc=clSkyBlue
+Preprocessor=clYellow
+Id modifier=$00E69D00
+Preproc string=clCream
+Generic types=$007B50F0
