@@ -25,9 +25,9 @@
       <UseVersionInfo Value="True"/>
       <AutoIncrementBuild Value="True"/>
       <MinorVersionNr Value="9"/>
-      <RevisionNr Value="13"/>
-      <BuildNr Value="407"/>
-      <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="(c) Helltar 2022" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.13"/>
+      <RevisionNr Value="14"/>
+      <BuildNr Value="409"/>
+      <StringTable Comments="Plain text editor" CompanyName="helltar.com" FileDescription="Plainotepad" LegalCopyright="(c) Helltar 2022" OriginalFilename="plainotepad" ProductName="Plainotepad" ProductVersion="0.9.14"/>
     </VersionInfo>
     <BuildModes>
       <Item Name="Default" Default="True"/>
